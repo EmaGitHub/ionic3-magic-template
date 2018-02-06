@@ -22,7 +22,7 @@ import { MyApp } from './app.component';
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp),
-        DeviceModule
+        DeviceModule.forRoot({ modalTitle : 'Ionic 3 Template' })
     ],
     bootstrap: [IonicApp],
     entryComponents: [

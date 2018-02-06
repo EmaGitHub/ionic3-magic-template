@@ -11,7 +11,8 @@ export class HomePage {
 
     constructor(
         public navCtrl: NavController,
-        public deviceService: DeviceService) {
+        public deviceService: DeviceService
+    ) {
 
     }
 
@@ -19,9 +20,8 @@ export class HomePage {
         this.deviceService.showLoading();
 
         setTimeout(() => {
-            console.log('chiudo loading');
-            // this.deviceService.hideLoading();
-        }, 3000);
+            this.deviceService.hideLoading();
+        }, 2000);
     }
 
 }

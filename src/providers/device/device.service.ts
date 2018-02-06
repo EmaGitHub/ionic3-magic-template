@@ -5,8 +5,10 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Platform } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
-import { Loading } from 'ionic-angular/components';
+import { Loading } from 'ionic-angular/components/loading/loading';
 import { Observable } from 'rxjs/Observable';
+
+import { DeviceConfig } from './device.config';
 
 @Injectable()
 export class DeviceService {
@@ -15,12 +17,13 @@ export class DeviceService {
     private ionLoading: Loading;
 
     constructor(
+        private config: DeviceConfig,
         private platform: Platform,
         private network: Network,
         private splashScreen: SplashScreen,
         private keyboard: Keyboard,
         private spinnerDialog: SpinnerDialog,
-        private loadingCtrl: LoadingController,
+        private loadingCtrl: LoadingController
     ) {
         // Create two Observable for online and offline notifications
         // to allow the whole app to subscribe to them with the custom functions
@@ -31,7 +34,7 @@ export class DeviceService {
 
 
     /**
-    * @description Return true if the app running on Cordova, false otherwise
+    * Return true if the app running on Cordova, false otherwise
     * @returns boolean
     */
     isCordova(): boolean {
@@ -40,7 +43,7 @@ export class DeviceService {
 
 
     /**
-    * @description Return true if the app running on Android device, false otherwise
+    * Return true if the app running on Android device, false otherwise
     * @returns boolean
     */
     isAndroid(): boolean {
@@ -49,7 +52,7 @@ export class DeviceService {
 
 
     /**
-    * @description Return true if the app running on iOS device, false otherwise
+    * Return true if the app running on iOS device, false otherwise
     * @returns boolean
     */
     isIos(): boolean {
@@ -58,7 +61,7 @@ export class DeviceService {
 
 
     /**
-    * @description Return true if the app running on Windows device, false otherwise
+    * Return true if the app running on Windows device, false otherwise
     * @returns boolean
     */
     isWindows(): boolean {
@@ -67,12 +70,13 @@ export class DeviceService {
 
 
     /**
-    * @description Return true if the device has internet connection available, false otherwise
+    * Return true if the device has internet connection available, false otherwise
     * @returns boolean
     */
     isOnline(): boolean {
         if (this.isCordova()) {
             const connectionType = this.network.type
+            // tslint:disable-next-line
             return connectionType !== window.Connection.UNKNOWN && connectionType !== window.Connection.NONE;
         }
         else {
@@ -82,7 +86,7 @@ export class DeviceService {
 
 
     /**
-    * @description Return true if the device doesn't have internet connection available, false otherwise
+    * Return true if the device doesn't have internet connection available, false otherwise
     * @returns boolean
     */
     isOffline(): boolean {
@@ -91,7 +95,7 @@ export class DeviceService {
 
 
     /**
-    * @description Return the Observable for online events emitted
+    * Return the Observable for online events emitted
     * @returns Observable
     */
     getOnlineObservable(): Observable<any> {
@@ -100,7 +104,7 @@ export class DeviceService {
 
 
     /**
-    * @description Return the Observable for offline events emitted
+    * Return the Observable for offline events emitted
     * @returns Observable
     */
     getOfflineObservable(): Observable<any> {
@@ -109,7 +113,7 @@ export class DeviceService {
 
 
     /**
-    * @description Show the app's splash screen
+    * Show the app's splash screen
     * @returns void
     */
     showSplashscreen(): void {
@@ -118,7 +122,7 @@ export class DeviceService {
 
 
     /**
-    * @description Hide the app's splash screen
+    * Hide the app's splash screen
     * @returns void
     */
     hideSplashscreen(): void {
@@ -126,7 +130,7 @@ export class DeviceService {
     }
 
     /**
-    * @description Force keyboard to be shown
+    * Force keyboard to be shown
     * @returns void
     */
     showKeyboard(): void {
@@ -134,7 +138,7 @@ export class DeviceService {
     }
 
     /**
-    * @description Close the keyboard if open
+    * Close the keyboard if open
     * @returns void
     */
     closeKeyboard(): void {
@@ -143,22 +147,17 @@ export class DeviceService {
 
 
     /**
-    * @description Show the native spinner dialog
+    * Show the native spinner dialog
     * or the Ionic Loading if the app is running on browser and there isn't any `message`
     * or the Ionic
-    * @param  {string|null} message Message to display in the spinner dialog
+    * @param  {string} message Message to display in the spinner dialog
     * @returns void
     */
-    showLoading(message?: string): void {
+    showLoading(message: string = ''): void {
         this.closeKeyboard();
 
         if (this.isCordova()) {
-            if (message) {
-                this.spinnerDialog.show('titolo', message, true);
-            }
-            else {
-                this.spinnerDialog.show('titolo', '', true);
-            }
+            this.spinnerDialog.show(this.config.getModalTitle(), message, true);
         }
         else if(!this.ionLoading) {
             this.ionLoading = this.loadingCtrl.create({
@@ -170,7 +169,7 @@ export class DeviceService {
 
 
     /**
-    * @description Close the native spinner dialog or the Ionic one
+    * Close the native spinner dialog or the Ionic one
     * @returns void
     */
     hideLoading(): void {
@@ -220,82 +219,6 @@ export class DeviceService {
 //         this._statusBarTheme = null;
 //     }
 
-
-//     /**
-//      * Mostra lo spinner nativo se sono su device,
-//      * altrimenti il preloader di F7 se gli viene passato un testo
-//      * altrimenti mostra l'indicator di F7
-//      * disabilitando anche il side menu
-//      * @param {String} text - Testo da visualizzare
-//      */
-//     showLoader(text) {
-//         this.hideKeyboard();
-
-//         if (window.SpinnerDialog) {
-//             if (text) {
-//                 window.SpinnerDialog.show(f7Config.modalTitle, Translator.t(text), true);
-//             }
-//             else {
-//                 window.SpinnerDialog.show(null, null, true);
-//             }
-//         }
-//         else {
-//             if (text) {
-//                 window.f7.showPreloader(Translator.t(text));
-//             }
-//             else {
-//                 window.f7.showIndicator();
-//             }
-//         }
-//     }
-
-//     /**
-//      * Nasconde lo spinner nativo se sono su device
-//      * altrimenti nascondo preloader e indicator
-//      * riabilitando anche il side menu
-//      */
-//     hideLoader(timeout = 0) {
-//         if (window.SpinnerDialog) {
-//             setTimeout(() => {
-//                 window.SpinnerDialog.hide();
-//             }, timeout);
-//         }
-//         else if (window.f7) {
-//             setTimeout(() => {
-//                 window.f7.hidePreloader();
-//                 window.f7.hideIndicator();
-//             }, timeout);
-//         }
-//     }
-
-//     /**
-//      * Recupera il colore attuale della status bar
-//      * @returns {String}
-//      */
-//     getStatusBarTheme() {
-//         return this._statusBarTheme;
-//     }
-
-//     /**
-//      * Su iOS imposta alla statusbar-overlay la classe `bg-*` relativa al tema passato
-//      * così da cambiare dinamicamente il colore della statusbar
-//      * Su Android imposta il colore della statusbar tramite il plugin nativo
-//      * @param {String} theme - Tema da impostare
-//      */
-//     setStatusBarTheme(theme) {
-//         if (this.isIos()) {
-//             // Rimuovo la vecchia classe di background e aggiungo la nuova
-//             document.querySelector('.statusbar-overlay').classList.remove(`bg-${this._statusBarTheme}`);
-//             document.querySelector('.statusbar-overlay').classList.add(`bg-${theme}`);
-//         }
-//         else {
-//             if (window.StatusBar) {
-//                 window.StatusBar.backgroundColorByHexString(STATUSBAR_THEMES_COLORS[theme]);
-//             }
-//         }
-//         this._statusBarTheme = theme;
-//         console.log(`setStatusBarTheme: removed ${this._statusBarTheme} added ${theme}`);
-//     }
 
 //     /**
 //      * Mostra una notifica sul device
