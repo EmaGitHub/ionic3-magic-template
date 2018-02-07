@@ -9,6 +9,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DeviceModule } from '../providers/device/device.module';
+import { LoggerService } from '../providers/logger/logger.service';
 import { MyApp } from './app.component';
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MyApp } from './app.component';
     providers: [
         StatusBar,
         SplashScreen,
-        {provide: ErrorHandler, useClass: IonicErrorHandler}
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        LoggerService
     ]
 })
 export class AppModule {}
