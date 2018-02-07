@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { Dialogs } from '@ionic-native/dialogs';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
@@ -10,16 +10,22 @@ import { Loading } from 'ionic-angular/components/loading/loading';
 import { Observable } from 'rxjs/Observable';
 
 import { ConfirmButton } from './ConfirmButton.model';
-import { DeviceConfig } from './device.config';
+
+export class DeviceServiceConfig {
+    public modalTitle: string;
+}
 
 @Injectable()
 export class DeviceService {
+    private modalTitle: string = 'MyApp';
+
+
     private onlineObservable: Observable<any>;
     private offlineObservable: Observable<any>;
     private ionLoading: Loading;
 
     constructor(
-        private config: DeviceConfig,
+        @Optional() config: DeviceServiceConfig,
         private platform: Platform,
         private network: Network,
         private splashScreen: SplashScreen,
@@ -28,6 +34,9 @@ export class DeviceService {
         private loadingCtrl: LoadingController,
         private dialogs: Dialogs
     ) {
+        if(config){
+            if(config.modalTitle) this.modalTitle = config.modalTitle;
+        }
         // Create two Observable for online and offline notifications
         // to allow the whole app to subscribe to them with the custom functions
         // getOnlineObservable and getOfflineObservable
@@ -161,7 +170,7 @@ export class DeviceService {
         // message = Translator.t(message);
 
         if (this.isCordova()) {
-            this.spinnerDialog.show(this.config.getModalTitle(), message, true);
+            this.spinnerDialog.show(this.modalTitle, message, true);
         }
         else if(!this.ionLoading) {
             this.ionLoading = this.loadingCtrl.create({
@@ -193,7 +202,7 @@ export class DeviceService {
     * @param  {string} title Dialog title
     * @returns void
     */
-    alert(message: string, title: string = this.config.getModalTitle()): void {
+    alert(message: string, title: string = this.modalTitle): void {
         this.hideLoading();
 
         let okButton = 'OK';
@@ -219,7 +228,7 @@ export class DeviceService {
     * @param {string} title Dialog title
     * @param {ConfirmButton[]} buttons List of <ConfirmButton>
     */
-    confirm(message: string, title: string = this.config.getModalTitle(), buttons: ConfirmButton[] = [new ConfirmButton('Ok'), new ConfirmButton('Cancel')]) {
+    confirm(message: string, title: string = this.modalTitle, buttons: ConfirmButton[] = [new ConfirmButton('Ok'), new ConfirmButton('Cancel')]) {
         this.hideLoading();
 
         // message = Translator.t(message);

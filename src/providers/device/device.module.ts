@@ -1,49 +1,46 @@
 import { ModuleWithProviders } from '@angular/compiler/src/core';
-import { InjectionToken, NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { Dialogs } from '@ionic-native/dialogs';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { DeviceConfig } from './device.config';
-import { DeviceService } from './device.service';
-
-export const deviceConfigToken = new InjectionToken<DeviceConfig>('deviceConfigToken');
+import { DeviceService, DeviceServiceConfig } from './device.service';
 
 /**
- * @name DeviceModule
- * @description
- * DeviceModule is an ngModule that imports a lot of services and utils for a Cordova app
- */
- @NgModule({
+* @name DeviceModule
+* @description
+* DeviceModule is an ngModule that imports a lot of services and utils for a Cordova app
+*/
+@NgModule({
     providers: [
+        DeviceService,
         Network,
         SplashScreen,
         Keyboard,
         SpinnerDialog,
-        DeviceService,
         Dialogs
     ]
 })
 export class DeviceModule {
+    constructor (@Optional() @SkipSelf() parentModule: DeviceModule) {
+        if (parentModule) {
+            throw new Error('DeviceModule is already loaded. Import it in the AppModule only');
+        }
+    }
+
+
     /**
-     * Allow to pass a <DeviceConfig> configuration con DeviceModule
-     * @param  {Partial<DeviceConfig>} config all available configuration for <DeviceConfig>
-     * @returns ModuleWithProviders
-     */
-    static forRoot(config?: Partial<DeviceConfig>): ModuleWithProviders {
+    * Allow to pass a <DeviceServiceConfig> configuration con DeviceModule
+    * @param  {DeviceServiceConfig} config all available configuration for <DeviceServiceConfig>
+    * @returns ModuleWithProviders
+    */
+    static forRoot(config?: Partial<DeviceServiceConfig>): ModuleWithProviders {
         return {
             ngModule: DeviceModule,
             providers: [
-                { provide: deviceConfigToken, useValue: config},
-                {
-                    provide: DeviceConfig,
-                    useFactory: (config: DeviceConfig) => {
-                        return new DeviceConfig(config);
-                    },
-                    deps: [deviceConfigToken]
-                }
+                { provide: DeviceServiceConfig, useValue: config }
             ]
         }
     }
