@@ -9,7 +9,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DeviceModule } from '../providers/device/device.module';
-import { LoggerService } from '../providers/logger/logger.service';
+import { LoggerModule } from '../providers/logger/logger.module';
 import { MyApp } from './app.component';
 
 @NgModule({
@@ -25,6 +25,9 @@ import { MyApp } from './app.component';
         IonicModule.forRoot(MyApp),
         DeviceModule.forRoot({
             modalTitle : 'Ionic 3 Template'
+        }),
+        LoggerModule.forRoot({
+            overrideLogLevel : 'ERROR'
         })
     ],
     bootstrap: [IonicApp],
@@ -39,7 +42,8 @@ import { MyApp } from './app.component';
         StatusBar,
         SplashScreen,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
-        LoggerService
+        // LoggerService,
+        // {provide: LoggerServiceConfig, useValue: {overrideLogLevel : 'WARN'}}
     ]
 })
 export class AppModule {}

@@ -1,3 +1,4 @@
+import { Optional } from '@angular/core';
 
 // const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 const isFirefox = !!(window as any).InstallTrigger;
@@ -14,11 +15,25 @@ export enum LoggerLevels {
     DEBUG       // print all messages
 }
 
+export class LoggerServiceConfig {
+    overrideLogLevel: keyof typeof LoggerLevels|null;
+}
+
 export class LoggerService {
     private logLevel: number = LoggerLevels.DEBUG;
-    private overrideLogLevel: string|null = null;
+    private overrideLogLevel: number|null = null;
 
-    constructor() {}
+    constructor(
+        @Optional() config: LoggerServiceConfig
+    ) {
+        if(config){
+            // Check if the override log lever exists and if it's one of the available levels
+            if (config.overrideLogLevel && config.overrideLogLevel.toUpperCase() in LoggerLevels) {
+                this.overrideLogLevel = parseInt(LoggerLevels[<any>config.overrideLogLevel.toUpperCase()]);
+                this.logLevel = this.overrideLogLevel;
+            }
+        }
+    }
 
 
     /**

@@ -32,7 +32,7 @@ export class DeviceModule {
 
 
     /**
-    * Allow to pass a <DeviceServiceConfig> configuration con DeviceModule
+    * Allow to pass a <DeviceServiceConfig> configuration to DeviceService
     * @param  {DeviceServiceConfig} config all available configuration for <DeviceServiceConfig>
     * @returns ModuleWithProviders
     */
