@@ -15,7 +15,7 @@ export enum LoggerLevels {
 }
 
 export class LoggerService {
-    private logLevel: string = 'DEBUG';
+    private logLevel: number = LoggerLevels.DEBUG;
     private overrideLogLevel: string|null = null;
 
     constructor() {}
@@ -26,7 +26,7 @@ export class LoggerService {
      * @param  {any} arg Argument to parse
      * @returns string
      */
-    private parseArg(arg: any): string{
+    private parseArg(arg: any): string {
         if(arg instanceof Array || arg instanceof Object){
             return JSON.stringify(arg);
         }
@@ -55,16 +55,17 @@ export class LoggerService {
             let line = '';
 
             if (isChrome) {
-                line = new Error().stack.split('\n')[3];
+                line = (new Error().stack as string).split('\n')[3];
                 line = (line.indexOf(' (') >= 0) ? line.split(' (')[1].substring(0, line.length - 1) : line.split('at ')[1];
                 line = line.lastIndexOf(')') !== -1 ? line.substring(0, line.lastIndexOf(')')) : line;
             }
             else if (isFirefox) {
-                line = new Error().stack.split('\n')[3].split('@')[1];
+                line = (new Error().stack as string).split('\n')[3].split('@')[1];
             }
 
             // Then print all arguments with the right console function
-            console[func](`${line}: `, ...others);
+            const functionToCall = eval('console[func]');
+            functionToCall(`${line}: `, ...others);
         }
     }
 
@@ -73,19 +74,16 @@ export class LoggerService {
      * Change the logger level for future uses
      * @param  {string='DEBUG'} requestedLogLevel
      */
-    changeLevel(newLogLevel: string = 'DEBUG') {
-        // // Se ho richiesto un override del livello di log applico quello
-        // if (this._overrideLogLevel) {
-        //     this._logLevel = this._overrideLogLevel;
-        // }
-        // else {
-        //     // Se è stato richiesto un livello specifico che è tra quelli disponibili lo applico
-        //     if (requestedLogLevel && levels[requestedLogLevel.toUpperCase()]) {
-        //         this._logLevel = requestedLogLevel.toUpperCase();
-        //     }
-        // }
+    changeLevel(newLogLevel: string) {
+        // If the override was set the new log level will be ignored
+        if (!this.overrideLogLevel) {
+            // Check if the new log lever exists and if it's one of the available levels
+            if (newLogLevel && newLogLevel.toUpperCase() in LoggerLevels) {
+                this.logLevel = parseInt(LoggerLevels[<any>newLogLevel.toUpperCase()]);
+            }
+        }
 
-        console.log(`Logger is active with level <${this.logLevel}>`);
+        console.log(`Logger is active with level <${LoggerLevels[this.logLevel]}>`);
     }
 
 
@@ -103,7 +101,7 @@ export class LoggerService {
      * @param  {any[]} ...args
      */
     warn(...args: any[]) {
-        if (LoggerLevels[this.logLevel] >= LoggerLevels.WARN) {
+        if (this.logLevel >= LoggerLevels.WARN) {
             this.print('warn', args);
         }
     }
@@ -114,7 +112,7 @@ export class LoggerService {
      * @param  {any[]} ...args
      */
     info(...args: any[]) {
-        if (LoggerLevels[this.logLevel] >= LoggerLevels.INFO) {
+        if (this.logLevel >= LoggerLevels.INFO) {
             this.print('info', args);
         }
     }
@@ -125,7 +123,7 @@ export class LoggerService {
      * @param  {any[]} ...args
      */
     debug(...args: any[]) {
-        if (LoggerLevels[this.logLevel] >= LoggerLevels.DEBUG) {
+        if (this.logLevel >= LoggerLevels.DEBUG) {
             this.print('debug', args);
         }
     }
