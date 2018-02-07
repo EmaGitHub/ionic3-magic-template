@@ -20,7 +20,7 @@ export class HomePage {
         this.deviceService.showLoading();
 
         setTimeout(() => {
-            this.deviceService.hideLoading();
+            this.deviceService.alert('ciao');
         }, 2000);
     }
 

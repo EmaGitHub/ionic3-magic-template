@@ -1,5 +1,6 @@
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { InjectionToken, NgModule } from '@angular/core';
+import { Dialogs } from '@ionic-native/dialogs';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
@@ -21,7 +22,8 @@ export const deviceConfigToken = new InjectionToken<DeviceConfig>('deviceConfigT
         SplashScreen,
         Keyboard,
         SpinnerDialog,
-        DeviceService
+        DeviceService,
+        Dialogs
     ]
 })
 export class DeviceModule {
