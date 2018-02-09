@@ -16,7 +16,9 @@ export enum LoggerLevels {
 }
 
 export class LoggerServiceConfig {
-    overrideLogLevel: keyof typeof LoggerLevels|null;
+    constructor(
+        public overrideLevel: number|null
+    ){ }
 }
 
 export class LoggerService {
@@ -28,8 +30,8 @@ export class LoggerService {
     ) {
         if(config){
             // Check if the override log lever exists and if it's one of the available levels
-            if (config.overrideLogLevel && config.overrideLogLevel.toUpperCase() in LoggerLevels) {
-                this.overrideLogLevel = parseInt(LoggerLevels[<any>config.overrideLogLevel.toUpperCase()]);
+            if (config.overrideLevel && config.overrideLevel in LoggerLevels) {
+                this.overrideLogLevel = config.overrideLevel;
                 this.logLevel = this.overrideLogLevel;
             }
         }

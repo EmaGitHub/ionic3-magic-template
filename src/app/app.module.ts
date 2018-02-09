@@ -26,9 +26,7 @@ import { MyApp } from './app.component';
         DeviceModule.forRoot({
             modalTitle : 'Ionic 3 Template'
         }),
-        LoggerModule.forRoot({
-            overrideLogLevel : 'ERROR'
-        })
+        LoggerModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

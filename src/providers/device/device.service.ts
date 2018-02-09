@@ -4,15 +4,17 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { LoadingController } from 'ionic-angular';
-import { Platform } from 'ionic-angular';
+import { LoadingController, Platform } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { Observable } from 'rxjs/Observable';
 
+import { LoggerService } from '../logger/logger.service';
 import { ConfirmButton } from './ConfirmButton.model';
 
 export class DeviceServiceConfig {
-    public modalTitle: string;
+    constructor(
+        public modalTitle: string
+    ){ }
 }
 
 @Injectable()
@@ -22,7 +24,7 @@ export class DeviceService {
 
     private onlineObservable: Observable<any>;
     private offlineObservable: Observable<any>;
-    private ionLoading: Loading;
+    private ionLoading: Loading|null = null;
 
     constructor(
         @Optional() config: DeviceServiceConfig,
@@ -32,7 +34,8 @@ export class DeviceService {
         private keyboard: Keyboard,
         private spinnerDialog: SpinnerDialog,
         private loadingCtrl: LoadingController,
-        private dialogs: Dialogs
+        private dialogs: Dialogs,
+        private loggerService: LoggerService
     ) {
         if(config){
             if(config.modalTitle) this.modalTitle = config.modalTitle;
@@ -204,6 +207,8 @@ export class DeviceService {
     */
     alert(message: string, title: string = this.modalTitle): void {
         this.hideLoading();
+
+        this.loggerService.info('pippo');
 
         let okButton = 'OK';
         // try {
