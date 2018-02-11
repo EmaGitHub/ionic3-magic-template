@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RequestMethods } from '@services/core/api/ApiConfig.model';
+
+import { RequestMethods } from './http.model';
 
 @Injectable()
-export class ApiService {
+export class HttpService {
     constructor(
         private http: HttpClient
     ) {

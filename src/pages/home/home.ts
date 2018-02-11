@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
+import { ApiService } from '@services/api/api.service';
+import { ConfigService } from '@services/config/config.service';
 import { NavController } from 'ionic-angular';
 
-// import { ApiService } from '../../services/core/api/api.service';
-
-// import { DeviceService } from '@services/core';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -12,10 +11,13 @@ export class HomePage {
 
     constructor(
         public navCtrl: NavController,
-        // public http: ApiService
+        public http: ApiService,
+        public config: ConfigService
         // public deviceService: DeviceService,
         // public loggerService: LoggerService
     ) {
+
+        this.config.update();
 
     }
 
@@ -35,12 +37,15 @@ export class HomePage {
         //     .subscribe(data => {
         //         console.log(data);
         //     });
+
+        this.config.update();
     }
 
     // START SERVIZIO
 
     // getQualcosaDaServizio(){
     //     // preparo la richiesta tramite il config service
+    //     this.config.getApi();
     //     // integro la richiesta con i dati (params e/o body)
     //     // chiamo l'api service e faccio la request
 

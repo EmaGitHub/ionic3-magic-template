@@ -1,3 +1,5 @@
+import FileDiConfigurazione from '@mocks/config/config.json';
+
 import { Config } from './config.model';
 
 export class ConfigService {
@@ -7,8 +9,13 @@ export class ConfigService {
 
     ) { }
 
+    getApi() {
+
+    }
+
     update() {
-        // this.config = new Config(FileDiConfigurazione);
+        this.config = <Config>FileDiConfigurazione;
+
     }
 
     // update() {

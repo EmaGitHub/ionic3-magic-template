@@ -1,16 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { ApiService } from './api.service';
+import { HttpService } from './http.service';
 
 @NgModule({
     imports: [
         HttpClientModule
     ],
     providers: [
-        ApiService
+        HttpService
     ]
 })
-export class ApiModule {
+export class HttpModule {
 
 }
