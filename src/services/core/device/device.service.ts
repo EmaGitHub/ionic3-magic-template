@@ -8,7 +8,6 @@ import { LoadingController, Platform } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { Observable } from 'rxjs/Observable';
 
-import { LoggerService } from '../logger/logger.service';
 import { ConfirmButton } from './ConfirmButton.model';
 
 export class DeviceServiceConfig {
@@ -34,8 +33,7 @@ export class DeviceService {
         private keyboard: Keyboard,
         private spinnerDialog: SpinnerDialog,
         private loadingCtrl: LoadingController,
-        private dialogs: Dialogs,
-        private loggerService: LoggerService
+        private dialogs: Dialogs
     ) {
         if(config){
             if(config.modalTitle) this.modalTitle = config.modalTitle;
@@ -207,8 +205,6 @@ export class DeviceService {
     */
     alert(message: string, title: string = this.modalTitle): void {
         this.hideLoading();
-
-        this.loggerService.info('pippo');
 
         let okButton = 'OK';
         // try {

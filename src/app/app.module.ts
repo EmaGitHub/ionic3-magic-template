@@ -1,16 +1,14 @@
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MyApp } from '@app/app.component';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { AboutPage } from '@pages/about/about';
+import { ContactPage } from '@pages/contact/contact';
+import { HomePage } from '@pages/home/home';
+import { TabsPage } from '@pages/tabs/tabs';
+import { CoreModule } from '@services/core/core.module';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
-import { DeviceModule } from '../providers/device/device.module';
-import { LoggerModule } from '../providers/logger/logger.module';
-import { MyApp } from './app.component';
 
 @NgModule({
     declarations: [
@@ -23,10 +21,7 @@ import { MyApp } from './app.component';
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp),
-        DeviceModule.forRoot({
-            modalTitle : 'Ionic 3 Template'
-        }),
-        LoggerModule
+        CoreModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -39,9 +34,7 @@ import { MyApp } from './app.component';
     providers: [
         StatusBar,
         SplashScreen,
-        {provide: ErrorHandler, useClass: IonicErrorHandler},
-        // LoggerService,
-        // {provide: LoggerServiceConfig, useValue: {overrideLogLevel : 'WARN'}}
+        {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })
 export class AppModule {}

@@ -1,0 +1,44 @@
+{
+    "versioning": [
+        {
+            "platform": "android",
+            "isLastVersion": true,
+            "isMandatoryUpdate": false,
+            "storeLink": "https://play.google.com/store/apps/details?id=it.engds.partnermatch"
+        },
+        {
+            "platform": "ios",
+            "isLastVersion": true,
+            "isMandatoryUpdate": false,
+            "storeLink": "https://itunes.apple.com/us/app/solution/id1311686558"
+        }
+    ],
+    "backend": {
+        "environment": "PROD",
+        "baseUrl": "./mocks",
+        "api" : [
+            {
+                "name" : "login",
+                "url": "/leads"
+            },
+            {
+                "name": "signUp",
+                "url": "/leads",
+                "method": "POST",
+                "headers" : {
+                    "contentType": "application/json; charset=utf-8"
+                }
+            }
+        ]
+    },
+    "langs": [
+        {
+            "code": "en",
+            "label": "English",
+            "url": "http://www.solutionpartnermatch.com/resource/MWTranslationAssets_1_0/en_GB.json",
+            "isDefault": true
+        }
+    ],
+    "loggerLevel": "ERROR",
+    "devMode": false
+}

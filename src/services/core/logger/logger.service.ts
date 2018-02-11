@@ -1,4 +1,4 @@
-import { Optional } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 
 // const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 const isFirefox = !!(window as any).InstallTrigger;
@@ -21,6 +21,7 @@ export class LoggerServiceConfig {
     ){ }
 }
 
+@Injectable()
 export class LoggerService {
     private logLevel: number = LoggerLevels.DEBUG;
     private overrideLogLevel: number|null = null;
