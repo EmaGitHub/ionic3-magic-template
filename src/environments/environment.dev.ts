@@ -1,5 +1,4 @@
 
 export const ENV = {
-    production: false,
-    isDebugMode: true
+    configUrl: 'http://127.0.0.1:9001/config/config.json?t=dev'
 };

@@ -3,14 +3,12 @@ const fs = require('fs');
 const path = require('path');
 const useDefaultConfig = require('@ionic/app-scripts/config/webpack.config.js');
 
-const env = process.env.IONIC_ENV;
-
 if (env === 'prod' || env === 'dev') {
 
     useDefaultConfig[env].resolve.alias = {
         '@app': path.resolve('./src/app'),
         '@assets': path.resolve('./src/assets'),
-        '@env': path.resolve(environmentPath()),
+        '@env': path.resolve(environmentPath(env)),
         '@mocks': path.resolve('./src/mocks'),
         '@pages': path.resolve('./src/pages'),
         '@services': path.resolve('./src/services'),
@@ -24,7 +22,7 @@ if (env === 'prod' || env === 'dev') {
     useDefaultConfig[env].resolve.alias = {
         '@app': path.resolve('./src/app'),
         '@assets': path.resolve('./src/assets'),
-        '@env': path.resolve(environmentPath()),
+        '@env': path.resolve(environmentPath(env)),
         '@mocks': path.resolve('./src/mocks'),
         '@pages': path.resolve('./src/pages'),
         '@services': path.resolve('./src/services'),
@@ -33,10 +31,8 @@ if (env === 'prod' || env === 'dev') {
 
 }
 
-function environmentPath() {
-
-    let filePath = './src/environments/environment' + (env === 'prod' ? '' : '.' + env) + '.ts';
-
+function environmentPath(env) {
+    var filePath = './src/environments/environment' + (env === 'prod' ? '' : '.' + env) + '.ts';
     if (!fs.existsSync(filePath)) {
         console.log(chalk.red('\n' + filePath + ' does not exist!'));
     } else {
@@ -47,15 +43,3 @@ function environmentPath() {
 module.exports = function () {
     return useDefaultConfig;
 };
-
-/*
-
-https://github.com/ionic-team/ionic-app-scripts/issues/1271
-https://github.com/ionic-team/ionic-app-scripts/blob/master/config/webpack.config.js
-
-module.exports = {
-    dev: useDefaultConfig,
-    prod: useDefaultConfig
-}
-
-*/
