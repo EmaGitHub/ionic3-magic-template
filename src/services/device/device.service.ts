@@ -4,17 +4,13 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 import { LoadingController, Platform } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { Observable } from 'rxjs/Observable';
 
 import { ConfirmButton } from './ConfirmButton.model';
-
-export class DeviceServiceConfig {
-    constructor(
-        public modalTitle: string
-    ){ }
-}
+import { DeviceServiceConfig } from './device.config';
 
 @Injectable()
 export class DeviceService {
@@ -33,7 +29,8 @@ export class DeviceService {
         private keyboard: Keyboard,
         private spinnerDialog: SpinnerDialog,
         private loadingCtrl: LoadingController,
-        private dialogs: Dialogs
+        private dialogs: Dialogs,
+        private statusBar: StatusBar
     ) {
         if(config){
             if(config.modalTitle) this.modalTitle = config.modalTitle;
@@ -193,6 +190,16 @@ export class DeviceService {
         else if(this.ionLoading) {
             this.ionLoading.dismiss();
             delete this.ionLoading;
+        }
+    }
+
+    /**
+     * Set the default status bar style: dark text, for light backgrounds
+     * @returns void
+     */
+    styleStatusBarAsDefault() : void {
+        if (this.isCordova()) {
+            this.statusBar.styleDefault();
         }
     }
 

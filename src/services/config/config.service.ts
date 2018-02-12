@@ -1,51 +1,62 @@
-import FileDiConfigurazione from '@mocks/config/config.json';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http/src/response';
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
+import { ConfigModuleConfig } from './config.config';
 import { Config } from './config.model';
 
+const storageKeys = {
+    config: 'config'
+};
+
+@Injectable()
 export class ConfigService {
+    private url: string;
     private config: Config;
 
     constructor(
-
-    ) { }
-
-    getApi() {
-
+        configModule: ConfigModuleConfig,
+        private storage: Storage,
+        private http: HttpClient
+    ) {
+        this.url = configModule.url;
     }
 
+    /**
+     * Returns the last config file stored in localStorage with last modified date
+     */
+    private getLastConfig(): Promise<Config> {
+        return this.storage.get(storageKeys.config)
+    }
+
+    /**
+     * Download the external config file and store it in localStorage
+     */
     update() {
-        this.config = <Config>FileDiConfigurazione;
-
+        return new Promise((resolve, reject) => {
+            this.getLastConfig().then(
+                lastConfig => {
+                    // Try to download the new config file only if it was modified
+                    let headers = new HttpHeaders();
+                    if(lastConfig && lastConfig.lastModified){
+                        headers.append('If-Modified-Since', lastConfig.lastModified);
+                    }
+                    this.http.get(this.url, {headers, observe: 'response'}).subscribe(
+                        (response: HttpResponse<Config>) => {
+                            this.config = <Config>response.body;
+                            this.config.lastModified = <string>response.headers.get('Last-Modified');
+                            this.storage.set(storageKeys.config, this.config);
+                            resolve();
+                        },
+                        (err: Error) => {
+                            // The download fails so, if a local config doesn't exists throw an error
+                            if(!this.config){
+                                reject(new Error('Error during app initialization.\nPlease, check your Internet connection and restart the app.'));
+                            }
+                        });
+                }
+            );
+        });
     }
-
-    // update() {
-    //     // Scarico il file di configurazione e
-    //     return axios.get(`${this._configUrl}?t=${new Date().getTime()}`).then(
-    //         configData => {
-    //             Logger.debug('File di configurazione scaricato correttamente', configData);
-
-    //             // Ho scaricato correttamente il file di configurazione, quindi lo memorizzo nel localStorage
-    //             Storage.setConfig(configData);
-    //             this._config = configData;
-    //             Logger.init(configData.loggerLevel);
-    //         },
-    //         () => {
-    //             Logger.warn('File di configurazione non scaricato; tento recupero da localStorage');
-
-    //             // Il reperimento del file di configurazione è fallito quindi recupero quello presente nel localStorage (se esiste)
-    //             let config = Storage.getConfig();
-
-    //             if (!_.isEmpty(config)) {
-    //                 // Visto che sono riuscito a recuperarlo proseguo correttamente
-    //                 this._config = config;
-    //                 return Promise.resolve();
-    //             }
-    //             else {
-    //                 // Dato che nel localStorage sembra non esserci non posso avviare l'app,
-    //                 // quindi ritorno un errore
-    //                 return Promise.reject(new Error('Error during app initialization.\nPlease, check your Internet connection and restart the app.'));
-    //             }
-    //         }
-    //     );
-    // }
 }

@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { RequestMethods } from './http.model';
-
 @Injectable()
 export class HttpService {
     constructor(
@@ -11,30 +9,30 @@ export class HttpService {
 
     }
 
-    request(url: string, method: keyof typeof RequestMethods, body?: Object, queryParams?: any, pathParams?: any[]) {
+    // request(url: string, method: keyof typeof RequestMethods, body?: Object, queryParams?: any, pathParams?: any[]) {
 
-        const headers: Headers = this.headersManager(method);
+    //     const headers: Headers = this.headersManager(method);
 
-        const requestOptions = new RequestOptions({
-            url: this.getCurrentEndPoint(url, pathParams || []),
-            method: method,
-            headers: headers
-        });
+    //     const requestOptions = new RequestOptions({
+    //         url: this.getCurrentEndPoint(url, pathParams || []),
+    //         method: method,
+    //         headers: headers
+    //     });
 
-        if (body) {
-            requestOptions.body = body;
-        }
+    //     if (body) {
+    //         requestOptions.body = body;
+    //     }
 
-        if (queryParams) {
-            requestOptions.params = queryParams;
-        }
+    //     if (queryParams) {
+    //         requestOptions.params = queryParams;
+    //     }
 
-        const request = new Request(requestOptions);
+    //     const request = new Request(requestOptions);
 
-        return this.http.request(request)
-        .map((res: Response) => res.json())
-        .catch((res: Response) => this.onRequestError(res));
-    }
+    //     return this.http.request(request)
+    //     .map((res: Response) => res.json())
+    //     .catch((res: Response) => this.onRequestError(res));
+    // }
 }
 
 

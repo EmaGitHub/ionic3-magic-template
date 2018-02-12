@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { ApiService } from '@services/api/api.service';
-import { ConfigService } from '@services/config/config.service';
 import { NavController } from 'ionic-angular';
 
+// import { ApiService } from '@services/api/api.service';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -11,13 +10,13 @@ export class HomePage {
 
     constructor(
         public navCtrl: NavController,
-        public http: ApiService,
-        public config: ConfigService
+        // public http: ApiService,
+        // public config: ConfigService
         // public deviceService: DeviceService,
         // public loggerService: LoggerService
     ) {
 
-        this.config.update();
+        // this.config.update();
 
     }
 
@@ -38,7 +37,7 @@ export class HomePage {
         //         console.log(data);
         //     });
 
-        this.config.update();
+        // this.config.update();
     }
 
     // START SERVIZIO

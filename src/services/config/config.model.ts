@@ -35,17 +35,6 @@ export class ApiConfig {
     ) { }
 }
 
-export enum RequestMethods {
-    GET = 'GET',
-    POST = 'POST',
-    PUT = 'PUT',
-    DELETE = 'DELETE',
-    HEAD = 'HEAD',
-    OPTIONS = 'OPTIONS',
-    PATCH = 'PATCH',
-    JSONP = 'JSONP'
-}
-
 export class ConfigLangs {
 
     constructor(
@@ -57,6 +46,7 @@ export class ConfigLangs {
 }
 
 export class Config {
+    public lastModified: string;
 
     constructor(
         @Optional() public versioning: ConfigVersioning[],
@@ -66,4 +56,16 @@ export class Config {
         @Optional() public devMode: boolean
     ) { }
 
+}
+
+
+export enum RequestMethods {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE',
+    HEAD = 'HEAD',
+    OPTIONS = 'OPTIONS',
+    PATCH = 'PATCH',
+    JSONP = 'JSONP'
 }

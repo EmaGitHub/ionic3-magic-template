@@ -1,7 +1,8 @@
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 
-import { LoggerService, LoggerServiceConfig } from './logger.service';
+import { LoggerServiceConfig } from './logger.config';
+import { LoggerService } from './logger.service';
 
 /**
 * @name LoggerModule

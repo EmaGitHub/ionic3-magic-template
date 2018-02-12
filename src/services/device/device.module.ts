@@ -5,8 +5,10 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 
-import { DeviceService, DeviceServiceConfig } from './device.service';
+import { DeviceServiceConfig } from './device.config';
+import { DeviceService } from './device.service';
 
 /**
 * @name DeviceModule
@@ -20,7 +22,8 @@ import { DeviceService, DeviceServiceConfig } from './device.service';
         SplashScreen,
         Keyboard,
         SpinnerDialog,
-        Dialogs
+        Dialogs,
+        StatusBar
     ]
 })
 export class DeviceModule {

@@ -1,6 +1,6 @@
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MyApp } from '@app/app.component';
+import { App } from '@app/app.component';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { AboutPage } from '@pages/about/about';
@@ -12,7 +12,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 @NgModule({
     declarations: [
-        MyApp,
+        App,
         AboutPage,
         ContactPage,
         HomePage,
@@ -20,12 +20,12 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp),
+        IonicModule.forRoot(App),
         CoreModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
-        MyApp,
+        App,
         AboutPage,
         ContactPage,
         HomePage,

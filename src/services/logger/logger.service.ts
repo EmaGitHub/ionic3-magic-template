@@ -1,5 +1,7 @@
 import { Injectable, Optional } from '@angular/core';
 
+import { LoggerServiceConfig } from './logger.config';
+
 // const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 const isFirefox = !!(window as any).InstallTrigger;
 // const isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
@@ -13,12 +15,6 @@ export enum LoggerLevels {
     WARN,       // print also warning messages
     INFO,       // print also info messages
     DEBUG       // print all messages
-}
-
-export class LoggerServiceConfig {
-    constructor(
-        public overrideLevel: number|null
-    ){ }
 }
 
 @Injectable()
