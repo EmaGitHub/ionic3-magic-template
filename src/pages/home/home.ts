@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HomeService } from '@pages/home/home.service';
+import { ConfigService } from '@services/config/config.service';
 import { NavController } from 'ionic-angular';
 
 // import { ApiService } from '@services/api/api.service';
@@ -11,7 +13,8 @@ export class HomePage {
     constructor(
         public navCtrl: NavController,
         // public http: ApiService,
-        // public config: ConfigService
+        public config: ConfigService,
+        public homeService: HomeService
         // public deviceService: DeviceService,
         // public loggerService: LoggerService
     ) {
@@ -38,6 +41,8 @@ export class HomePage {
         //     });
 
         // this.config.update();
+
+        this.homeService.recuperaRoba();
     }
 
     // START SERVIZIO

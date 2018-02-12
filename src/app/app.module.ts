@@ -10,6 +10,8 @@ import { TabsPage } from '@pages/tabs/tabs';
 import { CoreModule } from '@services/core/core.module';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+import { HomeService } from '../pages/home/home.service';
+
 @NgModule({
     declarations: [
         App,
@@ -34,7 +36,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
     providers: [
         StatusBar,
         SplashScreen,
-        {provide: ErrorHandler, useClass: IonicErrorHandler}
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        HomeService
     ]
 })
 export class AppModule {}

@@ -2,9 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http/src/response';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { LoggerService } from '@services/logger/logger.service';
 
 import { ConfigModuleConfig } from './config.config';
-import { Config } from './config.model';
+import { ApiConfig, Config } from './config.model';
 
 const storageKeys = {
     config: 'config'
@@ -18,7 +19,8 @@ export class ConfigService {
     constructor(
         configModule: ConfigModuleConfig,
         private storage: Storage,
-        private http: HttpClient
+        private http: HttpClient,
+        private logger: LoggerService
     ) {
         this.url = configModule.url;
     }
@@ -40,11 +42,12 @@ export class ConfigService {
                     // Try to download the new config file only if it was modified
                     let headers = new HttpHeaders();
                     if(lastConfig && lastConfig.lastModified){
+                        this.config = new Config(lastConfig);
                         headers.append('If-Modified-Since', lastConfig.lastModified);
                     }
                     this.http.get(this.url, {headers, observe: 'response'}).subscribe(
                         (response: HttpResponse<Config>) => {
-                            this.config = <Config>response.body;
+                            this.config = new Config(<Config>response.body);
                             this.config.lastModified = <string>response.headers.get('Last-Modified');
                             this.storage.set(storageKeys.config, this.config);
                             resolve();
@@ -58,5 +61,13 @@ export class ConfigService {
                 }
             );
         });
+    }
+
+    /**
+     * Get api configuration from the config.json file
+     * @param apiName string Attribute name of requested api
+     */
+    getApiConfig(apiName:string): ApiConfig|Error {
+        return this.config.backend.getApiConfig(apiName);
     }
 }
