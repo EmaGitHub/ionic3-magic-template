@@ -1,4 +1,5 @@
 import { HttpHeaders } from '@angular/common/http';
+import { RequestMethods } from '@services/api/api.models';
 
 export class VersioningConfig {
     public platform: string;
@@ -33,11 +34,23 @@ export class BackendConfig {
         let api;
         try {
             api = <ApiConfig>this.api.find(api => api.name === apiName);
+            api.url = this.prepareUrl(api.url);
         }
         catch(err){
             api = null;
         }
         return api;
+    }
+
+    /**
+     * Add baseUrl as prefix if the api url is relative
+     * @param {string} url Relative api url
+     */
+    private prepareUrl(url: string): string {
+        if (url.trim().indexOf('http') !== 0) {
+            url = (this.baseUrl + url).trim();
+        }
+        return url;
     }
 }
 
@@ -53,7 +66,7 @@ export class ApiConfig {
     ) {
         this.name = api.name;
         this.url = api.url;
-        this.method = api.method || RequestMethods.GET;
+        this.method = (api.method || RequestMethods.GET).toUpperCase();
         this.headers = api.headers || new HttpHeaders();
         this.timeout = api.timeout || 30000;
     }
@@ -83,8 +96,6 @@ export class Config {
     public loggerLevel: string;
     public devMode: boolean;
 
-
-
     constructor(
         config: Config
     ) {
@@ -95,16 +106,4 @@ export class Config {
         this.devMode = config.devMode || false;
     }
 
-}
-
-
-export enum RequestMethods {
-    GET = 'GET',
-    POST = 'POST',
-    PUT = 'PUT',
-    DELETE = 'DELETE',
-    HEAD = 'HEAD',
-    OPTIONS = 'OPTIONS',
-    PATCH = 'PATCH',
-    JSONP = 'JSONP'
 }

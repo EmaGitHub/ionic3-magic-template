@@ -26,7 +26,7 @@ export class LoggerModule {
     /**
     * Allow to pass a <LoggerServiceConfig> configuration to LoggerService
     * @param  {LoggerServiceConfig} config all available configuration for <LoggerServiceConfig>
-    * @returns ModuleWithProviders
+    * @returns {ModuleWithProviders}
     */
     static forRoot(config?: Partial<LoggerServiceConfig>): ModuleWithProviders {
         return {

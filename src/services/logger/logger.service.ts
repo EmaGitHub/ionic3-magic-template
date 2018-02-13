@@ -38,7 +38,7 @@ export class LoggerService {
     /**
      * Return the arg to string if is necessary
      * @param  {any} arg Argument to parse
-     * @returns string
+     * @returns {string}
      */
     private parseArg(arg: any): string {
         if(arg instanceof Array || arg instanceof Object){

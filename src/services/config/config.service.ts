@@ -27,6 +27,7 @@ export class ConfigService {
 
     /**
      * Returns the last config file stored in localStorage with last modified date
+     * @returns {Promise<Config>}
      */
     private getLastConfig(): Promise<Config> {
         return this.storage.get(storageKeys.config)
@@ -34,8 +35,9 @@ export class ConfigService {
 
     /**
      * Download the external config file and store it in localStorage
+     * @returns {Promise<any>}
      */
-    update() {
+    update(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.getLastConfig().then(
                 lastConfig => {
@@ -45,10 +47,10 @@ export class ConfigService {
                         this.config = new Config(lastConfig);
                         headers.append('If-Modified-Since', lastConfig.lastModified);
                     }
-                    this.http.get(this.url, {headers, observe: 'response'}).subscribe(
-                        (response: HttpResponse<Config>) => {
-                            this.config = new Config(<Config>response.body);
-                            this.config.lastModified = <string>response.headers.get('Last-Modified');
+                    this.http.get<Config>(this.url, {headers, observe: 'response'}).subscribe(
+                        (res: HttpResponse<Config>) => {
+                            this.config = new Config(<Config>res.body);
+                            this.config.lastModified = <string>res.headers.get('Last-Modified');
                             this.storage.set(storageKeys.config, this.config);
                             resolve();
                         },
@@ -66,8 +68,9 @@ export class ConfigService {
     /**
      * Get api configuration from the config.json file
      * @param apiName string Attribute name of requested api
+     * @returns {ApiConfig|null}
      */
-    getApiConfig(apiName:string): ApiConfig|Error {
+    getApiConfig(apiName:string): ApiConfig|null {
         return this.config.backend.getApiConfig(apiName);
     }
 }

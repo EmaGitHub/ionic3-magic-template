@@ -21,7 +21,6 @@
             "@app/*": [ "app/*" ],
             "@assets/*": [ "assets/*" ],
             "@env": [ "environments/environment" ],
-            "@mocks/*": [ "mocks/*" ],
             "@pages/*": [ "pages/*" ],
             "@services/*": [ "services/*" ],
             "@theme/*": [ "theme/*" ]

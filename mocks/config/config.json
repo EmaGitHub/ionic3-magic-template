@@ -15,11 +15,11 @@
     ],
     "backend": {
         "environment": "PROD",
-        "baseUrl": "./mocks",
+        "baseUrl": "http://localhost:9001",
         "api" : [
             {
                 "name" : "login",
-                "url": "/leads"
+                "url": "/login/login.json"
             },
             {
                 "name": "signUp",

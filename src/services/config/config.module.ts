@@ -34,7 +34,7 @@ export class ConfigModule {
     /**
     * Allow to pass a <ConfigModuleConfig> configuration to services in ConfigModule
     * @param  {ConfigModuleConfig} config all available configuration for <ConfigModuleConfig>
-    * @returns ModuleWithProviders
+    * @returns {ModuleWithProviders}
     */
     static forRoot(config: ConfigModuleConfig): ModuleWithProviders {
         return {

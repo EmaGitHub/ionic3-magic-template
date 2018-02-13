@@ -37,7 +37,7 @@ export class DeviceModule {
     /**
     * Allow to pass a <DeviceServiceConfig> configuration to DeviceService
     * @param  {DeviceServiceConfig} config all available configuration for <DeviceServiceConfig>
-    * @returns ModuleWithProviders
+    * @returns {ModuleWithProviders}
     */
     static forRoot(config?: Partial<DeviceServiceConfig>): ModuleWithProviders {
         return {
