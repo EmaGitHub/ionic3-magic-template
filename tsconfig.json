@@ -22,6 +22,7 @@
             "@assets/*": [ "assets/*" ],
             "@env": [ "environments/environment" ],
             "@pages/*": [ "pages/*" ],
+            "@modals/*": [ "modals/*" ],
             "@services/*": [ "services/*" ],
             "@theme/*": [ "theme/*" ]
         }

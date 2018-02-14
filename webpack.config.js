@@ -13,6 +13,7 @@ if (env === 'prod' || env === 'dev') {
         '@env': path.resolve(environmentPath(env)),
         '@mocks': path.resolve('./src/mocks'),
         '@pages': path.resolve('./src/pages'),
+        '@modals': path.resolve('./src/modals'),
         '@services': path.resolve('./src/services'),
         '@theme': path.resolve('./src/theme')
     };
@@ -27,6 +28,7 @@ if (env === 'prod' || env === 'dev') {
         '@env': path.resolve(environmentPath(env)),
         '@mocks': path.resolve('./src/mocks'),
         '@pages': path.resolve('./src/pages'),
+        '@modals': path.resolve('./src/modals'),
         '@services': path.resolve('./src/services'),
         '@theme': path.resolve('./src/theme')
     };

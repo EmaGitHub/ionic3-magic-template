@@ -1,35 +1,28 @@
 import { Component } from '@angular/core';
-import { ConfigService } from '@services/config/config.service';
-import { DeviceService } from '@services/device/device.service';
-import { Platform } from 'ionic-angular';
-
-import { TabsPage } from '../pages/tabs/tabs';
+import { StartModal } from '@modals/start/start';
+import { ModalController, Platform } from 'ionic-angular';
 
 @Component({
     templateUrl: 'app.html'
 })
 export class App {
-    rootPage:any = TabsPage;
+    rootPage: any;
 
     constructor(
         private platform: Platform,
-        private configService: ConfigService,
-        private deviceService: DeviceService,
+        private modalController: ModalController
     ) {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
 
-            // Downlaod config file
-            this.configService.update().then(
-                () => {
-                    this.deviceService.styleStatusBarAsDefault();
-                    this.deviceService.hideSplashscreen();
-                },
-                (err: Error) => {
-                    this.deviceService.alert(err.message);
-                }
-            )
+            // Show modal to start to initialize the app
+            let startingModal = this.modalController.create(StartModal, null, {
+                showBackdrop: false,
+                enableBackdropDismiss: false,
+                cssClass: 'fullscreen-modal'
+            });
+            startingModal.present();
         });
     }
 }
