@@ -19,7 +19,10 @@
         "api" : [
             {
                 "name" : "login",
-                "url": "/login/login.json"
+                "url": "/login/login.json",
+                "headers": {
+                    "test" : 123
+                }
             },
             {
                 "name": "signUp",

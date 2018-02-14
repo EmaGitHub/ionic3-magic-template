@@ -12,7 +12,7 @@ export class HomeService {
     ) { }
 
     recuperaRoba(){
-        const request = this.apiService.request<Config>('login', {'token' : 'ciaone'}, 'testo').subscribe(
+        this.apiService.request<Config>('login', {'token' : 'ciaone', 'pippo': 123, 'asd': [1,2,3]}, 'testo', {headers : {'test2': 'ciao'}}).subscribe(
             res => {
                 console.log(res);
             },

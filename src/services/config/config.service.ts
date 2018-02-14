@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http/src/response';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
@@ -44,20 +44,26 @@ export class ConfigService {
                     // Try to download the new config file only if it was modified
                     let headers = new HttpHeaders();
                     if(lastConfig && lastConfig.lastModified){
-                        this.config = new Config(lastConfig);
-                        headers.append('If-Modified-Since', lastConfig.lastModified);
+                        headers = headers.set('If-Modified-Since', lastConfig.lastModified);
                     }
                     this.http.get<Config>(this.url, {headers, observe: 'response'}).subscribe(
                         (res: HttpResponse<Config>) => {
+                            // If config.json was updated initialize it and update the lastModified property
+                            res.body.lastModified = <string>res.headers.get('Last-Modified');
                             this.config = new Config(<Config>res.body);
-                            this.config.lastModified = <string>res.headers.get('Last-Modified');
-                            this.storage.set(storageKeys.config, this.config);
+                            this.storage.set(storageKeys.config, res.body);
                             resolve();
                         },
-                        (err: Error) => {
-                            // The download fails so, if a local config doesn't exists throw an error
-                            if(!this.config){
-                                reject(new Error('Error during app initialization.\nPlease, check your Internet connection and restart the app.'));
+                        (err: HttpErrorResponse) => {
+                            // If the HTTP status is 304 the config.json was not modified
+                            // so I initialize Config with localStorage version
+                            if(lastConfig && err.status === 304){
+                                this.config = new Config(lastConfig);
+                                resolve();
+                            }
+                            // The download fails and a local config doesn't exists, so throw an error
+                            else {
+                                reject(err);
                             }
                         });
                 }

@@ -67,7 +67,12 @@ export class ApiConfig {
         this.name = api.name;
         this.url = api.url;
         this.method = (api.method || RequestMethods.GET).toUpperCase();
-        this.headers = api.headers || new HttpHeaders();
+        this.headers = new HttpHeaders().set('Content-Type', 'application/json; charset=UTF-8');
+        if(api.headers){
+            for (let key in api.headers){
+                this.headers = this.headers.set(key, api.headers[key].toString());
+            }
+        }
         this.timeout = api.timeout || 30000;
     }
 }
@@ -89,7 +94,7 @@ export class LangConfig {
 }
 
 export class Config {
-    public lastModified: string;
+    public lastModified: string | null;
     public versioning: VersioningConfig[];
     public backend: BackendConfig;
     public langs: LangConfig[];
@@ -104,6 +109,7 @@ export class Config {
         this.langs = config.langs.map((l: LangConfig) => { return new LangConfig(l); });
         this.loggerLevel = config.loggerLevel || 'ERROR';
         this.devMode = config.devMode || false;
+        this.lastModified = config.lastModified || null;
     }
 
 }
