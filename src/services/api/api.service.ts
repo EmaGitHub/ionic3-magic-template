@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpObserve, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiConfig } from '@services/config/config.model';
 import { ConfigService } from '@services/config/config.service';
@@ -20,14 +20,14 @@ export class ApiService {
 
     }
 
-    request<T>(api: string, params: object = {}, body: any = null, options: {observe? : string} = {}): Observable<T> {
+    request<T>(api: string, params: object = {}, body: any = null, options: {observe? : HttpObserve} = {}): Observable<T> {
         // Use getApiConfig in configService to define all options for api
         let apiConfig = <ApiConfig>this.configService.getApiConfig(api);
 
         // Add all requested HttpParams
         let queryParams = new HttpParams();
-        for(let key in queryParams){
-            queryParams.set(key, params[key]);
+        for(let key in params){
+            queryParams = queryParams.set(key, params[key]);
         }
 
         // Create a new HttpRequest base on API method
@@ -38,7 +38,7 @@ export class ApiService {
         httpClientOptions.observe = options.observe || 'body';
         // httpClientOptions.responseType = apiConfig.responseType;
 
-        return this.http.request(apiConfig.method, apiConfig.url, <any>httpClientOptions)
+        return this.http.request(apiConfig.method, apiConfig.url, httpClientOptions)
             .map(res => this.handleSuccess(res))
             .catch(res => this.handleError(res));
     }
