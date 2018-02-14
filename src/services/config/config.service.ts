@@ -2,7 +2,6 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { HttpResponse } from '@angular/common/http/src/response';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { LoggerService } from '@services/logger/logger.service';
 
 import { ConfigModuleConfig } from './config.config';
 import { ApiConfig, Config } from './config.model';
@@ -19,8 +18,7 @@ export class ConfigService {
     constructor(
         configModule: ConfigModuleConfig,
         private storage: Storage,
-        private http: HttpClient,
-        private logger: LoggerService
+        private http: HttpClient
     ) {
         this.url = configModule.url;
     }
@@ -49,7 +47,7 @@ export class ConfigService {
                     this.http.get<Config>(this.url, {headers, observe: 'response'}).subscribe(
                         (res: HttpResponse<Config>) => {
                             // If config.json was updated initialize it and update the lastModified property
-                            res.body.lastModified = <string>res.headers.get('Last-Modified');
+                            (<Config>res.body).lastModified = <string>res.headers.get('Last-Modified');
                             this.config = new Config(<Config>res.body);
                             this.storage.set(storageKeys.config, res.body);
                             resolve();

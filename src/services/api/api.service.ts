@@ -12,7 +12,6 @@ import { HttpClientOptions } from './api.models';
 
 @Injectable()
 export class ApiService {
-    private token: string;
 
     constructor(
         private configService: ConfigService,
@@ -41,7 +40,7 @@ export class ApiService {
         // Add all requested HttpParams
         let queryParams = new HttpParams();
         for(let qKey in params){
-            queryParams = queryParams.set(qKey, params[qKey]);
+            queryParams = queryParams.set(qKey, (<any>params)[qKey]);
         }
 
         // Add all requested HttpHeaders
@@ -50,7 +49,7 @@ export class ApiService {
             // add a fake header to duplicate the headers
             headers = apiConfig.headers.set('fake_header_for_cloning', '');
             for (let hKey in options.headers){
-                headers = headers.set(hKey, options.headers[hKey]);
+                headers = headers.set(hKey, (<any>options).headers[hKey]);
             }
             // remove the fake header
             headers = headers.delete('fake_header_for_cloning');

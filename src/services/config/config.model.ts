@@ -70,7 +70,7 @@ export class ApiConfig {
         this.headers = new HttpHeaders().set('Content-Type', 'application/json; charset=UTF-8');
         if(api.headers){
             for (let key in api.headers){
-                this.headers = this.headers.set(key, api.headers[key].toString());
+                this.headers = this.headers.set(key, (<any>api.headers)[key].toString());
             }
         }
         this.timeout = api.timeout || 30000;

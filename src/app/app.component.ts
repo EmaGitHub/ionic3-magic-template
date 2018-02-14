@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
 import { ConfigService } from '@services/config/config.service';
 import { DeviceService } from '@services/device/device.service';
 import { Platform } from 'ionic-angular';
@@ -15,12 +13,10 @@ export class App {
 
     constructor(
         private platform: Platform,
-        private statusBar: StatusBar,
-        private splashScreen: SplashScreen,
         private configService: ConfigService,
         private deviceService: DeviceService,
     ) {
-        platform.ready().then(() => {
+        this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
 
