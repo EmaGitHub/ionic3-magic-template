@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const useDefaultConfig = require('@ionic/app-scripts/config/webpack.config.js');
 
-const env = process.env.ENV;
+const env = process.env.ENV || 'dev';
 
 if (env === 'prod' || env === 'dev') {
 
