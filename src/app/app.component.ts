@@ -20,7 +20,7 @@ export class App {
             let startingModal = this.modalController.create(StartModal, null, {
                 showBackdrop: false,
                 enableBackdropDismiss: false,
-                cssClass: 'fullscreen-modal'
+                cssClass: 'fullscreen'
             });
             startingModal.present();
         });

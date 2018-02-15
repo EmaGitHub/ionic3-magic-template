@@ -1,6 +1,7 @@
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { Dialogs } from '@ionic-native/dialogs';
+import { Globalization } from '@ionic-native/globalization';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
@@ -23,7 +24,8 @@ import { DeviceService } from './device.service';
         Keyboard,
         SpinnerDialog,
         Dialogs,
-        StatusBar
+        StatusBar,
+        Globalization
     ]
 })
 export class DeviceModule {

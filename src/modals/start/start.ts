@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '@core/config/config.service';
 import { DeviceService } from '@core/device/device.service';
+import { LoggerService } from '@core/logger/logger.service';
 import { TabsPage } from '@pages/tabs/tabs';
 import { App, Nav, ViewController } from 'ionic-angular';
 
@@ -9,42 +10,31 @@ import { App, Nav, ViewController } from 'ionic-angular';
     templateUrl: 'start.html'
 })
 export class StartModal {
-    private status: string;
+    public status: string;
 
     constructor(
         private viewController: ViewController,
         private configService: ConfigService,
         private deviceService: DeviceService,
+        // private translator: TranslatorService,
+        private logger: LoggerService,
         private appController: App
     ) {
 
         this.status = 'Loading...';
 
-        // When modal is ready
-        // this.navController.viewDidEnter.subscribe(
-        //     () => {
+        // TODO:; Cambiare da Promise ad observer per inviare gli status di cosa si sta configurando
+        // renderndo il caricamento più interattivo
+        this.configService.configCompleated.then(
+            () => {
+                this.navTo(TabsPage);
+            },
+            (err: Error) => {
+                this.deviceService.alert(err.message);
+            }
+        )
 
-                // Downlaod config file
-                this.configService.update().then(
-                    () => {
-                        setTimeout(() => {
-                            const viewSubscriber = (<Nav>this.appController.getRootNav()).viewDidLoad.subscribe(
-                                () => {
-                                    this.viewController.dismiss();
-                                    viewSubscriber.unsubscribe();
-                                }
-                            );
-                            this.appController.getRootNav().push(TabsPage);
-                        }, 1000);
-                    },
-                    (err: Error) => {
-                        this.deviceService.alert(err.message);
-                    }
-                )
-        //     }
-        // );
-
-        // Hide spalsh after modal is completly loaded
+        // Hide splash after modal is completly loaded
         const viewSubscriber = this.viewController.didEnter.subscribe(
             () => {
                 this.deviceService.styleStatusBarAsDefault();
@@ -52,5 +42,17 @@ export class StartModal {
                 viewSubscriber.unsubscribe();
             }
         )
+    }
+
+    navTo(page: any) {
+        setTimeout(() => {
+            const viewSubscriber = (<Nav>this.appController.getRootNav()).viewDidLoad.subscribe(
+                () => {
+                    this.viewController.dismiss();
+                    viewSubscriber.unsubscribe();
+                }
+            );
+            this.appController.getRootNav().push(page);
+        }, 1000);
     }
 }

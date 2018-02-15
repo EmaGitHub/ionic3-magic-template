@@ -34,20 +34,23 @@
             }
         ]
     },
-    "langs": [
-        {
-            "code": "en",
-            "label": "English",
-            "url": "/langs/en.json",
-            "isDefault": true
-        },
-        {
-            "code": "fr",
-            "label": "Français",
-            "url": "/langs/fr.json",
-            "isDefault": false
-        }
-    ],
+    "translations": {
+        "baseUrl" : "http://localhost:9001",
+        "langs" : [
+            {
+                "code": "en",
+                "label": "English",
+                "url": "/langs/en.json",
+                "isDefault": true
+            },
+            {
+                "code": "fr",
+                "label": "Français",
+                "url": "/langs/fr.json",
+                "isDefault": false
+            }
+        ]
+    },
     "loggerLevel": "ERROR",
     "devMode": false
 }

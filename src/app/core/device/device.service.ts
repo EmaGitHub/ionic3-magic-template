@@ -1,5 +1,7 @@
 import { Injectable, Optional } from '@angular/core';
+import { ENV } from '@env';
 import { Dialogs } from '@ionic-native/dialogs';
+import { Globalization } from '@ionic-native/globalization';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
@@ -30,7 +32,8 @@ export class DeviceService {
         private spinnerDialog: SpinnerDialog,
         private loadingCtrl: LoadingController,
         private dialogs: Dialogs,
-        private statusBar: StatusBar
+        private statusBar: StatusBar,
+        private globalization: Globalization
     ) {
         if(config){
             if(config.modalTitle) this.modalTitle = config.modalTitle;
@@ -45,7 +48,7 @@ export class DeviceService {
 
     /**
     * Return true if the app running on Cordova, false otherwise
-    * @returns boolean
+    * @returns {boolean}
     */
     isCordova(): boolean {
         return this.platform.is('cordova');
@@ -54,7 +57,7 @@ export class DeviceService {
 
     /**
     * Return true if the app running on Android device, false otherwise
-    * @returns boolean
+    * @returns {boolean}
     */
     isAndroid(): boolean {
         return this.platform.is('android');
@@ -63,7 +66,7 @@ export class DeviceService {
 
     /**
     * Return true if the app running on iOS device, false otherwise
-    * @returns boolean
+    * @returns {boolean}
     */
     isIos(): boolean {
         return this.platform.is('ios');
@@ -72,7 +75,7 @@ export class DeviceService {
 
     /**
     * Return true if the app running on Windows device, false otherwise
-    * @returns boolean
+    * @returns {boolean}
     */
     isWindows(): boolean {
         return this.platform.is('windows');
@@ -81,7 +84,7 @@ export class DeviceService {
 
     /**
     * Return true if the device has internet connection available, false otherwise
-    * @returns boolean
+    * @returns {boolean}
     */
     isOnline(): boolean {
         if (this.isCordova()) {
@@ -96,7 +99,7 @@ export class DeviceService {
 
     /**
     * Return true if the device doesn't have internet connection available, false otherwise
-    * @returns boolean
+    * @returns {boolean}
     */
     isOffline(): boolean {
         return !this.isOnline();
@@ -105,7 +108,7 @@ export class DeviceService {
 
     /**
     * Return the Observable for online events emitted
-    * @returns Observable
+    * @returns {Observable}
     */
     getOnlineObservable(): Observable<any> {
         return this.onlineObservable;
@@ -114,7 +117,7 @@ export class DeviceService {
 
     /**
     * Return the Observable for offline events emitted
-    * @returns Observable
+    * @returns {Observable}
     */
     getOfflineObservable(): Observable<any> {
         return this.offlineObservable;
@@ -154,6 +157,40 @@ export class DeviceService {
         this.keyboard.close();
     }
 
+    /**
+     * Set the default status bar style: dark text, for light backgrounds
+     * @returns void
+     */
+    styleStatusBarAsDefault() : void {
+        if (this.isCordova()) {
+            this.statusBar.styleDefault();
+        }
+    }
+
+
+    /**
+     * Get the preferred language set on device
+     * @returns {Promise<string>}
+     */
+    getPreferredLanguage() : Promise<string> {
+        let defer: Promise<{value: string}>;
+        if(this.isCordova()){
+            defer = this.globalization.getPreferredLanguage();
+        }
+        else {
+            defer = new Promise((resolve, reject) => { resolve(ENV.getPreferredLanguageDev) });
+        }
+        return defer.then(
+            (lang: {value:string}) => {
+                let final;
+                try{
+                    final = lang.value.split('-')[0].toLowerCase();
+                }catch(e){ final = ''; }
+                return final;
+            }
+        )
+    }
+
 
     /**
     * Show the native spinner dialog
@@ -190,16 +227,6 @@ export class DeviceService {
         else if(this.ionLoading) {
             this.ionLoading.dismiss();
             delete this.ionLoading;
-        }
-    }
-
-    /**
-     * Set the default status bar style: dark text, for light backgrounds
-     * @returns void
-     */
-    styleStatusBarAsDefault() : void {
-        if (this.isCordova()) {
-            this.statusBar.styleDefault();
         }
     }
 
