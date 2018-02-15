@@ -46,7 +46,9 @@ Ad esempio, per aggiungere l'environment test occorrerà creare il file `src/env
 
 ## Alias
 
-Nel file `tsconfig.json` e nel file `webpack.config.js` è possibile definire una serie di alias per manterene il codice più pulito nelle sezioni di import. 
+Nel file `tsconfig.json` e nel file `webpack.config.js` è possibile definire una serie di alias per manterene il codice più pulito nelle sezioni di import, senza però abusarne: gli alias, infatti, dovrebbero essere creati per macro aree del progetto e non per singoli moduli. Ogni modulo deve essere inserito in una sua cartella con tutti i propri servizi e modelli, che però dovrebbe includere con path relativo e senza l'utilizzo degli alias.
+
+Il `DeviceService` ad esempio viene importato dall'esterno utilizzando il path `@core/device/device.service`, ma dall'interno della cartella `device`, ad esempio dal `DeviceModule`, deve essere importato attraverso il path relativo `./device.service`. Questo rende il modulo trasportabile a prescindere dall'alias utilizzato nel progetto.
 
 ## Server Mocks
 
