@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { LoggerService } from '@app/core/logger/logger.service';
 import { ConfigService } from '@core/config/config.service';
+import { LoggerService } from '@core/logger/logger.service';
 
 import { ApiService } from './api.service';
 

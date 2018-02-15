@@ -3,7 +3,7 @@ import 'rxjs/Rx';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http/src/response';
 import { Injectable } from '@angular/core';
-import { RequestMethods } from '@app/core/api/api.models';
+import { RequestMethods } from '@core/api/api.models';
 import { DeviceService } from '@core/device/device.service';
 import { Storage } from '@ionic/storage';
 
@@ -12,8 +12,8 @@ import { ApiConfig, Config, LangConfig } from './config.model';
 
 const storageKeys = {
     config: 'config',
-    lastLang: 'lastLang',
-    lang: 'lang-{CODE}'
+    lastLang: 'last_lang',
+    lang: 'lang_{CODE}'
 };
 
 @Injectable()
@@ -42,9 +42,12 @@ export class ConfigService {
     }
 
 
+    /**
+     * Init app
+     */
     private init() {
         return new Promise<any>((resolve, reject) => {
-            this.download().then(
+            this.initConfig().then(
                 () => {
                     this.initLangs().then(
                         resolve,
@@ -53,6 +56,19 @@ export class ConfigService {
                 },
                 reject
             );
+        });
+    }
+
+    private initConfig() {
+        return new Promise((resolve, reject) => {
+            this.download().then(
+                (config: Config) => {
+                    this.config = new Config(config);
+                    this.storage.set(storageKeys.config, config);
+                    resolve();
+                },
+                reject
+            )
         });
     }
 
@@ -74,16 +90,13 @@ export class ConfigService {
                         (res: HttpResponse<Config>) => {
                             // If config.json was updated initialize it and update the lastModified property
                             (<Config>res.body).lastModified = <string>res.headers.get('Last-Modified');
-                            this.config = new Config(<Config>res.body);
-                            this.storage.set(storageKeys.config, res.body);
-                            resolve();
+                            resolve(res.body);
                         },
                         (err: HttpErrorResponse) => {
                             // If the HTTP status is 304 the config.json was not modified
                             // I initialize Config with localStorage version
                             if(lastConfig && err.status === 304){
-                                this.config = new Config(lastConfig);
-                                resolve();
+                                resolve(lastConfig);
                             }
                             // The download fails and a local config doesn't exists, so throw an error
                             else {
@@ -102,11 +115,22 @@ export class ConfigService {
     */
    private initLangs() {
         return new Promise((resolve, reject) => {
-            this.getMainlanguage().then(
+            // Get the last used language if exists, or system one, or default one
+            this.getLastLanguage().then(
                 (lastLang: LangConfig) => {
                     // Download the json language (if necessary)
                     this.downloadLang(lastLang).then(
-                        resolve,
+                        () => {
+                            // Set the main language as default
+                            this.setLastLanguage(lastLang);
+                            // Resolve the promise
+                            resolve();
+                            // And start to download for other languages (background mode)
+                            const otherLanguages = this.config.translations.langs.filter((l: LangConfig) => {
+                                return l.code !== lastLang.code;
+                            });
+                            this.downloadLangs(otherLanguages);
+                        },
                         reject
                     );
                 }
@@ -136,7 +160,13 @@ export class ConfigService {
     }
 
 
-    getMainlanguage(): Promise<LangConfig> {
+    /**
+     * Get the last used language if exists
+     * If there is no last language set fetch the system language or defaut one if not available
+     *
+     * @returns {Promise<LangConfig>}
+     */
+    getLastLanguage(): Promise<LangConfig> {
         return new Promise((resolve, reject) => {
             // Search last used language in localStorage
             this.storage.get(storageKeys.lastLang).then((lastLang: LangConfig) => {
@@ -161,8 +191,22 @@ export class ConfigService {
         });
     }
 
+    /**
+     * Set the default language for the next app bootstrap
+     * @param  {LangConfig} lang Lang to set as default
+     * @returns {void}
+     */
+    setLastLanguage(lang: LangConfig): void {
+        this.storage.set(storageKeys.lastLang, lang);
+    }
 
-    private downloadLang(lang: LangConfig) {
+
+    /**
+     * Download
+     * @param  {LangConfig} lang Lang to download
+     * @returns {Promise}
+     */
+    private downloadLang(lang: LangConfig): Promise<object> {
         let headers = new HttpHeaders();
         // If the lang file was already downloaded append the 'If-Modified-Since' header
         if(lang && lang.lastModified){
@@ -176,9 +220,37 @@ export class ConfigService {
                     resolve();
                 },
                 (err: HttpErrorResponse) => {
-                    // If the HTTP status of lang json is not 304 throw an error
-                    reject(err);
+                    // If the HTTP status is 304 the language json was not modified
+                    // So simply resolve the promise
+                    if(err.status === 304){
+                        resolve();
+                    }
+                    // The download fails and a local language doesn't exists, so throw an error
+                    else {
+                        reject(err);
+                    }
                 });
+        });
+    }
+
+
+    /**
+     * @param  {LangConfig[]} langs
+     * @returns Promise
+     */
+    private downloadLangs(langs: LangConfig[]): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if(langs.length > 0){
+                let lang = langs.pop();
+                this.downloadLang(<LangConfig>lang).then(
+                    () => {
+                        this.downloadLangs(langs);
+                    }
+                );
+            }
+            else {
+                resolve();
+            }
         });
     }
 
