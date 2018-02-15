@@ -19,14 +19,14 @@
         "api" : [
             {
                 "name" : "login",
-                "url": "/login/login.json",
+                "url": "/api/login/login.json",
                 "headers": {
                     "test" : 123
                 }
             },
             {
                 "name": "signUp",
-                "url": "/leads",
+                "url": "/api/leads",
                 "method": "POST",
                 "headers" : {
                     "contentType": "application/json; charset=utf-8"
@@ -38,8 +38,14 @@
         {
             "code": "en",
             "label": "English",
-            "url": "http://www.solutionpartnermatch.com/resource/MWTranslationAssets_1_0/en_GB.json",
+            "url": "/langs/en.json",
             "isDefault": true
+        },
+        {
+            "code": "fr",
+            "label": "Français",
+            "url": "/langs/fr.json",
+            "isDefault": false
         }
     ],
     "loggerLevel": "ERROR",
