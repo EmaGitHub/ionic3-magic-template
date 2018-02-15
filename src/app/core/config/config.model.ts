@@ -1,5 +1,5 @@
 import { HttpHeaders } from '@angular/common/http';
-import { RequestMethods } from '@services/api/api.models';
+import { RequestMethods } from '@core/api/api.models';
 
 export class VersioningConfig {
     public platform: string;

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
+import { ApiModule } from '@core/api/api.module';
+import { ConfigModule } from '@core/config/config.module';
+import { DeviceModule } from '@core/device/device.module';
+import { LoggerModule } from '@core/logger/logger.module';
 import { ENV } from '@env';
-import { ApiModule } from '@services/api/api.module';
-import { ConfigModule } from '@services/config/config.module';
-import { DeviceModule } from '@services/device/device.module';
-import { LoggerModule } from '@services/logger/logger.module';
 
 @NgModule({
     imports : [

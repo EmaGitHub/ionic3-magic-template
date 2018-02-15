@@ -9,12 +9,12 @@ if (env === 'prod' || env === 'dev') {
 
     useDefaultConfig[env].resolve.alias = {
         '@app': path.resolve('./src/app'),
+        '@core': path.resolve('./src/app/core'),
+        '@shared': path.resolve('./src/shared/core'),
         '@assets': path.resolve('./src/assets'),
         '@env': path.resolve(environmentPath(env)),
-        '@mocks': path.resolve('./src/mocks'),
-        '@pages': path.resolve('./src/pages'),
         '@modals': path.resolve('./src/modals'),
-        '@services': path.resolve('./src/services'),
+        '@pages': path.resolve('./src/pages'),
         '@theme': path.resolve('./src/theme')
     };
 
@@ -24,12 +24,12 @@ if (env === 'prod' || env === 'dev') {
     useDefaultConfig[env] = useDefaultConfig.dev;
     useDefaultConfig[env].resolve.alias = {
         '@app': path.resolve('./src/app'),
+        '@core': path.resolve('./src/app/core'),
+        '@shared': path.resolve('./src/shared/core'),
         '@assets': path.resolve('./src/assets'),
         '@env': path.resolve(environmentPath(env)),
-        '@mocks': path.resolve('./src/mocks'),
-        '@pages': path.resolve('./src/pages'),
         '@modals': path.resolve('./src/modals'),
-        '@services': path.resolve('./src/services'),
+        '@pages': path.resolve('./src/pages'),
         '@theme': path.resolve('./src/theme')
     };
 

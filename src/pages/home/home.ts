@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { ConfigService } from '@core/config/config.service';
 import { HomeService } from '@pages/home/home.service';
-import { ConfigService } from '@services/config/config.service';
 import { NavController } from 'ionic-angular';
 
-// import { ApiService } from '@services/api/api.service';
+// import { ApiService } from '@core/api/api.service';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -31,35 +31,6 @@ export class HomePage {
 
         // this.deviceService.showLoading();
 
-        // setTimeout(() => {
-        //     this.deviceService.alert('ciao');
-        // }, 1000);
-
-        // this.getQualcosaDaServizio()
-        //     .subscribe(data => {
-        //         console.log(data);
-        //     });
-
-        // this.config.update();
-
         this.homeService.recuperaRoba();
     }
-
-    // START SERVIZIO
-
-    // getQualcosaDaServizio(){
-    //     // preparo la richiesta tramite il config service
-    //     this.config.getApi();
-    //     // integro la richiesta con i dati (params e/o body)
-    //     // chiamo l'api service e faccio la request
-
-
-    //     return this.http.request()
-
-
-    //     get<Config>(
-    //         this.configUrl, { observe: 'response' });
-    // }
-
-    // END SERVIZIO
 }

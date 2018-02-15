@@ -19,11 +19,12 @@
         "baseUrl": "./src",
         "paths": {
             "@app/*": [ "app/*" ],
+            "@core/*": [ "app/core/*" ],
+            "@shared/*": [ "app/shared/*" ],
             "@assets/*": [ "assets/*" ],
             "@env": [ "environments/environment" ],
-            "@pages/*": [ "pages/*" ],
             "@modals/*": [ "modals/*" ],
-            "@services/*": [ "services/*" ],
+            "@pages/*": [ "pages/*" ],
             "@theme/*": [ "theme/*" ]
         }
 

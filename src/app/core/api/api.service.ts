@@ -4,8 +4,8 @@ import 'rxjs/add/operator/map';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { HttpObserve } from '@angular/common/http/src/client';
 import { Injectable } from '@angular/core';
-import { ApiConfig } from '@services/config/config.model';
-import { ConfigService } from '@services/config/config.service';
+import { ApiConfig } from '@core/config/config.model';
+import { ConfigService } from '@core/config/config.service';
 import { Observable } from 'rxjs/Observable';
 
 import { HttpClientOptions } from './api.models';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '@services/api/api.service';
-import { Config } from '@services/config/config.model';
-import { LoggerService } from '@services/logger/logger.service';
+import { ApiService } from '@core/api/api.service';
+import { Config } from '@core/config/config.model';
+import { LoggerService } from '@core/logger/logger.service';
 
 @Injectable()
 export class HomeService {

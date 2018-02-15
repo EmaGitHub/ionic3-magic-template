@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { ConfigService } from '@core/config/config.service';
+import { DeviceService } from '@core/device/device.service';
 import { TabsPage } from '@pages/tabs/tabs';
-import { ConfigService } from '@services/config/config.service';
-import { DeviceService } from '@services/device/device.service';
 import { App, Nav, ViewController } from 'ionic-angular';
 
 @Component({

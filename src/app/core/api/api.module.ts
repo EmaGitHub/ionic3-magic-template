@@ -1,8 +1,9 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ApiService } from '@services/api/api.service';
-import { ConfigService } from '@services/config/config.service';
-import { LoggerModule } from '@services/logger/logger.module';
+import { ConfigService } from '@core/config/config.service';
+import { LoggerModule } from '@core/logger/logger.module';
+
+import { ApiService } from './api.service';
 
 /**
  * @name ApiModule
