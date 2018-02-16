@@ -5,16 +5,16 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { HttpObserve } from '@angular/common/http/src/client';
 import { Injectable } from '@angular/core';
 import { ApiConfig } from '@core/config/config.model';
+import { ConfigService } from '@core/config/config.service';
 import { Observable } from 'rxjs/Observable';
 
 import { HttpClientOptions, RequestMethods } from './api.models';
 
-// import { ConfigService } from '@core/config/config.service';
 @Injectable()
 export class ApiService {
 
     constructor(
-        // private configService: ConfigService,
+        private configService: ConfigService,
         private http: HttpClient
     ) { }
 
