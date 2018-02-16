@@ -6,6 +6,7 @@ import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { SharedModule } from '@shared/shared.module';
 
 import { DeviceServiceConfig } from './device.config';
 import { DeviceService } from './device.service';
@@ -16,6 +17,9 @@ import { DeviceService } from './device.service';
 * DeviceModule is an ngModule that imports a lot of services and utils for a Cordova app
 */
 @NgModule({
+    imports: [
+        SharedModule
+    ],
     providers: [
         DeviceService,
         Network,

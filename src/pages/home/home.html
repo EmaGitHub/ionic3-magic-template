@@ -8,8 +8,7 @@
 
     <h2> {{ 'HELLO' | translate }} Ionic!</h2>
 
-    <button ion-button (click)="test()"> test </button>
-
+    <button ion-button (click)="test()"> test API </button>
 
     <ion-list radio-group [(ngModel)]="selectedLanguage">
         <ion-list-header>
@@ -17,14 +16,16 @@
         </ion-list-header>
 
         <ion-item>
-          <ion-label> Engligh </ion-label>
-          <ion-radio value="en" (ionSelect)="changeLang('en')"></ion-radio>
+            <ion-label> Engligh </ion-label>
+            <ion-radio value="en" (ionSelect)="changeLang('en')"></ion-radio>
         </ion-item>
 
         <ion-item>
-          <ion-label> Français </ion-label>
-          <ion-radio value="fr" (ionSelect)="changeLang('fr')"></ion-radio>
+            <ion-label> Français </ion-label>
+            <ion-radio value="fr" (ionSelect)="changeLang('fr')"></ion-radio>
         </ion-item>
-      </ion-list>
+    </ion-list>
+
+    <button ion-button (click)="testLang()"> test lang </button>
 
 </ion-content>

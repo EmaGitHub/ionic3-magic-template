@@ -7,6 +7,7 @@ import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { TranslateService } from '@ngx-translate/core';
 import { LoadingController, Platform } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { Observable } from 'rxjs/Observable';
@@ -33,7 +34,8 @@ export class DeviceService {
         private loadingCtrl: LoadingController,
         private dialogs: Dialogs,
         private statusBar: StatusBar,
-        private globalization: Globalization
+        private globalization: Globalization,
+        private translateService: TranslateService
     ) {
         if(config){
             if(config.modalTitle) this.modalTitle = config.modalTitle;
@@ -202,7 +204,7 @@ export class DeviceService {
     showLoading(message: string = ''): void {
         this.closeKeyboard();
 
-        // message = Translator.t(message);
+        message = this.translateService.instant(message);
 
         if (this.isCordova()) {
             this.spinnerDialog.show(this.modalTitle, message, true);
@@ -241,12 +243,12 @@ export class DeviceService {
         this.hideLoading();
 
         let okButton = 'OK';
-        // try {
-        //     text = Translator.t(text);
-        //     title = Translator.t(title);
-        //     okButton = Translator.t(okButton);
-        // }
-        // catch (e) {}
+        try {
+            message = this.translateService.instant(message);
+            title = this.translateService.instant(title);
+            okButton = this.translateService.instant(okButton);
+        }
+        catch (e) {}
 
         if (this.isCordova()) {
             this.dialogs.alert(message, title, okButton);
@@ -266,11 +268,10 @@ export class DeviceService {
     confirm(message: string, title: string = this.modalTitle, buttons: ConfirmButton[] = [new ConfirmButton('Ok'), new ConfirmButton('Cancel')]) {
         this.hideLoading();
 
-        // message = Translator.t(message);
-        // title = Translator.t(title);
+        message = this.translateService.instant(message);
+        title = this.translateService.instant(title);
         const buttonLabels = buttons.map((b: ConfirmButton) => {
-            // return Translator.t(b.title);
-            return b.title;
+            return this.translateService.instant(b.title);
         });
 
         if (this.isCordova()) {

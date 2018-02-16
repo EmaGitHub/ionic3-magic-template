@@ -2,7 +2,7 @@ import 'rxjs/Rx';
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http/src/response';
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { DeviceService } from '@core/device/device.service';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,7 +24,7 @@ export class I18nService {
     public initCompleted: Promise<any>;
 
     constructor(
-        public config: I18nModuleConfig,
+        @Optional() public config: I18nModuleConfig,
         private deviceService: DeviceService,
         private translateService: TranslateService,
         private http: HttpClient
