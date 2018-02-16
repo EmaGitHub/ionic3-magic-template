@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '@core/config/config.service';
-import { I18nService } from '@core/i18n/i18n.service';
 import { StartModal } from '@modals/start/start';
+import { I18nService } from '@shared/i18n/i18n.service';
 import { ModalController, Platform } from 'ionic-angular';
 
 @Component({

@@ -27,6 +27,9 @@ import { I18nService } from './i18n.service';
     ],
     providers: [
         I18nService
+    ],
+    exports : [
+        TranslateModule
     ]
 })
 export class I18nModule {

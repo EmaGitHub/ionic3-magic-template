@@ -10,7 +10,7 @@ if (env === 'prod' || env === 'dev') {
     useDefaultConfig[env].resolve.alias = {
         '@app': path.resolve('./src/app'),
         '@core': path.resolve('./src/app/core'),
-        '@shared': path.resolve('./src/shared/core'),
+        '@shared': path.resolve('./src/app/shared'),
         '@assets': path.resolve('./src/assets'),
         '@env': path.resolve(environmentPath(env)),
         '@modals': path.resolve('./src/modals'),
@@ -25,7 +25,7 @@ if (env === 'prod' || env === 'dev') {
     useDefaultConfig[env].resolve.alias = {
         '@app': path.resolve('./src/app'),
         '@core': path.resolve('./src/app/core'),
-        '@shared': path.resolve('./src/shared/core'),
+        '@shared': path.resolve('./src/app/shared'),
         '@assets': path.resolve('./src/assets'),
         '@env': path.resolve(environmentPath(env)),
         '@modals': path.resolve('./src/modals'),

@@ -5,11 +5,11 @@ import { CoreModule } from '@core/core.module';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { StartModal } from '@modals/start/start';
-import { TranslateModule } from '@ngx-translate/core';
 import { AboutPage } from '@pages/about/about';
 import { ContactPage } from '@pages/contact/contact';
 import { HomePage } from '@pages/home/home';
 import { TabsPage } from '@pages/tabs/tabs';
+import { SharedModule } from '@shared/shared.module';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { HomeService } from '../pages/home/home.service';
@@ -26,8 +26,8 @@ import { HomeService } from '../pages/home/home.service';
     imports: [
         BrowserModule,
         IonicModule.forRoot(App),
-        TranslateModule,
-        CoreModule
+        CoreModule,
+        SharedModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { I18nService } from '@core/i18n/i18n.service';
 import { HomeService } from '@pages/home/home.service';
+import { I18nService } from '@shared/i18n/i18n.service';
 import { NavController } from 'ionic-angular';
 
-// import { ConfigService } from '@core/config/config.service';
-// import { ApiService } from '@core/api/api.service';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
