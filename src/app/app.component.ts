@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '@core/config/config.service';
-import { TranslatorService } from '@core/translator/translator.service';
+import { I18nService } from '@core/i18n/i18n.service';
 import { StartModal } from '@modals/start/start';
 import { ModalController, Platform } from 'ionic-angular';
 
@@ -14,7 +14,7 @@ export class App {
         private platform: Platform,
         private modalController: ModalController,
         private configService: ConfigService,
-        private translatorService: TranslatorService
+        private i18nService: I18nService
     ) {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.

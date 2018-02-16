@@ -4,13 +4,13 @@
         {
             "code": "en",
             "label": "English",
-            "url": "/translator/langs/en.json",
+            "url": "/i18n/langs/en.json",
             "isDefault": true
         },
         {
             "code": "fr",
             "label": "Français",
-            "url": "/translator/langs/fr.json",
+            "url": "/i18n/langs/fr.json",
             "isDefault": false
         }
     ]

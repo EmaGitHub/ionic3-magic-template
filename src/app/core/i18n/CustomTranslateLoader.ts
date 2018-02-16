@@ -3,10 +3,10 @@ import { TranslateLoader } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import { TranslatorLang } from './translator.model';
-import { TranslatorService } from './translator.service';
+import { Language } from './i18n.model';
+import { I18nService } from './i18n.service';
 
-export class CustomLoader implements TranslateLoader {
+export class CustomTranslateLoader implements TranslateLoader {
 
     constructor(
         private injector: Injector
@@ -16,12 +16,12 @@ export class CustomLoader implements TranslateLoader {
 
         return Observable.create((observer: Observer<any>) => {
 
-            this.injector.get(TranslatorService).downloadLang(lang).then(
-                (res: TranslatorLang) => {
+            this.injector.get(I18nService).downloadLang(lang).then(
+                (res: Language) => {
                     observer.next(res.translations);
                     observer.complete();
                 },
-                (err) => {
+                (err: Error) => {
                     observer.next({});
                     observer.complete();
                 }

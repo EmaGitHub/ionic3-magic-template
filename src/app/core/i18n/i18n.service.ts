@@ -7,24 +7,24 @@ import { DeviceService } from '@core/device/device.service';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { TranslatorModuleConfig } from './translator.config';
-import { Translator, TranslatorLang } from './translator.model';
+import { I18nModuleConfig } from './i18n.config';
+import { I18n, Language } from './i18n.model';
 
 const storageKeys = {
-    lastTranslator: 'translator',
+    i18n: 'i18n',
     lastLang: 'last_lang',
     lang: 'lang_{CODE}'
 };
 
 @Injectable()
-export class TranslatorService {
+export class I18nService {
     private url: string;
-    private translator: Translator|undefined;
+    private i18n: I18n|undefined;
     private storage: Storage;
     public initCompleted: Promise<any>;
 
     constructor(
-        public config: TranslatorModuleConfig,
+        public config: I18nModuleConfig,
         private deviceService: DeviceService,
         private translateService: TranslateService,
         private http: HttpClient
@@ -32,37 +32,37 @@ export class TranslatorService {
         this.url = config.url;
         this.storage = new Storage({
             name : config.storePrefix || 'storage',
-            storeName : 'translator',
+            storeName : 'i18n',
             driverOrder : ['localstorage']
         });
         this.initCompleted = this.init().then(
-            () => { console.log('translator init completed') },
+            () => { console.log('i18n init completed') },
             console.error
         );
     }
 
 
     /**
-     * Returns the last translator file stored in localStorage with last modified date
-     * @returns {Promise<Translator>}
+     * Returns the last i18n file stored in localStorage with last modified date
+     * @returns {Promise<I18n>}
      */
-    private getLastTranslator(): Promise<Translator> {
-        return this.storage.get(storageKeys.lastTranslator)
+    private getLastI18n(): Promise<I18n> {
+        return this.storage.get(storageKeys.i18n)
     }
 
 
     /**
-     * Download the translator config file and init default language
+     * Download the i18n config file and init default language
      */
     private init() {
         return new Promise<any>((resolve, reject) => {
             this.download().then(
-                (translator: Translator) => {
-                    // Create the Translator
-                    this.translator = new Translator(translator);
-                    // Save translator in storage
-                    this.storage.set(storageKeys.lastTranslator, translator);
-                    // Init default language and download all other languages
+                (i18n: I18n) => {
+                    // Create the I18n
+                    this.i18n = new I18n(i18n);
+                    // Save i18n in storage
+                    this.storage.set(storageKeys.i18n, i18n);
+                    // Init default i18n and download all other languages
                     this.initLangs().then(
                         resolve,
                         reject
@@ -75,31 +75,31 @@ export class TranslatorService {
 
 
     /**
-     * Download the external translator config file and store it in localStorage
+     * Download the external i18n config file and store it in localStorage
      * @returns {Promise<any>}
      */
     private download() {
         return new Promise<any>((resolve, reject) => {
-            this.getLastTranslator().then(
-                lastTranslator => {
-                    // Try to download the new translator config file only if it was modified
+            this.getLastI18n().then(
+                lastI18n => {
+                    // Try to download the new i18n config file only if it was modified
                     let headers = new HttpHeaders();
-                    if(lastTranslator && lastTranslator.lastModified){
-                        headers = headers.set('If-Modified-Since', lastTranslator.lastModified);
+                    if(lastI18n && lastI18n.lastModified){
+                        headers = headers.set('If-Modified-Since', lastI18n.lastModified);
                     }
-                    this.http.get<Translator>(this.url, {headers, observe: 'response'}).subscribe(
-                        (res: HttpResponse<Translator>) => {
-                            // If translator json was modified, update the lastModified property
-                            (<Translator>res.body).lastModified = <string>res.headers.get('Last-Modified');
+                    this.http.get<I18n>(this.url, {headers, observe: 'response'}).subscribe(
+                        (res: HttpResponse<I18n>) => {
+                            // If i18n json was modified, update the lastModified property
+                            (<I18n>res.body).lastModified = <string>res.headers.get('Last-Modified');
                             resolve(res.body);
                         },
                         (err: HttpErrorResponse) => {
-                            // If the HTTP status is 304 the translator json was not modified
-                            // Initialize Translator with localStorage version
-                            if(lastTranslator && err.status === 304){
-                                resolve(lastTranslator);
+                            // If the HTTP status is 304 the i18n json was not modified
+                            // Initialize I18n with localStorage version
+                            if(lastI18n && err.status === 304){
+                                resolve(lastI18n);
                             }
-                            // The download fails and a local translator config doesn't exists, so throw an error
+                            // The download fails and a local i18n config doesn't exists, so throw an error
                             else {
                                 reject(err);
                             }
@@ -121,16 +121,16 @@ export class TranslatorService {
             this.setDefaultLanguage();
             // Get the last used language if exists, or system one, or default one
             this.getLastLanguage().then(
-                (lastLang: TranslatorLang) => {
+                (lastLang: Language) => {
                     // Download the json of last language (if necessary)
                     // this.downloadLang(lastLang).then(
-                    //     (updatedLastLanguage: TranslatorLang) => {
+                    //     (updatedLastLanguage: Language) => {
                     //         // Set the main language as default
                     //         this.setLanguage(updatedLastLanguage);
                     //         // Resolve the promise
                     //         resolve();
                     //         // And start to download for other languages (background mode)
-                    //         const otherLanguages = (<Translator>this.translator).langs.filter((l: TranslatorLang) => {
+                    //         const otherLanguages = (<I18n>this.language).langs.filter((l: Language) => {
                     //             return l.code !== updatedLastLanguage.code;
                     //         });
                     //         this.downloadLangs(otherLanguages);
@@ -139,12 +139,12 @@ export class TranslatorService {
                     // );
 
                     // Set the main language as default
-                    // The TranslatorLoader will automatically download the json language
+                    // The CustomTranslateLoader will automatically download the json language
                     this.setLanguage(lastLang);
                     // Resolve the promise
                     resolve();
                     // And start to download for other languages (background mode)
-                    const otherLanguages = (<Translator>this.translator).langs.filter((l: TranslatorLang) => {
+                    const otherLanguages = (<I18n>this.i18n).langs.filter((l: Language) => {
                         return l.code !== lastLang.code;
                     });
                     this.downloadLangs(otherLanguages);
@@ -159,24 +159,24 @@ export class TranslatorService {
      * Get the last used language if exists
      * If there is no last language set fetch the system language or defaut one if not available
      *
-     * @returns {Promise<TranslatorLang>}
+     * @returns {Promise<Language>}
      */
-    private getLastLanguage(): Promise<TranslatorLang> {
+    private getLastLanguage(): Promise<Language> {
         return new Promise((resolve, reject) => {
             // Search last used language in localStorage
-            this.storage.get(storageKeys.lastLang).then((lastLang: TranslatorLang) => {
+            this.storage.get(storageKeys.lastLang).then((lastLang: Language) => {
                 // If last used language doesn't exists
                 if(!lastLang){
                     // Get the system language
                     this.deviceService.getPreferredLanguage().then((systemLang: string) => {
                         // Search the system language in available languages
-                        let translatorLang = (<Translator>this.translator).getConfig(systemLang);
+                        let lang = (<I18n>this.i18n).getConfig(systemLang);
                         // If lang doesn't exist
-                        if(!translatorLang){
+                        if(!lang){
                             // Get the default language from Config
-                            translatorLang = (<Translator>this.translator).getDefault();
+                            lang = (<I18n>this.i18n).getDefault();
                         }
-                        resolve(translatorLang);
+                        resolve(lang);
                     })
                 }
                 else {
@@ -189,23 +189,44 @@ export class TranslatorService {
 
     /**
      * Set the default language as fallback when a translation isn't found in the current language
-     * @param  {TranslatorLang} lang Lang to set as default
+     * @param  {Language} lang Language to set as default
      * @returns {void}
      */
     private setDefaultLanguage() {
-        const lang = (<Translator>this.translator).getDefault();
+        const lang = (<I18n>this.i18n).getDefault();
         this.translateService.setDefaultLang(lang.code);
     }
 
 
     /**
+     * @param  {Language[]} langs
+     * @returns Promise
+     */
+    private downloadLangs(langs: Language[]): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if(langs.length > 0){
+                let lang = langs.pop();
+                this.downloadLang(<Language>lang).then(
+                    () => {
+                        this.downloadLangs(langs);
+                    }
+                );
+            }
+            else {
+                resolve();
+            }
+        });
+    }
+
+
+    /**
      * Download the json of requested language
-     * @param  {TranslatorLang|string} lang TranslatorLang or code of lang to download
+     * @param  {Language|string} lang Language or code of lang to download
      * @returns {Promise}
      */
-    private downloadLang(lang: TranslatorLang|string): Promise<any> {
+    downloadLang(lang: Language|string): Promise<any> {
         if(typeof lang === 'string'){
-            lang = <TranslatorLang>(<Translator>this.translator).getConfig(lang);
+            lang = <Language>(<I18n>this.i18n).getConfig(lang);
         }
         let headers = new HttpHeaders();
         // If the lang file was already downloaded append the 'If-Modified-Since' header
@@ -213,17 +234,17 @@ export class TranslatorService {
             headers = headers.set('If-Modified-Since', lang.lastModified);
         }
         return new Promise((resolve, reject) => {
-            this.http.get<object>((<TranslatorLang>lang).url, {headers, observe: 'response'}).subscribe(
+            this.http.get<object>((<Language>lang).url, {headers, observe: 'response'}).subscribe(
                 (res: HttpResponse<object>) => {
-                    (<TranslatorLang>lang).lastModified = <string>res.headers.get('Last-Modified');
-                    (<TranslatorLang>lang).translations = res.body;
-                    this.storage.set(storageKeys.lang.replace('{CODE}', (<TranslatorLang>lang).code), lang);
+                    (<Language>lang).lastModified = <string>res.headers.get('Last-Modified');
+                    (<Language>lang).translations = res.body;
+                    this.storage.set(storageKeys.lang.replace('{CODE}', (<Language>lang).code), lang);
                     resolve(lang);
                 },
                 (err: HttpErrorResponse) => {
                     // If the HTTP status is 304 the language json was not modified
                     // Resolve localStorage version of language (if exists)
-                    if((<TranslatorLang>lang).lastModified && err.status === 304){
+                    if((<Language>lang).lastModified && err.status === 304){
                         resolve(lang);
                     }
                     // The download fails and a local language doesn't exists, so throw an error
@@ -236,42 +257,22 @@ export class TranslatorService {
 
 
     /**
-     * @param  {TranslatorLang[]} langs
-     * @returns Promise
-     */
-    private downloadLangs(langs: TranslatorLang[]): Promise<any> {
-        return new Promise((resolve, reject) => {
-            if(langs.length > 0){
-                let lang = langs.pop();
-                this.downloadLang(<TranslatorLang>lang).then(
-                    () => {
-                        this.downloadLangs(langs);
-                    }
-                );
-            }
-            else {
-                resolve();
-            }
-        });
-    }
-
-    /**
      * Get the current used language
-     * @returns {TranslatorLang}
+     * @returns {Language}
      */
-    getCurrentLanguage(): TranslatorLang | undefined {
-        return (<Translator>this.translator).getConfig(this.translateService.currentLang);
+    getCurrentLanguage(): Language | undefined {
+        return (<I18n>this.i18n).getConfig(this.translateService.currentLang);
     }
 
 
     /**
      * Set the last used language for the next app bootstrap
-     * @param  {TranslatorLang} lang Lang to set as last
+     * @param  {Language} lang Language to set as last
      * @returns {void}
      */
-    setLanguage(lang: TranslatorLang|string): void {
+    setLanguage(lang: Language|string): void {
         if(typeof lang === 'string'){
-            lang = <TranslatorLang>(<Translator>this.translator).getConfig(lang);
+            lang = <Language>(<I18n>this.i18n).getConfig(lang);
         }
         if(lang){
             this.storage.set(storageKeys.lastLang, lang);

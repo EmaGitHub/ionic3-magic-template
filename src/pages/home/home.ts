@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslatorService } from '@core/translator/translator.service';
+import { I18nService } from '@core/i18n/i18n.service';
 import { HomeService } from '@pages/home/home.service';
 import { NavController } from 'ionic-angular';
 
@@ -15,12 +15,12 @@ export class HomePage {
 
     constructor(
         public navCtrl: NavController,
-        public translator: TranslatorService,
+        public i18nService: I18nService,
         public homeService: HomeService
     ) { }
 
     ionViewDidLoad(){
-        const currentLang = this.translator.getCurrentLanguage();
+        const currentLang = this.i18nService.getCurrentLanguage();
         if(currentLang){
             this.selectedLanguage = currentLang.code;
         }
@@ -32,6 +32,6 @@ export class HomePage {
 
     changeLang(lang:string) {
         console.log('lingua da impostare', lang);
-        this.translator.setLanguage(lang);
+        this.i18nService.setLanguage(lang);
     }
 }

@@ -1,5 +1,5 @@
 
-export class TranslatorLang {
+export class Language {
     public code: string;
     public label: string;
     public url: string;
@@ -8,42 +8,42 @@ export class TranslatorLang {
     public translations: object | null;
 
     constructor(
-        lang: TranslatorLang
+        language: Language
     ) {
-        this.code = lang.code;
-        this.label = lang.label;
-        this.url = lang.url;
-        this.isDefault = lang.isDefault;
-        this.lastModified = lang.lastModified || null;
-        this.translations = lang.translations || null;
+        this.code = language.code;
+        this.label = language.label;
+        this.url = language.url;
+        this.isDefault = language.isDefault;
+        this.lastModified = language.lastModified || null;
+        this.translations = language.translations || null;
     }
 }
 
-export class Translator {
+export class I18n {
     public lastModified: string | null;
     public baseUrl: string;
-    public langs: TranslatorLang[];
+    public langs: Language[];
 
     constructor(
-        translator: Translator
+        i18n: I18n
     ) {
-        this.baseUrl = translator.baseUrl;
-        this.langs = translator.langs.map((l: TranslatorLang) => {
-            let lang = new TranslatorLang(l);
+        this.baseUrl = i18n.baseUrl;
+        this.langs = i18n.langs.map((l: Language) => {
+            let lang = new Language(l);
             lang.url = this.prepareUrl(lang.url);
             return lang;
         });
-        this.lastModified = translator.lastModified || null;
+        this.lastModified = i18n.lastModified || null;
     }
 
 
     /**
      * Get the language configuration if available, null otherwise
      * @param  {string} lang Requested language
-     * @returns {TranslatorLang|undefined}
+     * @returns {Language|undefined}
      */
-    getConfig(langCode: string): TranslatorLang|undefined {
-        return this.langs.find((l: TranslatorLang) => { return l.code === langCode });
+    getConfig(langCode: string): Language|undefined {
+        return this.langs.find((l: Language) => { return l.code === langCode });
     }
 
 
@@ -51,8 +51,8 @@ export class Translator {
      * Get the default language in langs property
      * @returns string
      */
-    getDefault(): TranslatorLang {
-        const def = this.langs.find((l: TranslatorLang) => { return l.isDefault; });
+    getDefault(): Language {
+        const def = this.langs.find((l: Language) => { return l.isDefault; });
         return def || this.langs[0];
     }
 
