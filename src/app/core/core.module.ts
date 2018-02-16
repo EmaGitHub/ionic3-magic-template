@@ -8,11 +8,12 @@ import { ENV } from '@env';
 @NgModule({
     imports : [
         ConfigModule.forRoot({
-            url: ENV.configUrl
+            url: ENV.configUrl,
+            storePrefix: ENV.appName.replace(/ /g, '')
         }),
         ApiModule,
         DeviceModule.forRoot({
-            modalTitle : 'Ionic 3 Template'
+            modalTitle : ENV.appName
         }),
         LoggerModule
     ]

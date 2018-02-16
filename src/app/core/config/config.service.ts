@@ -1,42 +1,86 @@
+import 'rxjs/Rx';
+
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http/src/response';
 import { Injectable } from '@angular/core';
+import { RequestMethods } from '@core/config/config.model';
 import { Storage } from '@ionic/storage';
 
 import { ConfigModuleConfig } from './config.config';
 import { ApiConfig, Config } from './config.model';
 
 const storageKeys = {
-    config: 'config'
+    lastConfig: 'last'
 };
 
 @Injectable()
 export class ConfigService {
     private url: string;
-    private config: Config;
+    private config: Config|undefined;
+    private storage: Storage;
+    public initCompleted: Promise<any>;
 
     constructor(
-        configModule: ConfigModuleConfig,
-        private storage: Storage,
+        public configModule: ConfigModuleConfig,
         private http: HttpClient
     ) {
         this.url = configModule.url;
+        this.storage = new Storage({
+            name : configModule.storePrefix || 'storage',
+            storeName: 'config',
+            driverOrder : ['localstorage']
+        });
+        this.initCompleted = this.init().then(
+            () => { console.log('config init completed') },
+            console.error
+        );
     }
+
 
     /**
      * Returns the last config file stored in localStorage with last modified date
      * @returns {Promise<Config>}
      */
     private getLastConfig(): Promise<Config> {
-        return this.storage.get(storageKeys.config)
+        return this.storage.get(storageKeys.lastConfig)
     }
+
+
+    /**
+     * Init app
+     */
+    private init() {
+        return new Promise<any>((resolve, reject) => {
+            this.initConfig().then(
+                () => {
+                    // Check versioning...
+                    resolve();
+                },
+                reject
+            );
+        });
+    }
+
+    private initConfig() {
+        return new Promise((resolve, reject) => {
+            this.download().then(
+                (config: Config) => {
+                    this.config = new Config(config);
+                    this.storage.set(storageKeys.lastConfig, config);
+                    resolve();
+                },
+                reject
+            )
+        });
+    }
+
 
     /**
      * Download the external config file and store it in localStorage
      * @returns {Promise<any>}
      */
-    update(): Promise<any> {
-        return new Promise((resolve, reject) => {
+    private download() {
+        return new Promise<any>((resolve, reject) => {
             this.getLastConfig().then(
                 lastConfig => {
                     // Try to download the new config file only if it was modified
@@ -48,16 +92,13 @@ export class ConfigService {
                         (res: HttpResponse<Config>) => {
                             // If config.json was updated initialize it and update the lastModified property
                             (<Config>res.body).lastModified = <string>res.headers.get('Last-Modified');
-                            this.config = new Config(<Config>res.body);
-                            this.storage.set(storageKeys.config, res.body);
-                            resolve();
+                            resolve(res.body);
                         },
                         (err: HttpErrorResponse) => {
                             // If the HTTP status is 304 the config.json was not modified
-                            // so I initialize Config with localStorage version
+                            // Initialize Config with localStorage version
                             if(lastConfig && err.status === 304){
-                                this.config = new Config(lastConfig);
-                                resolve();
+                                resolve(lastConfig);
                             }
                             // The download fails and a local config doesn't exists, so throw an error
                             else {
@@ -69,12 +110,24 @@ export class ConfigService {
         });
     }
 
+
     /**
      * Get api configuration from the config.json file
      * @param apiName string Attribute name of requested api
      * @returns {ApiConfig|null}
      */
     getApiConfig(apiName:string): ApiConfig|null {
-        return this.config.backend.getApiConfig(apiName);
+        return (<Config>this.config).backend.getApiConfig(apiName);
+    }
+
+
+    /**
+     * Get api configuration from the config.json file
+     * @param url string HTTP request's url
+     * @param method string HTTP request's method
+     * @returns {ApiConfig|null}
+     */
+    createNewApiConfig(url: string, method: string = RequestMethods.GET): ApiConfig {
+        return (<Config>this.config).backend.createNewApiConfig(url, method);
     }
 }

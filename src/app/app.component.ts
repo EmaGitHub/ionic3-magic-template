@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ConfigService } from '@core/config/config.service';
 import { StartModal } from '@modals/start/start';
+import { I18nService } from '@shared/i18n/i18n.service';
 import { ModalController, Platform } from 'ionic-angular';
 
 @Component({
@@ -10,7 +12,9 @@ export class App {
 
     constructor(
         private platform: Platform,
-        private modalController: ModalController
+        private modalController: ModalController,
+        private configService: ConfigService,
+        private i18nService: I18nService
     ) {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
@@ -20,7 +24,7 @@ export class App {
             let startingModal = this.modalController.create(StartModal, null, {
                 showBackdrop: false,
                 enableBackdropDismiss: false,
-                cssClass: 'fullscreen-modal'
+                cssClass: 'fullscreen'
             });
             startingModal.present();
         });

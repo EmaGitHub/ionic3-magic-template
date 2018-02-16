@@ -8,16 +8,24 @@ export class HomeService {
 
     constructor(
         private apiService: ApiService,
-        private loggerService: LoggerService
+        private logger: LoggerService
     ) { }
 
     recuperaRoba(){
-        this.apiService.request<Config>('login', {'token' : 'ciaone', 'pippo': 123, 'asd': [1,2,3]}, 'testo', {headers : {'test2': 'ciao'}}).subscribe(
-            res => {
+        this.apiService.callApi<Config>('login', {'token' : 'ciaone', 'pippo': 123, 'asd': [1,2,3]}, 'testo', {headers : {'test2': 'ciao'}}).subscribe(
+            (res: any) => {
                 console.log(res);
             },
-            err => {
-                this.loggerService.error(err);
+            (err: any) => {
+                this.logger.error(err);
+            }
+        );
+        this.apiService.request<Config>('/ciao', 'GET', {'token' : 'ciaone', 'pippo': 123, 'asd': [1,2,3]}, 'testo', {headers : {'test2': 'ciao'}}).subscribe(
+            (res: any) => {
+                console.log(res);
+            },
+            (err: any) => {
+                this.logger.error(err);
             }
         );
     }

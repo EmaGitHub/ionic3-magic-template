@@ -1,36 +1,41 @@
 import { Component } from '@angular/core';
-import { ConfigService } from '@core/config/config.service';
+import { DeviceService } from '@core/device/device.service';
 import { HomeService } from '@pages/home/home.service';
+import { I18nService } from '@shared/i18n/i18n.service';
 import { NavController } from 'ionic-angular';
 
-// import { ApiService } from '@core/api/api.service';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
 export class HomePage {
 
+    selectedLanguage = 'en';
+
     constructor(
         public navCtrl: NavController,
-        // public http: ApiService,
-        public config: ConfigService,
-        public homeService: HomeService
-        // public deviceService: DeviceService,
-        // public loggerService: LoggerService
-    ) {
+        public i18nService: I18nService,
+        public homeService: HomeService,
+        public deviceService: DeviceService
+    ) { }
 
-        // this.config.update();
-
+    ionViewDidLoad(){
+        const currentLang = this.i18nService.getCurrentLanguage();
+        if(currentLang){
+            this.selectedLanguage = currentLang.code;
+        }
     }
 
     test() {
-        // this.loggerService.error('ciao', 1, 2, false, [10, true, 'ciao'], {a: 123, b: 'ciaone', c: this.loggerService});
-        // this.loggerService.warn('ciao', 1, 2, false, [10, true, 'ciao'], {a: 123, b: 'ciaone', c: this.loggerService});
-        // this.loggerService.info('ciao', 1, 2, false, [10, true, 'ciao'], {a: 123, b: 'ciaone', c: this.loggerService});
-        // this.loggerService.debug('ciao', 1, 2, false, [10, true, 'ciao'], {a: 123, b: 'ciaone', c: this.loggerService});
-
-        // this.deviceService.showLoading();
-
         this.homeService.recuperaRoba();
+    }
+
+    changeLang(lang:string) {
+        console.log('lingua da impostare', lang);
+        this.i18nService.setLanguage(lang);
+    }
+
+    testLang() {
+        this.deviceService.alert('HELLO');
     }
 }

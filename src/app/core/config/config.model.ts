@@ -1,5 +1,15 @@
 import { HttpHeaders } from '@angular/common/http';
-import { RequestMethods } from '@core/api/api.models';
+
+export enum RequestMethods {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE',
+    HEAD = 'HEAD',
+    OPTIONS = 'OPTIONS',
+    PATCH = 'PATCH',
+    JSONP = 'JSONP'
+}
 
 export class VersioningConfig {
     public platform: string;
@@ -30,6 +40,7 @@ export class BackendConfig {
         this.environment = backend.environment || 'PROD';
     }
 
+
     public getApiConfig(apiName:string): ApiConfig|null {
         let api;
         try {
@@ -41,6 +52,23 @@ export class BackendConfig {
         }
         return api;
     }
+
+
+    /**
+     * Get api configuration from the config.json file
+     * @param url string HTTP request's url
+     * @param method string HTTP request's method
+     * @returns {ApiConfig|null}
+     */
+    public createNewApiConfig(url: string, method: string = RequestMethods.GET): ApiConfig {
+        url = this.prepareUrl(url);
+        let apiConfig = new ApiConfig(<ApiConfig>{
+            url : url,
+            method : method
+        });
+        return apiConfig;
+    }
+
 
     /**
      * Add baseUrl as prefix if the api url is relative
@@ -64,7 +92,7 @@ export class ApiConfig {
     constructor(
         api: ApiConfig
     ) {
-        this.name = api.name;
+        this.name = api.name || '';
         this.url = api.url;
         this.method = (api.method || RequestMethods.GET).toUpperCase();
         this.headers = new HttpHeaders().set('Content-Type', 'application/json; charset=UTF-8');
@@ -77,27 +105,10 @@ export class ApiConfig {
     }
 }
 
-export class LangConfig {
-    public code: string;
-    public label: string;
-    public url: string;
-    public isDefault: boolean;
-
-    constructor(
-        lang: LangConfig
-    ) {
-        this.code = lang.code;
-        this.label = lang.label;
-        this.url = lang.url;
-        this.isDefault = lang.isDefault;
-    }
-}
-
 export class Config {
     public lastModified: string | null;
     public versioning: VersioningConfig[];
     public backend: BackendConfig;
-    public langs: LangConfig[];
     public loggerLevel: string;
     public devMode: boolean;
 
@@ -106,7 +117,6 @@ export class Config {
     ) {
         this.versioning = config.versioning.map((v: VersioningConfig) => { return new VersioningConfig(v); });
         this.backend = new BackendConfig(config.backend);
-        this.langs = config.langs.map((l: LangConfig) => { return new LangConfig(l); });
         this.loggerLevel = config.loggerLevel || 'ERROR';
         this.devMode = config.devMode || false;
         this.lastModified = config.lastModified || null;

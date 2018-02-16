@@ -5,14 +5,27 @@
 </ion-header>
 
 <ion-content padding>
-    <h2>Welcome to Ionic!</h2>
-    <p>
-        This starter project comes with simple tabs-based layout for apps
-        that are going to primarily use a Tabbed UI.
-    </p>
-    <p>
-        Take a look at the <code>src/pages/</code> directory to add or change tabs,
-        update any existing page or create new pages.
-    </p>
-    <button ion-button (click)="test()"> test </button>
+
+    <h2> {{ 'HELLO' | translate }} Ionic!</h2>
+
+    <button ion-button (click)="test()"> test API </button>
+
+    <ion-list radio-group [(ngModel)]="selectedLanguage">
+        <ion-list-header>
+            i18n
+        </ion-list-header>
+
+        <ion-item>
+            <ion-label> Engligh </ion-label>
+            <ion-radio value="en" (ionSelect)="changeLang('en')"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label> Français </ion-label>
+            <ion-radio value="fr" (ionSelect)="changeLang('fr')"></ion-radio>
+        </ion-item>
+    </ion-list>
+
+    <button ion-button (click)="testLang()"> test lang </button>
+
 </ion-content>
