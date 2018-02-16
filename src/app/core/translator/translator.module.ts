@@ -1,9 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { Injector, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { IonicStorageModule } from '@ionic/storage';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { TranslatorModuleConfig } from './translator.config';
+import { CustomLoader } from './translator.loader';
 import { TranslatorService } from './translator.service';
 
 /**
@@ -15,6 +16,13 @@ import { TranslatorService } from './translator.service';
 @NgModule({
     imports: [
         IonicStorageModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useClass: CustomLoader,
+                deps: [Injector]
+            }
+        }),
         HttpClientModule
     ],
     providers: [

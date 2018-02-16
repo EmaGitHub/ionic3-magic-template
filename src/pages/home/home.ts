@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslatorService } from '@core/translator/translator.service';
 import { HomeService } from '@pages/home/home.service';
 import { NavController } from 'ionic-angular';
 
@@ -10,27 +11,27 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
+    selectedLanguage = 'en';
+
     constructor(
         public navCtrl: NavController,
-        // public http: ApiService,
-        // public config: ConfigService,
+        public translator: TranslatorService,
         public homeService: HomeService
-        // public deviceService: DeviceService,
-        // public loggerService: LoggerService
-    ) {
+    ) { }
 
-        // this.config.update();
-
+    ionViewDidLoad(){
+        const currentLang = this.translator.getCurrentLanguage();
+        if(currentLang){
+            this.selectedLanguage = currentLang.code;
+        }
     }
 
     test() {
-        // this.loggerService.error('ciao', 1, 2, false, [10, true, 'ciao'], {a: 123, b: 'ciaone', c: this.loggerService});
-        // this.loggerService.warn('ciao', 1, 2, false, [10, true, 'ciao'], {a: 123, b: 'ciaone', c: this.loggerService});
-        // this.loggerService.info('ciao', 1, 2, false, [10, true, 'ciao'], {a: 123, b: 'ciaone', c: this.loggerService});
-        // this.loggerService.debug('ciao', 1, 2, false, [10, true, 'ciao'], {a: 123, b: 'ciaone', c: this.loggerService});
-
-        // this.deviceService.showLoading();
-
         this.homeService.recuperaRoba();
+    }
+
+    changeLang(lang:string) {
+        console.log('lingua da impostare', lang);
+        this.translator.setLanguage(lang);
     }
 }

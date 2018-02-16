@@ -5,6 +5,7 @@ import { CoreModule } from '@core/core.module';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { StartModal } from '@modals/start/start';
+import { TranslateModule } from '@ngx-translate/core';
 import { AboutPage } from '@pages/about/about';
 import { ContactPage } from '@pages/contact/contact';
 import { HomePage } from '@pages/home/home';
@@ -25,6 +26,7 @@ import { HomeService } from '../pages/home/home.service';
     imports: [
         BrowserModule,
         IonicModule.forRoot(App),
+        TranslateModule,
         CoreModule
     ],
     bootstrap: [IonicApp],
