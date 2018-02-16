@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ConfigService } from '@core/config/config.service';
 import { DeviceService } from '@core/device/device.service';
 import { LoggerService } from '@core/logger/logger.service';
+import { TranslatorService } from '@core/translator/translator.service';
 import { TabsPage } from '@pages/tabs/tabs';
 import { App, Nav, ViewController } from 'ionic-angular';
 
@@ -16,7 +17,7 @@ export class StartModal {
         private viewController: ViewController,
         private configService: ConfigService,
         private deviceService: DeviceService,
-        // private translator: TranslatorService,
+        private translator: TranslatorService,
         private logger: LoggerService,
         private appController: App
     ) {
@@ -25,7 +26,10 @@ export class StartModal {
 
         // TODO:; Cambiare da Promise ad observer per inviare gli status di cosa si sta configurando
         // renderndo il caricamento più interattivo
-        this.configService.configCompleated.then(
+        Promise.all([
+            this.configService.initCompleted,
+            this.translator.initCompleted
+        ]).then(
             () => {
                 this.navTo(TabsPage);
             },

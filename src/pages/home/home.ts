@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ConfigService } from '@core/config/config.service';
 import { HomeService } from '@pages/home/home.service';
 import { NavController } from 'ionic-angular';
 
+// import { ConfigService } from '@core/config/config.service';
 // import { ApiService } from '@core/api/api.service';
 @Component({
     selector: 'page-home',
@@ -13,7 +13,7 @@ export class HomePage {
     constructor(
         public navCtrl: NavController,
         // public http: ApiService,
-        public config: ConfigService,
+        // public config: ConfigService,
         public homeService: HomeService
         // public deviceService: DeviceService,
         // public loggerService: LoggerService
