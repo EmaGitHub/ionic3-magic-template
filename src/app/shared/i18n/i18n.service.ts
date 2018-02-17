@@ -35,10 +35,7 @@ export class I18nService {
             storeName : 'i18n',
             driverOrder : ['localstorage']
         });
-        this.initCompleted = this.init().then(
-            () => { console.log('i18n init completed') },
-            console.error
-        );
+        this.initCompleted = this.init();
     }
 
 
@@ -101,7 +98,8 @@ export class I18nService {
                             }
                             // The download fails and a local i18n config doesn't exists, so throw an error
                             else {
-                                reject(err);
+                                console.error(err);
+                                reject(new Error('ERR_MISSING_I18N_CONFIG_FILE'));
                             }
                         });
                 }
@@ -209,6 +207,9 @@ export class I18nService {
                 this.downloadLang(<Language>lang).then(
                     () => {
                         this.downloadLangs(langs);
+                    },
+                    () => {
+                        this.downloadLangs(langs);
                     }
                 );
             }
@@ -249,7 +250,8 @@ export class I18nService {
                     }
                     // The download fails and a local language doesn't exists, so throw an error
                     else {
-                        reject(err);
+                        console.error(err);
+                        reject(new Error('ERR_MISSING_LANG_FILE'));
                     }
                 });
         });

@@ -30,10 +30,7 @@ export class ConfigService {
             storeName: 'config',
             driverOrder : ['localstorage']
         });
-        this.initCompleted = this.init().then(
-            () => { console.log('config init completed') },
-            console.error
-        );
+        this.initCompleted = this.init();
     }
 
 
@@ -102,7 +99,8 @@ export class ConfigService {
                             }
                             // The download fails and a local config doesn't exists, so throw an error
                             else {
-                                reject(err);
+                                console.error(err);
+                                reject(new Error('ERR_APP_MISSING_CONFIG_FILE'));
                             }
                         });
                 }
