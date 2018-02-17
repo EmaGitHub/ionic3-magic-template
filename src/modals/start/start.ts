@@ -34,7 +34,7 @@ export class StartModal {
                 this.navTo(TabsPage);
             },
             (err: Error) => {
-                this.deviceService.alert(err.message);
+                this.status = err.message;
             }
         )
 
