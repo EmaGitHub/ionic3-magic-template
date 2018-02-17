@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@core/api/api.service';
-import { Config } from '@core/config/config.model';
+import { Config } from '@core/config/models';
 import { LoggerService } from '@core/logger/logger.service';
 
 @Injectable()

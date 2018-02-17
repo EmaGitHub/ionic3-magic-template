@@ -3,8 +3,8 @@ import { TranslateLoader } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import { Language } from './i18n.model';
-import { I18nService } from './i18n.service';
+import { I18nService } from '../i18n.service';
+import { Language } from './Language';
 
 export class CustomTranslateLoader implements TranslateLoader {
 
