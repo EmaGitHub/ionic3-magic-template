@@ -2,8 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { IonicStorageModule } from '@ionic/storage';
 
-import { ConfigModuleConfig } from './config.config';
 import { ConfigService } from './config.service';
+import { ConfigModuleConfig } from './models';
 
 /**
 * @name ConfigModule

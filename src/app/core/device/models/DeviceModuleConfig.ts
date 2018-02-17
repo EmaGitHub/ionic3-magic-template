@@ -1,5 +1,5 @@
 
-export class DeviceServiceConfig {
+export class DeviceModuleConfig {
     constructor(
         public modalTitle: string
     ){ }

@@ -1,23 +1,7 @@
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { HttpObserve } from '@angular/common/http/src/client';
 
-export enum RequestMethods {
-    GET = 'GET',
-    POST = 'POST',
-    PUT = 'PUT',
-    DELETE = 'DELETE',
-    HEAD = 'HEAD',
-    OPTIONS = 'OPTIONS',
-    PATCH = 'PATCH',
-    JSONP = 'JSONP'
-}
-
-export enum ResponseTypes {
-    ARRAY_BUFFER = 'arraybuffer',
-    BLOB = 'blob',
-    JSON = 'json',
-    TEXT = 'text'
-}
+import { ResponseTypes } from './ResponseTypes';
 
 export class HttpClientOptions {
 

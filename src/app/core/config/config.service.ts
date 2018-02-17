@@ -3,11 +3,9 @@ import 'rxjs/Rx';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http/src/response';
 import { Injectable } from '@angular/core';
-import { RequestMethods } from '@core/config/config.model';
 import { Storage } from '@ionic/storage';
 
-import { ConfigModuleConfig } from './config.config';
-import { ApiConfig, Config } from './config.model';
+import { ApiConfig, Config, ConfigModuleConfig, RequestMethods } from './models';
 
 const storageKeys = {
     lastConfig: 'last'

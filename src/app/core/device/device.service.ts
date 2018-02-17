@@ -12,8 +12,7 @@ import { LoadingController, Platform } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfirmButton } from './ConfirmButton.model';
-import { DeviceServiceConfig } from './device.config';
+import { ConfirmButton, DeviceModuleConfig } from './models';
 
 @Injectable()
 export class DeviceService {
@@ -25,7 +24,7 @@ export class DeviceService {
     private ionLoading: Loading|null = null;
 
     constructor(
-        @Optional() config: DeviceServiceConfig,
+        @Optional() config: DeviceModuleConfig,
         private platform: Platform,
         private network: Network,
         private splashScreen: SplashScreen,

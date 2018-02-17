@@ -3,9 +3,8 @@ import { Injector, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@an
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-import { CustomTranslateLoader } from './CustomTranslateLoader';
-import { I18nModuleConfig } from './i18n.config';
 import { I18nService } from './i18n.service';
+import { CustomTranslateLoader, I18nModuleConfig } from './models';
 
 /**
 * @name I18nModule

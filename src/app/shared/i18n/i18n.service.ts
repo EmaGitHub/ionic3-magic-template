@@ -7,8 +7,7 @@ import { DeviceService } from '@core/device/device.service';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { I18nModuleConfig } from './i18n.config';
-import { I18n, Language } from './i18n.model';
+import { I18n, I18nModuleConfig, Language } from './models';
 
 const storageKeys = {
     i18n: 'i18n',

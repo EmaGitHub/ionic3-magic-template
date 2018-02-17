@@ -6,10 +6,10 @@ import { Network } from '@ionic-native/network';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { SharedModule } from '@shared/shared.module';
+import { I18nModule } from '@shared/i18n/i18n.module';
 
-import { DeviceServiceConfig } from './device.config';
 import { DeviceService } from './device.service';
+import { DeviceModuleConfig } from './models';
 
 /**
 * @name DeviceModule
@@ -18,7 +18,7 @@ import { DeviceService } from './device.service';
 */
 @NgModule({
     imports: [
-        SharedModule
+        I18nModule
     ],
     providers: [
         DeviceService,
@@ -40,15 +40,15 @@ export class DeviceModule {
 
 
     /**
-    * Allow to pass a <DeviceServiceConfig> configuration to DeviceService
-    * @param  {DeviceServiceConfig} config all available configuration for <DeviceServiceConfig>
+    * Allow to pass a <DeviceModuleConfig> configuration to DeviceService
+    * @param  {DeviceServiceConfig} config all available configuration for <DeviceModuleConfig>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(config?: Partial<DeviceServiceConfig>): ModuleWithProviders {
+    static forRoot(config?: Partial<DeviceModuleConfig>): ModuleWithProviders {
         return {
             ngModule: DeviceModule,
             providers: [
-                { provide: DeviceServiceConfig, useValue: config }
+                { provide: DeviceModuleConfig, useValue: config }
             ]
         }
     }
