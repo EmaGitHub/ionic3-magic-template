@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { Starter } from '@app/starter/starter';
 import { ConfigService } from '@core/config/config.service';
-import { StartModal } from '@modals/start/start';
 import { I18nService } from '@shared/i18n/i18n.service';
 import { ModalController, Platform } from 'ionic-angular';
 
@@ -21,7 +21,7 @@ export class App {
             // Here you can do any higher level native things you might need.
 
             // Show modal to start to initialize the app
-            let startingModal = this.modalController.create(StartModal, null, {
+            let startingModal = this.modalController.create(Starter, null, {
                 showBackdrop: false,
                 enableBackdropDismiss: false,
                 cssClass: 'fullscreen'

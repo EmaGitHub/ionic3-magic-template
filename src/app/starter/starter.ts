@@ -7,10 +7,10 @@ import { I18nService } from '@shared/i18n/i18n.service';
 import { App, Nav, ViewController } from 'ionic-angular';
 
 @Component({
-    selector: 'modal-start',
-    templateUrl: 'start.html'
+    selector: 'app-starter',
+    templateUrl: 'starter.html'
 })
-export class StartModal {
+export class Starter {
     public status: string;
 
     constructor(
