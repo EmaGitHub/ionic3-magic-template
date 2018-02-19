@@ -52,6 +52,6 @@ Il `DeviceService` ad esempio viene importato dall'esterno utilizzando il path `
 
 ## Server Mocks
 
-Attraverso il comando `npm run mocks-serve` è possibile lanciare un web server interno contattabile alla url `http://127.0.0.1:9001` e che punta alla disrectory `mocks` del progetto.
+Attraverso il comando `npm run start-mocks` è possibile lanciare un web server interno contattabile alla url `http://127.0.0.1:9001` e che punta alla disrectory `mocks` del progetto.
 
 Il file mock di configurazione presente in `/mocks/config/config.json` sarà, ad esempio fruibile all'app, contattando la url `http://127.0.0.1:9001/config./config.json`.

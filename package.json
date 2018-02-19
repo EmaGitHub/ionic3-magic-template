@@ -12,7 +12,9 @@
     "ionic:serve": "ionic-app-scripts serve",
     "serve:dev": "ENV=dev ionic-app-scripts serve",
     "serve:mocks": "ENV=mocks ionic-app-scripts serve",
-    "mocks-serve": "./node_modules/.bin/distribute serve ./mocks"
+    "build:coll": "ENV=coll ionic-app-scripts build",
+    "build:prod": "ENV=prod ionic-app-scripts build",
+    "start-mocks": "./node_modules/.bin/distribute serve ./mocks"
   },
   "dependencies": {
     "@angular/common": "5.0.3",
@@ -45,6 +47,7 @@
     "mobile-app-distribution": "^0.4.1",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
+    "webpack-merge": "^4.1.1",
     "zone.js": "0.8.18"
   },
   "devDependencies": {

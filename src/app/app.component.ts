@@ -13,7 +13,9 @@ export class App {
     constructor(
         private platform: Platform,
         private modalController: ModalController,
+        // tslint:disable-next-line
         private configService: ConfigService,
+        // tslint:disable-next-line
         private i18nService: I18nService
     ) {
         this.platform.ready().then(() => {

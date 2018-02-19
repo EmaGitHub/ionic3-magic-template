@@ -31,6 +31,7 @@ export class Starter {
             this.i18nService.initCompleted
         ]).then(
             () => {
+                this.logger.debug('initialize completed');
                 this.navTo(TabsPage);
             },
             (err: Error) => {
