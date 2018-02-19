@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { DeviceService } from '@core/device/device.service';
-import { HomeService } from '@pages/home/home.service';
 import { I18nService } from '@shared/i18n/i18n.service';
 import { NavController } from 'ionic-angular';
+
+import { HomeService } from './home.service';
 
 @Component({
     selector: 'page-home',
