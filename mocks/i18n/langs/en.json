@@ -1,8 +1,12 @@
 
 {
+    "CANCEL" : "Cancel",
+
     "ERR_MISSING_I18N_CONFIG_FILE" : "No translations config file was found.\nPlease check your internet connection and retry.",
     "ERR_MISSING_APP_CONFIG_FILE": "No app config file was found.\nPlease check your internet connection and retry",
     "ERR_MISSING_LANG_FILE": "No translations for selected language was found.\nPlease check your internet connection and retry",
 
-    "HELLO" : "Hi"
+    "HELLO" : "Hi",
+
+    "OK" : "Ok"
 }

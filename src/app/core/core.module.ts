@@ -13,7 +13,8 @@ import { ENV } from '@env';
         }),
         ApiModule,
         DeviceModule.forRoot({
-            modalTitle : ENV.appName
+            modalTitle : ENV.appName,
+            dialogsMode : 'ionic'
         }),
         LoggerModule
     ]

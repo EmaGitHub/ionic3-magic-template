@@ -8,15 +8,16 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadingController, Platform } from 'ionic-angular';
+import { AlertButton, AlertController, AlertOptions, LoadingController, Platform } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { Observable } from 'rxjs/Observable';
 
-import { ConfirmButton, DeviceModuleConfig } from './models';
+import { DeviceModuleConfig } from './models';
 
 @Injectable()
 export class DeviceService {
-    private modalTitle: string = 'MyApp';
+    private modalTitle: string;
+    private dialogsMode: string;
 
 
     private onlineObservable: Observable<any>;
@@ -34,10 +35,12 @@ export class DeviceService {
         private dialogs: Dialogs,
         private statusBar: StatusBar,
         private globalization: Globalization,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private alertCtrl: AlertController
     ) {
         if(config){
             if(config.modalTitle) this.modalTitle = config.modalTitle;
+            if(config.dialogsMode) this.dialogsMode = config.dialogsMode;
         }
         // Create two Observable for online and offline notifications
         // to allow the whole app to subscribe to them with the custom functions
@@ -233,7 +236,7 @@ export class DeviceService {
 
 
     /**
-    * Show a native alert dialog or a simple browser alert
+    * Show a native or ionic simple alert dialog
     * @param  {string} message Dialog message
     * @param  {string} title Dialog title
     * @returns void
@@ -241,20 +244,59 @@ export class DeviceService {
     alert(message: string, title: string = this.modalTitle): void {
         this.hideLoading();
 
-        let okButton = 'OK';
-        try {
-            message = this.translateService.instant(message);
-            title = this.translateService.instant(title);
-            okButton = this.translateService.instant(okButton);
-        }
-        catch (e) {}
+        if(this.dialogsMode === 'native'){
+            let okButton = 'OK';
+            try {
+                message = this.translateService.instant(message);
+                title = this.translateService.instant(title);
+                okButton = this.translateService.instant(okButton);
+            }
+            catch (e) {}
 
-        if (this.isCordova()) {
-            this.dialogs.alert(message, title, okButton);
+            if (this.isCordova()) {
+                this.dialogs.alert(message, title, okButton);
+            }
+            else {
+                window.alert(message);
+            }
         }
         else {
-            window.alert(message);
+            this.ionicCustomAlert({
+                title: title,
+                message: message
+            });
         }
+    }
+
+
+    /**
+    * Show an ionic custom alert dialog
+    * @param  {AlertOptions} options All Ionic alert options
+    * @returns void
+    */
+   ionicCustomAlert(options: AlertOptions = {}){
+        if(!options.title) options.title = this.modalTitle;
+        if(!options.subTitle) options.subTitle = '';
+        if(!options.message) options.message = '';
+        if(!options.cssClass) options.cssClass = 'primary';
+        if(!options.inputs) options.inputs = [];
+        if(!options.buttons) options.buttons = [
+            {
+                text : this.translateService.instant('OK'),
+                handler : () => {},
+                cssClass : 'primary',
+                role : ''
+            },{
+                text : this.translateService.instant('CANCEL'),
+                handler : () => {},
+                cssClass : 'primary',
+                role : 'cancel'
+            }
+        ];
+        if(!options.enableBackdropDismiss) options.enableBackdropDismiss = false;
+
+        let alert = this.alertCtrl.create(options);
+        alert.present();
     }
 
 
@@ -262,36 +304,57 @@ export class DeviceService {
     * Show a native confirm dialog or the simple browser confirm
     * @param {string} message Dialog message
     * @param {string} title Dialog title
-    * @param {ConfirmButton[]} buttons List of <ConfirmButton>
+    * @param {AlertButton[]} buttons List of <AlertButton>
     */
-    confirm(message: string, title: string = this.modalTitle, buttons: ConfirmButton[] = [new ConfirmButton('Ok'), new ConfirmButton('Cancel')]) {
+    confirm(message: string, title: string = this.modalTitle, buttons: AlertButton[] = []) {
         this.hideLoading();
 
         message = this.translateService.instant(message);
         title = this.translateService.instant(title);
-        const buttonLabels = buttons.map((b: ConfirmButton) => {
-            return this.translateService.instant(b.title);
+        if(buttons.length === 0){
+            buttons = [{
+                text: 'OK',
+                cssClass: 'primary',
+                handler: () => {}
+            },{
+                text: 'CANCEL',
+                cssClass: 'primary',
+                role: 'cancel',
+                handler: () => {}
+            }]
+        }
+        const buttonLabels = buttons.map((b: AlertButton) => {
+            return this.translateService.instant(<string>b.text);
         });
 
-        if (this.isCordova()) {
-            this.dialogs.confirm(message, title, buttonLabels).then(
-                (buttonIndex: number) => {
-                    // Decrement clicked button index because the plugin use 'one-based indexing'
-                    buttonIndex--;
-                    // Then execute the 'onClick' function if is defined
-                    if (buttons[buttonIndex]) {
-                        buttons[buttonIndex].onClick();
+        if(this.dialogsMode === 'native'){
+            if (this.isCordova()) {
+                this.dialogs.confirm(message, title, buttonLabels).then(
+                    (buttonIndex: number) => {
+                        // Decrement clicked button index because the plugin use 'one-based indexing'
+                        buttonIndex--;
+                        // Then execute the 'onClick' function if is defined
+                        if (buttons[buttonIndex]) {
+                            (buttons[buttonIndex] as any).handler();
+                        }
                     }
-                }
-            );
-        }
-        else {
-            if (window.confirm(message)) {
-                buttons[0].onClick();
+                );
             }
             else {
-                buttons[1].onClick();
+                if (window.confirm(message)) {
+                    (buttons[0] as any).handler();
+                }
+                else {
+                    (buttons[1] as any).handler();
+                }
             }
+        }
+        else {
+            this.ionicCustomAlert({
+                title: title,
+                message: message,
+                buttons: buttons
+            });
         }
     }
 }
