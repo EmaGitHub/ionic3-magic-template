@@ -7,10 +7,10 @@ import { I18nService } from '@shared/i18n/i18n.service';
 import { App, Nav, ViewController } from 'ionic-angular';
 
 @Component({
-    selector: 'modal-start',
-    templateUrl: 'start.html'
+    selector: 'app-starter',
+    templateUrl: 'starter.html'
 })
-export class StartModal {
+export class Starter {
     public status: string;
 
     constructor(
@@ -31,6 +31,7 @@ export class StartModal {
             this.i18nService.initCompleted
         ]).then(
             () => {
+                this.logger.debug('initialize completed');
                 this.navTo(TabsPage);
             },
             (err: Error) => {

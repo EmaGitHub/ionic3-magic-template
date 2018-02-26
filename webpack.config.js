@@ -1,39 +1,25 @@
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
-const useDefaultConfig = require('@ionic/app-scripts/config/webpack.config.js');
+const { join } = require('path');
+const webpackMerge = require('webpack-merge');
+const { dev, prod } = require('@ionic/app-scripts/config/webpack.config');
 
-const env = process.env.ENV || 'dev';
+const env = process.env.ENV || 'prod';
 
-if (env === 'prod' || env === 'dev') {
-
-    useDefaultConfig[env].resolve.alias = {
-        '@app': path.resolve('./src/app'),
-        '@core': path.resolve('./src/app/core'),
-        '@shared': path.resolve('./src/app/shared'),
-        '@assets': path.resolve('./src/assets'),
-        '@env': path.resolve(environmentPath(env)),
-        '@modals': path.resolve('./src/modals'),
-        '@pages': path.resolve('./src/pages'),
-        '@theme': path.resolve('./src/theme')
-    };
-
-} else {
-
-    // Default to dev config
-    useDefaultConfig[env] = useDefaultConfig.dev;
-    useDefaultConfig[env].resolve.alias = {
-        '@app': path.resolve('./src/app'),
-        '@core': path.resolve('./src/app/core'),
-        '@shared': path.resolve('./src/app/shared'),
-        '@assets': path.resolve('./src/assets'),
-        '@env': path.resolve(environmentPath(env)),
-        '@modals': path.resolve('./src/modals'),
-        '@pages': path.resolve('./src/pages'),
-        '@theme': path.resolve('./src/theme')
-    };
-
-}
+const customConfig = {
+    resolve: {
+        alias: {
+            '@app': join(__dirname, './src/app'),
+            '@core': join(__dirname, './src/app/core/'),
+            '@shared': join(__dirname, './src/app/shared/'),
+            '@assets': join(__dirname, './src/assets/'),
+            '@env': join(__dirname, environmentPath(env)),
+            '@pages': join(__dirname, './src/pages/'),
+            '@theme': join(__dirname, './src/theme/')
+        }
+    }
+};
 
 function environmentPath(env) {
     var filePath = './src/environments/environment' + (env === 'prod' ? '' : '.' + env) + '.ts';
@@ -44,6 +30,9 @@ function environmentPath(env) {
     }
 }
 
-module.exports = function () {
-    return useDefaultConfig;
-};
+const configs = {
+    dev: webpackMerge(dev, customConfig),
+    prod: webpackMerge(prod, customConfig),
+}
+
+module.exports = configs;
