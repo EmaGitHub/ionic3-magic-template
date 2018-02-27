@@ -267,6 +267,15 @@ export class I18nService {
 
 
     /**
+     * Get the default language
+     * @returns {Language}
+     */
+    getDefaultLanguage(): Language | undefined {
+        return (<I18n>this.i18n).getConfig(this.translateService.getDefaultLang());
+    }
+
+
+    /**
      * Set the last used language for the next app bootstrap
      * @param  {Language} lang Language to set as last
      * @returns {void}
@@ -280,5 +289,17 @@ export class I18nService {
             this.translateService.use(lang.code);
         }
     }
+
+
+    /**
+     * @param  {string} key
+     * @returns string
+     */
+    translate(key: string): string {
+        return this.translateService.instant(key);
+    }
+
+
+    onLangChange = this.translateService.onLangChange
 
 }
