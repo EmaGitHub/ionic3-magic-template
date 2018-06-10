@@ -1,15 +1,17 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { KeyboardProvider } from '@core/device/models/IKeyboard';
+import { Device } from '@ionic-native/device';
 import { Dialogs } from '@ionic-native/dialogs';
 import { Globalization } from '@ionic-native/globalization';
-import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { I18nModule } from '@shared/i18n/i18n.module';
 
 import { DeviceService } from './device.service';
-import { DeviceModuleConfig } from './models';
+import { DeviceModuleConfig } from './models/DeviceModuleConfig';
 
 /**
 * @name DeviceModule
@@ -24,11 +26,13 @@ import { DeviceModuleConfig } from './models';
         DeviceService,
         Network,
         SplashScreen,
-        Keyboard,
+        KeyboardProvider,
         SpinnerDialog,
         Dialogs,
         StatusBar,
-        Globalization
+        Globalization,
+        ScreenOrientation,
+        Device
     ]
 })
 export class DeviceModule {

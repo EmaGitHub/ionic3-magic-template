@@ -15,7 +15,6 @@ const customConfig = {
             '@shared': join(__dirname, './src/app/shared/'),
             '@assets': join(__dirname, './src/assets/'),
             '@env': join(__dirname, environmentPath(env)),
-            '@pages': join(__dirname, './src/pages/'),
             '@theme': join(__dirname, './src/theme/')
         }
     }

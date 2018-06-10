@@ -6,8 +6,8 @@ export class ApiConfig {
     public name: string;
     public url: string;
     public method: string;
-    public headers: HttpHeaders;
-    public timeout: number;
+    public headers?: HttpHeaders;
+    public timeout?: number;
 
     constructor(
         api: ApiConfig

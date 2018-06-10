@@ -4,8 +4,9 @@ export class Language {
     public label: string;
     public url: string;
     public isDefault: boolean;
-    public lastModified: string | null;
-    public translations: object | null;
+    public lastModified?: string | null;
+    public translations?: any | null;
+    public isAutomatic?: boolean;
 
     constructor(
         language: Language
@@ -16,5 +17,6 @@ export class Language {
         this.isDefault = language.isDefault;
         this.lastModified = language.lastModified || null;
         this.translations = language.translations || null;
+        this.isAutomatic = language.isAutomatic || true;
     }
 }

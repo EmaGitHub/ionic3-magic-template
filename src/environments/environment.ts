@@ -5,5 +5,7 @@ export const ENV = {
     translationsUrl: 'http://127.0.0.1:9001/i18n/i18n.json',
     getPreferredLanguageDev: {
         value: "en-GB"
-    }
+    },
+    productionMode: true,
+    storePrefix: 'Ionic3'
 };

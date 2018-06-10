@@ -1,1 +1,4 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-nav
+    class="main-app"
+    [root]="rootPage"
+    [ngClass]="{ 'content-hidden' : userIsNotLogged }"></ion-nav>

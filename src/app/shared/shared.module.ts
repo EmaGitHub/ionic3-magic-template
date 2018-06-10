@@ -1,18 +1,31 @@
 import { NgModule } from '@angular/core';
+import { EN } from '@app/shared/i18n/models/langs/EN';
+import { FR } from '@app/shared/i18n/models/langs/FR';
+import { LocalI18n } from '@app/shared/i18n/models/LocalI18n';
 import { ENV } from '@env';
-import { DBModule } from '@shared/db/db.module';
 import { I18nModule } from '@shared/i18n/i18n.module';
+import { ModalNavPageModule } from '@shared/modal-nav/modal-nav.module';
+import { IonicModule } from 'ionic-angular';
 
 @NgModule({
     imports : [
+        IonicModule,
+        ModalNavPageModule,
         I18nModule.forRoot({
-            url: ENV.translationsUrl,
-            storePrefix: ENV.appName.replace(/ /g, '')
-        }),
-        DBModule
+            // remote: ENV.translationsUrl,
+            local: {
+                i18n: LocalI18n,
+                langs: {
+                    en: EN,
+                    fr: FR
+                }
+            },
+            storePrefix: ENV.storePrefix
+        })
     ],
     exports : [
-        I18nModule
+        I18nModule,
+        ModalNavPageModule
     ]
 })
 export class SharedModule { }

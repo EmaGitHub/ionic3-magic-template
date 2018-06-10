@@ -1,15 +1,15 @@
 import { Language } from './Language';
 
 export class I18n {
-    public lastModified: string | null;
+    public lastModified?: string | null;
     public baseUrl: string;
     public langs: Language[];
 
     constructor(
-        i18n: I18n
+        i18n: Partial<I18n>
     ) {
-        this.baseUrl = i18n.baseUrl;
-        this.langs = i18n.langs.map((l: Language) => {
+        this.baseUrl = <string>i18n.baseUrl;
+        this.langs = (i18n.langs as Language[]).map((l: Language) => {
             let lang = new Language(l);
             lang.url = this.prepareUrl(lang.url);
             return lang;
