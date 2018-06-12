@@ -4,36 +4,44 @@
             "platform": "android",
             "isLastVersion": true,
             "isMandatoryUpdate": false,
-            "storeLink": "https://play.google.com/store/apps/details?id=it.engds.partnermatch"
+            "storeLink": ""
         },
         {
             "platform": "ios",
             "isLastVersion": true,
             "isMandatoryUpdate": false,
-            "storeLink": "https://itunes.apple.com/us/app/solution/id1311686558"
+            "storeLink": ""
         }
     ],
     "backend": {
         "environment": "PROD",
-        "baseUrl": "http://localhost:9001",
+        "baseUrl": "https://ionictemplate.com/api",
         "api" : [
             {
-                "name" : "login",
-                "url": "/api/login/login.json",
-                "headers": {
-                    "test" : 123
-                }
-            },
-            {
-                "name": "signUp",
-                "url": "/api/leads",
+                "name" : "credentials",
                 "method": "POST",
                 "headers" : {
-                    "contentType": "application/json; charset=utf-8"
-                }
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "url": "/authentication/credentials"
+            },
+            {
+                "name" : "public",
+                "method": "POST",
+                "url": "/authentication/public"
+            },
+            {
+                "name" : "getAccessToken",
+                "method" : "POST",
+                "url" : "/authentication/getAccessToken"
+            },
+            {
+                "name" : "getUserProfile",
+                "method": "POST",
+                "url" : "/core/graphql"
             }
         ]
     },
-    "loggerLevel": "ERROR",
+    "loggerLevel": "DEBUG",
     "devMode": false
 }

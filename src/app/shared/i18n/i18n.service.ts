@@ -1,4 +1,4 @@
-import 'rxjs/Rx';
+import 'moment/min/locales';
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http/src/response';
@@ -6,8 +6,11 @@ import { Injectable, Optional } from '@angular/core';
 import { DeviceService } from '@core/device/device.service';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
+import * as Moment from 'moment';
 
-import { I18n, I18nModuleConfig, Language } from './models';
+import { I18n } from './models/I18n';
+import { I18nModuleConfig } from './models/I18nModuleConfig';
+import { Language } from './models/Language';
 
 const storageKeys = {
     i18n: 'i18n',
@@ -18,7 +21,7 @@ const storageKeys = {
 @Injectable()
 export class I18nService {
     private url: string;
-    private i18n: I18n|undefined;
+    private i18n: I18n | undefined;
     private storage: Storage;
     public initCompleted: Promise<any>;
 
@@ -28,14 +31,15 @@ export class I18nService {
         private translateService: TranslateService,
         private http: HttpClient
     ) {
-        this.url = config.url;
         this.storage = new Storage({
             name : config.storePrefix || 'storage',
             storeName : 'i18n',
             driverOrder : ['localstorage']
         });
-        this.initCompleted = this.init();
+        this.initCompleted = this.init(config);
     }
+
+    public Moment = Moment;
 
 
     /**
@@ -50,23 +54,48 @@ export class I18nService {
     /**
      * Download the i18n config file and init default language
      */
-    private init() {
+    private init(config: I18nModuleConfig) {
         return new Promise<any>((resolve, reject) => {
-            this.download().then(
-                (i18n: I18n) => {
-                    // Create the I18n
-                    this.i18n = new I18n(i18n);
-                    // Save i18n in storage
-                    this.storage.set(storageKeys.i18n, i18n);
-                    // Init default i18n and download all other languages
-                    this.initLangs().then(
-                        resolve,
-                        reject
-                    )
-                },
-                reject
-            );
+            // If requested i18n is a remote one => download it
+            if(config.remote){
+                this.url = config.remote;
+                this.download().then(
+                    (i18n: I18n) => {
+                        this.initI18N(i18n);
+                        // Init default i18n and download all other languages
+                        this.initLangs().then(
+                            resolve,
+                            reject
+                        );
+                    },
+                    reject
+                );
+            }
+            // Otherwise use the local one (if exists)
+            else if(config.local && config.local.i18n && config.local.langs){
+                this.initI18N(config.local.i18n);
+                // Init default i18n and store all other languages
+                this.initLocalLangs(config.local.langs).then(
+                    resolve,
+                    reject
+                );
+            }
+            else {
+                reject(new Error('NO_I18N_CONFIG_DEFINED'));
+            }
         });
+    }
+
+
+    /**
+     * Init the i18n config
+     * @returns {Promise<any>}
+     */
+    private initI18N(i18n: I18n): void {
+        // Create the I18n
+        this.i18n = new I18n(i18n);
+        // Save i18n in storage
+        this.storage.set(storageKeys.i18n, i18n);
     }
 
 
@@ -74,33 +103,46 @@ export class I18nService {
      * Download the external i18n config file and store it in localStorage
      * @returns {Promise<any>}
      */
-    private download() {
+    private download(): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             this.getLastI18n().then(
                 lastI18n => {
-                    // Try to download the new i18n config file only if it was modified
-                    let headers = new HttpHeaders();
-                    if(lastI18n && lastI18n.lastModified){
-                        headers = headers.set('If-Modified-Since', lastI18n.lastModified);
+                    if(this.deviceService.isOnline()){
+                        // Try to download the new i18n config file only if it was modified
+                        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+                        if(lastI18n && lastI18n.lastModified){
+                            //headers = headers.set('If-Modified-Since', lastI18n.lastModified);
+                        }
+                        this.http.get<I18n>(`${this.url}?t=${new Date().getTime()}`, {headers, observe: 'response'}).subscribe(
+                            (res: HttpResponse<I18n>) => {
+                                // If i18n json was modified, update the lastModified property
+                                (<I18n>res.body).lastModified = <string>res.headers.get('Last-Modified');
+                                resolve(res.body);
+                            },
+                            (err: HttpErrorResponse) => {
+                                // If the HTTP call fails but I have a local I18n
+                                // initialize it with localStorage version
+                                if(lastI18n){
+                                    resolve(lastI18n);
+                                }
+                                // The download fails and a local i18n config doesn't exists, so throw an error
+                                else {
+                                    console.error(err);
+                                    reject(new Error('ERR_MISSING_I18N_CONFIG_FILE'));
+                                }
+                            });
                     }
-                    this.http.get<I18n>(this.url, {headers, observe: 'response'}).subscribe(
-                        (res: HttpResponse<I18n>) => {
-                            // If i18n json was modified, update the lastModified property
-                            (<I18n>res.body).lastModified = <string>res.headers.get('Last-Modified');
-                            resolve(res.body);
-                        },
-                        (err: HttpErrorResponse) => {
-                            // If the HTTP status is 304 the i18n json was not modified
-                            // Initialize I18n with localStorage version
-                            if(lastI18n && err.status === 304){
-                                resolve(lastI18n);
-                            }
-                            // The download fails and a local i18n config doesn't exists, so throw an error
-                            else {
-                                console.error(err);
-                                reject(new Error('ERR_MISSING_I18N_CONFIG_FILE'));
-                            }
-                        });
+                    // If the device is offline but I have a local I18n
+                    // initialize it with localStorage version
+                    else {
+                        if(lastI18n){
+                            resolve(lastI18n);
+                        }
+                        // The download fails and a local i18n config doesn't exists, so throw an error
+                        else {
+                            reject(new Error('DEVICE_OFFLINE'));
+                        }
+                    }
                 }
             );
         });
@@ -109,35 +151,19 @@ export class I18nService {
 
     /**
     * Set default (fallback) language
-    * Set the current Initialize langs file and app language
+    * Download all remote language files and store them in LocalStorage
     * @returns {Promise<any>}
     */
-   private initLangs() {
+    private initLangs(): Promise<any> {
         return new Promise((resolve, reject) => {
             // Set the default language
             this.setDefaultLanguage();
             // Get the last used language if exists, or system one, or default one
             this.getLastLanguage().then(
                 (lastLang: Language) => {
-                    // Download the json of last language (if necessary)
-                    // this.downloadLang(lastLang).then(
-                    //     (updatedLastLanguage: Language) => {
-                    //         // Set the main language as default
-                    //         this.setLanguage(updatedLastLanguage);
-                    //         // Resolve the promise
-                    //         resolve();
-                    //         // And start to download for other languages (background mode)
-                    //         const otherLanguages = (<I18n>this.language).langs.filter((l: Language) => {
-                    //             return l.code !== updatedLastLanguage.code;
-                    //         });
-                    //         this.downloadLangs(otherLanguages);
-                    //     },
-                    //     reject
-                    // );
-
                     // Set the main language as default
                     // The CustomTranslateLoader will automatically download the json language
-                    this.setLanguage(lastLang);
+                    this.setLanguage(lastLang, true);
                     // Resolve the promise
                     resolve();
                     // And start to download for other languages (background mode)
@@ -145,6 +171,37 @@ export class I18nService {
                         return l.code !== lastLang.code;
                     });
                     this.downloadLangs(otherLanguages);
+                },
+                reject
+            );
+        });
+    }
+
+
+    /**
+    * Set default (fallback) language
+    * Use the local language files and store them in LocalStorage
+    * @returns {Promise<any>}
+    */
+    private initLocalLangs(langs: Language[]): Promise<any> {
+        return new Promise((resolve, reject) => {
+            (this.i18n as I18n).langs.forEach((lang: Language) => {
+                if(langs[lang.code as any]){
+                    lang.translations = langs[lang.code as any];
+                    this.translateService.setTranslation(lang.code, lang.translations);
+                    this.storage.set(storageKeys.lang.replace('{CODE}', lang.code), lang);
+                }
+            });
+            // Set the default language
+            this.setDefaultLanguage();
+            // Get the last used language if exists, or system one, or default one
+            this.getLastLanguage().then(
+                (lastLang: Language) => {
+                    // Set the main language as default
+                    // The CustomTranslateLoader will automatically download the json language
+                    this.setLanguage(lastLang, true);
+                    // Resolve the promise
+                    resolve();
                 },
                 reject
             );
@@ -162,8 +219,8 @@ export class I18nService {
         return new Promise((resolve, reject) => {
             // Search last used language in localStorage
             this.storage.get(storageKeys.lastLang).then((lastLang: Language) => {
-                // If last used language doesn't exists
-                if(!lastLang){
+                // If last used language doesn't exists or the last used language was automatically set
+                if(!lastLang || lastLang.isAutomatic){
                     // Get the system language
                     this.deviceService.getPreferredLanguage().then((systemLang: string) => {
                         // Search the system language in available languages
@@ -189,8 +246,9 @@ export class I18nService {
      * @param  {Language} lang Language to set as default
      * @returns {void}
      */
-    private setDefaultLanguage() {
+    private setDefaultLanguage(): void {
         const lang = (<I18n>this.i18n).getDefault();
+        Moment.locale(lang.code);
         this.translateService.setDefaultLang(lang.code);
     }
 
@@ -228,31 +286,52 @@ export class I18nService {
         if(typeof lang === 'string'){
             lang = <Language>(<I18n>this.i18n).getConfig(lang);
         }
-        let headers = new HttpHeaders();
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
         // If the lang file was already downloaded append the 'If-Modified-Since' header
         if(lang && lang.lastModified){
-            headers = headers.set('If-Modified-Since', lang.lastModified);
+            //headers = headers.set('If-Modified-Since', lang.lastModified);
         }
         return new Promise((resolve, reject) => {
-            this.http.get<object>((<Language>lang).url, {headers, observe: 'response'}).subscribe(
-                (res: HttpResponse<object>) => {
-                    (<Language>lang).lastModified = <string>res.headers.get('Last-Modified');
-                    (<Language>lang).translations = res.body;
-                    this.storage.set(storageKeys.lang.replace('{CODE}', (<Language>lang).code), lang);
-                    resolve(lang);
-                },
-                (err: HttpErrorResponse) => {
-                    // If the HTTP status is 304 the language json was not modified
-                    // Resolve localStorage version of language (if exists)
-                    if((<Language>lang).lastModified && err.status === 304){
+            if(this.deviceService.isOnline()){
+                this.http.get<object>(`${(<Language>lang).url}?t=${new Date().getTime()}`, {headers, observe: 'response'}).subscribe(
+                    (res: HttpResponse<object>) => {
+                        (<Language>lang).lastModified = <string>res.headers.get('Last-Modified');
+                        (<Language>lang).translations = res.body;
+                        this.storage.set(storageKeys.lang.replace('{CODE}', (<Language>lang).code), lang);
                         resolve(lang);
+                    },
+                    (err: HttpErrorResponse) => {
+                        // If the HTTP call fails but I have a local language
+                        // initialize it with localStorage version
+                        this.getLanguage(<Language>lang).then(
+                            (lang: Language|null) => {
+                                if(lang !== null){
+                                    resolve(lang);
+                                }
+                                // The download fails and a local language doesn't exists, so throw an error
+                                else {
+                                    console.error(err);
+                                    reject(new Error('ERR_MISSING_LANG_FILE'));
+                                }
+                            }
+                        );
+                    });
+            }
+            // If the device is offline but I have a local language
+            // initialize it with localStorage version
+            else {
+                this.getLanguage(<Language>lang).then(
+                    (lang: Language|null) => {
+                        if(lang !== null){
+                            resolve(lang);
+                        }
+                        // The download fails and a local language doesn't exists, so throw an error
+                        else {
+                            reject(new Error('DEVICE_OFFLINE'));
+                        }
                     }
-                    // The download fails and a local language doesn't exists, so throw an error
-                    else {
-                        console.error(err);
-                        reject(new Error('ERR_MISSING_LANG_FILE'));
-                    }
-                });
+                );
+            }
         });
     }
 
@@ -278,16 +357,58 @@ export class I18nService {
     /**
      * Set the last used language for the next app bootstrap
      * @param  {Language} lang Language to set as last
+     * @param  {boolean} automatic If false or undefined the selection request is made by user, if true is automatic
      * @returns {void}
      */
-    setLanguage(lang: Language|string): void {
+    setLanguage(lang: Language|string, automatic: boolean = false): void {
         if(typeof lang === 'string'){
             lang = <Language>(<I18n>this.i18n).getConfig(lang);
         }
         if(lang){
+            if(!automatic){
+                lang.isAutomatic = false;
+            }
+
+            const relativeTimeSpec: Moment.RelativeTimeSpec = {
+                future: (lang.translations.MOMENT_RELATIVE_TIME_future),
+                past: (lang.translations.MOMENT_RELATIVE_TIME_past),
+                s: (lang.translations.MOMENT_RELATIVE_TIME_s),
+                ss: (lang.translations.MOMENT_RELATIVE_TIME_ss),
+                m: (lang.translations.MOMENT_RELATIVE_TIME_m),
+                mm: (lang.translations.MOMENT_RELATIVE_TIME_mm),
+                h: (lang.translations.MOMENT_RELATIVE_TIME_h),
+                hh: (lang.translations.MOMENT_RELATIVE_TIME_hh),
+                d: (lang.translations.MOMENT_RELATIVE_TIME_d),
+                dd: (lang.translations.MOMENT_RELATIVE_TIME_dd),
+                M: (lang.translations.MOMENT_RELATIVE_TIME_M),
+                MM: (lang.translations.MOMENT_RELATIVE_TIME_MM),
+                y: (lang.translations.MOMENT_RELATIVE_TIME_y),
+                yy: (lang.translations.MOMENT_RELATIVE_TIME_yy),
+            };
+            Moment.locale(lang.code, {
+                relativeTime : relativeTimeSpec
+            });
             this.storage.set(storageKeys.lastLang, lang);
             this.translateService.use(lang.code);
         }
+    }
+
+
+    /**
+     * Get the language with its translations from storage, if exists
+     * @param  {Language} lang Language to set as last
+     * @returns {void}
+     */
+    public getLanguage(lang: Language): Promise<Language|null> {
+        return this.storage.get(storageKeys.lang.replace('{CODE}', lang.code));
+    }
+
+
+    /**
+     * Get the list of all available languages
+     */
+    getAllLanguages() {
+        return (<I18n>this.i18n).langs;
     }
 
 
@@ -300,6 +421,6 @@ export class I18nService {
     }
 
 
-    onLangChange = this.translateService.onLangChange
+    onLangChange$ = this.translateService.onLangChange
 
 }

@@ -23,7 +23,6 @@
             "@shared/*": [ "app/shared/*" ],
             "@assets/*": [ "assets/*" ],
             "@env": [ "environments/environment" ],
-            "@pages/*": [ "pages/*" ],
             "@theme/*": [ "theme/*" ]
         }
 

@@ -1,7 +1,7 @@
-
 export class ConfigModuleConfig {
     constructor(
-        public url: string,
+        public remote?: string,
+        public local?: any,
         public storePrefix?: string
     ){ }
 }

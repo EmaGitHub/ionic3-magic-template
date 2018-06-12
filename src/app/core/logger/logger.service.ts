@@ -1,6 +1,7 @@
 import { Injectable, Optional } from '@angular/core';
 
-import { LoggerModuleConfig } from './models';
+import { LoggerLevels } from './models/LoggerLevels';
+import { LoggerModuleConfig } from './models/LoggerModuleConfig';
 
 // const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 const isFirefox = !!(window as any).InstallTrigger;
@@ -9,13 +10,6 @@ const isFirefox = !!(window as any).InstallTrigger;
 // const isEdge = !isIE && !!window.StyleMedia;
 const isChrome = !!(window as any).chrome && !!(window as any).chrome.webstore;
 // const isBlink = (isChrome || isOpera) && !!window.CSS;
-
-export enum LoggerLevels {
-    ERROR = 1,  // Print only error messages
-    WARN,       // print also warning messages
-    INFO,       // print also info messages
-    DEBUG       // print all messages
-}
 
 @Injectable()
 export class LoggerService {

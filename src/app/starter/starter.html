@@ -1,6 +1,9 @@
 
-<ion-content padding>
-    <p>
+<ion-content
+    padding
+    [ngClass]="{'visible' : status}">
+
+    <p *ngIf="status" >
         {{ status }}
     </p>
 </ion-content>

@@ -1,10 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Injector, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { IonicStorageModule } from '@ionic/storage';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { I18nService } from './i18n.service';
-import { CustomTranslateLoader, I18nModuleConfig } from './models';
+import { I18nModuleConfig } from './models/I18nModuleConfig';
 
 /**
 * @name I18nModule
@@ -15,13 +15,14 @@ import { CustomTranslateLoader, I18nModuleConfig } from './models';
 @NgModule({
     imports: [
         IonicStorageModule.forRoot(),
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useClass: CustomTranslateLoader,
-                deps: [Injector]
-            }
-        }),
+        TranslateModule.forRoot(),
+        // TranslateModule.forRoot({
+        //     loader: {
+        //         provide: TranslateLoader,
+        //         useClass: CustomTranslateHttpLoader,
+        //         deps: [Injector]
+        //     }
+        // }),
         HttpClientModule
     ],
     providers: [

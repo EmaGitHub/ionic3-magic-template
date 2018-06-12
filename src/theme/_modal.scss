@@ -9,3 +9,13 @@ ion-modal.fullscreen {
         border-radius: 0;
     }
 }
+
+.alert-ios .alert-button {
+    color: map-get($colors, ios-primary) !important;
+}
+
+ion-toast {
+    .toast-button {
+        color: map-get($colors, secondary);
+    }
+}

@@ -4,11 +4,12 @@ import 'rxjs/add/operator/map';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { HttpObserve } from '@angular/common/http/src/client';
 import { Injectable } from '@angular/core';
-import { ConfigService } from '@core/config/config.service';
-import { ApiConfig } from '@core/config/models';
+import { ApiConfig, ConfigService } from '@core/config';
 import { Observable } from 'rxjs/Observable';
 
-import { HttpClientOptions, RequestMethods } from './models';
+import { HttpClientOptions } from './models/HttpClientOptions';
+import { RequestMethods } from './models/RequestMethods';
+import { ResponseTypes } from './models/ResponseTypes';
 
 @Injectable()
 export class ApiService {
@@ -51,7 +52,7 @@ export class ApiService {
      * @param  {object={}} options.headers? HTTP header to add to request
      * @returns Observable
      */
-    callApi<T>(api: string, params: object | null | undefined, body: any = null, options: {observe? : HttpObserve, headers?: object} = {}): Observable<T> {
+    callApi<T>(api: string, params: object | null | undefined = {}, body: any = null, options: {observe? : HttpObserve, headers?: object} = {}): Observable<T> {
         // Use getApiConfig in configService to define all options for api
         let apiConfig = <ApiConfig>this.configService.getApiConfig(api);
 
@@ -68,7 +69,10 @@ export class ApiService {
      * @param  {object={}} options.headers? HTTP header to add to request
      * @returns Observable
      */
-    private call<T>(apiConfig: ApiConfig, params: object | null | undefined, body: any = null, options: {observe? : HttpObserve, headers?: object} = {}): Observable<T> {
+    private call<T>(apiConfig: ApiConfig, params: object | null | undefined, body: any = null, options: {observe? : HttpObserve, headers?: object, responseType?: ResponseTypes} = {}): Observable<T> {
+
+        // Create a new HttpRequest base on API method
+        let httpClientOptions = new  HttpClientOptions();
 
         // Add all requested HttpParams
         if(!params){
@@ -78,26 +82,26 @@ export class ApiService {
         for(let qKey in params){
             queryParams = queryParams.set(qKey, (<any>params)[qKey]);
         }
+        httpClientOptions.params = queryParams;
 
         // Add all requested HttpHeaders
-        let headers = new HttpHeaders();
         if(options.headers){
             // add a fake header to duplicate the headers
-            headers = apiConfig.headers.set('fake_header_for_cloning', '');
+            let headers = (apiConfig.headers as HttpHeaders).set('fake_header_for_cloning', '');
             for (let hKey in options.headers){
                 headers = headers.set(hKey, (<any>options).headers[hKey]);
             }
             // remove the fake header
             headers = headers.delete('fake_header_for_cloning');
+            httpClientOptions.headers = headers;
+        }
+        else {
+            httpClientOptions.headers = apiConfig.headers;
         }
 
-        // Create a new HttpRequest base on API method
-        let httpClientOptions = new  HttpClientOptions();
         httpClientOptions.body = body;
-        httpClientOptions.headers = headers;
-        httpClientOptions.params = queryParams;
         httpClientOptions.observe = options.observe || 'body';
-        // httpClientOptions.responseType = apiConfig.responseType;
+        httpClientOptions.responseType = options.responseType || ResponseTypes.JSON;
 
         return this.http.request(apiConfig.method, apiConfig.url, httpClientOptions)
             .map(res => this.handleSuccess(res))
@@ -109,7 +113,6 @@ export class ApiService {
     }
 
     private handleError(response: HttpErrorResponse) {
-        // const error = new Error("Impossibile eseguire l'operazione richiesta. Contattare l'amministratore di sistema se il problema persiste.");
         return Promise.reject(response);
     }
 }

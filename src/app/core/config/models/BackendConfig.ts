@@ -7,10 +7,10 @@ export class BackendConfig {
     public environment?: string;
 
     constructor(
-        backend: BackendConfig
+        backend: Partial<BackendConfig>
     ) {
-        this.baseUrl = backend.baseUrl;
-        this.api = backend.api.map((a: ApiConfig) => { return new ApiConfig(a); });
+        this.baseUrl = <string>backend.baseUrl;
+        this.api = (backend.api as ApiConfig[]).map((a: ApiConfig) => { return new ApiConfig(a); });
         this.environment = backend.environment || 'PROD';
     }
 

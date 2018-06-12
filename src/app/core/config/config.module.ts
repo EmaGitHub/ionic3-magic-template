@@ -1,9 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { LoggerService } from '@core/logger';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { ConfigService } from './config.service';
-import { ConfigModuleConfig } from './models';
+import { ConfigModuleConfig } from './models/ConfigModuleConfig';
 
 /**
 * @name ConfigModule
@@ -16,7 +17,8 @@ import { ConfigModuleConfig } from './models';
         HttpClientModule
     ],
     providers: [
-        ConfigService
+        ConfigService,
+        LoggerService
     ]
 })
 export class ConfigModule {
