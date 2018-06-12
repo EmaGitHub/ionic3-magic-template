@@ -106,7 +106,8 @@ export class Starter {
                         }
                         // else open the login modal using the loginService
                         else {
-                            this.loadMainLogin();
+                            // this.loadMainLogin();
+                            this.loadTabsPage();
                         }
                     }
                 )

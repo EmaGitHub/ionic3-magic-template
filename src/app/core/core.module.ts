@@ -43,8 +43,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
         }),
         NavigationModule,
         SplitViewModule,
-        PushNotificationsModule,
-        // IonicImageViewerModule
+        PushNotificationsModule
     ],
     providers: [
         AuthService,

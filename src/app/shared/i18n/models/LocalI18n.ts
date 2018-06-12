@@ -6,12 +6,6 @@ export const LocalI18n = {
             label: 'English',
             url: '/i18n/langs/en.json',
             isDefault: true
-        },
-        {
-            code: 'fr',
-            label: 'Français',
-            url: '/i18n/langs/fr.json',
-            isDefault: false
         }
     ]
 }
