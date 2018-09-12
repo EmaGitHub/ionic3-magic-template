@@ -3,6 +3,7 @@ import { HttpResponse } from '@angular/common/http/src/response';
 import { Injectable } from '@angular/core';
 import { DeviceService } from '@core/device';
 import { LoggerService } from '@core/logger';
+import { VersioningService } from '@core/versioning';
 import { Storage } from '@ionic/storage';
 
 import { ApiConfig } from './models/ApiConfig';
@@ -25,7 +26,8 @@ export class ConfigService {
         public configModule: ConfigModuleConfig,
         private http: HttpClient,
         private logger: LoggerService,
-        private deviceService: DeviceService
+        private deviceService: DeviceService,
+        private versioningService: VersioningService
     ) {
         this.storage = new Storage({
             name : configModule.storePrefix || 'storage',
@@ -75,6 +77,7 @@ export class ConfigService {
     private initConfig(config: Config) {
         this.config = new Config(config);
         this.logger.changeLevel(this.config.loggerLevel);
+        this.versioningService.setVersioning(this.config.versioning);
         this.storage.set(storageKeys.lastConfig, config);
     }
 

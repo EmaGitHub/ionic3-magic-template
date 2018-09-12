@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { LoginService } from '@app/login';
 import { TabsService } from '@app/tabs';
 import { ConfigService } from '@core/config';
-import { DeepLinkService } from '@core/deeplink';
 import { DeviceService } from '@core/device';
 import { LoggerService } from '@core/logger';
 import { PushNotificationsService } from '@core/push-notifications';
 import { UserService } from '@core/user';
+import { VersioningService } from '@core/versioning';
 import { I18nService } from '@shared/i18n';
 
 @Component({
@@ -14,9 +13,7 @@ import { I18nService } from '@shared/i18n';
     templateUrl: 'starter.html'
 })
 export class Starter {
-    public status: string | null;
-    private deepLinkLogin: string|null = null;
-    private appIsAlreadyLoaded: boolean = false;
+    public status: string = '';
 
     constructor(
         private tabsService: TabsService,
@@ -25,23 +22,10 @@ export class Starter {
         private i18nService: I18nService,
         private logger: LoggerService,
         private userService: UserService,
-        private loginService: LoginService,
-        private deepLinkService: DeepLinkService,
-
-        // tslint:disable-next-line
-        private pushNotificationsService: PushNotificationsService
+        private pushNotificationsService: PushNotificationsService,
+        private versioningService: VersioningService
     ) {
-        this.deepLinkService.onDeepLinking$
-            .subscribe((eventCode: string) => {
-            // If the app is already loaded directly process the new event code
-            if(this.appIsAlreadyLoaded){
-                console.log('goto deeplink');
-            }
-            // Otherwise save the new event code in order to use when the app was ready
-            else {
-                this.deepLinkLogin = eventCode;
-            }
-        });
+
     }
 
     ionViewDidEnter(){
@@ -60,57 +44,24 @@ export class Starter {
 
         Promise.all(servicesToWait).then(
             () => {
-                this.logger.debug('initialize completed');
-                // Try autologin
-                this.userService.autologin().then(
+                this.versioningService.checkVersioning().then(
                     () => {
-                        this.appIsAlreadyLoaded = true;
-                        // If user autologs successfully go to TabsPage
-                        // if no event code deeplink exists was arrived
-                        if(this.deepLinkLogin){
-                            // this.userService.onNewEventCodeArrived(this.deepLinkEventCode).then(
-                            //     () => {
-                            //         // After login go to tabs page
-                            //         this.userService.setFirstAccess();
-                                    this.loadTabsPage();
-                            //     },
-                            //     (err: Error) => {
-                            //         // If the login fails go to tabs page (back to public access)
-                            //         this.loadTabsPage();
-                            //         this.deviceService.alert(err.message);
-                            //     }
-                            // );
-                            // this.deepLinkLogin = null;
-                        }
-                        else {
-                            this.loadTabsPage();
-                        }
+                        this.logger.debug('initialize completed');
+                        // Try autologin
+                        this.userService.autologin().then(
+                            () => {
+                                this.loadTabsPage();
+                            },
+                            () => {
+                                this.loadTabsPage();
+                            }
+                        )
                     },
-                    () => {
-                        this.appIsAlreadyLoaded = true;
-                        // Otherwise check if new event code deeplink was arrived
-                        if(this.deepLinkLogin){
-                            // this.userService.onNewEventCodeArrived(this.deepLinkLogin).then(
-                            //     () => {
-                            //         // After login go to tabs page
-                            //         this.userService.setFirstAccess();
-                                    this.loadTabsPage();
-                            //     },
-                            //     (err: Error) => {
-                            //         // If the login fails login main login view
-                            //         this.loadMainLogin();
-                            //         this.deviceService.alert(err.message);
-                            //     }
-                            // );
-                            this.deepLinkLogin = null;
-                        }
-                        // else open the login modal using the loginService
-                        else {
-                            // this.loadMainLogin();
-                            this.loadTabsPage();
-                        }
+                    (err: Error) => {
+                        this.status = err.message;
+                        this.deviceService.hideSplashscreen();
                     }
-                )
+                );
             },
             (err: Error) => {
                 this.status = err.message;
@@ -119,20 +70,10 @@ export class Starter {
         )
     }
 
-
     /**
-     * When agendaService is completed go to tabsPage if not already exists
+     * Go to tabsPage if not already exists
      */
     private loadTabsPage(){
         this.tabsService.loadTabsPage();
-    }
-
-
-    /**
-     * Show the main login view and close the splashscreen
-     */
-    private loadMainLogin(){
-        this.loginService.openMainLogin();
-        this.deviceService.hideSplashscreen();
     }
 }
