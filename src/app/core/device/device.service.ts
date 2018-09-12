@@ -413,15 +413,15 @@ export class DeviceService {
     */
     alert(message: string,
           options: {
-            callback?: () => void,
+            handler?: () => void,
             title?: string,
             buttonName?: string
         } = {}
     ): void {
         this.hideLoading();
 
-        if(!options.callback){
-            options.callback = () => {};
+        if(!options.handler){
+            options.handler = () => {};
         }
 
         if(!options.title){
@@ -445,13 +445,13 @@ export class DeviceService {
 
             if (this.isCordova()) {
                 this.dialogs.alert(message, options.title, options.buttonName).then(() => {
-                    (options.callback as () => {})();
+                    (options.handler as () => {})();
                 });
             }
             else {
                 (navigator as any).notification.alert(
                     message,
-                    options.callback,
+                    options.handler,
                     options.title,
                     options.buttonName
                 );
@@ -464,7 +464,7 @@ export class DeviceService {
                 buttons: [
                     {
                         text: options.buttonName,
-                        handler: options.callback
+                        handler: options.handler
                     }
                 ]
             });
