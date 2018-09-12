@@ -478,13 +478,20 @@ export class DeviceService {
     * @param {string} title Dialog title
     * @param {AlertButton[]} buttons List of <AlertButton>
     */
-    confirm(message: string, title: string = this.modalTitle, buttons: AlertButton[] = []) {
+    confirm(message: string,
+            options: {
+                title?: string,
+                buttons?: AlertButton[]
+            } = {}
+    ) {
         this.hideLoading();
 
-        message = this.translateService.instant(message);
-        title = this.translateService.instant(title);
-        if(buttons.length === 0){
-            buttons = [{
+        if(!options.title){
+            options.title = this.modalTitle;
+        }
+
+        if(!options.buttons){
+            options.buttons = [{
                 text: 'CANCEL',
                 cssClass: 'primary',
                 role: 'cancel',
@@ -493,39 +500,43 @@ export class DeviceService {
                 text: 'OK',
                 cssClass: 'primary',
                 handler: () => {}
-            }]
+            }];
         }
-        const buttonLabels = buttons.map((b: AlertButton) => {
+
+        message = this.translateService.instant(message);
+        options.title = this.translateService.instant(options.title);
+
+        const buttonLabels = options.buttons.map((b: AlertButton) => {
             return this.translateService.instant(<string>b.text);
         });
 
         if(this.dialogsMode === 'native'){
             if (this.isCordova()) {
-                this.dialogs.confirm(message, title, buttonLabels).then(
+                this.dialogs.confirm(message, options.title, buttonLabels).then(
                     (buttonIndex: number) => {
                         // Decrement clicked button index because the plugin use 'one-based indexing'
                         buttonIndex--;
                         // Then execute the 'onClick' function if is defined
-                        if (buttons[buttonIndex]) {
-                            (buttons[buttonIndex] as any).handler();
+                        if ((options.buttons as AlertButton[])[buttonIndex]) {
+                            ((options.buttons as AlertButton[])[buttonIndex] as any).handler();
                         }
                     }
                 );
             }
             else {
                 if (window.confirm(message)) {
-                    (buttons[0] as any).handler();
+                    (options.buttons[0] as any).handler();
                 }
                 else {
-                    (buttons[1] as any).handler();
+                    (options.buttons[1] as any).handler();
                 }
             }
         }
         else {
             this.ionicCustomAlert({
-                title: title,
+                title: options.title,
                 message: message,
-                buttons: buttons
+                buttons: options.buttons
             });
         }
     }
