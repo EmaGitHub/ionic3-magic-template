@@ -29,7 +29,7 @@ export class Starter {
     }
 
     ionViewDidEnter(){
-        this.status = null;
+        this.status = '';
 
         // Wait for config and translations configurations completed
         let servicesToWait = [

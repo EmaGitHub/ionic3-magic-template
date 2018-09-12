@@ -17,7 +17,7 @@ const storageKeys = {
 
 @Injectable()
 export class UserService {
-    private user: User|null;
+    private user: User | null = null;
     private storage: Storage;
     private firstAccess: boolean = true;
     private publicAccess: boolean = false;
@@ -251,7 +251,9 @@ export class UserService {
                     }
                 }`
         };
-        return this.apiService.callApi('getUserProfile', null, query);
+        return this.apiService.callApi('getUserProfile', {
+            body: query
+        });
     }
 
 

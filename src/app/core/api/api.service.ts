@@ -4,90 +4,123 @@ import 'rxjs/add/operator/map';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { HttpObserve } from '@angular/common/http/src/client';
 import { Injectable } from '@angular/core';
-import { ApiConfig, ConfigService } from '@core/config';
 import { Observable } from 'rxjs/Observable';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
+import { Api } from './models/api';
+import { Backend } from './models/Backend';
 import { HttpClientOptions } from './models/HttpClientOptions';
-import { RequestMethods } from './models/RequestMethods';
 import { ResponseTypes } from './models/ResponseTypes';
 
 @Injectable()
 export class ApiService {
+    backend: Backend|null = null;
 
     constructor(
-        private configService: ConfigService,
         private http: HttpClient
     ) { }
 
-
     /**
-     * Create a new request with dynamic method, params, body, headers, observer.
-     * Create a new ApiConfig instance from given api url and methods and other default ApiConfig property
-     * After that add/set HTTP query params, body (for POST, PUT, PATCH requests), HTTP headers, and the HTTP observer.
-     * Make the request and return the Observable
-     * @param  {string} url HTTP request's url
-     * @param  {string} method HTTP request's method
-     * @param  {object={}} params HTTP query params to use in all request
-     * @param  {any=null} body HTTP body for POST, PUT or PATCH requests
-     * @param  {observe?:HttpObserve} options.observe? HttpObserve type
-     * @param  {object={}} options.headers? HTTP header to add to request
-     * @returns Observable
+     * Init the Api Service with configuration fetched from config file
+     * @param backend Beckend configuration for Api Service
      */
-    request<T>(url: string, method: string = RequestMethods.GET, params: object | null | undefined, body: any = null, options: {observe? : HttpObserve, headers?: object} = {}): Observable<T> {
-        let apiConfig = this.configService.createNewApiConfig(url, method);
-
-        return this.call(apiConfig, params, body, options);
+    init(backend: Backend) {
+        this.backend = new Backend(backend);
     }
 
-
     /**
-     * Create a new request with dynamic method, params, body, headers, observer.
-     * Create a new ApiConfig instance from given api name setting method, url, headers and timeout directly from config.json file.
-     * After that add/set HTTP query params, body (for POST, PUT, PATCH requests), HTTP headers, and the HTTP observer.
-     * Make the request and return the Observable
-     * @param  {string} api Property name of ApiConfig class
+     * Create a new request with dynamic method, params, body, headers.
+     * Create a new Api instance from given api name setting method, url, headers and timeout directly from config.json file.
+     * After that add/set HTTP query params, body (for POST, PUT, PATCH requests), and HTTP headers.
+     * @param  {string} api Property name of Api class
      * @param  {object={}} params HTTP query params to use in all request
-     * @param  {any=null} body HTTP body for POST, PUT or PATCH requests
-     * @param  {observe?:HttpObserve} options.observe? HttpObserve type
-     * @param  {object={}} options.headers? HTTP header to add to request
-     * @returns Observable
+     * @param  {object={}} paths HTTP path params to use in all request
+     * @param  {any=null} body HTTP body for a POST, PUT or PATCH request
+     * @param  {object={}} headers? HTTP header to add to request
+     * @param  {ResposeTypes} responseType? HTTP response type for request
+     * @returns Promise
      */
-    callApi<T>(api: string, params: object | null | undefined = {}, body: any = null, options: {observe? : HttpObserve, headers?: object} = {}): Observable<T> {
-        // Use getApiConfig in configService to define all options for api
-        let apiConfig = <ApiConfig>this.configService.getApiConfig(api);
+    callApi<T>(
+		apiName: string,
+		options: {
+			params?: {},
+			paths?: {},
+			body?: any,
+            headers?: Headers,
+            observe? : HttpObserve,
+			responseType?: ResponseTypes
+		} = {}
+    ): Observable<T> {
+        // Use getApi in configService to define all options for api
+        let api = (this.backend as Backend).getApi(apiName);
 
-        return this.call(apiConfig, params, body, options);
+        if(api){
+            // Set the request's url
+            api.url = this.prepareUrl(api.url, options.paths);
+
+            let httpClientOptions = this.prepareOptions(api, options);
+
+            return this.call(api, httpClientOptions);
+        }
+        else {
+            return new ErrorObservable(new Error(`API ${apiName} is not configured`));
+        }
     }
 
+    /**
+     * Build a url of api from the global configuration
+     * of model and optionaly the pass params
+     * @param {string} url a api url
+     * @param {object={}} paths a path params
+     * @return {string} api's url
+     */
+    private prepareUrl(url: string, paths?: {}): string {
+        return paths && Object.keys(paths).length
+            ? this.bindPathParams(url, paths)
+            : url;
+    }
 
     /**
-     * Make the HTTP request fomr ApiConfig and the other settings
-     * @param  {ApiConfig} apiConfig ApiConfig of request
-     * @param  {object|null|undefined} params HTTP query params to use in all request
-     * @param  {any=null} body HTTP body for POST, PUT or PATCH requests
-     * @param  {observe?:HttpObserve} options.observe? HttpObserve type
-     * @param  {object={}} options.headers? HTTP header to add to request
-     * @returns Observable
+     * Bind a path param name with the pass value
+     * @param {string} url request url to replace
+     * @param {object={}} paths object key => val
+     * @return {string}
      */
-    private call<T>(apiConfig: ApiConfig, params: object | null | undefined, body: any = null, options: {observe? : HttpObserve, headers?: object, responseType?: ResponseTypes} = {}): Observable<T> {
+    private bindPathParams(url: string, params: {[key: string]: any }): string {
+        for (const key in params) {
+            url = url.replace(new RegExp(`{${key}}`, 'g'), params[key]);
+        }
+        return url;
+    }
+
+    private prepareOptions(
+        api: Api,
+		options: {
+			params?: {},
+			body?: any,
+            headers?: Headers,
+            observe? : HttpObserve,
+			responseType?: ResponseTypes
+		} = {}
+    ): HttpClientOptions {
 
         // Create a new HttpRequest base on API method
         let httpClientOptions = new  HttpClientOptions();
 
         // Add all requested HttpParams
-        if(!params){
-            params = {};
+        if(!options.params){
+            options.params = {};
         }
         let queryParams = new HttpParams();
-        for(let qKey in params){
-            queryParams = queryParams.set(qKey, (<any>params)[qKey]);
+        for(let qKey in options.params){
+            queryParams = queryParams.set(qKey, (<any>options.params)[qKey]);
         }
         httpClientOptions.params = queryParams;
 
         // Add all requested HttpHeaders
         if(options.headers){
             // add a fake header to duplicate the headers
-            let headers = (apiConfig.headers as HttpHeaders).set('fake_header_for_cloning', '');
+            let headers = (api.headers as HttpHeaders).set('fake_header_for_cloning', '');
             for (let hKey in options.headers){
                 headers = headers.set(hKey, (<any>options).headers[hKey]);
             }
@@ -96,14 +129,24 @@ export class ApiService {
             httpClientOptions.headers = headers;
         }
         else {
-            httpClientOptions.headers = apiConfig.headers;
+            httpClientOptions.headers = api.headers;
         }
 
-        httpClientOptions.body = body;
+        httpClientOptions.body = options.body;
         httpClientOptions.observe = options.observe || 'body';
         httpClientOptions.responseType = options.responseType || ResponseTypes.JSON;
 
-        return this.http.request(apiConfig.method, apiConfig.url, httpClientOptions)
+        return httpClientOptions;
+    }
+
+    /**
+     * Make the HTTP request with the prepared Api and options
+     * @param  {Api} api
+     * @param  {HttpClientOptions} options
+     * @returns Observable
+     */
+    call<T>(api: Api, httpClientOptions: HttpClientOptions): Observable<T> {
+        return this.http.request(api.method, api.url, httpClientOptions)
             .map(res => this.handleSuccess(res))
             .catch(res => this.handleError(res));
     }

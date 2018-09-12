@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TabsService } from '@app/tabs';
-import { ConfigService } from '@core/config';
 import { DeviceService } from '@core/device';
 import { LoggerService } from '@core/logger';
 import { UserService } from '@core/user';
@@ -21,8 +20,7 @@ export class LoginPage {
         private deviceService: DeviceService,
         private tabsService: TabsService,
         private viewCtrl: ViewController,
-        private inAppBrowser: InAppBrowser,
-        private configService: ConfigService
+        private inAppBrowser: InAppBrowser
     ) { }
 
 

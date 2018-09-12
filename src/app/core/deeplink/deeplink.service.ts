@@ -43,10 +43,6 @@ export class DeepLinkService {
                 if(this.deepLinkIsReady$ && !this.deepLinkIsReady$.closed){
                     this.deepLinkIsReady$.unsubscribe();
                 }
-                // this.deepLinkIsReady$ = this.agendaService.calendarIsReady$.subscribe(() => {
-                //     this.deepLinkIsReady$.unsubscribe();
-                //     this.onAgendaDeepLinking$.next({meetingId: meetingId, agendaItemId: agendaItemId});
-                // });
         }
     }
 
