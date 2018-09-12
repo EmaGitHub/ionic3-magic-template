@@ -411,35 +411,60 @@ export class DeviceService {
     * @param  {string} title Dialog title
     * @returns void
     */
-    alert(message: string, title: string = this.modalTitle): void {
+    alert(message: string,
+          options: {
+            callback?: () => void,
+            title?: string,
+            buttonName?: string
+        } = {}
+    ): void {
         this.hideLoading();
 
-        let okButton = 'OK';
+        if(!options.callback){
+            options.callback = () => {};
+        }
+
+        if(!options.title){
+            options.title = this.modalTitle;
+        }
+
+        if(!options.buttonName){
+            options.buttonName = 'OK';
+        }
+
         try {
-            okButton = this.translateService.instant(okButton);
+            options.buttonName = this.translateService.instant(options.buttonName);
         }
         catch (e) {}
         if(this.dialogsMode === 'native'){
             try {
                 message = this.translateService.instant(message);
-                title = this.translateService.instant(title);
+                options.title = this.translateService.instant(options.title);
             }
             catch (e) {}
 
             if (this.isCordova()) {
-                this.dialogs.alert(message, title, okButton);
+                this.dialogs.alert(message, options.title, options.buttonName).then(() => {
+                    (options.callback as () => {})();
+                });
             }
             else {
-                window.alert(message);
+                (navigator as any).notification.alert(
+                    message,
+                    options.callback,
+                    options.title,
+                    options.buttonName
+                );
             }
         }
         else {
             this.ionicCustomAlert({
-                title: title,
+                title: options.title,
                 message: message,
                 buttons: [
                     {
-                        text: okButton
+                        text: options.buttonName,
+                        handler: options.callback
                     }
                 ]
             });
