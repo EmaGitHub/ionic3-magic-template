@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { EN } from '@app/shared/i18n/models/langs/EN';
-import { FR } from '@app/shared/i18n/models/langs/FR';
 import { LocalI18n } from '@app/shared/i18n/models/LocalI18n';
 import { ENV } from '@env';
 import { I18nModule } from '@shared/i18n/i18n.module';
@@ -16,8 +15,7 @@ import { IonicModule } from 'ionic-angular';
             local: {
                 i18n: LocalI18n,
                 langs: {
-                    en: EN,
-                    fr: FR
+                    en: EN
                 }
             },
             storePrefix: ENV.storePrefix
