@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { DBService } from './db.service';
-import { DBModuleConfig } from './models/DBModuleConfig';
+import { DBModuleOptions } from './models/DBModuleOptions';
 
 /**
 * @name DBModule
@@ -22,15 +22,15 @@ export class DBModule {
 
 
     /**
-    * Allow to pass a <DBModuleConfig> configuration to DBService
-    * @param  {DBModuleConfig} config all available configuration for <DBModuleConfig>
+    * Allow to pass a <DBModuleOptions> configuration to DBService
+    * @param  {DBModuleOptions} options all available configuration for <DBModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(config?: Partial<DBModuleConfig>): ModuleWithProviders {
+    static forRoot(options?: Partial<DBModuleOptions>): ModuleWithProviders {
         return {
             ngModule: DBModule,
             providers: [
-                { provide: DBModuleConfig, useValue: config }
+                { provide: DBModuleOptions, useValue: options }
             ]
         }
     }

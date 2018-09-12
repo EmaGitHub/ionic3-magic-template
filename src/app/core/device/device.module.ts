@@ -11,7 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { I18nModule } from '@shared/i18n/i18n.module';
 
 import { DeviceService } from './device.service';
-import { DeviceModuleConfig } from './models/DeviceModuleConfig';
+import { DeviceModuleOptions } from './models/DeviceModuleOptions';
 
 /**
 * @name DeviceModule
@@ -44,15 +44,15 @@ export class DeviceModule {
 
 
     /**
-    * Allow to pass a <DeviceModuleConfig> configuration to DeviceService
-    * @param  {DeviceServiceConfig} config all available configuration for <DeviceModuleConfig>
+    * Allow to pass a <DeviceModuleOptions> configuration to DeviceService
+    * @param  {DeviceModuleOptions} options all available configuration for <DeviceModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(config?: Partial<DeviceModuleConfig>): ModuleWithProviders {
+    static forRoot(options?: Partial<DeviceModuleOptions>): ModuleWithProviders {
         return {
             ngModule: DeviceModule,
             providers: [
-                { provide: DeviceModuleConfig, useValue: config }
+                { provide: DeviceModuleOptions, useValue: options }
             ]
         }
     }

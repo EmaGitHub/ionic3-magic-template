@@ -22,12 +22,12 @@ import { Loading } from 'ionic-angular/components/loading/loading';
 import { Subscription } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
 
-import { DeviceModuleConfig } from './models/DeviceModuleConfig';
+import { DeviceModuleOptions } from './models/DeviceModuleOptions';
 import { KeyboardProvider } from './models/IKeyboard';
 
 @Injectable()
 export class DeviceService {
-    private modalTitle: string;
+    private modalTitle: string = '';
     private dialogsMode: string;
     private ionLoading: Loading;
 
@@ -37,7 +37,7 @@ export class DeviceService {
     public onPause: Subject<any> = new Subject();
 
     constructor(
-        @Optional() config: DeviceModuleConfig,
+        @Optional() options: DeviceModuleOptions,
         private platform: Platform,
         private network: Network,
         private splashScreen: SplashScreen,
@@ -53,9 +53,9 @@ export class DeviceService {
         private toastCtrl: ToastController,
         private device: Device
     ) {
-        if(config){
-            if(config.modalTitle) this.modalTitle = config.modalTitle;
-            if(config.dialogsMode) this.dialogsMode = config.dialogsMode;
+        if(options){
+            if(options.modalTitle) this.modalTitle = options.modalTitle;
+            if(options.dialogsMode) this.dialogsMode = options.dialogsMode;
         }
 
         // Init observables when device is ready

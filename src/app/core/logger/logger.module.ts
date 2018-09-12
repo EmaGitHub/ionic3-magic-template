@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { LoggerService } from './logger.service';
-import { LoggerModuleConfig } from './models/LoggerModuleConfig';
+import { LoggerModuleOptions } from './models/LoggerModuleOptions';
 
 /**
 * @name LoggerModule
@@ -23,15 +23,15 @@ export class LoggerModule {
 
 
     /**
-    * Allow to pass a <LoggerModuleConfig> configuration to LoggerService
-    * @param  {LoggerServiceConfig} config all available configuration for <LoggerModuleConfig>
+    * Allow to pass a <LoggerModuleOptions> configuration to LoggerService
+    * @param  {LoggerModuleOptions} options all available configuration for <LoggerModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(config?: Partial<LoggerModuleConfig>): ModuleWithProviders {
+    static forRoot(options?: Partial<LoggerModuleOptions>): ModuleWithProviders {
         return {
             ngModule: LoggerModule,
             providers: [
-                { provide: LoggerModuleConfig, useValue: config }
+                { provide: LoggerModuleOptions, useValue: options }
             ]
         }
     }

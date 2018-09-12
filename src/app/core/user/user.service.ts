@@ -1,11 +1,14 @@
 import { Injectable, Optional } from '@angular/core';
-import { LoginStates, User, UserModuleConfig } from '@app/core/user';
 import { ApiService } from '@core/api/api.service';
 import { AuthService } from '@core/auth';
 import { DeviceService } from '@core/device';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+
+import { LoginStates } from './models/LoginStates';
+import { User } from './models/User';
+import { UserModuleOptions } from './models/UserModuleOptions';
 
 const profileValidity = 1000 * 60 * 60 * 24;     // The user data is valid for only 24 hours (86400000 mills)
 
@@ -25,13 +28,13 @@ export class UserService {
     public onSessionChanges$: Subject<number> = new Subject();
 
     constructor(
-        @Optional() public config: UserModuleConfig,
+        @Optional() public options: UserModuleOptions,
         private apiService: ApiService,
         private authService: AuthService,
         private deviceService: DeviceService
     ){
         this.storage = new Storage({
-            name : config.storePrefix || 'storage',
+            name : options.storePrefix || 'storage',
             storeName : 'user',
             driverOrder : ['localstorage']
         });

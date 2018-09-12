@@ -8,7 +8,7 @@ import { VersioningService } from '@core/versioning';
 import { Storage } from '@ionic/storage';
 
 import { Config } from './models/Config';
-import { ConfigModuleConfig } from './models/ConfigModuleConfig';
+import { ConfigModuleOptions } from './models/ConfigModuleOptions';
 
 const storageKeys = {
     lastConfig: 'last'
@@ -22,7 +22,7 @@ export class ConfigService {
     public initCompleted: Promise<any>;
 
     constructor(
-        public configModule: ConfigModuleConfig,
+        public options: ConfigModuleOptions,
         private http: HttpClient,
         private logger: LoggerService,
         private deviceService: DeviceService,
@@ -30,11 +30,11 @@ export class ConfigService {
         private versioningService: VersioningService
     ) {
         this.storage = new Storage({
-            name : configModule.storePrefix || 'storage',
+            name : options.storePrefix || 'storage',
             storeName: 'config',
             driverOrder : ['localstorage']
         });
-        this.initCompleted = this.init(configModule);
+        this.initCompleted = this.init(options);
     }
 
 
@@ -50,11 +50,11 @@ export class ConfigService {
     /**
      * Download config file and init the app
      */
-    private init(configModule: ConfigModuleConfig) {
+    private init(options: ConfigModuleOptions) {
         return new Promise<any>((resolve, reject) => {
             // If requested config is a remote one => download it
-            if(configModule.remote){
-                this.url = configModule.remote;
+            if(options.remote){
+                this.url = options.remote;
                 this.download().then(
                     (config: Config) => {
                         this.initConfig(config);
@@ -64,8 +64,8 @@ export class ConfigService {
                 );
             }
             // Otherwise use the local one (if exists)
-            else if(configModule.local){
-                this.initConfig(configModule.local);
+            else if(options.local){
+                this.initConfig(options.local);
                 resolve();
             }
             else {

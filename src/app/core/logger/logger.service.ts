@@ -1,7 +1,7 @@
 import { Injectable, Optional } from '@angular/core';
 
 import { LoggerLevels } from './models/LoggerLevels';
-import { LoggerModuleConfig } from './models/LoggerModuleConfig';
+import { LoggerModuleOptions } from './models/LoggerModuleOptions';
 
 // const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 const isFirefox = !!(window as any).InstallTrigger;
@@ -17,7 +17,7 @@ export class LoggerService {
     private overrideLogLevel: number|null = null;
 
     constructor(
-        @Optional() config: LoggerModuleConfig
+        @Optional() config: LoggerModuleOptions
     ) {
         if(config){
             // Check if the override log lever exists and if it's one of the available levels

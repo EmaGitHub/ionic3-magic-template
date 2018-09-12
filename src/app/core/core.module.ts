@@ -35,7 +35,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
         UserModule.forRoot({
             storePrefix: ENV.storePrefix
         }),
-        VersioningModule.forRoot(),
+        VersioningModule,
         NavigationModule,
         SplitViewModule,
         PushNotificationsModule

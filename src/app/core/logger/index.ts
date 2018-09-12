@@ -1,5 +1,5 @@
 
 export { LoggerLevels } from './models/LoggerLevels';
-export { LoggerModuleConfig } from './models/LoggerModuleConfig';
+export { LoggerModuleOptions } from './models/LoggerModuleOptions';
 
 export { LoggerService } from './logger.service';

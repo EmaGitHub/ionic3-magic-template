@@ -1,9 +1,8 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { DeviceService } from '@core/device';
 import { LoggerService } from '@core/logger';
 import { AppVersion } from '@ionic-native/app-version';
 
-import { VersioningOptions } from './models/VersioningOptions';
 import { VersioningService } from './versioning.service';
 
 /**
@@ -19,25 +18,4 @@ import { VersioningService } from './versioning.service';
         AppVersion
     ]
 })
-export class VersioningModule {
-    constructor (@Optional() @SkipSelf() parentModule: VersioningModule) {
-        if (parentModule) {
-            throw new Error('VersioningModule is already loaded');
-        }
-    }
-
-
-    /**
-    * Allow to pass a <VersioningOptions> options to services in VersioningModule
-    * @param  {VersioningOptions} options all available options for <VersioningModule>
-    * @returns {ModuleWithProviders}
-    */
-    static forRoot(options?: VersioningModule): ModuleWithProviders {
-        return {
-            ngModule: VersioningModule,
-            providers: [
-                { provide: VersioningOptions, useValue: options }
-            ]
-        }
-    }
-}
+export class VersioningModule {}

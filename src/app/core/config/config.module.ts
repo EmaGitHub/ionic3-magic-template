@@ -4,7 +4,7 @@ import { LoggerService } from '@core/logger';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { ConfigService } from './config.service';
-import { ConfigModuleConfig } from './models/ConfigModuleConfig';
+import { ConfigModuleOptions } from './models/ConfigModuleOptions';
 
 /**
 * @name ConfigModule
@@ -30,15 +30,15 @@ export class ConfigModule {
 
 
     /**
-    * Allow to pass a <ConfigModuleConfig> configuration to services in ConfigModule
-    * @param  {ConfigModuleConfig} config all available configuration for <ConfigModule>
+    * Allow to pass a <ConfigModuleOptions> configuration to services in ConfigModule
+    * @param  {ConfigModuleOptions} options all available configuration for <ConfigModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(config: ConfigModuleConfig): ModuleWithProviders {
+    static forRoot(options: ConfigModuleOptions): ModuleWithProviders {
         return {
             ngModule: ConfigModule,
             providers: [
-                { provide: ConfigModuleConfig, useValue: config }
+                { provide: ConfigModuleOptions, useValue: options }
             ]
         }
     }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DeviceService } from '@core/device';
 import LokiJS, { Collection } from 'lokijs';
 
-import { DBModuleConfig } from './models/DBModuleConfig';
+import { DBModuleOptions } from './models/DBModuleOptions';
 import { LokiConfigOptions } from './models/LokiConfigOptions';
 
 declare var require: any;
@@ -16,11 +16,11 @@ export class DBService {
     public initCompleted: Promise<any>;
 
     constructor(
-        public dbModuleConfig: DBModuleConfig,
+        public options: DBModuleOptions,
         private deviceService: DeviceService
     ) {
         const DB = this;
-        DB.dbName = dbModuleConfig.dbName;
+        DB.dbName = options.dbName;
         this.initCompleted = new Promise((resolve, reject) => {
             if (this.deviceService.isCordova()) {
                 document.addEventListener('deviceready', () => {
@@ -87,12 +87,6 @@ export class DBService {
         return new Promise((resolve, reject) => {
 
             // Create a LokiJS DB
-            // this.db = this.createLokiDB(this.dbName, {
-            //     autosave: true,
-            //     autosaveInterval: 1000,
-            //     autoload: false,
-            //     verbose: true
-            // });
             this.db = this.createLokiDB(this.dbName, lokiOptions);
 
             // Define options for LokiDB load

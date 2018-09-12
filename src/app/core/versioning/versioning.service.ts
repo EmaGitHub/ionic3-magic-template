@@ -6,28 +6,16 @@ import { find } from 'lodash';
 import Semver from 'semver';
 
 import { Versioning } from './models/Versioning';
-import { VersioningOptions } from './models/VersioningOptions';
 
 @Injectable()
 export class VersioningService {
     private versioning: Versioning[] = [];
 
     constructor(
-        public options: VersioningOptions,
         private logger: LoggerService,
         private deviceService: DeviceService,
         private appVersion: AppVersion
-    ) {
-        this.init(options);
-    }
-
-    /**
-     * Init the VersioningService with the downloaded config
-     * @param enabled
-     */
-    private init(options?: VersioningOptions): void {
-
-    }
+    ) { }
 
     /**
      * Init the module with the remote conf
@@ -84,7 +72,7 @@ export class VersioningService {
      * @return {Promise<any>}
      * @private
      */
-    public checkVersioning(options?: VersioningOptions): Promise<any> {
+    public checkVersioning(): Promise<any> {
         return new Promise((resolve, reject) => {
             if (this.deviceService.isCordova()) {
                 let platform = this.deviceService.getOS().toLowerCase();
