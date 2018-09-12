@@ -43,7 +43,7 @@ export class LoginPage {
 
 
     onForgotPasswordClicked() {
-        this.inAppBrowser.create(this.configService.getExternalUrls().forgotPassword, '_system');
+        this.inAppBrowser.create('https://forgotpassword.test.com', '_system');
     }
 
     /**

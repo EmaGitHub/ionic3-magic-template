@@ -148,9 +148,4 @@ export class ConfigService {
     createNewApiConfig(url: string, method: string = RequestMethods.GET): ApiConfig {
         return (<Config>this.config).backend.createNewApiConfig(url, method);
     }
-
-
-    getExternalUrls() {
-        return (<Config>this.config).externalUrls;
-    }
 }
