@@ -1,6 +1,5 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { VersioningModule } from '@app/core/versioning';
 import { ApiModule } from '@core/api/api.module';
 import { AuthInterceptor, AuthService, ErrorInterceptor } from '@core/auth';
 import { LocalConfig } from '@core/config';
@@ -13,6 +12,7 @@ import { NavigationModule } from '@core/navigation/navigation.module';
 import { PushNotificationsModule } from '@core/push-notifications/push-notifications.module';
 import { SplitViewModule } from '@core/split-view/split-view.module';
 import { UserModule } from '@core/user/user.module';
+import { VersioningModule } from '@core/versioning';
 import { ENV } from '@env';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 

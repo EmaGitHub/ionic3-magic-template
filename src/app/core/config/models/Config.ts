@@ -1,4 +1,4 @@
-import { Backend } from '@app/core/api';
+import { Backend } from '@core/api';
 import { Versioning } from '@core/versioning';
 
 export class Config {
