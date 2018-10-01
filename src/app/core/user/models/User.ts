@@ -9,12 +9,8 @@ export class User {
     constructor (
         user: Partial<User>
     ){
-        if(user.id){
-            this.id = user.id;
-        }
-        if(user.username){
-            this.username = user.username;
-        }
+        this.id = (user.id)? user.id : '';
+        this.username = (user.username)? user.username : '';
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.timestamp = user.timestamp || new Date().getTime();

@@ -18,7 +18,6 @@ import {
     ToastController,
     ToastOptions,
 } from 'ionic-angular';
-import { Loading } from 'ionic-angular/components/loading/loading';
 import { Subscription } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
 
@@ -27,9 +26,9 @@ import { KeyboardProvider } from './models/IKeyboard';
 
 @Injectable()
 export class DeviceService {
-    private modalTitle: string = '';
-    private dialogsMode: string;
-    private ionLoading: Loading;
+    private modalTitle!: string;
+    private dialogsMode!: string;
+    private ionLoading!: any;
 
     public networkStatusChanges$: Subject<boolean> = new Subject();
     public keyboardVisibilityChanges$: Subject<boolean> = new Subject();
@@ -433,29 +432,16 @@ export class DeviceService {
         }
 
         try {
+            message = this.translateService.instant(message);
+            options.title = this.translateService.instant(options.title);
             options.buttonName = this.translateService.instant(options.buttonName);
         }
         catch (e) {}
-        if(this.dialogsMode === 'native'){
-            try {
-                message = this.translateService.instant(message);
-                options.title = this.translateService.instant(options.title);
-            }
-            catch (e) {}
 
-            if (this.isCordova()) {
-                this.dialogs.alert(message, options.title, options.buttonName).then(() => {
-                    (options.handler as () => {})();
-                });
-            }
-            else {
-                (navigator as any).notification.alert(
-                    message,
-                    options.handler,
-                    options.title,
-                    options.buttonName
-                );
-            }
+        if (this.isCordova() && this.dialogsMode === 'native') {
+            this.dialogs.alert(message, options.title, options.buttonName).then(() => {
+                (options.handler as () => {})();
+            });
         }
         else {
             this.ionicCustomAlert({
@@ -510,27 +496,17 @@ export class DeviceService {
             return this.translateService.instant(<string>b.text);
         });
 
-        if(this.dialogsMode === 'native'){
-            if (this.isCordova()) {
-                this.dialogs.confirm(message, options.title, buttonLabels).then(
-                    (buttonIndex: number) => {
-                        // Decrement clicked button index because the plugin use 'one-based indexing'
-                        buttonIndex--;
-                        // Then execute the 'onClick' function if is defined
-                        if ((options.buttons as AlertButton[])[buttonIndex]) {
-                            ((options.buttons as AlertButton[])[buttonIndex] as any).handler();
-                        }
+        if (this.isCordova() && this.dialogsMode === 'native'){
+            this.dialogs.confirm(message, options.title, buttonLabels).then(
+                (buttonIndex: number) => {
+                    // Decrement clicked button index because the plugin use 'one-based indexing'
+                    buttonIndex--;
+                    // Then execute the 'onClick' function if is defined
+                    if ((options.buttons as AlertButton[])[buttonIndex]) {
+                        ((options.buttons as AlertButton[])[buttonIndex] as any).handler();
                     }
-                );
-            }
-            else {
-                if (window.confirm(message)) {
-                    (options.buttons[0] as any).handler();
                 }
-                else {
-                    (options.buttons[1] as any).handler();
-                }
-            }
+            );
         }
         else {
             this.ionicCustomAlert({

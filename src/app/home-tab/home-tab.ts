@@ -10,8 +10,8 @@ import { HomePage } from './pages/home/home';
 })
 export class HomeTab {
     // Grab References to our 2 NavControllers...
-    @ViewChild('masterNav') masterNav: Nav;
-    @ViewChild('detailNav') detailNav: Nav;
+    @ViewChild('masterNav') masterNav!: Nav;
+    @ViewChild('detailNav') detailNav!: Nav;
 
     constructor(
         private splitViewService: SplitViewService

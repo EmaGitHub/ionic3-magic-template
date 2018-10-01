@@ -29,7 +29,7 @@ export class PushNotificationsService {
     private notificationsCollection: Collection|null = null;
 
     private firebaseToken: string = '';
-    private storage: Storage;
+    private storage!: Storage;
     private infoEnabled: boolean = true;
     private subscriptions: string[] = [];
     public onInfoPushArrives$: Subject<any> = new Subject<any>();

@@ -12,7 +12,7 @@ declare var universalLinks: any;
 @Injectable()
 export class DeepLinkService {
     public onDeepLinking$: Subject<string> = new Subject<string>();
-    private deepLinkIsReady$: Subscription;
+    private deepLinkIsReady$!: Subscription;
 
     constructor(
         private deviceService: DeviceService

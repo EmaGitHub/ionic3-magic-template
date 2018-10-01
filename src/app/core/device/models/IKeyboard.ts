@@ -1,12 +1,12 @@
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { fromEvent } from 'rxjs/observable/fromEvent';
+
 /**
 * cordova-plugin-ionic-keyboard Provider
 * Diego Castro <ing.diegocastro@gmail.com>
 *
 */
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { fromEvent } from 'rxjs/observable/fromEvent';
-
 interface IKeyboard {
     isVisible: boolean;
     hideFormAccessoryBar(value: boolean, successCallback?: Function): void;
@@ -26,7 +26,7 @@ export class KeyboardProvider implements OnDestroy, OnInit {
     * @type {IKeyboard}
     * @memberof KeyboardProvider
     */
-    private _keyboard: IKeyboard;
+    private _keyboard!: IKeyboard;
 
     private _keyboardDidHide$: Observable<void>|null = null;
     private _keyboardDidShow$: Observable<KeyboardEvent>|null = null;
