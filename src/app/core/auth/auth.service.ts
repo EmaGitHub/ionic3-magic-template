@@ -16,8 +16,8 @@ const storageKeys = {
 @Injectable()
 export class AuthService {
     private applicationKey = 'demo-key-0xFF6';
-    private accessToken: string|null;
-    private refreshToken: string|null;
+    private accessToken: string|null = null;
+    private refreshToken: string|null = null;
     private storage: Storage;
 
     constructor(
@@ -116,7 +116,9 @@ export class AuthService {
             let credentials = new HttpParams()
                 .set('username', username)
                 .set('password', password);
-            this.apiService.callApi('credentials', null, credentials.toString()).subscribe(
+            this.apiService.callApi('credentials', {
+                body: credentials.toString()
+            }).subscribe(
                 (res: any) => {
                     this.setAccessToken((res as AuthResponse).accessToken);
                     this.setRefreshToken((res as AuthResponse).refreshToken);
@@ -138,7 +140,9 @@ export class AuthService {
         return new Promise((resolve, reject) => {
             let credentials = new HttpParams()
                 .set('eventCode', eventCode);
-            this.apiService.callApi('eventCode', null, credentials.toString()).subscribe(
+            this.apiService.callApi('eventCode', {
+                body: credentials.toString()
+            }).subscribe(
                 (res: any) => {
                     this.setAccessToken((res as AuthResponse).accessToken);
                     this.setRefreshToken((res as AuthResponse).refreshToken);

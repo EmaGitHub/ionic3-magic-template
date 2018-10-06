@@ -24,8 +24,8 @@
             "@assets/*": [ "assets/*" ],
             "@env": [ "environments/environment" ],
             "@theme/*": [ "theme/*" ]
-        }
-
+        },
+        "skipLibCheck": true
     },
     "include": [
         "src/**/*.ts"

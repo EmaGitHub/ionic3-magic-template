@@ -1,24 +1,24 @@
-import { ApiConfig } from './ApiConfig';
+import { Api } from './Api';
 import { RequestMethods } from './RequestMethods';
 
-export class BackendConfig {
+export class Backend {
     public baseUrl: string;
-    public api: ApiConfig[];
+    public api: Api[];
     public environment?: string;
 
     constructor(
-        backend: Partial<BackendConfig>
+        backend: Partial<Backend>
     ) {
         this.baseUrl = <string>backend.baseUrl;
-        this.api = (backend.api as ApiConfig[]).map((a: ApiConfig) => { return new ApiConfig(a); });
+        this.api = (backend.api as Api[]).map((a: Api) => { return new Api(a); });
         this.environment = backend.environment || 'PROD';
     }
 
 
-    public getApiConfig(apiName:string): ApiConfig|null {
+    public getApi(apiName:string): Api|null {
         let api;
         try {
-            api = <ApiConfig>this.api.find(api => api.name === apiName);
+            api = <Api>this.api.find(api => api.name === apiName);
             api.url = this.prepareUrl(api.url);
         }
         catch(err){
@@ -32,15 +32,16 @@ export class BackendConfig {
      * Get api configuration from the config.json file
      * @param url string HTTP request's url
      * @param method string HTTP request's method
-     * @returns {ApiConfig|null}
+     * @returns {Api|null}
      */
-    public createNewApiConfig(url: string, method: string = RequestMethods.GET): ApiConfig {
+    public createNewApi(url: string, method: string = RequestMethods.GET): Api {
         url = this.prepareUrl(url);
-        let apiConfig = new ApiConfig(<ApiConfig>{
+        let api = new Api({
+            name : 'newApi',
             url : url,
             method : method
         });
-        return apiConfig;
+        return api;
     }
 
 

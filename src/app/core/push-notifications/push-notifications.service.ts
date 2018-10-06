@@ -26,10 +26,10 @@ const storageKeys = {
 @Injectable()
 export class PushNotificationsService {
     // LokiJS Collections
-    private notificationsCollection: Collection;
+    private notificationsCollection: Collection|null = null;
 
-    private firebaseToken: string;
-    private storage: Storage;
+    private firebaseToken: string = '';
+    private storage!: Storage;
     private infoEnabled: boolean = true;
     private subscriptions: string[] = [];
     public onInfoPushArrives$: Subject<any> = new Subject<any>();
@@ -363,12 +363,12 @@ export class PushNotificationsService {
     private updateLatestPush(notifications: Notification[]) {
         // Insert (only) the new notifications in DB
         notifications.map((n: Notification) => {
-            let oldNotification = this.notificationsCollection.find({ id: n.id })[0];
+            let oldNotification = (this.notificationsCollection as Collection).find({ id: n.id })[0];
             if(!oldNotification){
                 // Set isNew flag as true
                 n.isNew = true;
                 // Insert the new meeting in DB
-                this.notificationsCollection.insert(n);
+                (this.notificationsCollection as Collection).insert(n);
             }
         });
     }
@@ -378,7 +378,7 @@ export class PushNotificationsService {
      * Get the new push notifications inside the DB and sent event with counter
      */
     private updateNewPushCounter(){
-        const newNotificationsCounter = this.notificationsCollection.find({isNew: true}).length;
+        const newNotificationsCounter = (this.notificationsCollection as Collection).find({isNew: true}).length;
         this.onNewPushCouterUpdated$.next(newNotificationsCounter);
     }
 
@@ -388,7 +388,7 @@ export class PushNotificationsService {
      * @returns Promise
      */
     public getNotificationsFromDB(): Notification[]{
-        let notifications = sortBy(this.notificationsCollection.find(), 'sentDate').reverse();
+        let notifications = sortBy((this.notificationsCollection as Collection).find(), 'sentDate').reverse();
         return notifications;
     }
 
@@ -426,7 +426,7 @@ export class PushNotificationsService {
      * Set all notifications as readed
      */
     setNotificationsReaded(){
-        this.notificationsCollection.findAndUpdate({}, (notification: Notification) => { notification.isNew = false; });
+        (this.notificationsCollection as Collection).findAndUpdate({}, (notification: Notification) => { notification.isNew = false; });
         this.updateNewPushCounter();
     }
 

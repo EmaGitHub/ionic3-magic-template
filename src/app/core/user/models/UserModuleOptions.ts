@@ -1,5 +1,5 @@
 
-export class UserModuleConfig {
+export class UserModuleOptions {
     constructor(
         public storePrefix?: string
     ){ }

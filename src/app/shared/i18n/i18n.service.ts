@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as Moment from 'moment';
 
 import { I18n } from './models/I18n';
-import { I18nModuleConfig } from './models/I18nModuleConfig';
+import { I18nModuleOptions } from './models/I18nModuleOptions';
 import { Language } from './models/Language';
 
 const storageKeys = {
@@ -20,23 +20,23 @@ const storageKeys = {
 
 @Injectable()
 export class I18nService {
-    private url: string;
+    private url: string = '';
     private i18n: I18n | undefined;
     private storage: Storage;
     public initCompleted: Promise<any>;
 
     constructor(
-        @Optional() public config: I18nModuleConfig,
+        @Optional() public options: I18nModuleOptions,
         private deviceService: DeviceService,
         private translateService: TranslateService,
         private http: HttpClient
     ) {
         this.storage = new Storage({
-            name : config.storePrefix || 'storage',
+            name : options.storePrefix || 'storage',
             storeName : 'i18n',
             driverOrder : ['localstorage']
         });
-        this.initCompleted = this.init(config);
+        this.initCompleted = this.init(options);
     }
 
     public Moment = Moment;
@@ -54,11 +54,11 @@ export class I18nService {
     /**
      * Download the i18n config file and init default language
      */
-    private init(config: I18nModuleConfig) {
+    private init(options: I18nModuleOptions) {
         return new Promise<any>((resolve, reject) => {
             // If requested i18n is a remote one => download it
-            if(config.remote){
-                this.url = config.remote;
+            if(options.remote){
+                this.url = options.remote;
                 this.download().then(
                     (i18n: I18n) => {
                         this.initI18N(i18n);
@@ -72,10 +72,10 @@ export class I18nService {
                 );
             }
             // Otherwise use the local one (if exists)
-            else if(config.local && config.local.i18n && config.local.langs){
-                this.initI18N(config.local.i18n);
+            else if(options.local && options.local.i18n && options.local.langs){
+                this.initI18N(options.local.i18n);
                 // Init default i18n and store all other languages
-                this.initLocalLangs(config.local.langs).then(
+                this.initLocalLangs(options.local.langs).then(
                     resolve,
                     reject
                 );

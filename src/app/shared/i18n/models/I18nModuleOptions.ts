@@ -1,4 +1,4 @@
-export class I18nModuleConfig {
+export class I18nModuleOptions {
     constructor(
         public remote?: string,
         public local?: {

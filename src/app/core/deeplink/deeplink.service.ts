@@ -12,7 +12,7 @@ declare var universalLinks: any;
 @Injectable()
 export class DeepLinkService {
     public onDeepLinking$: Subject<string> = new Subject<string>();
-    private deepLinkIsReady$: Subscription;
+    private deepLinkIsReady$!: Subscription;
 
     constructor(
         private deviceService: DeviceService
@@ -43,10 +43,6 @@ export class DeepLinkService {
                 if(this.deepLinkIsReady$ && !this.deepLinkIsReady$.closed){
                     this.deepLinkIsReady$.unsubscribe();
                 }
-                // this.deepLinkIsReady$ = this.agendaService.calendarIsReady$.subscribe(() => {
-                //     this.deepLinkIsReady$.unsubscribe();
-                //     this.onAgendaDeepLinking$.next({meetingId: meetingId, agendaItemId: agendaItemId});
-                // });
         }
     }
 

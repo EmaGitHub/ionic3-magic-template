@@ -2,13 +2,13 @@
     "versioning": [
         {
             "platform": "android",
-            "isLastVersion": true,
+            "lastVersion": "0.0.1",
             "isMandatoryUpdate": false,
             "storeLink": ""
         },
         {
             "platform": "ios",
-            "isLastVersion": true,
+            "lastVersion": "0.0.1",
             "isMandatoryUpdate": false,
             "storeLink": ""
         }

@@ -1,14 +1,14 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http/src/response';
 import { Injectable } from '@angular/core';
+import { ApiService } from '@core/api';
 import { DeviceService } from '@core/device';
 import { LoggerService } from '@core/logger';
+import { VersioningService } from '@core/versioning';
 import { Storage } from '@ionic/storage';
 
-import { ApiConfig } from './models/ApiConfig';
 import { Config } from './models/Config';
-import { ConfigModuleConfig } from './models/ConfigModuleConfig';
-import { RequestMethods } from './models/RequestMethods';
+import { ConfigModuleOptions } from './models/ConfigModuleOptions';
 
 const storageKeys = {
     lastConfig: 'last'
@@ -16,23 +16,25 @@ const storageKeys = {
 
 @Injectable()
 export class ConfigService {
-    private url: string;
+    private url: string = '';
     private config: Config | undefined;
     private storage: Storage;
     public initCompleted: Promise<any>;
 
     constructor(
-        public configModule: ConfigModuleConfig,
+        public options: ConfigModuleOptions,
         private http: HttpClient,
         private logger: LoggerService,
-        private deviceService: DeviceService
+        private deviceService: DeviceService,
+        private apiService: ApiService,
+        private versioningService: VersioningService
     ) {
         this.storage = new Storage({
-            name : configModule.storePrefix || 'storage',
+            name : options.storePrefix || 'storage',
             storeName: 'config',
             driverOrder : ['localstorage']
         });
-        this.initCompleted = this.init(configModule);
+        this.initCompleted = this.init(options);
     }
 
 
@@ -48,11 +50,11 @@ export class ConfigService {
     /**
      * Download config file and init the app
      */
-    private init(configModule: ConfigModuleConfig) {
+    private init(options: ConfigModuleOptions) {
         return new Promise<any>((resolve, reject) => {
             // If requested config is a remote one => download it
-            if(configModule.remote){
-                this.url = configModule.remote;
+            if(options.remote){
+                this.url = options.remote;
                 this.download().then(
                     (config: Config) => {
                         this.initConfig(config);
@@ -62,8 +64,8 @@ export class ConfigService {
                 );
             }
             // Otherwise use the local one (if exists)
-            else if(configModule.local){
-                this.initConfig(configModule.local);
+            else if(options.local){
+                this.initConfig(options.local);
                 resolve();
             }
             else {
@@ -74,7 +76,12 @@ export class ConfigService {
 
     private initConfig(config: Config) {
         this.config = new Config(config);
+        // Init the api service
+        this.apiService.init(this.config.backend);
+        // Update the logger service
         this.logger.changeLevel(this.config.loggerLevel);
+        // Init the versioning service
+        this.versioningService.setVersioning(this.config.versioning);
         this.storage.set(storageKeys.lastConfig, config);
     }
 
@@ -126,31 +133,5 @@ export class ConfigService {
                 }
             );
         });
-    }
-
-
-    /**
-     * Get api configuration from the config.json file
-     * @param apiName string Attribute name of requested api
-     * @returns {ApiConfig|null}
-     */
-    getApiConfig(apiName:string): ApiConfig|null {
-        return (<Config>this.config).backend.getApiConfig(apiName);
-    }
-
-
-    /**
-     * Get api configuration from the config.json file
-     * @param url string HTTP request's url
-     * @param method string HTTP request's method
-     * @returns {ApiConfig|null}
-     */
-    createNewApiConfig(url: string, method: string = RequestMethods.GET): ApiConfig {
-        return (<Config>this.config).backend.createNewApiConfig(url, method);
-    }
-
-
-    getExternalUrls() {
-        return (<Config>this.config).externalUrls;
     }
 }

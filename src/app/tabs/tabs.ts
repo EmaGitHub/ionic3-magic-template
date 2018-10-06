@@ -11,7 +11,7 @@ import { TabsService } from './tabs.service';
     templateUrl: 'tabs.html'
 })
 export class TabsPage extends AutoUnsubscribe {
-    @ViewChild('appTabs') appTabs: Tabs;
+    @ViewChild('appTabs') appTabs!: Tabs;
     tab1Root = HomeTab;
     // tab2Root = FloorPlansTab;
     // tab3Root = InfoCornerTab;

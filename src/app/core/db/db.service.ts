@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DeviceService } from '@core/device';
 import LokiJS, { Collection } from 'lokijs';
 
-import { DBModuleConfig } from './models/DBModuleConfig';
+import { DBModuleOptions } from './models/DBModuleOptions';
 import { LokiConfigOptions } from './models/LokiConfigOptions';
 
 declare var require: any;
@@ -11,16 +11,16 @@ var LokiIndexedAdapter = require('lokijs/src/loki-indexed-adapter');
 
 @Injectable()
 export class DBService {
-    private dbName: string;
-    private db: LokiJS;
+    private dbName: string = '';
+    private db: LokiJS|null = null;
     public initCompleted: Promise<any>;
 
     constructor(
-        public dbModuleConfig: DBModuleConfig,
+        public options: DBModuleOptions,
         private deviceService: DeviceService
     ) {
         const DB = this;
-        DB.dbName = dbModuleConfig.dbName;
+        DB.dbName = options.dbName;
         this.initCompleted = new Promise((resolve, reject) => {
             if (this.deviceService.isCordova()) {
                 document.addEventListener('deviceready', () => {
@@ -71,9 +71,9 @@ export class DBService {
      */
     getOrCreateCollection(name: string): Collection{
         // Init the allMeeting collection
-        let newCollection = this.db.getCollection(name);
+        let newCollection = (this.db as LokiJS).getCollection(name);
         if (newCollection === null) {
-            newCollection = this.db.addCollection(name);
+            newCollection = (this.db as LokiJS).addCollection(name);
         }
         return newCollection;
     }
@@ -87,12 +87,6 @@ export class DBService {
         return new Promise((resolve, reject) => {
 
             // Create a LokiJS DB
-            // this.db = this.createLokiDB(this.dbName, {
-            //     autosave: true,
-            //     autosaveInterval: 1000,
-            //     autoload: false,
-            //     verbose: true
-            // });
             this.db = this.createLokiDB(this.dbName, lokiOptions);
 
             // Define options for LokiDB load
@@ -104,7 +98,7 @@ export class DBService {
                     reject(data);
                 }
                 else {
-                    resolve(this.db);
+                    resolve(<LokiJS>this.db);
                 }
             });
         });
@@ -112,6 +106,6 @@ export class DBService {
 
 
     getDB(): LokiJS{
-        return this.db;
+        return <LokiJS>this.db;
     }
 }

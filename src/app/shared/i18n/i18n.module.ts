@@ -4,7 +4,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { I18nService } from './i18n.service';
-import { I18nModuleConfig } from './models/I18nModuleConfig';
+import { I18nModuleOptions } from './models/I18nModuleOptions';
 
 /**
 * @name I18nModule
@@ -41,15 +41,15 @@ export class I18nModule {
 
 
     /**
-    * Allow to pass a <I18nModuleConfig> configuration to services in I18nModule
-    * @param  {I18nModuleConfig} config all available configuration for <I18nModule>
+    * Allow to pass a <I18nModuleOptions> configuration to services in I18nModule
+    * @param  {I18nModuleOptions} options all available configuration for <I18nModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(config: I18nModuleConfig): ModuleWithProviders {
+    static forRoot(options?: I18nModuleOptions): ModuleWithProviders {
         return {
             ngModule: I18nModule,
             providers: [
-                { provide: I18nModuleConfig, useValue: config }
+                { provide: I18nModuleOptions, useValue: options }
             ]
         }
     }

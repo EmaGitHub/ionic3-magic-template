@@ -18,18 +18,17 @@ import {
     ToastController,
     ToastOptions,
 } from 'ionic-angular';
-import { Loading } from 'ionic-angular/components/loading/loading';
 import { Subscription } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
 
-import { DeviceModuleConfig } from './models/DeviceModuleConfig';
+import { DeviceModuleOptions } from './models/DeviceModuleOptions';
 import { KeyboardProvider } from './models/IKeyboard';
 
 @Injectable()
 export class DeviceService {
-    private modalTitle: string;
-    private dialogsMode: string;
-    private ionLoading: Loading;
+    private modalTitle!: string;
+    private dialogsMode!: string;
+    private ionLoading!: any;
 
     public networkStatusChanges$: Subject<boolean> = new Subject();
     public keyboardVisibilityChanges$: Subject<boolean> = new Subject();
@@ -37,7 +36,7 @@ export class DeviceService {
     public onPause: Subject<any> = new Subject();
 
     constructor(
-        @Optional() config: DeviceModuleConfig,
+        @Optional() options: DeviceModuleOptions,
         private platform: Platform,
         private network: Network,
         private splashScreen: SplashScreen,
@@ -53,9 +52,9 @@ export class DeviceService {
         private toastCtrl: ToastController,
         private device: Device
     ) {
-        if(config){
-            if(config.modalTitle) this.modalTitle = config.modalTitle;
-            if(config.dialogsMode) this.dialogsMode = config.dialogsMode;
+        if(options){
+            if(options.modalTitle) this.modalTitle = options.modalTitle;
+            if(options.dialogsMode) this.dialogsMode = options.dialogsMode;
         }
 
         // Init observables when device is ready
@@ -411,35 +410,47 @@ export class DeviceService {
     * @param  {string} title Dialog title
     * @returns void
     */
-    alert(message: string, title: string = this.modalTitle): void {
+    alert(message: string,
+          options: {
+            handler?: () => void,
+            title?: string,
+            buttonName?: string
+        } = {}
+    ): void {
         this.hideLoading();
 
-        let okButton = 'OK';
+        if(!options.handler){
+            options.handler = () => {};
+        }
+
+        if(!options.title){
+            options.title = this.modalTitle;
+        }
+
+        if(!options.buttonName){
+            options.buttonName = 'OK';
+        }
+
         try {
-            okButton = this.translateService.instant(okButton);
+            message = this.translateService.instant(message);
+            options.title = this.translateService.instant(options.title);
+            options.buttonName = this.translateService.instant(options.buttonName);
         }
         catch (e) {}
-        if(this.dialogsMode === 'native'){
-            try {
-                message = this.translateService.instant(message);
-                title = this.translateService.instant(title);
-            }
-            catch (e) {}
 
-            if (this.isCordova()) {
-                this.dialogs.alert(message, title, okButton);
-            }
-            else {
-                window.alert(message);
-            }
+        if (this.isCordova() && this.dialogsMode === 'native') {
+            this.dialogs.alert(message, options.title, options.buttonName).then(() => {
+                (options.handler as () => {})();
+            });
         }
         else {
             this.ionicCustomAlert({
-                title: title,
+                title: options.title,
                 message: message,
                 buttons: [
                     {
-                        text: okButton
+                        text: options.buttonName,
+                        handler: options.handler
                     }
                 ]
             });
@@ -453,13 +464,20 @@ export class DeviceService {
     * @param {string} title Dialog title
     * @param {AlertButton[]} buttons List of <AlertButton>
     */
-    confirm(message: string, title: string = this.modalTitle, buttons: AlertButton[] = []) {
+    confirm(message: string,
+            options: {
+                title?: string,
+                buttons?: AlertButton[]
+            } = {}
+    ) {
         this.hideLoading();
 
-        message = this.translateService.instant(message);
-        title = this.translateService.instant(title);
-        if(buttons.length === 0){
-            buttons = [{
+        if(!options.title){
+            options.title = this.modalTitle;
+        }
+
+        if(!options.buttons){
+            options.buttons = [{
                 text: 'CANCEL',
                 cssClass: 'primary',
                 role: 'cancel',
@@ -468,39 +486,33 @@ export class DeviceService {
                 text: 'OK',
                 cssClass: 'primary',
                 handler: () => {}
-            }]
+            }];
         }
-        const buttonLabels = buttons.map((b: AlertButton) => {
+
+        message = this.translateService.instant(message);
+        options.title = this.translateService.instant(options.title);
+
+        const buttonLabels = options.buttons.map((b: AlertButton) => {
             return this.translateService.instant(<string>b.text);
         });
 
-        if(this.dialogsMode === 'native'){
-            if (this.isCordova()) {
-                this.dialogs.confirm(message, title, buttonLabels).then(
-                    (buttonIndex: number) => {
-                        // Decrement clicked button index because the plugin use 'one-based indexing'
-                        buttonIndex--;
-                        // Then execute the 'onClick' function if is defined
-                        if (buttons[buttonIndex]) {
-                            (buttons[buttonIndex] as any).handler();
-                        }
+        if (this.isCordova() && this.dialogsMode === 'native'){
+            this.dialogs.confirm(message, options.title, buttonLabels).then(
+                (buttonIndex: number) => {
+                    // Decrement clicked button index because the plugin use 'one-based indexing'
+                    buttonIndex--;
+                    // Then execute the 'onClick' function if is defined
+                    if ((options.buttons as AlertButton[])[buttonIndex]) {
+                        ((options.buttons as AlertButton[])[buttonIndex] as any).handler();
                     }
-                );
-            }
-            else {
-                if (window.confirm(message)) {
-                    (buttons[0] as any).handler();
                 }
-                else {
-                    (buttons[1] as any).handler();
-                }
-            }
+            );
         }
         else {
             this.ionicCustomAlert({
-                title: title,
+                title: options.title,
                 message: message,
-                buttons: buttons
+                buttons: options.buttons
             });
         }
     }

@@ -12,15 +12,9 @@ import { NavigationModule } from '@core/navigation/navigation.module';
 import { PushNotificationsModule } from '@core/push-notifications/push-notifications.module';
 import { SplitViewModule } from '@core/split-view/split-view.module';
 import { UserModule } from '@core/user/user.module';
+import { VersioningModule } from '@core/versioning';
 import { ENV } from '@env';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
-// import { CallNumber } from '@ionic-native/call-number';
-// import { EmailComposer } from '@ionic-native/email-composer';
-// import { File } from '@ionic-native/file';
-// import { FileOpener } from '@ionic-native/file-opener';
-// import { FileTransfer } from '@ionic-native/file-transfer';
-// import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
     imports : [
@@ -41,6 +35,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
         UserModule.forRoot({
             storePrefix: ENV.storePrefix
         }),
+        VersioningModule,
         NavigationModule,
         SplitViewModule,
         PushNotificationsModule
@@ -49,11 +44,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
         AuthService,
         DeepLinkService,
         InAppBrowser,
-        // EmailComposer,
-        // FileTransfer,
-        // File,
-        // FileOpener,
-        // CallNumber,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi : true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi : true }
     ]
