@@ -3,7 +3,10 @@
     "no-duplicate-variable": true,
     "no-unused-variable": [
       true
-    ]
+    ],
+    "curly": [true, "ignore-same-line"],
+    "no-consecutive-blank-lines": true,
+    "quotemark": [true, "single", "avoid-escape"]
   },
   "rulesDirectory": [
     "node_modules/tslint-eslint-rules/dist/rules"
