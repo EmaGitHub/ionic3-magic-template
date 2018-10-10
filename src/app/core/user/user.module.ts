@@ -28,7 +28,6 @@ export class UserModule {
         }
     }
 
-
     /**
     * Allow to pass a <UserModuleOptions> configuration to services in UserModule
     * @param  {UserModuleOptions} options all available configuration for <UserModule>

@@ -31,7 +31,6 @@ export class TabsPage extends AutoUnsubscribe {
         this.initSplitViewSubscriptions();
     }
 
-
     private initSplitViewSubscriptions(){
         const Tabs = this;
         // If device is tablet activate split view and unlock orientation
@@ -50,7 +49,6 @@ export class TabsPage extends AutoUnsubscribe {
             this.splitViewService.deactivateSplitView();
         }
     }
-
 
     onTabChanges(activeTab: Tab){
         this.tabsService.onTabChanges$.next(activeTab.index);

@@ -31,7 +31,6 @@ export class LoginService {
         });
     }
 
-
     /**
      * Start to observe the session's changes in order to open or dismiss it
      */

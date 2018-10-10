@@ -10,7 +10,6 @@ export class NavigationService {
         private geolocation: Geolocation
     ){ }
 
-
     /**
      * @param  {Partial<GeolocationOptions>={}} options
      * @returns Promise
@@ -18,7 +17,6 @@ export class NavigationService {
     getCurrentPosition(options: Partial<GeolocationOptions> = {}): Promise<Geoposition>{
         return this.geolocation.getCurrentPosition(options);
     }
-
 
     /**
      * @param  {number} lat

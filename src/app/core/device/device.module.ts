@@ -42,7 +42,6 @@ export class DeviceModule {
         }
     }
 
-
     /**
     * Allow to pass a <DeviceModuleOptions> configuration to DeviceService
     * @param  {DeviceModuleOptions} options all available configuration for <DeviceModule>

@@ -24,7 +24,6 @@ export class DeepLinkService {
         }
     }
 
-
     private initSubscriptions() {
         // Subscription for all deeplink
         universalLinks.subscribe('ul_deeplink', (eventData: EventData) => {
@@ -32,7 +31,6 @@ export class DeepLinkService {
             this.detectDeepLinkPath(url);
         });
     }
-
 
     private detectDeepLinkPath(url: ParsedURL){
         const paths = url.pathname.split('/');
@@ -45,7 +43,6 @@ export class DeepLinkService {
                 }
         }
     }
-
 
     /**
      * Parsed url and return a special HTMLAnchorElement with searchObject params

@@ -37,7 +37,6 @@ export class ConfigService {
         this.initCompleted = this.init(options);
     }
 
-
     /**
      * Returns the last config file stored in localStorage with last modified date
      * @returns {Promise<Config>}
@@ -45,7 +44,6 @@ export class ConfigService {
     private getLastConfig(): Promise<Config> {
         return this.storage.get(storageKeys.lastConfig)
     }
-
 
     /**
      * Download config file and init the app
@@ -84,7 +82,6 @@ export class ConfigService {
         this.versioningService.setVersioning(this.config.versioning);
         this.storage.set(storageKeys.lastConfig, config);
     }
-
 
     /**
      * Download the external config file and store it in localStorage

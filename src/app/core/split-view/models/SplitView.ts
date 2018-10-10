@@ -31,7 +31,6 @@ export class SplitView extends AutoUnsubscribe {
             });
     }
 
-
     /**
      * Force first page of master view
      * @param  {any} page
@@ -42,7 +41,6 @@ export class SplitView extends AutoUnsubscribe {
     pushOnMaster(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}) {
         this.masterNav.push(page, params, options);
     }
-
 
     /**
      * * Force first page of detail view
@@ -85,7 +83,6 @@ export class SplitView extends AutoUnsubscribe {
         }
     }
 
-
     gotoFirstDetailPage(options: Partial<NavOptions>|undefined = {}){
         if (this.isOn) {
             this.detailNav.popToRoot(options);
@@ -94,8 +91,6 @@ export class SplitView extends AutoUnsubscribe {
             this.masterNav.popToRoot(options);
         }
     }
-
-
 
     activateSplitView() {
         this.masterNav.getActive();
@@ -108,8 +103,6 @@ export class SplitView extends AutoUnsubscribe {
         //     this.detailNav.setRoot(currentView.component, currentView.data);
         // }
     }
-
-
 
     deactivateSplitView() {
         this.detailNav.getActive();

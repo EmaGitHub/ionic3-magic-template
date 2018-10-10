@@ -17,7 +17,6 @@ export class I18n {
         this.lastModified = i18n.lastModified || null;
     }
 
-
     /**
      * Get the language configuration if available, null otherwise
      * @param  {string} lang Requested language
@@ -27,7 +26,6 @@ export class I18n {
         return this.langs.find((l: Language) => { return l.code === langCode });
     }
 
-
     /**
      * Get the default language in langs property
      * @returns string
@@ -36,7 +34,6 @@ export class I18n {
         const def = this.langs.find((l: Language) => { return l.isDefault; });
         return def || this.langs[0];
     }
-
 
     /**
      * Add baseUrl as prefix if the lang url is relative

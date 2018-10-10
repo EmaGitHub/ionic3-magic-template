@@ -28,7 +28,6 @@ export class ConfigModule {
         }
     }
 
-
     /**
     * Allow to pass a <ConfigModuleOptions> configuration to services in ConfigModule
     * @param  {ConfigModuleOptions} options all available configuration for <ConfigModule>

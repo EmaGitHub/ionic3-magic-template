@@ -144,7 +144,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
     }
 
-
     /**
      * Clone the request updating the Authorization token header
      * @param  {HttpRequest<any>} req Old request to update and retry

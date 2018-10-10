@@ -23,7 +23,6 @@ export class LoginPage {
         private inAppBrowser: InAppBrowser
     ) { }
 
-
     onLoginSubmit() {
         this.logger.debug(`credentials ${this.username}/${this.password}`);
         this.deviceService.showLoading();
@@ -38,7 +37,6 @@ export class LoginPage {
             }
         );
     }
-
 
     onForgotPasswordClicked() {
         this.inAppBrowser.create('https://forgotpassword.test.com', '_system');

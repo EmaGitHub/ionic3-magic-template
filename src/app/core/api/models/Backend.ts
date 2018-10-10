@@ -14,7 +14,6 @@ export class Backend {
         this.environment = backend.environment || 'PROD';
     }
 
-
     public getApi(apiName:string): Api|null {
         let api;
         try {
@@ -26,7 +25,6 @@ export class Backend {
         }
         return api;
     }
-
 
     /**
      * Get api configuration from the config.json file
@@ -43,7 +41,6 @@ export class Backend {
         });
         return api;
     }
-
 
     /**
      * Add baseUrl as prefix if the api url is relative

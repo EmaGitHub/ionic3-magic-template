@@ -36,7 +36,6 @@ export class PushNotificationsPopover {
         this.onOpen = this.navParams.data.onOpen;
     }
 
-
     /**
      * Open push and execute its onOpen function
      */
@@ -47,7 +46,6 @@ export class PushNotificationsPopover {
             this.closePush();
         }, 500);
     }
-
 
     /**
      * Simply close the popover

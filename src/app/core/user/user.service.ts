@@ -62,7 +62,6 @@ export class UserService {
         });
     }
 
-
     /**
      * Returns the user full name
      * @returns string
@@ -73,7 +72,6 @@ export class UserService {
         }
         return '';
     }
-
 
     /**
      * Returns if user is logged
@@ -86,7 +84,6 @@ export class UserService {
         return false;
     }
 
-
     /**
      * Return the current value for public access mode
      * @returns boolean
@@ -94,7 +91,6 @@ export class UserService {
     isPublicAccess(): boolean {
         return this.publicAccess;
     }
-
 
     /**
      * Set the public access flag in memory and storage
@@ -104,7 +100,6 @@ export class UserService {
         this.publicAccess = publicAccess;
         this.storage.set(storageKeys.public, publicAccess);
     }
-
 
     /**
      * Makes login with classic username and password
@@ -134,7 +129,6 @@ export class UserService {
             );
         });
     }
-
 
     /**
      * Fetch the accessToken and the refreshToken for public access
@@ -220,7 +214,6 @@ export class UserService {
         });
     }
 
-
     /**
      * Get user's information using the backend GraphQL
      * @param {string} username User's username
@@ -259,7 +252,6 @@ export class UserService {
         });
     }
 
-
     refreshUserProfile(){
         return new Promise((resolve, reject) => {
             // If the current profile data was refreshed during last 24 hours => resolve
@@ -287,7 +279,6 @@ export class UserService {
         });
     }
 
-
     /**
      * Get the firstAccess flag to use for public access
      * @returns Promise
@@ -295,7 +286,6 @@ export class UserService {
     isFirstAccess(): boolean{
         return this.firstAccess;
     }
-
 
     /**
      * Set the firstAccess flag to use for public access
@@ -305,7 +295,6 @@ export class UserService {
         this.firstAccess = firstAccess;
         this.storage.set(storageKeys.firstAccess, firstAccess);
     }
-
 
     /**
      * Set the user information in localStorage,
@@ -328,7 +317,6 @@ export class UserService {
             }
         });
     }
-
 
     restoreLastSession() {
         return new Promise((resolve, reject) => {
@@ -362,7 +350,6 @@ export class UserService {
         });
     }
 
-
     /**
      * Destroy the user session and the user info in DB
      */
@@ -370,7 +357,6 @@ export class UserService {
         this.user = null;
         this.storage.remove(storageKeys.user);
     }
-
 
     /**
      * Logout the user,

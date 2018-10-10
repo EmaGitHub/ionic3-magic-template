@@ -20,7 +20,6 @@ export class DBModule {
         }
     }
 
-
     /**
     * Allow to pass a <DBModuleOptions> configuration to DBService
     * @param  {DBModuleOptions} options all available configuration for <DBModule>

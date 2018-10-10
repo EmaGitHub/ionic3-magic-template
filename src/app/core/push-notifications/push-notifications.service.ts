@@ -28,7 +28,6 @@ export class PushNotificationsService {
     // LokiJS Collections
     private notificationsCollection: Collection|null = null;
 
-    private firebaseToken: string = '';
     private storage!: Storage;
     private infoEnabled: boolean = true;
     private subscriptions: string[] = [];
@@ -58,7 +57,6 @@ export class PushNotificationsService {
             }
         });
     }
-
 
     /**
      * Wait for LokiJS DB loaded and init the notifications collection
@@ -147,13 +145,11 @@ export class PushNotificationsService {
         });
     }
 
-
     /**
      * Set the Firebase push token
      * @param  {string} token
      */
     private setToken(token: string) {
-        this.firebaseToken = token;
         this.startSubscriptions();
     }
 
@@ -171,14 +167,12 @@ export class PushNotificationsService {
         });
     }
 
-
     /**
      * Subscribe to INFO general topic
      */
     private subscribeToInfo(){
         this.firebase.subscribe(TopicNames.INFO);
     }
-
 
     /**
      * Unsubscribe from INFO general topic
@@ -220,7 +214,6 @@ export class PushNotificationsService {
         }
     }
 
-
     private openForegroundPopoverPush(notification: FirebaseNotification, openPushOpen: Function){
         let popover = this.popoverCtrl.create(
             PushNotificationsPopover,
@@ -246,11 +239,9 @@ export class PushNotificationsService {
         });
     }
 
-
     private processInfoNotification(notification: FirebaseNotification){
         this.onInfoPushArrives$.next();
     }
-
 
     /**
      * Check the push notification permission
@@ -265,14 +256,12 @@ export class PushNotificationsService {
         }
     }
 
-
     /**
      * Get if INFO topic is enabled in preferences panel
      */
     getEnabled(){
         return this.infoEnabled;
     }
-
 
     /**
      * Enable/Disable INFO push notifications from preferences panel
@@ -290,7 +279,6 @@ export class PushNotificationsService {
             }
         }
     }
-
 
     /**
      * Subscribe for push notification's topic
@@ -312,7 +300,6 @@ export class PushNotificationsService {
                 return Promise.reject(err);
             });
     }
-
 
     /**
      * unsubscribe for push notification's topic
@@ -337,7 +324,6 @@ export class PushNotificationsService {
             });
     }
 
-
     /**
      * Fetch latest push from API
      * and add/update DB data
@@ -354,7 +340,6 @@ export class PushNotificationsService {
             }
         );
     }
-
 
     /**
      * Update latest push data in DB
@@ -373,7 +358,6 @@ export class PushNotificationsService {
         });
     }
 
-
     /**
      * Get the new push notifications inside the DB and sent event with counter
      */
@@ -381,7 +365,6 @@ export class PushNotificationsService {
         const newNotificationsCounter = (this.notificationsCollection as Collection).find({isNew: true}).length;
         this.onNewPushCouterUpdated$.next(newNotificationsCounter);
     }
-
 
     /**
      * Fetch from DB all notifications
@@ -391,7 +374,6 @@ export class PushNotificationsService {
         let notifications = sortBy((this.notificationsCollection as Collection).find(), 'sentDate').reverse();
         return notifications;
     }
-
 
     /**
      * Fetch from server or DB all notifications
@@ -429,7 +411,6 @@ export class PushNotificationsService {
         (this.notificationsCollection as Collection).findAndUpdate({}, (notification: Notification) => { notification.isNew = false; });
         this.updateNewPushCounter();
     }
-
 
     /**
      * Reset the native push counter in os launcher

@@ -69,7 +69,6 @@ export class DeviceService {
         }
     }
 
-
     private initSubscriptions(){
         // Init subscription for online/offline events
         this.network.onConnect().subscribe(() => {
@@ -100,7 +99,6 @@ export class DeviceService {
         });
     }
 
-
     /**
     * Return true if the app running on Cordova, false otherwise
     * @returns {boolean}
@@ -108,7 +106,6 @@ export class DeviceService {
     isCordova(): boolean {
         return this.platform.is('cordova');
     }
-
 
     /**
     * Return true if the app running on Android device, false otherwise
@@ -118,7 +115,6 @@ export class DeviceService {
         return this.platform.is('android');
     }
 
-
     /**
     * Return true if the app running on iOS device, false otherwise
     * @returns {boolean}
@@ -126,7 +122,6 @@ export class DeviceService {
     isIos(): boolean {
         return this.platform.is('ios');
     }
-
 
     /**
     * Return true if the app running on Windows device, false otherwise
@@ -136,7 +131,6 @@ export class DeviceService {
         return this.platform.is('windows');
     }
 
-
     /**
     * Return true if the app is running on tablet
     * @returns {boolean}
@@ -144,7 +138,6 @@ export class DeviceService {
     isTablet(): boolean {
         return this.platform.is('tablet');
     }
-
 
     /**
     * Return true if the device has internet connection available, false otherwise
@@ -160,7 +153,6 @@ export class DeviceService {
         }
     }
 
-
     /**
     * Return true if the device doesn't have internet connection available, false otherwise
     * @returns {boolean}
@@ -168,7 +160,6 @@ export class DeviceService {
     isOffline(): boolean {
         return !this.isOnline();
     }
-
 
     /**
      * Return the device’s Universally Unique Identifier (UUID) if the app is running on device
@@ -181,7 +172,6 @@ export class DeviceService {
         return 'FAKE_UUID';
     }
 
-
     /**
      * Return the operating system version if the app is running on device
      * @returns string
@@ -192,7 +182,6 @@ export class DeviceService {
         }
         return 'FAKE_VERSION';
     }
-
 
     /**
      * Return the device’s operating system name if the app is running on device
@@ -205,7 +194,6 @@ export class DeviceService {
         return 'FAKE_PLATFORM';
     }
 
-
     /**
      * Return the platform of the device’s model or product if the app is running on device
      * @returns string
@@ -217,7 +205,6 @@ export class DeviceService {
         return 'FAKE_PLATFORM';
     }
 
-
     /**
     * Show the app's splash screen
     * @returns void
@@ -225,7 +212,6 @@ export class DeviceService {
     showSplashscreen(): void {
         this.splashScreen.show();
     }
-
 
     /**
     * Hide the app's splash screen
@@ -261,7 +247,6 @@ export class DeviceService {
         }
     }
 
-
     /**
      * Get the preferred language set on device
      * @returns {Promise<string>}
@@ -284,7 +269,6 @@ export class DeviceService {
             }
         )
     }
-
 
     /**
     * Show the native spinner dialog
@@ -316,7 +300,6 @@ export class DeviceService {
         }
     }
 
-
     /**
     * Close the native spinner dialog or the Ionic one
     * @returns void
@@ -331,9 +314,7 @@ export class DeviceService {
         }
     }
 
-
     ORIENTATIONS = this.screenOrientation.ORIENTATIONS;
-
 
     /**
      * Lock the orientation to the passed value
@@ -344,7 +325,6 @@ export class DeviceService {
         this.screenOrientation.lock(orientation);
     }
 
-
     /**
      * Unlock and allow all orientations
      * @returns void
@@ -352,7 +332,6 @@ export class DeviceService {
     unlockOrientation(): void {
         this.screenOrientation.unlock();
     }
-
 
     /**
      * Get the current orientation of the device
@@ -388,7 +367,6 @@ export class DeviceService {
         return !this.isPortrait();
     }
 
-
     /**
      * Listen to orientation change event
      * @param  {Function|undefined} callback Callback to execute when orientation event is fired
@@ -402,7 +380,6 @@ export class DeviceService {
                 }
             });
     }
-
 
     /**
     * Show a native or ionic simple alert dialog
@@ -456,7 +433,6 @@ export class DeviceService {
             });
         }
     }
-
 
     /**
     * Show a native confirm dialog or the simple browser confirm
@@ -517,7 +493,6 @@ export class DeviceService {
         }
     }
 
-
     /**
     * Show an ionic custom alert dialog
     * @param  {AlertOptions} options All Ionic alert options
@@ -542,7 +517,7 @@ export class DeviceService {
         }
         if(!options.cssClass) options.cssClass = 'primary';
         if(!options.inputs) options.inputs = [];
-        if(!options.buttons) options.buttons = [
+        if(!options.buttons) { options.buttons = [
             {
                 text : 'OK',
                 handler : () => {},
@@ -555,6 +530,7 @@ export class DeviceService {
                 role : 'cancel'
             }
         ];
+        }
         options.buttons.forEach((b) => {
             (b as AlertButton).text = this.translateService.instant((b as AlertButton).text as string);
         });
@@ -566,7 +542,6 @@ export class DeviceService {
         }
         alert.present();
     }
-
 
     /**
      * Show an ionic toast

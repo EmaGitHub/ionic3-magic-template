@@ -39,7 +39,6 @@ export class I18nModule {
         }
     }
 
-
     /**
     * Allow to pass a <I18nModuleOptions> configuration to services in I18nModule
     * @param  {I18nModuleOptions} options all available configuration for <I18nModule>

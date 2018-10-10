@@ -33,7 +33,6 @@ export class DBService {
         });
     }
 
-
     /**
      * Create new LokiJS db
      * If the app runs on browser it persists data on localStorage
@@ -63,7 +62,6 @@ export class DBService {
         return new LokiJS(dbName, lokiOptions);
     }
 
-
     /**
      * Get the collection from its name,
      * or, if not exists, create it and returns
@@ -77,7 +75,6 @@ export class DBService {
         }
         return newCollection;
     }
-
 
     /**
      * Create and load the LokiJS database
@@ -103,7 +100,6 @@ export class DBService {
             });
         });
     }
-
 
     getDB(): LokiJS{
         return <LokiJS>this.db;

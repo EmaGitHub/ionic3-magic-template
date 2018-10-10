@@ -31,7 +31,6 @@ export class AuthService {
         });
     }
 
-
     /**
      * Get the application key
      * @returns string
@@ -39,7 +38,6 @@ export class AuthService {
     getApplicationKey(): string {
         return this.applicationKey;
     }
-
 
     /**
      * Get the current value of accessToken
@@ -49,7 +47,6 @@ export class AuthService {
         return this.accessToken;
     }
 
-
     /**
      * Set the accesstoken in memory
      * @param  {string|null=null} accessToken
@@ -58,7 +55,6 @@ export class AuthService {
         this.accessToken = accessToken;
     }
 
-
     /**
      * Get the current accessToken
      * @returns string
@@ -66,7 +62,6 @@ export class AuthService {
     getRefreshToken(): string|null {
         return this.refreshToken;
     }
-
 
     /**
      * Reset the refreshToken from memory and storage
@@ -77,7 +72,6 @@ export class AuthService {
         let encryptedToken = AES.encrypt(JSON.stringify(refreshToken), this.deviceService.getUUID());
         this.storage.set(storageKeys.token, encryptedToken.toString());
     }
-
 
     /**
      * Get the refreshToken from native (secure) storage
@@ -95,7 +89,6 @@ export class AuthService {
         });
     }
 
-
     /**
      * Reset accessToken and refreshToken
      */
@@ -104,7 +97,6 @@ export class AuthService {
         this.setRefreshToken();
         this.storage.remove(storageKeys.token);
     }
-
 
     /**
      * Fetch the auth tokens using username and password
@@ -129,7 +121,6 @@ export class AuthService {
         });
     }
 
-
     /**
      * Fetch the auth tokens using the eventCode
      * and returns the response in order to save the invitation meetings' ids
@@ -153,7 +144,6 @@ export class AuthService {
         });
     }
 
-
     /**
      * Fetch the auth token for the public access
      * @returns Promise
@@ -170,7 +160,6 @@ export class AuthService {
             );
         });
     }
-
 
     /**
      * Get the new accessToken from the actual refreshToken

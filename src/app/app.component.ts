@@ -24,7 +24,6 @@ export class App extends AutoUnsubscribe {
         });
     }
 
-
     /**
      * Initialize the native device orientation
      */
@@ -40,7 +39,6 @@ export class App extends AutoUnsubscribe {
             this.deviceService.lockOrientation(this.deviceService.ORIENTATIONS.PORTRAIT_PRIMARY);
         }
     }
-
 
     /**
      * Initialize subscription for logout events in order to hide the app's content

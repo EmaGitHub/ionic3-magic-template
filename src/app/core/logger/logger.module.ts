@@ -21,7 +21,6 @@ export class LoggerModule {
         }
     }
 
-
     /**
     * Allow to pass a <LoggerModuleOptions> configuration to LoggerService
     * @param  {LoggerModuleOptions} options all available configuration for <LoggerModule>

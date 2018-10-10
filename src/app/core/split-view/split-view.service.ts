@@ -14,7 +14,6 @@ export class SplitViewService {
 
     ){ }
 
-
     initSplitView(name: string, masterView: SplitViewConfig, detailView: SplitViewConfig) {
         if(name && !this.splitViewList[name]){
             this.splitViewList[name] = new SplitView(masterView.nav, detailView.nav, this.isOn, this.isOn$);
@@ -24,32 +23,25 @@ export class SplitViewService {
         return this.splitViewList[name];
     }
 
-
     getSplitView(name: string): SplitView {
         return this.splitViewList[name];
     }
 
-
     isActive(): boolean {
         return this.isOn;
     }
-
 
     onSplitPaneChanged(isOn: boolean) {
         this.isOn = isOn;
         this.isOn$.next(this.isOn);
     }
 
-
     activateSplitView(){
         this.onSplitPaneChanged(true);
     }
 
-
     deactivateSplitView(){
         this.onSplitPaneChanged(false);
     }
-
-
 
 }

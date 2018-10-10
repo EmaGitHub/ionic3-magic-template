@@ -28,7 +28,6 @@ export class LoggerService {
         }
     }
 
-
     /**
      * Return the arg to string if is necessary
      * @param  {any} arg Argument to parse
@@ -42,7 +41,6 @@ export class LoggerService {
             return arg;
         }
     }
-
 
     /**
      * Print all supplied arguments with the right level function (on browser)
@@ -77,7 +75,6 @@ export class LoggerService {
         }
     }
 
-
     /**
      * Change the logger level for future uses
      * @param  {string='DEBUG'} requestedLogLevel
@@ -94,7 +91,6 @@ export class LoggerService {
         console.log(`Logger is active with level <${LoggerLevels[this.logLevel]}>`);
     }
 
-
     /**
      * Print with warn function
      * @param  {any[]} ...args
@@ -102,7 +98,6 @@ export class LoggerService {
     error(...args: any[]) {
         this.print('error', args);
     }
-
 
     /**
      * Print with warn function
@@ -114,7 +109,6 @@ export class LoggerService {
         }
     }
 
-
     /**
      * Print with info function
      * @param  {any[]} ...args
@@ -124,7 +118,6 @@ export class LoggerService {
             this.print('info', args);
         }
     }
-
 
     /**
      * Print with debug function

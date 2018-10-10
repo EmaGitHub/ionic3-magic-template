@@ -41,7 +41,6 @@ export class I18nService {
 
     public Moment = Moment;
 
-
     /**
      * Returns the last i18n file stored in localStorage with last modified date
      * @returns {Promise<I18n>}
@@ -49,7 +48,6 @@ export class I18nService {
     private getLastI18n(): Promise<I18n> {
         return this.storage.get(storageKeys.i18n)
     }
-
 
     /**
      * Download the i18n config file and init default language
@@ -86,7 +84,6 @@ export class I18nService {
         });
     }
 
-
     /**
      * Init the i18n config
      * @returns {Promise<any>}
@@ -97,7 +94,6 @@ export class I18nService {
         // Save i18n in storage
         this.storage.set(storageKeys.i18n, i18n);
     }
-
 
     /**
      * Download the external i18n config file and store it in localStorage
@@ -148,7 +144,6 @@ export class I18nService {
         });
     }
 
-
     /**
     * Set default (fallback) language
     * Download all remote language files and store them in LocalStorage
@@ -176,7 +171,6 @@ export class I18nService {
             );
         });
     }
-
 
     /**
     * Set default (fallback) language
@@ -207,7 +201,6 @@ export class I18nService {
             );
         });
     }
-
 
     /**
      * Get the last used language if exists
@@ -240,7 +233,6 @@ export class I18nService {
         });
     }
 
-
     /**
      * Set the default language as fallback when a translation isn't found in the current language
      * @param  {Language} lang Language to set as default
@@ -251,7 +243,6 @@ export class I18nService {
         Moment.locale(lang.code);
         this.translateService.setDefaultLang(lang.code);
     }
-
 
     /**
      * @param  {Language[]} langs
@@ -275,7 +266,6 @@ export class I18nService {
             }
         });
     }
-
 
     /**
      * Download the json of requested language
@@ -335,7 +325,6 @@ export class I18nService {
         });
     }
 
-
     /**
      * Get the current used language
      * @returns {Language}
@@ -344,7 +333,6 @@ export class I18nService {
         return (<I18n>this.i18n).getConfig(this.translateService.currentLang);
     }
 
-
     /**
      * Get the default language
      * @returns {Language}
@@ -352,7 +340,6 @@ export class I18nService {
     getDefaultLanguage(): Language | undefined {
         return (<I18n>this.i18n).getConfig(this.translateService.getDefaultLang());
     }
-
 
     /**
      * Set the last used language for the next app bootstrap
@@ -393,7 +380,6 @@ export class I18nService {
         }
     }
 
-
     /**
      * Get the language with its translations from storage, if exists
      * @param  {Language} lang Language to set as last
@@ -403,14 +389,12 @@ export class I18nService {
         return this.storage.get(storageKeys.lang.replace('{CODE}', lang.code));
     }
 
-
     /**
      * Get the list of all available languages
      */
     getAllLanguages() {
         return (<I18n>this.i18n).langs;
     }
-
 
     /**
      * @param  {string} key
@@ -419,7 +403,6 @@ export class I18nService {
     translate(key: string): string {
         return this.translateService.instant(key);
     }
-
 
     onLangChange$ = this.translateService.onLangChange
 

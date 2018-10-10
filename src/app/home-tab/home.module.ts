@@ -12,7 +12,6 @@ import { HomePage } from './pages/home/home';
 
         // Components
 
-
         // Pages list
         HomePage
     ],
@@ -25,7 +24,6 @@ import { HomePage } from './pages/home/home';
         HomeTab,
 
         // Components
-
 
         // Pages list
         HomePage

@@ -97,7 +97,7 @@ export class VersioningService {
                                 }
                             }
                             else {
-                                this.logger.debug("App alredy update");
+                                this.logger.debug('App alredy update');
                                 resolve();
                             }
                         },
