@@ -1,7 +1,8 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ResponseErrorInterceptor, ResponseInterceptor } from '@core/api';
 import { ApiModule } from '@core/api/api.module';
-import { AuthInterceptor, AuthService, ErrorInterceptor } from '@core/auth';
+import { AuthInterceptor, AuthService } from '@core/auth';
 import { LocalConfig } from '@core/config';
 import { ConfigModule } from '@core/config/config.module';
 import { DBModule } from '@core/db/db.module';
@@ -45,7 +46,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
         DeepLinkService,
         InAppBrowser,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi : true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi : true }
+        { provide: HTTP_INTERCEPTORS, useClass: ResponseErrorInterceptor, multi : true },
+        { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi : true }
     ]
 })
 export class CoreModule {

@@ -4,15 +4,14 @@ import 'rxjs/add/operator/catch';
 
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
+import { AuthService } from '@core/auth';
 import { DeviceService } from '@core/device';
 import { LoginStates, UserService } from '@core/user';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 
-import { AuthService } from './auth.service';
-
 @Injectable()
-export class ErrorInterceptor implements HttpInterceptor {
+export class ResponseErrorInterceptor implements HttpInterceptor {
     isRefreshingToken: boolean = false;
     tokenSubject: BehaviorSubject<string|null> = new BehaviorSubject<string|null>(null);
 
@@ -121,7 +120,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                             }
                             return this.handleError(err);
                         })
-                        .catch(error => {
+                        .catch((err: Error) => {
                             return this.handleError(err);
                         });
                 }
