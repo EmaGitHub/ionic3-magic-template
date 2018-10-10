@@ -6,8 +6,7 @@ import { DBModuleOptions } from './models/DBModuleOptions';
 import { LokiConfigOptions } from './models/LokiConfigOptions';
 
 declare var require: any;
-var LokiCordovaFSAdapter = require('loki-cordova-fs-adapter');
-var LokiIndexedAdapter = require('lokijs/src/loki-indexed-adapter');
+var LokiIndexedAdapter = require('./loki-indexed-adapter');
 
 @Injectable()
 export class DBService {
@@ -21,14 +20,21 @@ export class DBService {
     ) {
         const DB = this;
         DB.dbName = options.dbName;
+        let lokiConfig = new LokiConfigOptions({
+            autosave: false,
+            autoload: false,
+            verbose: true,
+            env: 'BROWSER',
+            persistenceMethod: 'localStorage'
+        });
         this.initCompleted = new Promise((resolve, reject) => {
             if (this.deviceService.isCordova()) {
                 document.addEventListener('deviceready', () => {
-                    DB.initLokiDB().then(resolve, reject);
+                    DB.initLokiDB(lokiConfig).then(resolve, reject);
                 }, true);
             }
             else {
-                DB.initLokiDB().then(resolve, reject);
+                DB.initLokiDB(lokiConfig).then(resolve, reject);
             }
         });
     }
@@ -45,18 +51,8 @@ export class DBService {
 
         lokiOptions = new LokiConfigOptions(lokiOptions);
 
-        if(this.deviceService.isCordova()){
-            lokiOptions.env = 'CORDOVA';
-            if (!lokiOptions.adapter) {
-                lokiOptions.adapter = new LokiCordovaFSAdapter({ 'prefix' : dbName });
-            }
-        }
-        else {
-            if (!lokiOptions.adapter) {
-                lokiOptions.adapter = new LokiIndexedAdapter(dbName);
-            }
-            lokiOptions.env = 'BROWSER';
-            lokiOptions.persistenceMethod = 'localStorage';
+        if (!lokiOptions.adapter) {
+            lokiOptions.adapter = new LokiIndexedAdapter(dbName, { closeAfterSave: true });
         }
 
         return new LokiJS(dbName, lokiOptions);
@@ -68,12 +64,19 @@ export class DBService {
      * @param  {string} name
      */
     getOrCreateCollection(name: string): Collection{
-        // Init the allMeeting collection
         let newCollection = (this.db as LokiJS).getCollection(name);
         if (newCollection === null) {
-            newCollection = (this.db as LokiJS).addCollection(name);
+            newCollection = this.createCollection(name);
         }
         return newCollection;
+    }
+
+    /**
+     * Create a new collection form name and return it
+     * @param  {string} name
+     */
+    createCollection(name: string): Collection{
+        return (this.db as LokiJS).addCollection(name);
     }
 
     /**
@@ -103,5 +106,11 @@ export class DBService {
 
     getDB(): LokiJS{
         return <LokiJS>this.db;
+    }
+
+    saveDB() {
+        if(this.db){
+            this.db.saveDatabase();
+        }
     }
 }
