@@ -1,49 +1,41 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { DeviceService } from '@core/device';
+import { LoggerService } from '@core/logger/logger.service';
+import { ENV } from '@env';
 import LokiJS, { Collection } from 'lokijs';
 
 import { DBModuleOptions } from './models/DBModuleOptions';
 import { LokiConfigOptions } from './models/LokiConfigOptions';
 
 declare var require: any;
+var LokiCordovaFSAdapter = require('loki-cordova-fs-adapter');
 var LokiIndexedAdapter = require('./loki-indexed-adapter');
 
 @Injectable()
 export class DBService {
-    private dbName: string = '';
-    private db: LokiJS|null = null;
-    public initCompleted: Promise<any>;
+    private db!: LokiJS;
+    public initCompleted!: Promise<any>;
 
     constructor(
-        public options: DBModuleOptions,
-        private deviceService: DeviceService
+        @Optional() options: DBModuleOptions,
+        private deviceService: DeviceService,
+        private logger: LoggerService
     ) {
         const DB = this;
-        DB.dbName = options.dbName;
-        let lokiConfig = new LokiConfigOptions({
-            autosave: false,
-            autoload: false,
-            verbose: true,
-            env: 'BROWSER',
-            persistenceMethod: 'localStorage'
-        });
         this.initCompleted = new Promise((resolve, reject) => {
             if (this.deviceService.isCordova()) {
                 document.addEventListener('deviceready', () => {
-                    DB.initLokiDB(lokiConfig).then(resolve, reject);
+                    DB.initLokiDB(options).then(resolve, reject);
                 }, true);
             }
             else {
-                DB.initLokiDB(lokiConfig).then(resolve, reject);
+                DB.initLokiDB(options).then(resolve, reject);
             }
         });
     }
 
     /**
-     * Create new LokiJS db
-     * If the app runs on browser it persists data on localStorage
-     * while in a real device it persists data on file system,
-     * using the LokiCordovaFSAdapter and the cordova-plugin-file
+     * Create new LokiJS db and persists data on localStorage with IndexedDB adapater
      * @param  {string} dbName
      * @param  {Partial<LokiConfigOptions>} lokiOptions?
      */
@@ -51,9 +43,19 @@ export class DBService {
 
         lokiOptions = new LokiConfigOptions(lokiOptions);
 
+        // Remove the old DB stored in file system
+        try{
+            let oldAdapter = new LokiCordovaFSAdapter({ 'prefix' : dbName });
+            oldAdapter.deleteDatabase(dbName, () => {
+                this.logger.debug('Old LokiJS DB deleted');
+            });
+        }catch(e){}
+
         if (!lokiOptions.adapter) {
             lokiOptions.adapter = new LokiIndexedAdapter(dbName, { closeAfterSave: true });
         }
+        lokiOptions.env = 'BROWSER';
+        lokiOptions.persistenceMethod = 'localStorage';
 
         return new LokiJS(dbName, lokiOptions);
     }
@@ -64,53 +66,64 @@ export class DBService {
      * @param  {string} name
      */
     getOrCreateCollection(name: string): Collection{
-        let newCollection = (this.db as LokiJS).getCollection(name);
+        // Init the allMeeting collection
+        let newCollection = this.db.getCollection(name);
         if (newCollection === null) {
-            newCollection = this.createCollection(name);
+            newCollection = this.db.addCollection(name);
         }
+        newCollection.data = newCollection.data.filter(doc => typeof doc.$loki === 'number' && typeof doc.meta === 'object');
+        newCollection.ensureId();
+        newCollection.ensureAllIndexes();
         return newCollection;
     }
 
     /**
-     * Create a new collection form name and return it
-     * @param  {string} name
-     */
-    createCollection(name: string): Collection{
-        return (this.db as LokiJS).addCollection(name);
-    }
-
-    /**
-     * Create and load the LokiJS database
+     * Create a new LokiJS DB
      * @returns Promise
      */
-    initLokiDB(lokiOptions?: Partial<LokiConfigOptions>): Promise<LokiJS>{
+    initLokiDB(options: DBModuleOptions): Promise<LokiJS>{
+        // Init the DB name
+        if(!options.dbName){
+            options.dbName = ENV.storePrefix || 'db';
+        }
+        // Init the DB costructor options
+        if(!options.dbOptions){
+            options.dbOptions = {
+                autosave: false,
+                autoload: false,
+                verbose: true,
+                env: 'BROWSER',
+                persistenceMethod: 'localStorage'
+            }
+        }
+        // Init the DB load options
+        if(!options.loadOptions){
+            // Init the DB load options
+            options.loadOptions = {};
+        }
+
         return new Promise((resolve, reject) => {
 
             // Create a LokiJS DB
-            this.db = this.createLokiDB(this.dbName, lokiOptions);
-
-            // Define options for LokiDB load
-            let options = {};
+            this.db = this.createLokiDB(options.dbName!, options.dbOptions);
 
             // Load database
-            this.db.loadDatabase(options, (data: any) => {
+            this.db.loadDatabase(options.loadOptions, (data: any) => {
                 if(data instanceof Error){
                     reject(data);
                 }
                 else {
-                    resolve(<LokiJS>this.db);
+                    resolve(this.db);
                 }
             });
         });
     }
 
     getDB(): LokiJS{
-        return <LokiJS>this.db;
+        return this.db;
     }
 
     saveDB() {
-        if(this.db){
-            this.db.saveDatabase();
-        }
+        this.db.saveDatabase();
     }
 }

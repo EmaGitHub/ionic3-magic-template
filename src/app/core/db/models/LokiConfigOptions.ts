@@ -1,17 +1,17 @@
 
 export class LokiConfigOptions {
-    public env: 'NODEJS' | 'BROWSER' | 'CORDOVA' = 'CORDOVA';
-    public adapter = null;
-    public autoload: boolean = false;
-    public autoloadCallback: (err: any) => void = () => {};
-    public autosave: boolean = false;
-    public autosaveCallback: (err?: any) => void = () => {};
-    public autosaveInterval: string | number = 5000;
-    public persistenceMethod: 'fs' | 'localStorage' | 'memory' | null = null;
-    public destructureDelimiter: string = '$<\n';
-    public serializationMethod: 'normal' | 'pretty' | 'destructured' | null = 'normal';
-    public throttledSaves: boolean = true;
-    public verbose: boolean = false;
+    public env?: 'NODEJS' | 'BROWSER' | 'CORDOVA' = 'CORDOVA';
+    public adapter?: any = null;
+    public autoload?: boolean = false;
+    public autoloadCallback?: (err: any) => void = () => {};
+    public autosave?: boolean = false;
+    public autosaveCallback?: (err?: any) => void = () => {};
+    public autosaveInterval?: string | number = 5000;
+    public persistenceMethod?: 'fs' | 'localStorage' | 'memory' | null = null;
+    public destructureDelimiter?: string = '$<\n';
+    public serializationMethod?: 'normal' | 'pretty' | 'destructured' | null = 'normal';
+    public throttledSaves?: boolean = true;
+    public verbose?: boolean = false;
 
     // Default values read from 'https://github.com/techfort/LokiJS/blob/master/src/lokijs.js'
     constructor(
