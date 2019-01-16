@@ -36,10 +36,10 @@ export class SplitView extends AutoUnsubscribe {
      * @param  {any} page
      */
     initMaster(page: any, params: {title?: string, icon?: string, label?: string} = {}){
-        this.masterNav.setRoot(page, params);
+        return this.masterNav.setRoot(page, params);
     }
     pushOnMaster(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}) {
-        this.masterNav.push(page, params, options);
+        return this.masterNav.push(page, params, options);
     }
 
     /**
@@ -50,7 +50,7 @@ export class SplitView extends AutoUnsubscribe {
         if(!params.title){
             params.title = ENV.appName;
         }
-        this.detailNav.setRoot(page, params);
+        return this.detailNav.setRoot(page, params);
     }
     /**
      * If the split view if active set the root of detail nav
@@ -61,10 +61,10 @@ export class SplitView extends AutoUnsubscribe {
      */
     setRootOnDetail(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}) {
         if (this.isOn) {
-            this.detailNav.setRoot(page, params, options);
+            return this.detailNav.setRoot(page, params, options);
         }
         else {
-            this.pushOnMaster(page, params, options);
+            return this.pushOnMaster(page, params, options);
         }
     }
     /**
@@ -76,19 +76,32 @@ export class SplitView extends AutoUnsubscribe {
      */
     pushOnDetail(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}) {
         if (this.isOn) {
-            this.detailNav.push(page, params, options);
+            return this.detailNav.push(page, params, options);
         }
         else {
-            this.pushOnMaster(page, params, options);
+            return this.pushOnMaster(page, params, options);
         }
     }
 
-    gotoFirstDetailPage(options: Partial<NavOptions>|undefined = {}){
+    gotoFirstDetailPage(options: Partial<NavOptions>|undefined = {}) {
         if (this.isOn) {
-            this.detailNav.popToRoot(options);
+            return this.detailNav.popToRoot(options);
         }
         else {
-            this.masterNav.popToRoot(options);
+            return this.masterNav.popToRoot(options);
+        }
+    }
+
+    back(){
+        if (this.isOn) {
+            if(this.detailNav.canGoBack()){
+                return this.detailNav.pop();
+            }
+        }
+        else {
+            if(this.masterNav.canGoBack()){
+                return this.masterNav.pop();
+            }
         }
     }
 

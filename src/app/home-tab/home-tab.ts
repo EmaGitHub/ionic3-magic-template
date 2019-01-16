@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { PlaceholderPage, SplitViews, SplitViewService } from '@core/split-view';
+import { AllTabs } from '@app/tabs';
+import { PlaceholderPage, SplitViewService } from '@core/split-view';
 import { Nav } from 'ionic-angular';
 
 import { HomePage } from './pages/home/home';
@@ -19,7 +20,7 @@ export class HomeTab {
 
     ionViewDidLoad(){
         this.splitViewService.initSplitView(
-            SplitViews.NOTIFICATIONS,
+            AllTabs.HOME,
             {
                 nav: this.masterNav,
                 page: HomePage

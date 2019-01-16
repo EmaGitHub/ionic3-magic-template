@@ -7,28 +7,39 @@ import { SplitViewConfig } from './models/SplitViewConfig';
 @Injectable()
 export class SplitViewService {
     private isOn: boolean = false;
-    private splitViewList: {[name : string] : SplitView} = {};
+    private splitViewList: SplitView[] = [];
+    private visibileSplitViewIndex: number = 0;
     public isOn$: Subject<boolean> = new Subject<boolean>();
 
     constructor(
 
     ){ }
 
-    initSplitView(name: string, masterView: SplitViewConfig, detailView: SplitViewConfig) {
-        if(name && !this.splitViewList[name]){
-            this.splitViewList[name] = new SplitView(masterView.nav, detailView.nav, this.isOn, this.isOn$);
-            this.splitViewList[name].initMaster(masterView.page, masterView.params);
-            this.splitViewList[name].initDetail(detailView.page, detailView.params);
+    initSplitView(index: number, masterView: SplitViewConfig, detailView: SplitViewConfig) {
+        if(typeof index !== undefined && !this.splitViewList[index]){
+            this.splitViewList[index] = new SplitView(masterView.nav, detailView.nav, this.isOn, this.isOn$);
+            this.splitViewList[index].initMaster(masterView.page, masterView.params);
+            this.splitViewList[index].initDetail(detailView.page, detailView.params);
         }
-        return this.splitViewList[name];
+        return this.splitViewList[index];
     }
 
-    getSplitView(name: string): SplitView {
-        return this.splitViewList[name];
+    getSplitView(index: number): SplitView {
+        return this.splitViewList[index];
     }
 
     isActive(): boolean {
         return this.isOn;
+    }
+
+    setVisibleSplitView(index: number): void {
+        if(typeof index !== undefined && this.splitViewList[index]){
+            this.visibileSplitViewIndex = index;
+        }
+    }
+
+    back(){
+        this.splitViewList[this.visibileSplitViewIndex].back();
     }
 
     onSplitPaneChanged(isOn: boolean) {
