@@ -46,7 +46,7 @@ export class ApiService {
 			params?: {},
 			paths?: {},
 			body?: any,
-            headers?: Headers,
+            headers?: {},
             observe? : HttpObserve,
 			responseType?: ResponseTypes
 		} = {}
@@ -98,7 +98,7 @@ export class ApiService {
 		options: {
 			params?: {},
 			body?: any,
-            headers?: Headers,
+            headers?: {},
             observe? : HttpObserve,
 			responseType?: ResponseTypes
 		} = {}
