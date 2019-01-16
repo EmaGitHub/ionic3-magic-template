@@ -32,8 +32,8 @@ export class DeviceService {
 
     public networkStatusChanges$: Subject<boolean> = new Subject();
     public keyboardVisibilityChanges$: Subject<boolean> = new Subject();
-    public onResume: Subject<any> = new Subject();
-    public onPause: Subject<any> = new Subject();
+    public onResume$: Subject<any> = new Subject();
+    public onPause$: Subject<any> = new Subject();
 
     constructor(
         @Optional() options: DeviceModuleOptions,
@@ -90,17 +90,17 @@ export class DeviceService {
 
         // Init subscription for platform pause event
         this.platform.pause.subscribe(() => {
-            this.onPause.next(true);
+            this.onPause$.next(true);
         });
 
         // Init subscription for platform resume event
         this.platform.resume.subscribe(() => {
-            this.onResume.next(true);
+            this.onResume$.next(true);
         });
     }
 
     /**
-    * Return true if the app running on Cordova, false otherwise
+    * Return true if the app is running on Cordova, false otherwise
     * @returns {boolean}
     */
     isCordova(): boolean {
@@ -108,7 +108,7 @@ export class DeviceService {
     }
 
     /**
-    * Return true if the app running on Android device, false otherwise
+    * Return true if the app is running on Android device, false otherwise
     * @returns {boolean}
     */
     isAndroid(): boolean {
@@ -116,7 +116,7 @@ export class DeviceService {
     }
 
     /**
-    * Return true if the app running on iOS device, false otherwise
+    * Return true if the app is running on iOS device, false otherwise
     * @returns {boolean}
     */
     isIos(): boolean {
@@ -124,7 +124,7 @@ export class DeviceService {
     }
 
     /**
-    * Return true if the app running on Windows device, false otherwise
+    * Return true if the app is running on Windows device, false otherwise
     * @returns {boolean}
     */
     isWindows(): boolean {
