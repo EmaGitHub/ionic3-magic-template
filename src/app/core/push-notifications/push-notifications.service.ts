@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '@core/api';
-import { DBCollections, DBService } from '@core/db';
 import { DeviceService } from '@core/device';
 import { LoggerService } from '@core/logger';
-import { LoginStates, UserService } from '@core/user';
 import { ENV } from '@env';
 import { Firebase } from '@ionic-native/firebase';
 import { Storage } from '@ionic/storage';
 import { PopoverController } from 'ionic-angular';
-import { remove, sortBy, union } from 'lodash';
-import LokiJS, { Collection } from 'lokijs';
+import { remove, union } from 'lodash';
 import { Subject } from 'rxjs/Subject';
 
 import { PushNotificationsPopover } from './components/push-notifications-popover';
@@ -25,8 +21,6 @@ const storageKeys = {
 
 @Injectable()
 export class PushNotificationsService {
-    // LokiJS Collections
-    private notificationsCollection: Collection|null = null;
 
     private storage!: Storage;
     private infoEnabled: boolean = true;
@@ -38,22 +32,21 @@ export class PushNotificationsService {
     public initCompleted: Promise<any>;
 
     constructor(
-        private apiService: ApiService,
-        private dbService: DBService,
         private logger: LoggerService,
         private firebase: Firebase,
         private deviceService: DeviceService,
-        private userService: UserService,
         private popoverCtrl: PopoverController
     ){
         this.initCompleted = new Promise((resolve, reject) => {
             if (this.deviceService.isCordova()) {
                 document.addEventListener('deviceready', () => {
-                    this.init().then(resolve, reject);
+                    this.init();
+                    resolve();
                 }, true);
             }
             else {
-                this.init().then(resolve, reject);
+                this.init();
+                resolve();
             }
         });
     }
@@ -61,7 +54,7 @@ export class PushNotificationsService {
     /**
      * Wait for LokiJS DB loaded and init the notifications collection
      */
-    private init(): Promise<any> {
+    private init() {
         const PushNotification = this;
 
         this.storage = new Storage({
@@ -109,40 +102,8 @@ export class PushNotificationsService {
             this.firebase.onNotificationOpen().subscribe((notification: FirebaseNotification) => {
                 // Parse and sent event with new the notification
                 PushNotification.parseNotification(notification);
-                // If the use is logged also check API to get the latest push in order to update DB and tab's counter
-                if(this.userService.isLogged()){
-                    this.getLatestPush();
-                }
             });
         }
-
-        // When the use makes a new login => get the latest push in order to update DB and tab's counter
-        this.userService.onSessionChanges$
-            .filter((loginState: number) => {
-                return (loginState !== LoginStates.LOGOUT && loginState !== LoginStates.THROW_OUT)
-            })
-            .subscribe(() => {
-                this.getLatestPush();
-            }
-        );
-
-        // When the app resumes => get the latest push in order to update DB and tab's counter
-        this.deviceService.onResume.subscribe((loginState: number) => {
-            this.getLatestPush();
-        });
-
-        return new Promise<any>((resolve, reject) => {
-
-            this.dbService.initCompleted.then(
-                (db: LokiJS) => {
-                    // Init the notifications collection
-                    PushNotification.notificationsCollection = this.dbService.getOrCreateCollection(DBCollections.NOTIFICATIONS);
-
-                    resolve();
-                },
-                reject
-            );
-        });
     }
 
     /**
@@ -325,92 +286,37 @@ export class PushNotificationsService {
     }
 
     /**
-     * Fetch latest push from API
-     * and add/update DB data
-     */
-    private fetchLatestPush(){
-        return this.apiService.callApi('getLatestPush').map(
-            (notifications: any) => {
-                this.updateLatestPush(notifications);
-                return Promise.resolve();
-            },
-            (err: Error) => {
-                this.logger.error(err);
-                return Promise.reject(err);
-            }
-        );
-    }
-
-    /**
      * Update latest push data in DB
      * @param {Notification[]} notifications Notifications list to update
      */
-    private updateLatestPush(notifications: Notification[]) {
-        // Insert (only) the new notifications in DB
-        notifications.map((n: Notification) => {
-            let oldNotification = (this.notificationsCollection as Collection).find({ id: n.id })[0];
-            if(!oldNotification){
-                // Set isNew flag as true
-                n.isNew = true;
-                // Insert the new meeting in DB
-                (this.notificationsCollection as Collection).insert(n);
-            }
-        });
-    }
+    // private updateLatestPush(notifications: Notification[]) {
+    //     // Insert (only) the new notifications in DB
+    //     notifications.map((n: Notification) => {
+    //         let oldNotification = (this.notificationsCollection as Collection).find({ id: n.id })[0];
+    //         if(!oldNotification){
+    //             // Set isNew flag as true
+    //             n.isNew = true;
+    //             // Insert the new meeting in DB
+    //             (this.notificationsCollection as Collection).insert(n);
+    //         }
+    //     });
+    // }
 
     /**
      * Get the new push notifications inside the DB and sent event with counter
      */
-    private updateNewPushCounter(){
-        const newNotificationsCounter = (this.notificationsCollection as Collection).find({isNew: true}).length;
-        this.onNewPushCouterUpdated$.next(newNotificationsCounter);
-    }
-
-    /**
-     * Fetch from DB all notifications
-     * @returns Promise
-     */
-    public getNotificationsFromDB(): Notification[]{
-        let notifications = sortBy((this.notificationsCollection as Collection).find(), 'sentDate').reverse();
-        return notifications;
-    }
-
-    /**
-     * Fetch from server or DB all notifications
-     * @param  {string} month
-     * @returns Promise
-     */
-    getLatestPush(): Promise<Notification[]>{
-        const PushNotification = this;
-        return new Promise((resolve, reject) => {
-            // If device is online fetch data from API and update DB
-            if (this.deviceService.isOnline()) {
-                this.fetchLatestPush().subscribe(
-                    () => {
-                        this.updateNewPushCounter();
-                        resolve(PushNotification.getNotificationsFromDB());
-                    },
-                    () => {
-                        this.updateNewPushCounter();
-                        resolve(PushNotification.getNotificationsFromDB());
-                    }
-                );
-            }
-            // Otherwise get data from DB
-            else {
-                this.updateNewPushCounter();
-                resolve(PushNotification.getNotificationsFromDB());
-            }
-        });
-    }
+    // private updateNewPushCounter(){
+    //     const newNotificationsCounter = (this.notificationsCollection as Collection).find({isNew: true}).length;
+    //     this.onNewPushCouterUpdated$.next(newNotificationsCounter);
+    // }
 
     /**
      * Set all notifications as readed
      */
-    setNotificationsReaded(){
-        (this.notificationsCollection as Collection).findAndUpdate({}, (notification: Notification) => { notification.isNew = false; });
-        this.updateNewPushCounter();
-    }
+    // setNotificationsReaded(){
+    //     (this.notificationsCollection as Collection).findAndUpdate({}, (notification: Notification) => { notification.isNew = false; });
+    //     this.updateNewPushCounter();
+    // }
 
     /**
      * Reset the native push counter in os launcher
