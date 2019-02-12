@@ -10,8 +10,8 @@
 
     "cordova" : {
         "rootPath" : ".",
-        "buildIosCommand" : "npm run build:ios:coll",
-        "buildAndroidCommand" : "npm run build:android:coll"
+        "buildIosCommand" : "npm run build:ios:dev",
+        "buildAndroidCommand" : "npm run build:android:dev"
     },
 
     "buildsDir": "builds/",

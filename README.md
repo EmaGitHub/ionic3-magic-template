@@ -44,6 +44,8 @@ Per creare un environment è sufficiente aggiungere il relativo file nella direc
 
 Ad esempio, per aggiungere l'environment test occorrerà creare il file `src/environments/environment.test.ts` definendone tutte le variabili e specificare il nuovo script `serve:test: "ENV=test ionic-app-scripts serve"` nel `package.json`. Ora lanciando il comando `npm run serve:test` si avvierà una nuova istanza del progetto con l'environment appena definito.
 
+In entrambi i task `serve` e `build` di Ionic verrà eseguito automaticamente l'hook `environment-selector.js` il cui obbiettivo è copiare l'environment richiesto in un nuovo file dal nome `_environment.BUILD.ts`. Questo hook serve a fixare un bug di compilazione AOT di Angular quando viene richiesta la build `--prod` per Ionic. (https://github.com/angular/angular-cli/issues/2673)
+
 ## Alias
 
 Nel file `tsconfig.json` e nel file `webpack.config.js` è possibile definire una serie di alias per manterene il codice più pulito nelle sezioni di import, senza però abusarne: gli alias, infatti, dovrebbero essere creati per macro aree del progetto e non per singoli moduli. Ogni modulo deve essere inserito in una sua cartella con tutti i propri servizi e modelli, che però dovrebbe includere con path relativo e senza l'utilizzo degli alias.

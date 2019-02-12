@@ -1,11 +1,6 @@
-const chalk = require('chalk');
-const fs = require('fs');
-const path = require('path');
 const { join } = require('path');
 const webpackMerge = require('webpack-merge');
 const { dev, prod } = require('@ionic/app-scripts/config/webpack.config');
-
-const env = process.env.ENV || 'prod';
 
 const customConfig = {
     resolve: {
@@ -14,20 +9,11 @@ const customConfig = {
             '@core': join(__dirname, './src/app/core/'),
             '@shared': join(__dirname, './src/app/shared/'),
             '@assets': join(__dirname, './src/assets/'),
-            '@env': join(__dirname, environmentPath(env)),
+            '@env': join(__dirname, './src/environments/_environment.BUILD'),    // The environment readed will be always the same
             '@theme': join(__dirname, './src/theme/')
         }
     }
 };
-
-function environmentPath(env) {
-    var filePath = './src/environments/environment' + (env === 'prod' ? '' : '.' + env) + '.ts';
-    if (!fs.existsSync(filePath)) {
-        console.log(chalk.red('\n' + filePath + ' does not exist!'));
-    } else {
-        return filePath;
-    }
-}
 
 const configs = {
     dev: webpackMerge(dev, customConfig),

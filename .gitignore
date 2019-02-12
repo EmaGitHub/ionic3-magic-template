@@ -22,7 +22,6 @@ dist/
 node_modules/
 tmp/
 temp/
-hooks/
 platforms/
 plugins/
 plugins/android.json
@@ -30,9 +29,12 @@ plugins/ios.json
 www/
 $RECYCLE.BIN/
 package-lock.json
+src/environments/_environment.BUILD.ts
+Icon
 
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
 
 builds/
+distribute.log
