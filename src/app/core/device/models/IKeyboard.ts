@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 
@@ -18,7 +18,7 @@ interface IKeyboard {
 declare const Keyboard: IKeyboard;
 
 @Injectable()
-export class KeyboardProvider implements OnDestroy, OnInit {
+export class KeyboardProvider {
     /**
     * Keyboard instance
     *

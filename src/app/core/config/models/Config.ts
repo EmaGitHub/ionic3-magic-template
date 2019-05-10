@@ -1,9 +1,9 @@
 import { Backend } from '@core/api';
-import { Versioning } from '@core/versioning';
+import { IVersioning } from '@core/versioning';
 
 export class Config {
     public lastModified?: string | null;
-    public versioning: Versioning[];
+    public versioning: IVersioning[];
     public backend: Backend;
     public loggerLevel: string;
     public devMode: boolean;
