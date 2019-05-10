@@ -36,6 +36,33 @@ Altra impostazione che si consiglia di attivare è l'autofix per tslint in fase 
 
     "tslint.autoFixOnSave": true
 
+
+## Linter
+
+Il template è configurato per utilizzare ESlint con il plugin TSLint. Per eseguire il lint manualmente e vedere la lista degli errori è sufficiente lanciare il comando
+
+    "npm run lint"
+
+È possibile configurare il linter automatico in ogni IDE di sviluppo.
+
+Questa la configurazione da aggiungere alle impostazioni di VSCode per effettuare le modifiche di formattazione all'autosave:
+
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        {
+            "language": "typescript",
+            "autoFix": true
+        }
+    ],
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.formatOnSave": false,
+    },
+    "[typescript]": {
+        "editor.formatOnSave": false,
+    }
+
 ## Sviluppo
 
 Invece di lanciare il comando `ionic serve` si consiglia di utilizzare il comando `npm run serve:<env>` dove `<env>` rappresenta l'environment da utilizzare all'interno dell'app. Al momento sono disponibili tre environment: `dev`, `mocks` e `prod` (che è il default nel caso in cui non venga specificato). Gli environment sono configurabili attraverso i relativi file `/src/environments/environment.<env>.ts`.
