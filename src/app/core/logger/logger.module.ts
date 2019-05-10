@@ -26,7 +26,7 @@ export class LoggerModule {
     * @param  {LoggerModuleOptions} options all available configuration for <LoggerModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(options?: Partial<LoggerModuleOptions>): ModuleWithProviders {
+    public static forRoot(options?: Partial<LoggerModuleOptions>): ModuleWithProviders {
         return {
             ngModule: LoggerModule,
             providers: [

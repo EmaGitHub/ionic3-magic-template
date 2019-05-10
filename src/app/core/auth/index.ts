@@ -1,5 +1,5 @@
 
-export { AuthResponse } from './models/AuthResponse';
+export { IAuthResponse as AuthResponse } from './models/AuthResponse';
 
 export { AuthService } from './auth.service';
 

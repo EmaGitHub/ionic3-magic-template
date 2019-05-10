@@ -7,5 +7,5 @@ export class DBModuleOptions {
         public loadOptions?: {
             [collection: string] : any
         }
-    ){ }
+    ) { }
 }

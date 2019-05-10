@@ -11,14 +11,14 @@ import { HomePage } from './pages/home/home';
 })
 export class HomeTab {
     // Grab References to our 2 NavControllers...
-    @ViewChild('masterNav') masterNav!: Nav;
-    @ViewChild('detailNav') detailNav!: Nav;
+    @ViewChild('masterNav') public masterNav!: Nav;
+    @ViewChild('detailNav') public detailNav!: Nav;
 
     constructor(
         private splitViewService: SplitViewService
     ) { }
 
-    ionViewDidLoad(){
+    public ionViewDidLoad(): void {
         this.splitViewService.initSplitView(
             AllTabs.HOME,
             {
@@ -28,7 +28,7 @@ export class HomeTab {
             {
                 nav: this.detailNav,
                 page: PlaceholderPage,
-                params : {
+                params: {
                     icon: 'home',
                     label: 'HOME_PLACEHOLDER'
                 }

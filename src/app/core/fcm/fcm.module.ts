@@ -3,23 +3,23 @@ import { Firebase } from '@ionic-native/firebase';
 import { SharedModule } from '@shared/shared.module';
 import { IonicModule } from 'ionic-angular';
 
-import { PushNotificationsPopover } from './components/push-notifications-popover';
-import { PushNotificationsService } from './push-notifications.service';
+import { PopoverPush } from './components/popover-push';
+import { FCMService } from './fcm.service';
 
 @NgModule({
     declarations: [
-        PushNotificationsPopover
+        PopoverPush
     ],
     imports: [
         IonicModule,
         SharedModule
     ],
-    providers : [
+    providers: [
         Firebase,
-        PushNotificationsService
+        FCMService
     ],
     entryComponents: [
-        PushNotificationsPopover
+        PopoverPush
     ]
 })
-export class PushNotificationsModule { }
+export class FCMModule { }

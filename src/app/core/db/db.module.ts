@@ -9,7 +9,7 @@ import { DBModuleOptions } from './models/DBModuleOptions';
 * DBModule is an ngModule that imports a service to manage the local internal database
 */
 @NgModule({
-    providers : [
+    providers: [
         DBService
     ]
 })
@@ -25,7 +25,7 @@ export class DBModule {
     * @param  {DBModuleOptions} options all available configuration for <DBModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(options: DBModuleOptions): ModuleWithProviders {
+    public static forRoot(options: DBModuleOptions): ModuleWithProviders {
         return {
             ngModule: DBModule,
             providers: [

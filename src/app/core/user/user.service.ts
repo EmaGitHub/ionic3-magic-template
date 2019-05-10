@@ -32,15 +32,15 @@ export class UserService {
         private apiService: ApiService,
         private authService: AuthService,
         private deviceService: DeviceService
-    ){
+    ) {
         this.storage = new Storage({
-            name : options.storePrefix || 'storage',
-            storeName : 'user',
-            driverOrder : ['localstorage']
+            name: options.storePrefix || 'storage',
+            storeName: 'user',
+            driverOrder: ['localstorage']
         });
         this.storage.get(storageKeys.firstAccess).then((isFirstAccess: boolean) => {
             // If firstAccess flag doesn't exists create it with true value
-            if(typeof isFirstAccess === 'undefined' || isFirstAccess === null){
+            if (typeof isFirstAccess === 'undefined' || isFirstAccess === null) {
                 this.setFirstAccess(true);
             }
             else {
@@ -48,7 +48,7 @@ export class UserService {
             }
         });
         this.storage.get(storageKeys.public).then((isPublic: boolean) => {
-            if(typeof isPublic === 'undefined' || isPublic === null){
+            if (typeof isPublic === 'undefined' || isPublic === null) {
                 this.publicAccess = false;
             }
             else {
@@ -56,7 +56,7 @@ export class UserService {
             }
         });
         this.deviceService.networkStatusChanges$.subscribe((isOnline: boolean) => {
-            if(isOnline){
+            if (isOnline) {
                 this.autologin();
             }
         });
@@ -66,8 +66,8 @@ export class UserService {
      * Returns the user full name
      * @returns string
      */
-    getFullName(): string {
-        if(this.user){
+    public getFullName(): string {
+        if (this.user) {
             return this.user.getFullName();
         }
         return '';
@@ -77,28 +77,11 @@ export class UserService {
      * Returns if user is logged
      * @returns boolean
      */
-    isLogged(): boolean {
-        if(this.user) {
+    public isLogged(): boolean {
+        if (this.user) {
             return this.user.isLogged();
         }
         return false;
-    }
-
-    /**
-     * Return the current value for public access mode
-     * @returns boolean
-     */
-    isPublicAccess(): boolean {
-        return this.publicAccess;
-    }
-
-    /**
-     * Set the public access flag in memory and storage
-     * @param  {boolean} publicAccess
-     */
-    setPublicAccess(publicAccess: boolean) {
-        this.publicAccess = publicAccess;
-        this.storage.set(storageKeys.public, publicAccess);
     }
 
     /**
@@ -106,18 +89,18 @@ export class UserService {
      * @param {string} username User's username
      * @param {string} password User's password
      */
-    login(username: string, password: string): Promise<any>{
+    public login(username: string, password: string): Promise<any> {
         return new Promise((resolve, reject) => {
             this.authService.authenticate(username, password).then(
                 () => {
                     this.fetchUserProfile(username).subscribe(
                         (res: any) => {
-                            try{
+                            try {
                                 this.startSession(username, res.data.users.items[0]);
                                 this.setFirstAccess();
                                 resolve();
                             }
-                            catch(err){
+                            catch (err) {
                                 reject(err);
                             }
                         },
@@ -131,75 +114,37 @@ export class UserService {
     }
 
     /**
-     * Fetch the accessToken and the refreshToken for public access
-     * @returns Promise
-     */
-    accessAsPublic(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            // If the device is online try the login
-            if(this.deviceService.isOnline()){
-                this.authService.fetchPublicAccess().then(
-                    () => {
-                        this.setFirstAccess();
-                        this.setPublicAccess(true);
-                        this.onSessionChanges$.next(LoginStates.PUBLIC);
-                        resolve();
-                    },
-                    (err: Error) => {
-                        reject(err);
-                    }
-                );
-            }
-            // Otherwise enter in app wit a fake accessToken
-            // The app will use the DB and when online will be fetch the new accessToken with interceptor
-            else {
-                resolve();
-            }
-        });
-    }
-
-    /**
      * If the refreshToken is stored try to use it to fetch a new accessToken
      * after that get the last user info in storage to use as user and go in
      */
-    autologin(): Promise<any>{
+    public autologin(): Promise<any> {
         return new Promise((resolve, reject) => {
             // If the user has already access to the app check user info
-            if(!this.isFirstAccess()){
+            if (!this.isFirstAccess()) {
                 // Get the refreshToken
                 this.authService.getRefreshTokenFromStorage().then((refreshToken: string|null) => {
-                    if(refreshToken){
-                        // If the last session was in public access get new accessToken and go on
-                        if(this.isPublicAccess()){
-                            this.accessAsPublic().then(
-                                resolve,
+                    if (refreshToken) {
+                        // If the device is online try to get the new access token
+                        if (this.deviceService.isOnline()) {
+                            this.authService.fetchAccessToken(refreshToken).subscribe(
+                                () => {
+                                    // And restore last user session
+                                    this.restoreLastSession().then(
+                                        resolve,
+                                        reject
+                                    )
+                                },
                                 reject
                             );
                         }
-                        // Otherwise get the new user access token
+                        // Otherwise enter in app without set accessToken
+                        // The app will use the DB and when online will be fetch the new accessToken with interceptor
                         else {
-                            // If the device is online try to get the new access token
-                            if(this.deviceService.isOnline()){
-                                this.authService.fetchAccessToken(refreshToken).subscribe(
-                                    () => {
-                                        // And restore last user session
-                                        this.restoreLastSession().then(
-                                            resolve,
-                                            reject
-                                        )
-                                    },
-                                    reject
-                                );
-                            }
-                            // Otherwise enter in app without set accessToken
-                            // The app will use the DB and when online will be fetch the new accessToken with interceptor
-                            else {
-                                // And restore last user session
-                                this.restoreLastSession().then(
-                                    resolve,
-                                    reject
-                                )
-                            }
+                            // And restore last user session
+                            this.restoreLastSession().then(
+                                resolve,
+                                reject
+                            )
                         }
                     }
                     else {
@@ -218,9 +163,9 @@ export class UserService {
      * Get user's information using the backend GraphQL
      * @param {string} username User's username
      */
-    fetchUserProfile(username: string): Observable<any> {
+    public fetchUserProfile(username: string): Observable<any> {
         const query = {
-            query : `
+            query: `
                 query {
                     users(userCodes: "${username}") {
                         items {
@@ -252,22 +197,22 @@ export class UserService {
         });
     }
 
-    refreshUserProfile(){
+    public refreshUserProfile(): Promise<any> {
         return new Promise((resolve, reject) => {
             // If the current profile data was refreshed during last 24 hours => resolve
-            if(new Date().getTime() - (this.user as User).timestamp < profileValidity){
+            if (new Date().getTime() - (this.user as User).timestamp < profileValidity) {
                 resolve();
             }
             // Otherwise if the user is loggd I can update its data (if online)
-            else if(this.deviceService.isOnline() && this.isLogged()){
+            else if (this.deviceService.isOnline() && this.isLogged()) {
                 this.fetchUserProfile((this.user as User).username).subscribe(
                     (res: any) => {
-                        try{
+                        try {
                             this.startSession((this.user as User).username, res.data.users.items[0]);
                             this.setFirstAccess();
                             resolve();
                         }
-                        catch(err){
+                        catch (err) {
                             reject(err);
                         }
                     },
@@ -283,7 +228,7 @@ export class UserService {
      * Get the firstAccess flag to use for public access
      * @returns Promise
      */
-    isFirstAccess(): boolean{
+    public isFirstAccess(): boolean {
         return this.firstAccess;
     }
 
@@ -291,7 +236,7 @@ export class UserService {
      * Set the firstAccess flag to use for public access
      * As default the firstAccess flag will be disabled
      */
-    setFirstAccess(firstAccess: boolean = false){
+    public setFirstAccess(firstAccess: boolean = false): void {
         this.firstAccess = firstAccess;
         this.storage.set(storageKeys.firstAccess, firstAccess);
     }
@@ -302,14 +247,13 @@ export class UserService {
      * and set isPublic to false
      * @param  {User} userData
      */
-    startSession(username: string, userData: User) {
+    public startSession(username: string, userData: User): void {
         userData.username = username;
         userData.timestamp = new Date().getTime();
         this.storage.set(storageKeys.user, userData);
-        this.setPublicAccess(false);
         this.user = new User(userData);
         this.storage.get(storageKeys.user).then((lastUser: User) => {
-            if(lastUser && lastUser.id === userData.id){
+            if (lastUser && lastUser.id === userData.id) {
                 this.onSessionChanges$.next(LoginStates.LAST_USER);
             }
             else {
@@ -318,18 +262,18 @@ export class UserService {
         });
     }
 
-    restoreLastSession() {
+    public restoreLastSession(): Promise<any> {
         return new Promise((resolve, reject) => {
             // If the user is logged I can update its data (if online)
-            if(this.deviceService.isOnline() && this.isLogged()){
+            if (this.deviceService.isOnline() && this.isLogged()) {
                 this.fetchUserProfile((this.user as User).username).subscribe(
                     (res: any) => {
-                        try{
+                        try {
                             this.startSession((this.user as User).username, res.data.users.items[0]);
                             this.setFirstAccess();
                             resolve();
                         }
-                        catch(err){
+                        catch (err) {
                             reject(err);
                         }
                     },
@@ -338,7 +282,7 @@ export class UserService {
             // Otherwise the user is an invited one, so I can0't update its data
             else {
                 this.storage.get(storageKeys.user).then((lastUser: User) => {
-                    if(lastUser){
+                    if (lastUser) {
                         this.user = new User(lastUser);
                         resolve();
                     }
@@ -353,7 +297,7 @@ export class UserService {
     /**
      * Destroy the user session and the user info in DB
      */
-    endSession() {
+    public endSession(): void {
         this.user = null;
         this.storage.remove(storageKeys.user);
     }
@@ -364,7 +308,7 @@ export class UserService {
      * and get new accessToken for public access
      * @param  {LoginStates} loginState LOGOUT if user logs out or THROW_OUT if the refreshToken expire
      */
-    logout(loginState: LoginStates): void {
+    public logout(loginState: LoginStates): void {
         this.deviceService.showLoading();
         this.endSession();
         this.onSessionChanges$.next(loginState);

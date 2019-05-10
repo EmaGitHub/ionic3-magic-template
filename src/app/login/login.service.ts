@@ -6,7 +6,7 @@ import { Modal, ModalController } from 'ionic-angular';
 
 @Injectable()
 export class LoginService {
-    loginModal: Modal;
+    private _loginModal: Modal;
 
     constructor(
         private modalCtrl: ModalController,
@@ -14,7 +14,7 @@ export class LoginService {
         private userService: UserService
     ) {
         // Create the main login modal
-        this.loginModal = this.modalCtrl.create(LoginPage, {}, {
+        this._loginModal = this.modalCtrl.create(LoginPage, {}, {
             showBackdrop: true,
             enableBackdropDismiss: false,
             cssClass: 'login-modal'
@@ -25,8 +25,8 @@ export class LoginService {
     /**
      * Open the previuosly created main login modal
      */
-    public openMainLogin() {
-        this.loginModal.present().then(() => {
+    public openMainLogin(): void {
+        this._loginModal.present().then(() => {
             this.deviceService.hideLoading();
         });
     }
@@ -34,20 +34,20 @@ export class LoginService {
     /**
      * Start to observe the session's changes in order to open or dismiss it
      */
-    private initMainLoginModalObservable(){
+    private initMainLoginModalObservable(): void {
         // Listen the session's changes in order to open or dismiss the main login modal
         this.userService.onSessionChanges$.subscribe((loginState: number) => {
             // If the refreshToken expires, the user will be thrown out
             // and the login modal will be presented
-            if(loginState === LoginStates.THROW_OUT) {
-                this.loginModal.present();
+            if (loginState === LoginStates.THROW_OUT) {
+                this._loginModal.present();
             }
             // If the user logs in dismiss the login modal
-            else if(loginState === LoginStates.NEW_USER ||
+            else if (loginState === LoginStates.NEW_USER ||
                     loginState === LoginStates.LAST_USER ||
                     loginState === LoginStates.PUBLIC) {
 
-                    this.loginModal.dismiss();
+                    this._loginModal.dismiss();
             }
         });
     }

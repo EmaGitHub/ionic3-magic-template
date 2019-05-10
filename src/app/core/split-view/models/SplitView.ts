@@ -12,7 +12,7 @@ export class SplitView extends AutoUnsubscribe {
         private isOn: boolean,
         // tslint:disable-next-line
         private isOn$: Subject<boolean>
-    ){
+    ) {
         super();
         const SplitView = this;
         isOn$
@@ -21,7 +21,7 @@ export class SplitView extends AutoUnsubscribe {
                 SplitView.isOn = isOn;
                 // if the nav controllers have been instantiated...
                 if (SplitView.masterNav && SplitView.detailNav) {
-                    if(SplitView.isOn){
+                    if (SplitView.isOn) {
                         SplitView.activateSplitView();
                     }
                     else {
@@ -35,10 +35,10 @@ export class SplitView extends AutoUnsubscribe {
      * Force first page of master view
      * @param  {any} page
      */
-    initMaster(page: any, params: {title?: string, icon?: string, label?: string} = {}){
+    public initMaster(page: any, params: {title?: string, icon?: string, label?: string} = {}): Promise<any> {
         return this.masterNav.setRoot(page, params);
     }
-    pushOnMaster(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}) {
+    public pushOnMaster(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}): Promise<any> {
         return this.masterNav.push(page, params, options);
     }
 
@@ -46,8 +46,8 @@ export class SplitView extends AutoUnsubscribe {
      * * Force first page of detail view
      * @param  {any} page
      */
-    initDetail(page: any, params: {title?: string, icon?: string, label?: string} = {}){
-        if(!params.title){
+    public initDetail(page: any, params: {title?: string, icon?: string, label?: string} = {}): Promise<any> {
+        if (!params.title) {
             params.title = ENV.appName;
         }
         return this.detailNav.setRoot(page, params);
@@ -59,7 +59,7 @@ export class SplitView extends AutoUnsubscribe {
      * @param  {any={}} params
      * @param  {Partial<NavOptions>|undefined={}} options
      */
-    setRootOnDetail(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}) {
+    public setRootOnDetail(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}): Promise<any> {
         if (this.isOn) {
             return this.detailNav.setRoot(page, params, options);
         }
@@ -74,7 +74,7 @@ export class SplitView extends AutoUnsubscribe {
      * @param  {any={}} params
      * @param  {Partial<NavOptions>|undefined={}} options
      */
-    pushOnDetail(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}) {
+    public pushOnDetail(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}): Promise<any> {
         if (this.isOn) {
             return this.detailNav.push(page, params, options);
         }
@@ -83,7 +83,7 @@ export class SplitView extends AutoUnsubscribe {
         }
     }
 
-    gotoFirstDetailPage(options: Partial<NavOptions>|undefined = {}) {
+    public gotoFirstDetailPage(options: Partial<NavOptions>|undefined = {}): Promise<any> {
         if (this.isOn) {
             return this.detailNav.popToRoot(options);
         }
@@ -92,20 +92,21 @@ export class SplitView extends AutoUnsubscribe {
         }
     }
 
-    back(){
+    public back(): Promise<any> {
         if (this.isOn) {
-            if(this.detailNav.canGoBack()){
+            if (this.detailNav.canGoBack()) {
                 return this.detailNav.pop();
             }
         }
         else {
-            if(this.masterNav.canGoBack()){
+            if (this.masterNav.canGoBack()) {
                 return this.masterNav.pop();
             }
         }
+        return Promise.resolve();
     }
 
-    activateSplitView() {
+    public activateSplitView(): void {
         this.masterNav.getActive();
         // let currentView = this.masterNav.getActive();
         // if the current view is a 'Detail' page...
@@ -117,7 +118,7 @@ export class SplitView extends AutoUnsubscribe {
         // }
     }
 
-    deactivateSplitView() {
+    public deactivateSplitView(): void {
         this.detailNav.getActive();
         // let detailView = this.detailNav.getActive();
         this.detailNav.setRoot(PlaceholderPage);

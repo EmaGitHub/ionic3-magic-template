@@ -13,7 +13,7 @@ import { TabsService } from './tabs.service';
         IonicModule,
         SharedModule
     ],
-    entryComponents : [
+    entryComponents: [
         TabsPage
     ],
     providers: [

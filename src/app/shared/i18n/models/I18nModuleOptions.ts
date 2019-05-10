@@ -6,5 +6,5 @@ export class I18nModuleOptions {
             langs: any
         },
         public storePrefix?: string
-    ){ }
+    ) { }
 }

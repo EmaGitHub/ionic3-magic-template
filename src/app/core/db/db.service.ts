@@ -25,11 +25,11 @@ export class DBService {
         this.initCompleted = new Promise((resolve, reject) => {
             if (this.deviceService.isCordova()) {
                 document.addEventListener('deviceready', () => {
-                    DB.initLokiDB(options).then(resolve, reject);
+                    DB._initLokiDB(options).then(resolve, reject);
                 }, true);
             }
             else {
-                DB.initLokiDB(options).then(resolve, reject);
+                DB._initLokiDB(options).then(resolve, reject);
             }
         });
     }
@@ -39,17 +39,17 @@ export class DBService {
      * @param  {string} dbName
      * @param  {Partial<LokiConfigOptions>} lokiOptions?
      */
-    createLokiDB(dbName:string, lokiOptions?: Partial<LokiConfigOptions>): LokiJS {
+    private _createLokiDB(dbName:string, lokiOptions?: Partial<LokiConfigOptions>): LokiJS {
 
         lokiOptions = new LokiConfigOptions(lokiOptions);
 
         // Remove the old DB stored in file system
-        try{
-            let oldAdapter = new LokiCordovaFSAdapter({ 'prefix' : dbName });
+        try {
+            let oldAdapter = new LokiCordovaFSAdapter({ 'prefix': dbName });
             oldAdapter.deleteDatabase(dbName, () => {
                 this.logger.debug('Old LokiJS DB deleted');
             });
-        }catch(e){}
+        } catch (e) {}
 
         if (!lokiOptions.adapter) {
             lokiOptions.adapter = new LokiIndexedAdapter(dbName, { closeAfterSave: true });
@@ -65,7 +65,7 @@ export class DBService {
      * or, if not exists, create it and returns
      * @param  {string} name
      */
-    getOrCreateCollection(name: string): Collection{
+    public getOrCreateCollection(name: string): Collection {
         // Init the allMeeting collection
         let newCollection = this.db.getCollection(name);
         if (newCollection === null) {
@@ -81,13 +81,13 @@ export class DBService {
      * Create a new LokiJS DB
      * @returns Promise
      */
-    initLokiDB(options: DBModuleOptions): Promise<LokiJS>{
+    private _initLokiDB(options: DBModuleOptions): Promise<LokiJS> {
         // Init the DB name
-        if(!options.dbName){
+        if (!options.dbName) {
             options.dbName = ENV.storePrefix || 'db';
         }
         // Init the DB costructor options
-        if(!options.dbOptions){
+        if (!options.dbOptions) {
             options.dbOptions = {
                 autosave: false,
                 autoload: false,
@@ -97,7 +97,7 @@ export class DBService {
             }
         }
         // Init the DB load options
-        if(!options.loadOptions){
+        if (!options.loadOptions) {
             // Init the DB load options
             options.loadOptions = {};
         }
@@ -105,11 +105,11 @@ export class DBService {
         return new Promise((resolve, reject) => {
 
             // Create a LokiJS DB
-            this.db = this.createLokiDB(options.dbName!, options.dbOptions);
+            this.db = this._createLokiDB(options.dbName as string, options.dbOptions);
 
             // Load database
             this.db.loadDatabase(options.loadOptions, (data: any) => {
-                if(data instanceof Error){
+                if (data instanceof Error) {
                     reject(data);
                 }
                 else {
@@ -119,11 +119,11 @@ export class DBService {
         });
     }
 
-    getDB(): LokiJS{
+    public getDB(): LokiJS {
         return this.db;
     }
 
-    saveDB() {
+    public saveDB(): void {
         this.db.saveDatabase();
     }
 }

@@ -8,11 +8,11 @@ import { ViewController } from 'ionic-angular';
 
 @Component({
     selector: 'page-login',
-    templateUrl: 'login.html'
+    templateUrl: 'login.html',
 })
 export class LoginPage {
-    username: string = '';
-    password: string = '';
+    public username: string = '';
+    public password: string = '';
 
     constructor(
         private logger: LoggerService,
@@ -20,10 +20,10 @@ export class LoginPage {
         private deviceService: DeviceService,
         private tabsService: TabsService,
         private viewCtrl: ViewController,
-        private inAppBrowser: InAppBrowser
+        private inAppBrowser: InAppBrowser,
     ) { }
 
-    onLoginSubmit() {
+    public onLoginSubmit(): void {
         this.logger.debug(`credentials ${this.username}/${this.password}`);
         this.deviceService.showLoading();
         this.userService.login(this.username, this.password).then(
@@ -34,19 +34,18 @@ export class LoginPage {
             },
             (err: Error) => {
                 this.deviceService.alert(err.message);
-            }
+            },
         );
     }
 
-    onForgotPasswordClicked() {
+    public onForgotPasswordClicked(): void {
         this.inAppBrowser.create('https://forgotpassword.test.com', '_system');
     }
 
     /**
      * Close login modal
      */
-    closeModal() {
+    public closeModal(): void {
         this.viewCtrl.dismiss();
     }
-
 }

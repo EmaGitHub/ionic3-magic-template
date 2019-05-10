@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
 import { SplitView } from './models/SplitView';
-import { SplitViewConfig } from './models/SplitViewConfig';
+import { ISplitViewConfig } from './models/SplitViewConfig';
 
 @Injectable()
 export class SplitViewService {
@@ -13,10 +13,10 @@ export class SplitViewService {
 
     constructor(
 
-    ){ }
+    ) { }
 
-    initSplitView(index: number, masterView: SplitViewConfig, detailView: SplitViewConfig) {
-        if(typeof index !== undefined && !this.splitViewList[index]){
+    public initSplitView(index: number, masterView: ISplitViewConfig, detailView: ISplitViewConfig): SplitView {
+        if (typeof index !== undefined && !this.splitViewList[index]) {
             this.splitViewList[index] = new SplitView(masterView.nav, detailView.nav, this.isOn, this.isOn$);
             this.splitViewList[index].initMaster(masterView.page, masterView.params);
             this.splitViewList[index].initDetail(detailView.page, detailView.params);
@@ -24,34 +24,34 @@ export class SplitViewService {
         return this.splitViewList[index];
     }
 
-    getSplitView(index: number): SplitView {
+    public getSplitView(index: number): SplitView {
         return this.splitViewList[index];
     }
 
-    isActive(): boolean {
+    public isActive(): boolean {
         return this.isOn;
     }
 
-    setVisibleSplitView(index: number): void {
-        if(typeof index !== undefined && this.splitViewList[index]){
+    public setVisibleSplitView(index: number): void {
+        if (typeof index !== undefined && this.splitViewList[index]) {
             this.visibileSplitViewIndex = index;
         }
     }
 
-    back(){
+    public back(): void {
         this.splitViewList[this.visibileSplitViewIndex].back();
     }
 
-    onSplitPaneChanged(isOn: boolean) {
+    public onSplitPaneChanged(isOn: boolean): void {
         this.isOn = isOn;
         this.isOn$.next(this.isOn);
     }
 
-    activateSplitView(){
+    public activateSplitView(): void {
         this.onSplitPaneChanged(true);
     }
 
-    deactivateSplitView(){
+    public deactivateSplitView(): void {
         this.onSplitPaneChanged(false);
     }
 

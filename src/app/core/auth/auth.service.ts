@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 import CryptoJS, { AES } from 'crypto-js';
 import { Observable } from 'rxjs/Observable';
 
-import { AuthResponse } from './models/AuthResponse';
+import { IAuthResponse } from './models/AuthResponse';
 
 const storageKeys = {
     token: 'token'
@@ -23,11 +23,11 @@ export class AuthService {
     constructor(
         private apiService: ApiService,
         private deviceService: DeviceService
-    ){
+    ) {
         this.storage = new Storage({
-            name : ENV.appName.replace(/ /g, ''),
-            storeName : 'auth',
-            driverOrder : ['localstorage']
+            name: ENV.appName.replace(/ /g, ''),
+            storeName: 'auth',
+            driverOrder: ['localstorage']
         });
     }
 
@@ -35,7 +35,7 @@ export class AuthService {
      * Get the application key
      * @returns string
      */
-    getApplicationKey(): string {
+    public getApplicationKey(): string {
         return this.applicationKey;
     }
 
@@ -43,7 +43,7 @@ export class AuthService {
      * Get the current value of accessToken
      * @returns string
      */
-    getAccessToken(): string|null {
+    public getAccessToken(): string|null {
         return this.accessToken;
     }
 
@@ -51,7 +51,7 @@ export class AuthService {
      * Set the accesstoken in memory
      * @param  {string|null=null} accessToken
      */
-    setAccessToken(accessToken: string|null = null) {
+    public setAccessToken(accessToken: string|null = null): void {
         this.accessToken = accessToken;
     }
 
@@ -59,7 +59,7 @@ export class AuthService {
      * Get the current accessToken
      * @returns string
      */
-    getRefreshToken(): string|null {
+    public getRefreshToken(): string|null {
         return this.refreshToken;
     }
 
@@ -67,7 +67,7 @@ export class AuthService {
      * Reset the refreshToken from memory and storage
      * @param  {string|null=null} refreshToken
      */
-    setRefreshToken(refreshToken: string|null = null) {
+    public setRefreshToken(refreshToken: string|null = null): void {
         this.refreshToken = refreshToken;
         let encryptedToken = AES.encrypt(JSON.stringify(refreshToken), this.deviceService.getUUID());
         this.storage.set(storageKeys.token, encryptedToken.toString());
@@ -77,13 +77,13 @@ export class AuthService {
      * Get the refreshToken from native (secure) storage
      * @returns Promise
      */
-    getRefreshTokenFromStorage(): Promise<string|null> {
+    public getRefreshTokenFromStorage(): Promise<string|null> {
         return this.storage.get(storageKeys.token).then((cryptedToken: string) => {
-            try{
+            try {
                 let plainTokenObj = AES.decrypt(cryptedToken.toString(), this.deviceService.getUUID()).toString(CryptoJS.enc.Utf8);
                 return JSON.parse(plainTokenObj);
             }
-            catch(e){
+            catch (e) {
                 return cryptedToken;
             }
         });
@@ -92,7 +92,7 @@ export class AuthService {
     /**
      * Reset accessToken and refreshToken
      */
-    reset() {
+    public reset(): void{
         this.setAccessToken();
         this.setRefreshToken();
         this.storage.remove(storageKeys.token);
@@ -103,7 +103,7 @@ export class AuthService {
      * @param {string} username User's username
      * @param {string} password User's password
      */
-    authenticate(username: string, password: string): Promise<any> {
+    public authenticate(username: string, password: string): Promise<any> {
         return new Promise((resolve, reject) => {
             let credentials = new HttpParams()
                 .set('username', username)
@@ -112,32 +112,9 @@ export class AuthService {
                 body: credentials.toString()
             }).subscribe(
                 (res: any) => {
-                    this.setAccessToken((res as AuthResponse).accessToken);
-                    this.setRefreshToken((res as AuthResponse).refreshToken);
+                    this.setAccessToken((res as IAuthResponse).accessToken);
+                    this.setRefreshToken((res as IAuthResponse).refreshToken);
                     resolve();
-                },
-                reject
-            );
-        });
-    }
-
-    /**
-     * Fetch the auth tokens using the eventCode
-     * and returns the response in order to save the invitation meetings' ids
-     * @param  {string} eventCode
-     * @returns Promise
-     */
-    authenticateAsInvited(eventCode: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            let credentials = new HttpParams()
-                .set('eventCode', eventCode);
-            this.apiService.callApi('eventCode', {
-                body: credentials.toString()
-            }).subscribe(
-                (res: any) => {
-                    this.setAccessToken((res as AuthResponse).accessToken);
-                    this.setRefreshToken((res as AuthResponse).refreshToken);
-                    resolve(res);
                 },
                 reject
             );
@@ -148,13 +125,13 @@ export class AuthService {
      * Fetch the auth token for the public access
      * @returns Promise
      */
-    fetchPublicAccess(): Promise<any> {
+    public fetchPublicAccess(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiService.callApi('public').subscribe(
                 (res: any) => {
-                    this.setAccessToken((res as AuthResponse).accessToken);
-                    this.setRefreshToken((res as AuthResponse).refreshToken);
-                    resolve((res as AuthResponse).accessToken);
+                    this.setAccessToken((res as IAuthResponse).accessToken);
+                    this.setRefreshToken((res as IAuthResponse).refreshToken);
+                    resolve((res as IAuthResponse).accessToken);
                 },
                 reject
             );
@@ -165,9 +142,9 @@ export class AuthService {
      * Get the new accessToken from the actual refreshToken
      * @returns Observable
      */
-    fetchAccessToken(refreshToken?: string): Observable<any> {
+    public fetchAccessToken(refreshToken?: string): Observable<any> {
         // Set the refreshToken as accessToken to obtain a new accessToken
-        if(refreshToken){
+        if (refreshToken) {
             this.setAccessToken(refreshToken);
         }
         else {
@@ -176,7 +153,7 @@ export class AuthService {
         const authService = this;
         return this.apiService.callApi('getAccessToken')
             .map((res) => {
-                const token = (res as AuthResponse).accessToken;
+                const token = (res as IAuthResponse).accessToken;
                 authService.setAccessToken(token);
                 return token;
             })

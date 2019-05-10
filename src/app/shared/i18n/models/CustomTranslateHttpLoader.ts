@@ -10,9 +10,9 @@ export class CustomTranslateHttpLoader implements TranslateLoader {
 
     constructor(
         private injector: Injector
-    ){ }
+    ) { }
 
-    getTranslation(lang: string): Observable<any> {
+    public getTranslation(lang: string): Observable<any> {
 
         return Observable.create((observer: Observer<any>) => {
 
@@ -21,7 +21,7 @@ export class CustomTranslateHttpLoader implements TranslateLoader {
                     observer.next(res.translations);
                     observer.complete();
                 },
-                (err: Error) => {
+                () => {
                     observer.next({});
                     observer.complete();
                 }

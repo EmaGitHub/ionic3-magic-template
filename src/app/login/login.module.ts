@@ -16,7 +16,7 @@ import { IonicModule } from 'ionic-angular';
 
         // Components
     ],
-    entryComponents : [
+    entryComponents: [
         // Pages list
         LoginPage
 

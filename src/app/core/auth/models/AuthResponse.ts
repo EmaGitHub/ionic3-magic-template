@@ -1,5 +1,5 @@
 
-export interface AuthResponse {
+export interface IAuthResponse {
     refreshToken: string;
     refreshTokenExpiration: string;
     accessToken: string;

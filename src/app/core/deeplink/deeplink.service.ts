@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
 
 import { DeepLinkPaths } from './models/DeepLinkPaths';
-import { EventData } from './models/EventData';
+import { IEventData } from './models/EventData';
 import { ParsedURL } from './models/ParsedURL';
 
 declare var universalLinks: any;
@@ -16,29 +16,29 @@ export class DeepLinkService {
 
     constructor(
         private deviceService: DeviceService
-    ){
+    ) {
         if (this.deviceService.isCordova()) {
             document.addEventListener('deviceready', () => {
-                this.initSubscriptions();
+                this._initSubscriptions();
             }, true);
         }
     }
 
-    private initSubscriptions() {
+    private _initSubscriptions(): void {
         // Subscription for all deeplink
-        universalLinks.subscribe('ul_deeplink', (eventData: EventData) => {
-            const url = this.parseURL(eventData.url);
-            this.detectDeepLinkPath(url);
+        universalLinks.subscribe('ul_deeplink', (eventData: IEventData) => {
+            const url = this._parseURL(eventData.url);
+            this._detectDeepLinkPath(url);
         });
     }
 
-    private detectDeepLinkPath(url: ParsedURL){
+    private _detectDeepLinkPath(url: ParsedURL): void {
         const paths = url.pathname.split('/');
 
-        switch(paths[1]){
+        switch (paths[1]) {
             case DeepLinkPaths.LINK:
                 // If a subscription is already started unsubscribe it
-                if(this.deepLinkIsReady$ && !this.deepLinkIsReady$.closed){
+                if (this.deepLinkIsReady$ && !this.deepLinkIsReady$.closed) {
                     this.deepLinkIsReady$.unsubscribe();
                 }
         }
@@ -49,7 +49,7 @@ export class DeepLinkService {
      * @param  {string} url
      * @returns ParsedURL
      */
-    private parseURL(url: string): ParsedURL {
+    private _parseURL(url: string): ParsedURL {
         var parser = document.createElement('a'),
             searchObject: any = {},
             queries, split, i;
@@ -57,7 +57,7 @@ export class DeepLinkService {
         parser.href = url;
         // Convert query string to object
         queries = parser.search.replace(/^\?/, '').split('&');
-        for( i = 0; i < queries.length; i++ ) {
+        for ( i = 0; i < queries.length; i++ ) {
             split = queries[i].split('=');
             searchObject[split[0]] = split[1];
         }

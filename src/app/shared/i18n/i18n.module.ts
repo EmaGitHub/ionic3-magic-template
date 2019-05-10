@@ -28,7 +28,7 @@ import { I18nModuleOptions } from './models/I18nModuleOptions';
     providers: [
         I18nService
     ],
-    exports : [
+    exports: [
         TranslateModule
     ]
 })
@@ -44,7 +44,7 @@ export class I18nModule {
     * @param  {I18nModuleOptions} options all available configuration for <I18nModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(options?: I18nModuleOptions): ModuleWithProviders {
+    public static forRoot(options?: I18nModuleOptions): ModuleWithProviders {
         return {
             ngModule: I18nModule,
             providers: [

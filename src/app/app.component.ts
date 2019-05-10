@@ -9,8 +9,8 @@ import { Platform } from 'ionic-angular';
     templateUrl: 'app.html'
 })
 export class App extends AutoUnsubscribe {
-    rootPage: any = Starter;
-    userIsNotLogged: boolean = false;
+    public rootPage: any = Starter;
+    public userIsNotLogged: boolean = false;
 
     constructor(
         private platform: Platform,
@@ -27,15 +27,15 @@ export class App extends AutoUnsubscribe {
     /**
      * Initialize the native device orientation
      */
-    initOrientation(){
+    public initOrientation(): void{
         // If device is tablet activate split view and unlock orientation
-        if(this.deviceService.isTablet()){
-            if(this.deviceService.isCordova()){
+        if (this.deviceService.isTablet()) {
+            if (this.deviceService.isCordova()) {
                 this.deviceService.unlockOrientation();
             }
         }
         // Otherwise deactivate split view and lock orientation in portrait
-        else if(this.deviceService.isCordova()){
+        else if (this.deviceService.isCordova()) {
             this.deviceService.lockOrientation(this.deviceService.ORIENTATIONS.PORTRAIT_PRIMARY);
         }
     }
@@ -43,7 +43,7 @@ export class App extends AutoUnsubscribe {
     /**
      * Initialize subscription for logout events in order to hide the app's content
      */
-    initLogoutSubscriptions(){
+    public initLogoutSubscriptions(): void {
         this.userService.onSessionChanges$
             .takeUntil(this.destroy$)
             .subscribe((loginState: number) => {

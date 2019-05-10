@@ -33,7 +33,7 @@ export class ConfigModule {
     * @param  {ConfigModuleOptions} options all available configuration for <ConfigModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(options: ConfigModuleOptions): ModuleWithProviders {
+    public static forRoot(options: ConfigModuleOptions): ModuleWithProviders {
         return {
             ngModule: ConfigModule,
             providers: [

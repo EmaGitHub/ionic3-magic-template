@@ -14,18 +14,18 @@ export class TabsService {
     constructor(
         private appCtrl: App,
         private deviceService: DeviceService
-    ){ }
+    ) { }
 
-    isTabsLoaded(): boolean {
+    public isTabsLoaded(): boolean {
         let tabsIsLoaded = true;
-        try{
+        try {
             // Check if the TabsPage is already loaded
             let view = this.appCtrl.getRootNavs()[0].getViews()[0];
             // If the TabsPage doesn't exists go to TabsPage for the first time
-            if(!view || view.name !== 'TabsPage'){
+            if (!view || view.name !== 'TabsPage') {
                 tabsIsLoaded = false;
             }
-        }catch(e){
+        } catch (e) {
             tabsIsLoaded = false;
         }
         return tabsIsLoaded;
@@ -34,8 +34,8 @@ export class TabsService {
     /**
      * Load the TabsPage for the first time
      */
-    loadTabsPage(){
-        if(!this.tabsIsLoded){
+    public loadTabsPage(): void {
+        if (!this.tabsIsLoded) {
             const { TabsPage } = require('./tabs'); // <-- Workaround to avoid dependency loop
             this.appCtrl.getRootNavs()[0].setRoot(TabsPage, {}, {}, () => {
                 this.tabsIsLoded = true;

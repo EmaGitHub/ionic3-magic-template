@@ -1,5 +1,5 @@
 
-ion-popover.push-notifications-popover {
+ion-popover.popover-push {
     position: static;
 
     .popover-arrow {
@@ -20,7 +20,7 @@ ion-popover.push-notifications-popover {
             -webkit-backdrop-filter: blur(10px);
             background: rgba(243, 243, 243, 0.85);
 
-            push-notifications-popover {
+            popover-push {
                 ion-list.list {
                     margin: 0;
                     border-radius: 10px;
@@ -64,11 +64,11 @@ ion-popover.push-notifications-popover {
     }
 }
 
-.platform-cordova.platform-android ion-popover.push-notifications-popover .popover-content .popover-viewport {
+.platform-cordova.platform-android ion-popover.popover-push .popover-content .popover-viewport {
     background: rgba(243, 243, 243, 0.96);
     border-radius: 0;
 
-    push-notifications-popover ion-list.list {
+    popover-push ion-list.list {
         border-radius: 0;
 
         .item {
@@ -78,7 +78,7 @@ ion-popover.push-notifications-popover {
 }
 
 
-.platform-cordova.platform-ios ion-popover.push-notifications-popover .popover-content {
+.platform-cordova.platform-ios ion-popover.popover-push .popover-content {
     padding-top: calc(20px + 4px);
     padding-top: calc(constant(safe-area-inset-top) + 4px);
     padding-top: calc(env(safe-area-inset-top) + 4px);
@@ -87,7 +87,7 @@ ion-popover.push-notifications-popover {
     min-height: calc(56px + env(safe-area-inset-top));
 }
 
-.platform-tablet ion-popover.push-notifications-popover .popover-content {
+.platform-tablet ion-popover.popover-push .popover-content {
     max-width: 450px !important;
     right: 0 !important;
     left: auto !important;

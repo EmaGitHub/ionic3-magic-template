@@ -7,7 +7,7 @@ import { ModalNavPageModule } from '@shared/modal-nav/modal-nav.module';
 import { IonicModule } from 'ionic-angular';
 
 @NgModule({
-    imports : [
+    imports: [
         IonicModule,
         ModalNavPageModule,
         I18nModule.forRoot({
@@ -21,7 +21,7 @@ import { IonicModule } from 'ionic-angular';
             storePrefix: ENV.storePrefix
         })
     ],
-    exports : [
+    exports: [
         I18nModule,
         ModalNavPageModule
     ]

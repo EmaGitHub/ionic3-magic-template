@@ -9,7 +9,7 @@ import { SplitViewService } from './split-view.service';
         IonicModule,
         PlaceholderPageModule
     ],
-    providers : [
+    providers: [
         SplitViewService
     ]
 })

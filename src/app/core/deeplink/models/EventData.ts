@@ -1,5 +1,5 @@
 
-export interface EventData {
+export interface IEventData {
     url: string,
     scheme: string,
     host: string,

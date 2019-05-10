@@ -7,9 +7,9 @@ import { IonicPage, NavParams } from 'ionic-angular';
     templateUrl: 'placeholder.html',
 })
 export class PlaceholderPage {
-    title: string = '';
-    icon: string = '';
-    label: string = '';
+    public title: string = '';
+    public icon: string = '';
+    public label: string = '';
 
     constructor(
         private navParams: NavParams

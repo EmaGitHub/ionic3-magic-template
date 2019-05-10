@@ -47,7 +47,7 @@ export class DeviceModule {
     * @param  {DeviceModuleOptions} options all available configuration for <DeviceModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(options?: Partial<DeviceModuleOptions>): ModuleWithProviders {
+    public static forRoot(options?: Partial<DeviceModuleOptions>): ModuleWithProviders {
         return {
             ngModule: DeviceModule,
             providers: [

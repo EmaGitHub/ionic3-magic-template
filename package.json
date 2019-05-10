@@ -7,7 +7,7 @@
     "scripts": {
         "clean": "ionic clean",
         "build": "ionic build",
-        "lint": "eslint --fix ./src/**/*.js ./src/**/*.ts",
+        "lint": "eslint --fix ./src --ext .ts",
         "serve:mocks": "ENV=mocks ionic serve -p 8080",
         "serve:dev": "ENV=dev ionic serve -p 8080",
         "serve:prod": "ENV=prod ionic serve -p 8080",

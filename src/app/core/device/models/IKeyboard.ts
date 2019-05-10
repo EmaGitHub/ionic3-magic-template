@@ -41,8 +41,6 @@ export class KeyboardProvider implements OnDestroy, OnInit {
         }
     }
 
-    ngOnInit() {
-    }
     /**
     * Determine if the keyboard is visible
     *
@@ -50,8 +48,8 @@ export class KeyboardProvider implements OnDestroy, OnInit {
     * @type {boolean}
     * @memberof KeyboardProvider
     */
-    get isVisible(): boolean {
-        if(this._keyboard){
+    public get isVisible(): boolean {
+        if (this._keyboard) {
             return this._keyboard.isVisible;
         }
         return false;
@@ -61,16 +59,16 @@ export class KeyboardProvider implements OnDestroy, OnInit {
     * @param value
     * @param successCallback
     */
-    hideFormAccessoryBar(value: boolean, successCallback?: Function): void {
-        if(this._keyboard){
+    public hideFormAccessoryBar(value: boolean, successCallback?: Function): void {
+        if (this._keyboard) {
             this._keyboard.hideFormAccessoryBar(value, successCallback);
         }
     }
     /**
     * Show the keyboard
     */
-    show(): void {
-        if(this._keyboard){
+    public show(): void {
+        if (this._keyboard) {
             this._keyboard.show();
         }
     }
@@ -79,18 +77,18 @@ export class KeyboardProvider implements OnDestroy, OnInit {
     *
     * @memberof KeyboardProvider
     */
-    hide(): void {
-        if(this._keyboard){
+    public hide(): void {
+        if (this._keyboard) {
             // Workaround for different methods for close function
             // betweek iOS and Android
-            try{
+            try {
                 this._keyboard.hide();
             }
-            catch(e){
-                try{
+            catch (e) {
+                try {
                     this._keyboard.close();
                 }
-                catch(e){}
+                catch (e) {}
             }
         }
     }
@@ -100,7 +98,7 @@ export class KeyboardProvider implements OnDestroy, OnInit {
     * @returns {Observable<void>}
     * @memberof KeyboardProvider
     */
-    keyboardDidHide(): Observable<void> {
+    public keyboardDidHide(): Observable<void> {
         if (!this._keyboardDidHide$) {
             this._keyboardDidHide$ = fromEvent(window, 'keyboardDidHide');
         }
@@ -112,7 +110,7 @@ export class KeyboardProvider implements OnDestroy, OnInit {
     * @returns {Observable<KeyboardEvent>}
     * @memberof KeyboardProvider
     */
-    keyboardDidShow(): Observable<KeyboardEvent> {
+    public keyboardDidShow(): Observable<KeyboardEvent> {
         if (!this._keyboardDidShow$) {
             this._keyboardDidShow$ = fromEvent(window, 'keyboardDidShow');
         }
@@ -124,7 +122,7 @@ export class KeyboardProvider implements OnDestroy, OnInit {
     * @returns {Observable<void>}
     * @memberof KeyboardProvider
     */
-    keyboardWillHide(): Observable<void> {
+    public keyboardWillHide(): Observable<void> {
         if (!this._keyboardWillHide$) {
             this._keyboardWillHide$ = fromEvent(window, 'keyboardWillHide');
         }
@@ -136,14 +134,11 @@ export class KeyboardProvider implements OnDestroy, OnInit {
     * @returns {Observable<KeyboardEvent>}
     * @memberof KeyboardProvider
     */
-    keyboardWillShow(): Observable<KeyboardEvent> {
+    public keyboardWillShow(): Observable<KeyboardEvent> {
         if (!this._keyboardWillShow$) {
             this._keyboardWillShow$ = fromEvent(window, 'keyboardWillShow');
         }
         return this._keyboardWillShow$;
-    }
-
-    ngOnDestroy() {
     }
 
 }

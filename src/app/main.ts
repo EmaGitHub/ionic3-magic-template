@@ -4,7 +4,7 @@ import { ENV } from '@env';
 
 import { AppModule } from './app.module';
 
-if(ENV.productionMode){
+if (ENV.productionMode) {
     enableProdMode();
 }
 

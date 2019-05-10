@@ -8,7 +8,7 @@ export class HomePage {
 
     constructor(
 
-    ){
+    ) {
 
     }
 }

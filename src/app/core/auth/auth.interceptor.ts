@@ -9,23 +9,23 @@ export class AuthInterceptor implements HttpInterceptor {
 
     constructor(
         private injector: Injector
-    ){ }
+    ) {}
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         let headersKeys = req.headers.keys();
         let clonedHeaders: {[name: string]: string } = {};
         headersKeys.forEach((header: string) => {
-            clonedHeaders[header] = <string>req.headers.get(header);
+            clonedHeaders[header] = req.headers.get(header) as string;
         });
 
-        if(!req.url.includes('mobileapp-coll.engds.it')){
+        if (!req.url.includes('mobileapp-coll.engds.it')) {
             // Add the application key header
             clonedHeaders['X-Application-Key'] = this.injector.get(AuthService).getApplicationKey();
 
             // Add the access token header, if exists
             const accessToken = this.injector.get(AuthService).getAccessToken();
-            if(accessToken){
+            if (accessToken) {
                 clonedHeaders['Authorization'] = `Bearer ${accessToken}`;
             }
         }

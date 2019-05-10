@@ -11,13 +11,13 @@ import { TabsService } from './tabs.service';
     templateUrl: 'tabs.html'
 })
 export class TabsPage extends AutoUnsubscribe {
-    @ViewChild('appTabs') appTabs!: Tabs;
-    tab1Root = HomeTab;
+    @ViewChild('appTabs') public appTabs!: Tabs;
+    public tab1Root = HomeTab;
     // tab2Root = FloorPlansTab;
     // tab3Root = InfoCornerTab;
     // tab4Root = NotificationsTab;
-    splitViewIsActive: boolean = false;
-    pushCounterBadge: number = 0;
+    public splitViewIsActive: boolean = false;
+    public pushCounterBadge: number = 0;
 
     constructor(
         private splitViewService: SplitViewService,
@@ -27,14 +27,14 @@ export class TabsPage extends AutoUnsubscribe {
         super();
     }
 
-    ionViewDidLoad(){
-        this.initSplitViewSubscriptions();
+    public ionViewDidLoad(): void {
+        this._initSplitViewSubscriptions();
     }
 
-    private initSplitViewSubscriptions(){
+    private _initSplitViewSubscriptions(): void {
         const Tabs = this;
         // If device is tablet activate split view and unlock orientation
-        if(this.deviceService.isTablet()){
+        if (this.deviceService.isTablet()) {
             this.splitViewIsActive = true;
             this.splitViewService.isOn$
                 .takeUntil(this.destroy$)
@@ -50,7 +50,7 @@ export class TabsPage extends AutoUnsubscribe {
         }
     }
 
-    onTabChanges(activeTab: Tab){
+    public onTabChanges(activeTab: Tab): void {
         this.tabsService.onTabChanges$.next(activeTab.index);
     }
 

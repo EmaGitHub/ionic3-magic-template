@@ -1,0 +1,7 @@
+
+export enum TopicTypes {
+    INFO_SEC = 'INFO_SEC',
+    AGENDA = 'AGENDA',
+    MEETING_UPDATED = 'MEETING_UPDATED',
+    MEETING_CANCELLED = 'MEETING_CANCELLED'
+}

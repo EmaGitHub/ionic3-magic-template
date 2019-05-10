@@ -19,7 +19,7 @@ import { HomePage } from './pages/home/home';
         IonicModule,
         SharedModule
     ],
-    entryComponents : [
+    entryComponents: [
         // Tab with split view
         HomeTab,
 

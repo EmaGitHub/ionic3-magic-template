@@ -33,7 +33,7 @@ export class UserModule {
     * @param  {UserModuleOptions} options all available configuration for <UserModule>
     * @returns {ModuleWithProviders}
     */
-    static forRoot(options?: UserModuleOptions): ModuleWithProviders {
+    public static forRoot(options?: UserModuleOptions): ModuleWithProviders {
         return {
             ngModule: UserModule,
             providers: [

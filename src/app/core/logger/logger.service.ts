@@ -19,7 +19,7 @@ export class LoggerService {
     constructor(
         @Optional() config: LoggerModuleOptions
     ) {
-        if(config){
+        if (config) {
             // Check if the override log lever exists and if it's one of the available levels
             if (config.overrideLevel && config.overrideLevel in LoggerLevels) {
                 this.overrideLogLevel = config.overrideLevel;
@@ -34,7 +34,7 @@ export class LoggerService {
      * @returns {string}
      */
     private parseArg(arg: any): string {
-        if(arg instanceof Array || arg instanceof Object){
+        if (arg instanceof Array || arg instanceof Object) {
             return JSON.stringify(arg);
         }
         else {
@@ -48,7 +48,7 @@ export class LoggerService {
      * @param  {string} func Console function
      * @param  {any[]} others All other arguments to print
      */
-    private print(func: string, others: any[]) {
+    private _print(func: string, others: any[]) : void{
 
         // If the app is running on device all arguments to print will be transformed into string
         if (!!(window as any).cordova) {
@@ -79,12 +79,12 @@ export class LoggerService {
      * Change the logger level for future uses
      * @param  {string='DEBUG'} requestedLogLevel
      */
-    changeLevel(newLogLevel: string) {
+    public changeLevel(newLogLevel: string): void {
         // If the override was set the new log level will be ignored
         if (!this.overrideLogLevel) {
             // Check if the new log lever exists and if it's one of the available levels
             if (newLogLevel && newLogLevel.toUpperCase() in LoggerLevels) {
-                this.logLevel = parseInt(LoggerLevels[<any>newLogLevel.toUpperCase()]);
+                this.logLevel = parseInt(LoggerLevels[newLogLevel.toUpperCase() as any]);
             }
         }
 
@@ -95,17 +95,17 @@ export class LoggerService {
      * Print with warn function
      * @param  {any[]} ...args
      */
-    error(...args: any[]) {
-        this.print('error', args);
+    public error(...args: any[]): void {
+        this._print('error', args);
     }
 
     /**
      * Print with warn function
      * @param  {any[]} ...args
      */
-    warn(...args: any[]) {
+    public warn(...args: any[]): void {
         if (this.logLevel >= LoggerLevels.WARN) {
-            this.print('warn', args);
+            this._print('warn', args);
         }
     }
 
@@ -113,9 +113,9 @@ export class LoggerService {
      * Print with info function
      * @param  {any[]} ...args
      */
-    info(...args: any[]) {
+    public info(...args: any[]): void {
         if (this.logLevel >= LoggerLevels.INFO) {
-            this.print('info', args);
+            this._print('info', args);
         }
     }
 
@@ -123,9 +123,9 @@ export class LoggerService {
      * Print with debug function
      * @param  {any[]} ...args
      */
-    debug(...args: any[]) {
+    public debug(...args: any[]): void {
         if (this.logLevel >= LoggerLevels.DEBUG) {
-            this.print('debug', args);
+            this._print('debug', args);
         }
     }
 }

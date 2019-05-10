@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { TabsService } from '@app/tabs';
 import { ConfigService } from '@core/config';
 import { DeviceService } from '@core/device';
+import { FCMService } from '@core/fcm';
 import { LoggerService } from '@core/logger';
-import { PushNotificationsService } from '@core/push-notifications';
 import { UserService } from '@core/user';
 import { VersioningService } from '@core/versioning';
 import { I18nService } from '@shared/i18n';
@@ -22,13 +22,13 @@ export class Starter {
         private i18nService: I18nService,
         private logger: LoggerService,
         private userService: UserService,
-        private pushNotificationsService: PushNotificationsService,
+        private fcmService: FCMService,
         private versioningService: VersioningService
     ) {
 
     }
 
-    ionViewDidEnter(){
+    public ionViewDidEnter(): void {
         this.status = '';
 
         // Wait for config and translations configurations completed
@@ -36,11 +36,6 @@ export class Starter {
             this.configService.initCompleted,
             this.i18nService.initCompleted
         ];
-        // If the app can make an autologin also wait for
-        // push notification complete because after login the app calls the API
-        if(!this.userService.isFirstAccess()){
-            servicesToWait.push(this.pushNotificationsService.initCompleted);
-        }
 
         Promise.all(servicesToWait).then(
             () => {
@@ -50,10 +45,10 @@ export class Starter {
                         // Try autologin
                         this.userService.autologin().then(
                             () => {
-                                this.loadTabsPage();
+                                this._loadTabsPage();
                             },
                             () => {
-                                this.loadTabsPage();
+                                this._loadTabsPage();
                             }
                         )
                     },
@@ -73,7 +68,7 @@ export class Starter {
     /**
      * Go to tabsPage if not already exists
      */
-    private loadTabsPage(){
+    private _loadTabsPage(): void {
         this.tabsService.loadTabsPage();
     }
 }

@@ -8,7 +8,7 @@ export class User {
 
     constructor (
         user: Partial<User>
-    ){
+    ) {
         this.id = (user.id)? user.id : '';
         this.username = (user.username)? user.username : '';
         this.firstName = user.firstName;
@@ -16,11 +16,11 @@ export class User {
         this.timestamp = user.timestamp || new Date().getTime();
     }
 
-    isLogged(){
+    public isLogged(): boolean {
         return this.id !== undefined;
     }
 
-    getFullName(){
+    public getFullName(): string {
         return `${this.firstName} ${this.lastName}`;
     }
 }

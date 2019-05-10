@@ -1,6 +1,6 @@
 import { Nav } from 'ionic-angular';
 
-export interface SplitViewConfig {
+export interface ISplitViewConfig {
     nav: Nav;
     page: any;
     params?: {
