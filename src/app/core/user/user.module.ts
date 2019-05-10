@@ -22,7 +22,7 @@ import { UserService } from './user.service';
     ]
 })
 export class UserModule {
-    constructor (@Optional() @SkipSelf() parentModule: UserModule) {
+    constructor(@Optional() @SkipSelf() parentModule: UserModule) {
         if (parentModule) {
             throw new Error('UserModule is already loaded');
         }

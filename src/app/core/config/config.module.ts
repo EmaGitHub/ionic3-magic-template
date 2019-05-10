@@ -22,7 +22,7 @@ import { ConfigModuleOptions } from './models/ConfigModuleOptions';
     ]
 })
 export class ConfigModule {
-    constructor (@Optional() @SkipSelf() parentModule: ConfigModule) {
+    constructor(@Optional() @SkipSelf() parentModule: ConfigModule) {
         if (parentModule) {
             throw new Error('ConfigModule is already loaded');
         }

@@ -152,7 +152,7 @@ export class AuthService {
         }
         const authService = this;
         return this.apiService.callApi('getAccessToken')
-            .map((res) => {
+            .map(res => {
                 const token = (res as IAuthResponse).accessToken;
                 authService.setAccessToken(token);
                 return token;

@@ -35,7 +35,7 @@ export class SplitView extends AutoUnsubscribe {
      * Force first page of master view
      * @param  {any} page
      */
-    public initMaster(page: any, params: {title?: string, icon?: string, label?: string} = {}): Promise<any> {
+    public initMaster(page: any, params: {title?: string; icon?: string; label?: string} = {}): Promise<any> {
         return this.masterNav.setRoot(page, params);
     }
     public pushOnMaster(page: any, params: any = {}, options: Partial<NavOptions>|undefined = {}): Promise<any> {
@@ -46,7 +46,7 @@ export class SplitView extends AutoUnsubscribe {
      * * Force first page of detail view
      * @param  {any} page
      */
-    public initDetail(page: any, params: {title?: string, icon?: string, label?: string} = {}): Promise<any> {
+    public initDetail(page: any, params: {title?: string; icon?: string; label?: string} = {}): Promise<any> {
         if (!params.title) {
             params.title = ENV.appName;
         }

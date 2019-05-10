@@ -23,7 +23,7 @@ export class NavigationService {
      * @param  {number} lng
      * @param  {Partial<LaunchNavigatorOptions>={}} options
      */
-    public navigateToCoordinates(coords: {latitude: number, longitude: number}, options?: Partial<LaunchNavigatorOptions>): Promise<null> {
+    public navigateToCoordinates(coords: {latitude: number; longitude: number}, options?: Partial<LaunchNavigatorOptions>): Promise<null> {
         return new Promise((resolve, reject) => {
             this.getCurrentPosition().then(
                 (position: Geoposition) => {

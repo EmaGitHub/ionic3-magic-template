@@ -40,7 +40,7 @@ export class FCMService {
         this.storage.get(storageKeys.infoSecEnabled).then((infoSecEnabled: boolean) => {
             if (typeof infoSecEnabled === 'undefined' || infoSecEnabled === null) {
                 // If there is no previous flag for INFO_SEC topic read the current permission in order to enable/disable it
-                _self.hasPermission().then((data) => {
+                _self.hasPermission().then(data => {
                     _self.toggleInfoSecSubscription(data.isEnabled);
                 })
             }
@@ -89,7 +89,7 @@ export class FCMService {
                 }
             );
             // Every push notification arrived from FCM will be managed here
-            this.firebase.onNotificationOpen().subscribe((notification: EUCouncilNotification) => {
+            this.firebase.onNotificationOpen().subscribe((notification: AppNotification) => {
                 _self.logger.debug('FCMService:parseNotification', notification);
                 try {
                     // If the push notification arrived has been tapped by user emit notification via onPushArrives$
@@ -183,7 +183,7 @@ export class FCMService {
         }
     }
 
-    private _openForegroundPopoverPush(notification: EUCouncilNotification, openPushOpen: Function): void {
+    private _openForegroundPopoverPush(notification: AppNotification, openPushOpen: Function): void {
         let popover = this.popoverCtrl.create(
             PopoverPush,
             {

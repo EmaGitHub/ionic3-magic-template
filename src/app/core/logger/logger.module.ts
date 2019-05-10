@@ -15,7 +15,7 @@ import { LoggerModuleOptions } from './models/LoggerModuleOptions';
     ]
 })
 export class LoggerModule {
-    constructor (@Optional() @SkipSelf() parentModule: LoggerModule) {
+    constructor(@Optional() @SkipSelf() parentModule: LoggerModule) {
         if (parentModule) {
             throw new Error('LoggerModule is already loaded. Import it in the AppModule only');
         }

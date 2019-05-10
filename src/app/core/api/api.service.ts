@@ -41,14 +41,14 @@ export class ApiService {
      * @returns Promise
      */
     public callApi<T>(
-		apiName: string,
-		options: {
-			params?: {},
-			paths?: {},
-			body?: any,
-            headers?: {},
-            observe? : HttpObserve,
-			responseType?: ResponseTypes
+        apiName: string,
+        options: {
+			params?: {};
+			paths?: {};
+			body?: any;
+            headers?: {};
+            observe? : HttpObserve;
+			responseType?: ResponseTypes;
 		} = {}
     ): Observable<T> {
         // Use getApi in configService to define all options for api
@@ -95,12 +95,12 @@ export class ApiService {
 
     private _prepareOptions(
         api: Api,
-		options: {
-			params?: {},
-			body?: any,
-            headers?: {},
-            observe? : HttpObserve,
-			responseType?: ResponseTypes
+        options: {
+			params?: {};
+			body?: any;
+            headers?: {};
+            observe? : HttpObserve;
+			responseType?: ResponseTypes;
 		} = {}
     ): HttpClientOptions {
 

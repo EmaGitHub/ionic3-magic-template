@@ -8,7 +8,7 @@ import { NavParams, ViewController } from 'ionic-angular';
     templateUrl: 'popover-push.html',
 })
 export class PopoverPush {
-    public notification: EUCouncilNotification;
+    public notification: AppNotification;
     public icon: string = 'home';
     public title: string = 'title';
     public message: string = 'Push test message';
@@ -24,14 +24,14 @@ export class PopoverPush {
         this.message = this.notification.body = '';
 
         switch (this.notification.type) {
-            case TopicTypes.INFO_SEC:
-                this.icon = 'warning';
-                break;
-            case TopicTypes.AGENDA:
-            case TopicTypes.MEETING_UPDATED:
-            case TopicTypes.MEETING_CANCELLED:
-                this.icon = 'euc-calendar';
-                break;
+        case TopicTypes.INFO_SEC:
+            this.icon = 'warning';
+            break;
+        case TopicTypes.AGENDA:
+        case TopicTypes.MEETING_UPDATED:
+        case TopicTypes.MEETING_CANCELLED:
+            this.icon = 'euc-calendar';
+            break;
         }
         this.onOpen = this.navParams.data.onOpen;
     }

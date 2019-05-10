@@ -4,8 +4,8 @@ export interface ISplitViewConfig {
     nav: Nav;
     page: any;
     params?: {
-        title?: string,
-        icon?: string,
-        label?: string
-    }
+        title?: string;
+        icon?: string;
+        label?: string;
+    };
 }

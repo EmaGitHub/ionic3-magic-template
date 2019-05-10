@@ -7,7 +7,7 @@ import { DeepLinkPaths } from './models/DeepLinkPaths';
 import { IEventData } from './models/EventData';
 import { ParsedURL } from './models/ParsedURL';
 
-declare var universalLinks: any;
+declare const universalLinks: any;
 
 @Injectable()
 export class DeepLinkService {
@@ -36,11 +36,11 @@ export class DeepLinkService {
         const paths = url.pathname.split('/');
 
         switch (paths[1]) {
-            case DeepLinkPaths.LINK:
-                // If a subscription is already started unsubscribe it
-                if (this.deepLinkIsReady$ && !this.deepLinkIsReady$.closed) {
-                    this.deepLinkIsReady$.unsubscribe();
-                }
+        case DeepLinkPaths.LINK:
+            // If a subscription is already started unsubscribe it
+            if (this.deepLinkIsReady$ && !this.deepLinkIsReady$.closed) {
+                this.deepLinkIsReady$.unsubscribe();
+            }
         }
     }
 
@@ -50,7 +50,7 @@ export class DeepLinkService {
      * @returns ParsedURL
      */
     private _parseURL(url: string): ParsedURL {
-        var parser = document.createElement('a'),
+        let parser = document.createElement('a'),
             searchObject: any = {},
             queries, split, i;
         // Let the browser do the work

@@ -26,10 +26,10 @@ export class ResponseErrorInterceptor implements HttpInterceptor {
                 if (deviceService.isOnline()) {
                     if (error instanceof HttpErrorResponse) {
                         switch ((error as HttpErrorResponse).status) {
-                            case 401:
-                                return this._handle401Error(req, error, next);
-                            default:
-                                return this._handleError(error);
+                        case 401:
+                            return this._handle401Error(req, error, next);
+                        default:
+                            return this._handleError(error);
                         }
                     }
                     else {
@@ -69,14 +69,14 @@ export class ResponseErrorInterceptor implements HttpInterceptor {
 
                 return authService.fetchAccessToken()
                     .switchMap((newToken: string) => {
-                          if (newToken) {
-                              this._tokenSubject.next(newToken);
-                              return next.handle(this._updateTokenInRequest(req, newToken));
-                          }
+                        if (newToken) {
+                            this._tokenSubject.next(newToken);
+                            return next.handle(this._updateTokenInRequest(req, newToken));
+                        }
 
-                          // If we don't get a new token, we are in trouble so logout.
-                          userService.logout(LoginStates.THROW_OUT);
-                          return this._handleError(err);
+                        // If we don't get a new token, we are in trouble so logout.
+                        userService.logout(LoginStates.THROW_OUT);
+                        return this._handleError(err);
                     })
                     .catch(() => {
                         // If there is an exception calling 'refreshToken', bad news so logout.

@@ -33,7 +33,7 @@ import { I18nModuleOptions } from './models/I18nModuleOptions';
     ]
 })
 export class I18nModule {
-    constructor (@Optional() @SkipSelf() parentModule: I18nModule) {
+    constructor(@Optional() @SkipSelf() parentModule: I18nModule) {
         if (parentModule) {
             throw new Error('I18nModule is already loaded');
         }

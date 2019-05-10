@@ -14,7 +14,7 @@ import { DBModuleOptions } from './models/DBModuleOptions';
     ]
 })
 export class DBModule {
-    constructor (@Optional() @SkipSelf() parentModule: DBModule) {
+    constructor(@Optional() @SkipSelf() parentModule: DBModule) {
         if (parentModule) {
             throw new Error('DBModule is already loaded');
         }

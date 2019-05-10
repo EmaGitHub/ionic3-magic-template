@@ -5,5 +5,5 @@ export interface IAuthResponse {
     accessToken: string;
     accessTokenExpiration: string;
     userCode?: string;
-    extra?: {meetingIds : string[]}
+    extra?: {meetingIds : string[]};
 }

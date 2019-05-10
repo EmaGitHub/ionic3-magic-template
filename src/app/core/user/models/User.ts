@@ -6,7 +6,7 @@ export class User {
     public lastName?: string;
     public timestamp: number;
 
-    constructor (
+    constructor(
         user: Partial<User>
     ) {
         this.id = (user.id)? user.id : '';

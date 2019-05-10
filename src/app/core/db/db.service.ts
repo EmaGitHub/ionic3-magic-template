@@ -7,9 +7,9 @@ import LokiJS, { Collection } from 'lokijs';
 import { DBModuleOptions } from './models/DBModuleOptions';
 import { LokiConfigOptions } from './models/LokiConfigOptions';
 
-declare var require: any;
-var LokiCordovaFSAdapter = require('loki-cordova-fs-adapter');
-var LokiIndexedAdapter = require('./loki-indexed-adapter');
+declare const require: any;
+const LokiCordovaFSAdapter = require('loki-cordova-fs-adapter');
+const LokiIndexedAdapter = require('./loki-indexed-adapter');
 
 @Injectable()
 export class DBService {
@@ -45,7 +45,7 @@ export class DBService {
 
         // Remove the old DB stored in file system
         try {
-            let oldAdapter = new LokiCordovaFSAdapter({ 'prefix': dbName });
+            let oldAdapter = new LokiCordovaFSAdapter({ prefix: dbName });
             oldAdapter.deleteDatabase(dbName, () => {
                 this.logger.debug('Old LokiJS DB deleted');
             });

@@ -9,19 +9,32 @@ module.exports =  {
       "sourceType":  "module",  // Allows for the use of imports
     },
     "rules": {
+        "arrow-spacing": "error",
+        "arrow-parens": ["error", "as-needed"],
+        "comma-dangle": ["error", "only-multiline"],
+        "block-spacing": ["error", "always"],
+        "func-call-spacing": ["error", "never"],
         "key-spacing": ["error", {
             "beforeColon": false,
             "afterColon": true,
             "mode": "strict"
         }],
-        "block-spacing": ["error", "always"],
-        "space-before-blocks": ["error", "always"],
         "keyword-spacing": ["error", {
             "before": true,
             "after": true
         }],
-        "no-trailing-spaces": ["error"],
+        "indent": ["error", 4],
+        "no-const-assign": "error",
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+        "no-trailing-spaces": ["error"],
+        "no-var": "error",
+        "quotes": ["error", "single"],
+        "quote-props": ["error", "as-needed"],
+        "space-before-blocks": "error",
+        "space-before-function-paren": ["error", "never"],
+        "camelcase": "off",
+        "@typescript-eslint/camelcase": ["error", { "properties": "always" }],
+        '@typescript-eslint/member-delimiter-style': 'error',
         "@typescript-eslint/no-explicit-any": false,
         "@typescript-eslint/no-var-requires": false,
         "@typescript-eslint/interface-name-prefix": "always",

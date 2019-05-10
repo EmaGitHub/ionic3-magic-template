@@ -15,7 +15,7 @@ interface IKeyboard {
     show(): void;
 }
 
-declare var Keyboard: IKeyboard;
+declare const Keyboard: IKeyboard;
 
 @Injectable()
 export class KeyboardProvider implements OnDestroy, OnInit {

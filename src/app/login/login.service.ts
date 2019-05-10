@@ -47,7 +47,7 @@ export class LoginService {
                     loginState === LoginStates.LAST_USER ||
                     loginState === LoginStates.PUBLIC) {
 
-                    this._loginModal.dismiss();
+                this._loginModal.dismiss();
             }
         });
     }

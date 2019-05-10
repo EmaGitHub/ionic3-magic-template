@@ -27,7 +27,7 @@ export class App extends AutoUnsubscribe {
     /**
      * Initialize the native device orientation
      */
-    public initOrientation(): void{
+    public initOrientation(): void {
         // If device is tablet activate split view and unlock orientation
         if (this.deviceService.isTablet()) {
             if (this.deviceService.isCordova()) {

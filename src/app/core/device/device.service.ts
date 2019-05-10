@@ -257,7 +257,7 @@ export class DeviceService {
             defer = this.globalization.getPreferredLanguage();
         }
         else {
-            defer = new Promise((resolve) => { resolve(ENV.getPreferredLanguageDev) });
+            defer = new Promise(resolve => { resolve(ENV.getPreferredLanguageDev) });
         }
         return defer.then(
             (lang: {value:string}) => {
@@ -388,10 +388,10 @@ export class DeviceService {
     * @returns void
     */
     public alert(message: string,
-          options: {
-            handler?: () => void,
-            title?: string,
-            buttonName?: string
+        options: {
+            handler?: () => void;
+            title?: string;
+            buttonName?: string;
         } = {}
     ): void {
         this.hideLoading();
@@ -441,9 +441,9 @@ export class DeviceService {
     * @param {AlertButton[]} buttons List of <AlertButton>
     */
     public confirm(message: string,
-            options: {
-                title?: string,
-                buttons?: AlertButton[]
+        options: {
+                title?: string;
+                buttons?: AlertButton[];
             } = {}
     ): void {
         this.hideLoading();
@@ -531,7 +531,7 @@ export class DeviceService {
             }
         ];
         }
-        options.buttons.forEach((b) => {
+        options.buttons.forEach(b => {
             (b as AlertButton).text = this.translateService.instant((b as AlertButton).text as string);
         });
         if (!options.enableBackdropDismiss) options.enableBackdropDismiss = false;

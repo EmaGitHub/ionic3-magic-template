@@ -36,7 +36,7 @@ import { DeviceModuleOptions } from './models/DeviceModuleOptions';
     ]
 })
 export class DeviceModule {
-    constructor (@Optional() @SkipSelf() parentModule: DeviceModule) {
+    constructor(@Optional() @SkipSelf() parentModule: DeviceModule) {
         if (parentModule) {
             throw new Error('DeviceModule is already loaded. Import it in the AppModule only');
         }

@@ -32,7 +32,7 @@ export class VersioningService {
      * @public
      */
     public getAppVersion(): Promise<string> {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             // Se sto girando su device recupero la versione utilizzando il plugin nativo
             if (this.deviceService.isCordova()) {
                 this.appVersion.getVersionNumber().then((version: string) => {

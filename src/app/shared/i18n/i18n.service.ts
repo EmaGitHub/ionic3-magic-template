@@ -209,7 +209,7 @@ export class I18nService {
      * @returns {Promise<Language>}
      */
     private _getLastLanguage(): Promise<Language> {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             // Search last used language in localStorage
             this._storage.get(storageKeys.lastLang).then((lastLang: Language) => {
                 // If last used language doesn't exists or the last used language was automatically set
@@ -249,7 +249,7 @@ export class I18nService {
      * @returns Promise
      */
     private _downloadLangs(langs: Language[]): Promise<any> {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             if (langs.length > 0) {
                 let lang = langs.pop();
                 this.downloadLang(lang as Language).then(

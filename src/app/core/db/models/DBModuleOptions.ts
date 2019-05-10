@@ -5,7 +5,7 @@ export class DBModuleOptions {
         public dbName?: string,
         public dbOptions?: LokiConfigOptions,
         public loadOptions?: {
-            [collection: string] : any
+            [collection: string] : any;
         }
     ) { }
 }

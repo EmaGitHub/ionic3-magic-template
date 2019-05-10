@@ -3,8 +3,7 @@ import { DeviceService } from '@core/device';
 import { App } from 'ionic-angular';
 import { Subject } from 'rxjs';
 
-// import { TabsPage } from '@app/tabs/tabs';
-declare var require: any;
+declare const require: any;
 
 @Injectable()
 export class TabsService {
