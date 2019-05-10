@@ -1,47 +1,59 @@
 {
-    "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
-        "declaration": false,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "lib": [
-            "dom",
-            "es2015"
-        ],
-        "module": "es2015",
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "target": "es5",
-        "typeRoots": [
-            "../node_modules/@types"
-        ],
-        "strict": true,
-        "baseUrl": "./src",
-        "paths": {
-            "@app/*": [ "app/*" ],
-            "@core/*": [ "app/core/*" ],
-            "@shared/*": [ "app/shared/*" ],
-            "@assets/*": [ "assets/*" ],
-            "@env": [ "environments/_environment.BUILD" ],
-            "@theme/*": [ "theme/*" ]
-        },
-        "skipLibCheck": true
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es5",
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "strict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ],
+      "@core/*": [
+        "app/core/*"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@env": [
+        "environments/_environment.BUILD"
+      ],
+      "@theme/*": [
+        "theme/*"
+      ]
     },
-    "include": [
-        "src/**/*.ts"
-    ],
-    "indent": [
-        true,
-        "spaces",
-        4
-    ],
-    "exclude": [
-        "node_modules",
-        "src/**/*.spec.ts",
-        "src/**/__tests__/*.ts"
-    ],
-    "compileOnSave": false,
-    "atom": {
-        "rewriteTsconfig": false
-    }
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "indent": [
+    true,
+    "spaces",
+    4
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts",
+    "src/**/__tests__/*.ts"
+  ],
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }
