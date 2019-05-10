@@ -52,7 +52,7 @@ export class ApiService {
 		} = {}
     ): Observable<T> {
         // Use getApi in configService to define all options for api
-        let api = (this._backend as Backend).getApi(apiName);
+        let api = Object.assign({},(this._backend as Backend).getApi(apiName));
 
         if (api) {
             // Set the request's url
