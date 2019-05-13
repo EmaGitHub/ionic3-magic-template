@@ -22,6 +22,7 @@
     "ionic:build:before": "node ./hooks/environment-selector.js"
   },
   "dependencies": {
+    "@angular/animations": "5.2.11",
     "@angular/common": "5.0.3",
     "@angular/compiler": "5.0.3",
     "@angular/compiler-cli": "5.0.3",
