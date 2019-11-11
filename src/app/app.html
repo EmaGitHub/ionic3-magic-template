@@ -1,4 +1,31 @@
-<ion-nav
-    class="main-app"
-    [root]="rootPage"
-    [ngClass]="{ 'content-hidden' : userIsNotLogged }"></ion-nav>
+<ion-menu persistent="true" [content]="content" id="menuHome">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Header</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+        <ion-list>
+            <ion-item tappable class="menuButton" (tap)="go()" menuClose>
+                <ion-icon id="sectionIcon" name="ics-home" item-start></ion-icon>
+                {{'HOME' | translate}}
+            </ion-item>
+            <ion-item tappable class="menuButton" (tap)="go()" menuClose>
+                <ion-icon id="sectionIcon" name="ics-home" item-start></ion-icon>
+                {{'HOME' | translate}}
+            </ion-item>
+            <ion-item tappable class="menuButton" (tap)="go()" menuClose>
+                <ion-icon id="sectionIcon" name="ics-home" item-start></ion-icon>
+                {{'HOME' | translate}}
+            </ion-item>
+            <ion-item tappable class="menuButton" (tap)="go()" menuClose>
+                <ion-icon id="sectionIcon" name="ics-home" item-start></ion-icon>
+                {{'HOME' | translate}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-menu>
+
+<ion-nav #content class="main-app" [root]="rootPage" [ngClass]="{ 'content-hidden' : userIsNotLogged }"></ion-nav>

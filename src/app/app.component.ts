@@ -50,4 +50,8 @@ export class App extends AutoUnsubscribe {
                 this.userIsNotLogged = (loginState === LoginStates.LOGOUT || loginState === LoginStates.THROW_OUT);
             });
     }
+
+    public go(){
+
+    }
 }

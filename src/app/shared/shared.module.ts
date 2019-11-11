@@ -5,8 +5,12 @@ import { ENV } from '@env';
 import { I18nModule } from '@shared/i18n/i18n.module';
 import { ModalNavPageModule } from '@shared/modal-nav/modal-nav.module';
 import { IonicModule } from 'ionic-angular';
+import { NavbarComponent } from './navbar/navbar';
 
 @NgModule({
+    declarations: [
+        NavbarComponent
+    ],
     imports: [
         IonicModule,
         ModalNavPageModule,
@@ -23,7 +27,8 @@ import { IonicModule } from 'ionic-angular';
     ],
     exports: [
         I18nModule,
-        ModalNavPageModule
+        ModalNavPageModule,
+        NavbarComponent
     ]
 })
 export class SharedModule { }
