@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { HomeTab } from '@app/home-tab';
+import { InfoTab } from '@app/info-tab';
 import { AutoUnsubscribe } from '@core/auto-unsubscribe';
 import { DeviceService } from '@core/device';
 import { SplitViewService } from '@core/split-view';
@@ -13,10 +14,10 @@ import { TabsService } from './tabs.service';
 export class TabsPage extends AutoUnsubscribe {
     @ViewChild('appTabs') public appTabs!: Tabs;
     public tab1Root = HomeTab;
-    // tab2Root = FloorPlansTab;
+    public tab2Root = InfoTab;
     // tab3Root = InfoCornerTab;
     // tab4Root = NotificationsTab;
-    public splitViewIsActive: boolean = false;
+    public splitViewIsActive: boolean = true;
     public pushCounterBadge: number = 0;
 
     constructor(

@@ -12,6 +12,7 @@ export const EN = {
     FORGOT_PASSWORD: 'Forgotten password?',
 
     HOME: 'Home',
+    INFO: 'Info',
 
     LOGIN: 'Login',
     LOGOUT: 'Logout',

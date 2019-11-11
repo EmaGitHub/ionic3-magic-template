@@ -9,6 +9,7 @@ import { TabsModule } from '@app/tabs/tabs.module';
 import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { InfoModule } from './info-tab';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
         SharedModule,
         LoginModule,
         TabsModule,
-        HomeModule
+        HomeModule,
+        InfoModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
