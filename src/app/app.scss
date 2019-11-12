@@ -17,10 +17,15 @@
 
 #menuList{
 
-    padding-top: 8px;
+    padding-top: 8px !important;
 }
+
 .text-bold {
     font-weight: bold;
+}
+
+.pageContent{
+    margin-top: 72px;
 }
 
 ion-nav.main-app.content-hidden {

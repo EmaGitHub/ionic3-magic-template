@@ -1,5 +1,6 @@
 .app-tabs {
     & > .tabbar {
+
         a.tab-button {
             color: map-get($colors, primary);
             padding: 0px;
@@ -35,9 +36,10 @@
     // Split view
     &.split-view {
 
-        // Only for portrait mode
+        // Only for landscape mode
         .tabbar {
             max-width: $split-pane-md-side-min-width - 1;
+            
         }
 
         ion-nav.split-pane-main {
@@ -47,4 +49,12 @@
             }
         }
     }
+
+    
+}
+
+.make-hide-tabs {
+
+    position: absolute;
+    bottom: -56px !important;
 }
