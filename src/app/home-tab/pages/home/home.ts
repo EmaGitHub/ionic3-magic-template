@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FadeInOut, Collapse } from '@app/core/animations';
+import { FadeInOut } from '@app/core/animations';
 
 @Component({
     selector: 'page-home',
@@ -14,7 +14,6 @@ export class HomePage {
     private visibleText: string = '0';
 
     constructor(
-
     ) {
 
     }
@@ -25,4 +24,5 @@ export class HomePage {
             this.visibleText = '1';
         }, 1000);
     }
+
 }
