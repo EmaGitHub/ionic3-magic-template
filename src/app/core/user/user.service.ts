@@ -93,7 +93,10 @@ export class UserService {
         return new Promise((resolve, reject) => {
             this.authService.authenticate(username, password).then(
                 () => {
-                    this.fetchUserProfile(username).subscribe(
+                    this.fakeFetchUserProfile(username).subscribe(
+                        (res: any) => resolve()
+                    );
+                    /* this.fetchUserProfile(username).subscribe(
                         (res: any) => {
                             try {
                                 this.startSession(username, res.data.users.items[0]);
@@ -104,12 +107,13 @@ export class UserService {
                                 reject(err);
                             }
                         },
-                    );
+                    ); */
                 },
                 (err: Error) => {
+                    console.log("rejected in user.service")
                     reject(err);
                 }
-            );
+            )
         });
     }
 
@@ -312,5 +316,16 @@ export class UserService {
         this.deviceService.showLoading();
         this.endSession();
         this.onSessionChanges$.next(loginState);
+    }
+
+    public fakeFetchUserProfile(username: string): Observable<any>{
+
+        console.log("fake feth user profile")
+        var source = Observable.create(
+            (observer: any) => {
+                observer.next()
+            });
+        
+        return source;
     }
 }

@@ -28,11 +28,13 @@ export class LoginPage {
         this.deviceService.showLoading();
         this.userService.login(this.username, this.password).then(
             () => {
+                this.deviceService.hideLoading();
                 this.userService.setFirstAccess();
                 this.tabsService.loadTabsPage();
                 this.closeModal();
             },
             (err: Error) => {
+                this.deviceService.hideLoading();
                 this.deviceService.alert(err.message);
             },
         );

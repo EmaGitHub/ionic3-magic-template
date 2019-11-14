@@ -7,6 +7,7 @@ import { LoggerService } from '@core/logger';
 import { UserService } from '@core/user';
 import { VersioningService } from '@core/versioning';
 import { I18nService } from '@shared/i18n';
+import { LoginService } from '@app/login';
 
 @Component({
     selector: 'app-starter',
@@ -23,7 +24,8 @@ export class Starter {
         private logger: LoggerService,
         private userService: UserService,
         private fcmService: FCMService,
-        private versioningService: VersioningService
+        private versioningService: VersioningService,
+        private loginService: LoginService
     ) {
 
     }
@@ -45,10 +47,12 @@ export class Starter {
                         // Try autologin
                         this.userService.autologin().then(
                             () => {
+                                console.log("autologin success")
                                 this._loadTabsPage();
                             },
                             () => {
-                                this._loadTabsPage();
+                                console.log("autologin failed")
+                                this.loginService.openMainLogin();
                             }
                         )
                     },

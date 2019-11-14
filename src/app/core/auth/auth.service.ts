@@ -104,7 +104,8 @@ export class AuthService {
      * @param {string} password User's password
      */
     public authenticate(username: string, password: string): Promise<any> {
-        return new Promise((resolve, reject) => {
+        return this.fakeAuth(); 
+        /* new Promise((resolve, reject) => {
             let credentials = new HttpParams()
                 .set('username', username)
                 .set('password', password);
@@ -112,13 +113,17 @@ export class AuthService {
                 body: credentials.toString()
             }).subscribe(
                 (res: any) => {
+                    console.log("api response ok")
                     this.setAccessToken((res as IAuthResponse).accessToken);
                     this.setRefreshToken((res as IAuthResponse).refreshToken);
                     resolve();
                 },
-                reject
+                (err: any) => {
+                    console.log("api response ko ",err)
+                    reject(err);
+                }
             );
-        });
+        }); */
     }
 
     /**
@@ -158,6 +163,19 @@ export class AuthService {
                 return token;
             })
             .first();
+    }
+
+    public fakeAuth(): Promise<any> {
+
+        console.log("fake auth")
+
+        return new Promise((resolve, reject) => {
+           
+            resolve({
+
+            })
+
+        });
     }
 
 }
