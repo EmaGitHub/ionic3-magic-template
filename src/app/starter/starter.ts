@@ -43,26 +43,28 @@ export class Starter {
             () => {
                 this.versioningService.checkVersioning().then(
                     () => {
-                        this.logger.debug('initialize completed');
+                        this.logger.debug('Initialize completed');
                         // Try autologin
                         this.userService.autologin().then(
                             () => {
-                                console.log("autologin success")
+                                console.log("Autologin success")
                                 this._loadTabsPage();
                             },
                             () => {
-                                console.log("autologin failed")
+                                console.log("Autologin failed: ")
                                 this.loginService.openMainLogin();
                             }
                         )
                     },
                     (err: Error) => {
+                        console.log("Autologin error: ",err)
                         this.status = err.message;
                         this.deviceService.hideSplashscreen();
                     }
                 );
             },
             (err: Error) => {
+                console.log("Starter serviceToWait error: ",err)
                 this.status = err.message;
                 this.deviceService.hideSplashscreen();
             }

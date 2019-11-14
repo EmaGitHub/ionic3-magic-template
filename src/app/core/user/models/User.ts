@@ -5,6 +5,7 @@ export class User {
     public firstName?: string;
     public lastName?: string;
     public timestamp: number;
+    public logged: boolean;
 
     constructor(
         user: Partial<User>
@@ -14,6 +15,7 @@ export class User {
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.timestamp = user.timestamp || new Date().getTime();
+        this.logged = user.logged? user.logged : false;
     }
 
     public isLogged(): boolean {

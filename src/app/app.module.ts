@@ -10,6 +10,10 @@ import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { InfoModule } from './info-tab';
+import { StoreModule, Store } from '@ngrx/store';
+import { userReducer } from './core/user/user.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './core/user/user.effects';
 
 @NgModule({
     declarations: [
@@ -19,6 +23,8 @@ import { InfoModule } from './info-tab';
     imports: [
         BrowserModule,
         IonicModule.forRoot(App, IonicConfig),
+        StoreModule.forRoot(<any>{userState: userReducer}),
+        EffectsModule.forRoot([UserEffects]),
         CoreModule,
         SharedModule,
         LoginModule,
@@ -32,6 +38,7 @@ import { InfoModule } from './info-tab';
         Starter
     ],
     providers: [
+        Store,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })
