@@ -11,9 +11,10 @@ import { SharedModule } from '@shared/shared.module';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { InfoModule } from './info-tab';
 import { StoreModule, Store } from '@ngrx/store';
-import { userReducer } from './core/user/user.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { UserEffects } from './core/user/user.effects';
+import { UserEffects } from './core/user/effects/user.effects';
+import { UserReducer } from './core/user/reducers/user.reducer';
+import { DeviceReducer } from './core/device/reducers/device.reducer';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,7 @@ import { UserEffects } from './core/user/user.effects';
     imports: [
         BrowserModule,
         IonicModule.forRoot(App, IonicConfig),
-        StoreModule.forRoot(<any>{userState: userReducer}),
+        StoreModule.forRoot(<any>{userState: UserReducer, deviceState: DeviceReducer}),
         EffectsModule.forRoot([UserEffects]),
         CoreModule,
         SharedModule,

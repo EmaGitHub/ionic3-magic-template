@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Actions, Effect } from "@ngrx/effects";
-import { UserService } from './user.service';
-import { UserActionTypes } from "./actions/user-actions-types";
+import { UserService } from "../user.service";
+import { UserActionTypes } from "../actions/user-actions-types";
 
 @Injectable()
 export class UserEffects {

@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { LoggerService } from '@core/logger';
 import { IonicStorageModule } from '@ionic/storage';
 

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Starter } from '@app/starter/starter';
 import { AutoUnsubscribe } from '@core/auto-unsubscribe';
 import { DeviceService } from '@core/device';

@@ -1,0 +1,5 @@
+export const DeviceActionTypes = {
+
+    DEVICE_IS_SMARTPHONE: "DEVICE_IS_SMARTPHONE",
+    DEVICE_IS_TABLET: "DEVICE_IS_TABLET"
+}

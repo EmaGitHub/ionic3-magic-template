@@ -1,6 +1,6 @@
 <ion-header no-border>
     <ion-navbar color="primary">
-        <button ion-button icon-only menuToggle class="toggle">
+        <button ion-button icon-only menuToggle class="toggle" [ngClass]="(menuToggleVisible)?'':'invisible'">
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title text-center> {{ pageName | translate }} </ion-title>

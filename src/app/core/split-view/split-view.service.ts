@@ -3,6 +3,9 @@ import { Subject } from 'rxjs/Subject';
 
 import { SplitView } from './models/SplitView';
 import { ISplitViewConfig } from './models/SplitViewConfig';
+import { Store } from '@ngrx/store';
+import { AppStore } from '@app/app-store';
+import { DeviceActionTypes } from '../device/actions/device-action-types';
 
 @Injectable()
 export class SplitViewService {
@@ -12,7 +15,7 @@ export class SplitViewService {
     public isOn$: Subject<boolean> = new Subject<boolean>();
 
     constructor(
-
+        private store: Store<AppStore>
     ) { }
 
     public initSplitView(index: number, masterView: ISplitViewConfig, detailView: ISplitViewConfig): SplitView {
@@ -44,6 +47,7 @@ export class SplitViewService {
 
     public onSplitPaneChanged(isOn: boolean): void {
         this.isOn = isOn;
+        isOn? this.store.dispatch({type: DeviceActionTypes.DEVICE_IS_TABLET}) : this.store.dispatch({type: DeviceActionTypes.DEVICE_IS_SMARTPHONE});    //update device state
         this.isOn$.next(this.isOn);
     }
 
