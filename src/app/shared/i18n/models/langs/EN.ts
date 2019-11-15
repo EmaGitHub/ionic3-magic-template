@@ -13,9 +13,14 @@ export const EN = {
 
     HOME: 'Home',
     INFO: 'Info',
+    ROOT: 'Root',
+    SEEK: 'Seek',
 
     HOMEPAGE: 'HomePage',
     INFOPAGE: 'InfoPage',
+    DETAILPAGE: 'DetailPage',
+    ROOTPAGE: 'RootPage',
+    SEEKPAGE: 'SeekPage',
 
     LOGIN: 'Login',
     LOGOUT: 'Logout',

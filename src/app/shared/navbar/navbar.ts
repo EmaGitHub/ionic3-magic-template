@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AppStore } from '@app/app-store';
 import { Store } from '@ngrx/store';
 import { DeviceState } from '@app/core/device/models/device-state';
+import { NavController } from 'ionic-angular';
 
 /**
  * Generated class for the NavbarComponent component.
@@ -19,16 +20,19 @@ export class NavbarComponent {
   menuToggleVisible: boolean = true;
 
   constructor(
-    private store: Store<AppStore>) { }
+    private store: Store<AppStore>,
+    private navCtrl: NavController) { }
 
 
   ngAfterViewInit() {
 
+    if(this.navCtrl.getViews().length > 1) this.menuToggleVisible = false;
+
     this.store.select('deviceState').subscribe(
       (deviceState: DeviceState) => {
 
-        if(deviceState.deviceType == 'tablet') this.menuToggleVisible = false;
-        else this.menuToggleVisible = true;
+        /* if(deviceState.deviceType == 'tablet') this.menuToggleVisible = false;
+        else this.menuToggleVisible = true; */
       }
     )
   }

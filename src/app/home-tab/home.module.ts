@@ -5,16 +5,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HomeTab } from './home-tab';
 import { HomePage } from './pages/home/home';
+import { DetailPage } from './pages/detail/detail';
+import { RootPage } from './pages/root/root';
+import { SeekPage } from './pages/seek/seek';
 
 @NgModule({
     declarations: [
         // Tab with split view
         HomeTab,
+        
 
         // Components
 
         // Pages list
-        HomePage
+        HomePage,
+        DetailPage,
+        RootPage,
+        SeekPage
     ],
     imports: [
         IonicModule,
@@ -28,7 +35,10 @@ import { HomePage } from './pages/home/home';
         // Components
 
         // Pages list
-        HomePage
+        HomePage,
+        DetailPage,
+        RootPage,
+        SeekPage
     ]
 })
 export class HomeModule { }

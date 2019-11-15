@@ -2,6 +2,9 @@
 
 <ion-content padding-left padding-right class="pageContent">
 
-    <div id="text" [@fade-in-out]="visibleText">{{text}}</div>
+    <div class="fade-in" [@fade-in-out]="visibleText">{{text}}</div>
+
+    <br>
+    <button class="fade-in" ion-button (tap)="goDetail()" [@fade-in-out]="visibleText"> go to detail</button>
 
 </ion-content>

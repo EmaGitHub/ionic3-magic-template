@@ -15,11 +15,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './core/user/effects/user.effects';
 import { UserReducer } from './core/user/reducers/user.reducer';
 import { DeviceReducer } from './core/device/reducers/device.reducer';
+import { SideMenuComponent } from './shared/side-menu/side-menu';
 
 @NgModule({
     declarations: [
         App,
-        Starter
+        Starter,
+        SideMenuComponent
     ],
     imports: [
         BrowserModule,
@@ -36,7 +38,8 @@ import { DeviceReducer } from './core/device/reducers/device.reducer';
     bootstrap: [IonicApp],
     entryComponents: [
         App,
-        Starter
+        Starter,
+        SideMenuComponent
     ],
     providers: [
         Store,

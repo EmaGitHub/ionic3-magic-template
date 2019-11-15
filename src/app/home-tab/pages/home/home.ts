@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FadeInOut } from '@app/core/animations';
+import { SplitViewService } from '@app/core/split-view';
+import { DetailPage } from '../detail/detail';
 
 @Component({
     selector: 'page-home',
@@ -14,6 +16,7 @@ export class HomePage {
     private visibleText: string = '0';
 
     constructor(
+        private splitViewService: SplitViewService
     ) {
 
     }
@@ -22,7 +25,12 @@ export class HomePage {
 
         setTimeout(() => {
             this.visibleText = '1';
-        }, 1000);
+        }, 500);
+    }
+
+    goDetail(){
+
+        this.splitViewService.getSplitView(0).pushOnDetail(DetailPage);
     }
 
 }
