@@ -20,7 +20,7 @@ export class TabsPage extends AutoUnsubscribe {
     public splitViewIsActive: boolean = true;
     public pushCounterBadge: number = 0;
 
-    public tabsVisible: boolean = true;
+    public tabsVisible: boolean = false;
 
     constructor(
         private splitViewService: SplitViewService,
@@ -29,6 +29,13 @@ export class TabsPage extends AutoUnsubscribe {
     ) {
         super();
     }
+
+    ionViewDidEnter() {
+        let elem = <HTMLElement>document.querySelector(".tabbar");
+        if (elem != null && !this.tabsVisible) {
+          elem.style.display = 'none';
+        }
+      }
 
     public ionViewDidLoad(): void {
         this._initSplitViewSubscriptions();

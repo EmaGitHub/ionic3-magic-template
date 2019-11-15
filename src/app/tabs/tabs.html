@@ -3,20 +3,18 @@
     #appTabs
     no-border
     color="gray"
-    class="app-tabs make-hide-tabs"
+    class="app-tabs"
     [ngClass]="{'split-view' : splitViewIsActive}"
     (ionChange)="onTabChanges($event)">
 
     <ion-tab
         [enabled]="true"
-        [show]="tabsVisible"
         [root]="tab1Root"
         [tabTitle]="'HOME' | translate"
         tabIcon="home"></ion-tab>
 
     <ion-tab
     [enabled]="true"
-    [show]="tabsVisible"
     [root]="tab2Root"
     [tabTitle]="'INFO' | translate"
     tabIcon="map"></ion-tab>
