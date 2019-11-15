@@ -5,8 +5,9 @@ page-login {
         #loginForm {
             width: 80%;
             max-width: 300px;
-            margin: 120px auto;
+            margin: 70px auto;
             text-align: center;
+            height: 0px;
 
             h5 {
                 color: map-get($colors, primary);

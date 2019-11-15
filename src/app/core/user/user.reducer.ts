@@ -1,5 +1,6 @@
 import {Action} from "@ngrx/store";
 import { User } from "./models/User";
+import { UserState } from "./models/user-state";
 
 export const UserActionTypes = {
   USER_LOGIN: 'USER_LOGIN',
@@ -7,13 +8,6 @@ export const UserActionTypes = {
   USER_LOGIN_ERROR: 'USER_LOGIN_ERROR',
   USER_LOGOUT_SUCCESS: 'USER_LOGOUT_SUCCESS',
 };
-
-export interface UserState {
-  loading: boolean,
-  error: boolean,
-  logged: boolean
-  user: User | null
-}
 
 const initialState: UserState = {
   loading: false,

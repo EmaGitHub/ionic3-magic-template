@@ -20,7 +20,7 @@ export class TabsPage extends AutoUnsubscribe {
     public splitViewIsActive: boolean = true;
     public pushCounterBadge: number = 0;
 
-    public tabsVisible: boolean = false;
+    public tabsVisible: boolean = true;
 
     constructor(
         private splitViewService: SplitViewService,

@@ -8,7 +8,8 @@ import { ViewController } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppStore } from '@app/app-store';
-import { UserState, LoginAction } from '@app/core/user/user.reducer';
+import { LoginAction } from '@app/core/user/user.reducer';
+import { UserState } from '@app/core/user/models/user-state';
 
 @Component({
     selector: 'page-login',
