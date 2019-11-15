@@ -3,7 +3,6 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
 import { LoggerService } from '@core/logger';
 import { IonicStorageModule } from '@ionic/storage';
 
-import { UserModuleOptions } from './models/UserModuleOptions';
 import { UserService } from './user.service';
 
 /**
@@ -28,17 +27,4 @@ export class UserModule {
         }
     }
 
-    /**
-    * Allow to pass a <UserModuleOptions> configuration to services in UserModule
-    * @param  {UserModuleOptions} options all available configuration for <UserModule>
-    * @returns {ModuleWithProviders}
-    */
-    public static forRoot(options?: UserModuleOptions): ModuleWithProviders {
-        return {
-            ngModule: UserModule,
-            providers: [
-                { provide: UserModuleOptions, useValue: options }
-            ]
-        }
-    }
 }

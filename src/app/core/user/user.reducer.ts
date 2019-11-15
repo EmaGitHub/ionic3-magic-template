@@ -1,28 +1,8 @@
 import {Action} from "@ngrx/store";
 import { User } from "./models/User";
-import { UserState } from "./models/user-state";
-
-export const UserActionTypes = {
-  USER_LOGIN: 'USER_LOGIN',
-  USER_LOGIN_SUCCESS: 'USER_LOGIN_SUCCESS',
-  USER_LOGIN_ERROR: 'USER_LOGIN_ERROR',
-  USER_LOGOUT_SUCCESS: 'USER_LOGOUT_SUCCESS',
-};
-
-const initialState: UserState = {
-  loading: false,
-  logged: false,
-  error: false,
-  user: null
-};
-
-export class LoginAction implements Action {
-  type = UserActionTypes.USER_LOGIN;
-  user!: User;
-
-  constructor(public email:string, public password:string) {}
-  
-}
+import { UserState, initialState } from "./models/user-state";
+import { UserActionTypes } from "./actions/user-actions-types";
+import { LoginAction } from "./actions/login-action";
 
 export function userReducer(state: any = initialState, action: LoginAction): UserState {
 
@@ -39,7 +19,7 @@ export function userReducer(state: any = initialState, action: LoginAction): Use
       console.log("pass on userReducer case error")
       return {...state, loading: false, error: true};
 
-    case UserActionTypes.USER_LOGOUT_SUCCESS:
+    case UserActionTypes.USER_LOGOUT:
         console.log("pass on userReducer case userLogoutSuccess")
         return {...state, loading: false, logged: false};
 

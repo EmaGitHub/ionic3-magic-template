@@ -3,11 +3,11 @@ import { Starter } from '@app/starter/starter';
 import { AutoUnsubscribe } from '@core/auto-unsubscribe';
 import { DeviceService } from '@core/device';
 import { LoginStates, UserService } from '@core/user';
-import { Platform, NavController, ViewController, Nav } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { AppStore } from './app-store';
 import { Store } from '@ngrx/store';
-import { UserActionTypes } from './core/user/user.reducer';
 import { LoginService } from './login';
+import { UserActionTypes } from './core/user/actions/user-actions-types';
 
 @Component({
     templateUrl: 'app.html'
@@ -63,8 +63,8 @@ export class App extends AutoUnsubscribe {
 
     public logOut(){
 
+        this.store.dispatch({type: UserActionTypes.USER_LOGOUT});
         setTimeout(() => {
-            this.store.dispatch({type: UserActionTypes.USER_LOGOUT_SUCCESS});
             this.loginService.openMainLogin(); 
         }, 400);
     }

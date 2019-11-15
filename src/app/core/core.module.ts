@@ -16,6 +16,7 @@ import { UserModule } from '@core/user/user.module';
 import { VersioningModule } from '@core/versioning';
 import { ENV } from '@env';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { UserService } from './user';
 
 @NgModule({
     imports: [
@@ -33,9 +34,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
         DBModule.forRoot({
             dbName: 'ionic_db'
         }),
-        UserModule.forRoot({
-            storePrefix: ENV.storePrefix
-        }),
         VersioningModule,
         NavigationModule,
         SplitViewModule,
@@ -45,6 +43,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
         AuthService,
         DeepLinkService,
         InAppBrowser,
+        UserService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ResponseErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true }
