@@ -19,7 +19,7 @@ export class LoginPage {
 
     private username: string = '';
     private password: string = '';
-    private userStateSubscription$?: Subscription;
+    private userStateSubscription$: Subscription = new Subscription;
 
     constructor(
         private logger: LoggerService,

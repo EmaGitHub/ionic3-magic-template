@@ -63,9 +63,21 @@ export class App extends AutoUnsubscribe {
 
     public logOut(){
 
-        this.store.dispatch({type: UserActionTypes.USER_LOGOUT});
         setTimeout(() => {
-            this.loginService.openMainLogin(); 
-        }, 400);
+            
+            this.deviceService.confirm("Are you sure do you want to exit app?", {title: 'Exit confirm', buttons: [{
+                text: 'CANCEL',
+                cssClass: 'primary',
+                role: 'cancel',
+                handler: () => {}
+            },{
+                text: 'OK',
+                cssClass: 'primary',
+                handler: () => {
+                    this.store.dispatch({type: UserActionTypes.USER_LOGOUT});
+                    this.loginService.openMainLogin(); 
+                }
+            }]})
+        }, 300);       
     }
 }
