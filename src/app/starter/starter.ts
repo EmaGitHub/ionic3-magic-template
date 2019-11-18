@@ -48,10 +48,12 @@ export class Starter {
                         this.userService.autologin().then(
                             () => {
                                 console.log("Autologin success")
+                                this.deviceService.hideSplashscreen();
                                 this._loadTabsPage();
                             },
                             () => {
                                 console.log("Autologin failed: ")
+                                this.deviceService.hideSplashscreen();
                                 this.loginService.openMainLogin();
                             }
                         )

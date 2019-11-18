@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Ionic3 Template</name>
+<widget id="io.magic.template" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Ionic Magic Template</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -37,6 +37,10 @@
     <preference name="loadUrlTimeoutValue" value="700000" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <preference name="android-minSdkVersion" value="26" />
+        <preference name="android-targetSdkVersion" value="26" />
+        <hook src="hooks/copy_gradle_extra.js" type="after_platform_add" />
+        <hook src="hooks/copy_properties_extra.js" type="after_platform_add" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -117,6 +121,7 @@
     <plugin name="cordova-plugin-compat" spec="1.2.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.0.5" />
     <plugin name="cordova-universal-links-plugin" spec="https://github.com/lcaprini/cordova-universal-links-plugin.git" />
-    <plugin name="cordova-plugin-firebase" spec="1.0.0" />
     <plugin name="cordova-plugin-app-version" spec="0.1.9" />
+    <plugin name="cordova-plugin-firebase" spec="2.0.5" />
+    <engine name="android" spec="7.1.4" />
 </widget>

@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:474572383177:android:0010d760f46edee1",
         "android_client_info": {
-          "package_name": "it.engds.councilapp"
+          "package_name": "io.magic.template"
         }
       },
       "oauth_client": [

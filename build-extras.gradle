@@ -1,0 +1,53 @@
+def dependencyMap = [
+        "com.google.firebase:firebase-core": "16.0.8",
+        "com.google.firebase:firebase-iid": "17.1.1",
+        "com.google.firebase:firebase-messaging": "17.5.0",
+        "com.google.firebase:firebase-config": "16.4.1",
+        "com.google.firebase:firebase-perf": "16.2.4",
+        "com.google.android.gms:play-services-tagmanager": "16.0.8",
+        "com.google.firebase:firebase-auth": "16.2.0"
+]
+
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+    }
+    dependencies {
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:3.0.0'
+    }
+// Moved configuration from here.
+}
+
+// Placed configuration here.
+configurations.all {
+                resolutionStrategy {
+                                force 'com.android.support:support-v4:26.0.0'
+                                force 'com.google.android.gms:play-services-gcm:16.1.0'
+                                force 'com.google.android.gms:play-services-base:16.1.0'
+
+                                eachDependency { DependencyResolveDetails details ->
+                            def group = details.requested.group
+                            def name = details.requested.name
+                            def fullName =  group + ":" + name
+                            print fullName
+                            if (dependencyMap.containsKey(fullName)) {
+                                details.useVersion dependencyMap[fullName]
+                            }
+                }
+        }
+}
+
+ext {
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.1'
+    defaultMinSdkVersion = 19
+    googlePlayServicesVersion = "16.0.0"
+    firebaseVersion = "17.3.4"
+ }
+
+
