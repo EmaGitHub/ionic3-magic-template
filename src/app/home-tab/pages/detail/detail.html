@@ -2,6 +2,12 @@
 
 <ion-content padding-left padding-right class="pageContent">
 
-    <div id="text" [@fade-in-out]="visibleText">{{text}}</div>
+    <div [@fade-in-out]="visibleText" id="text">{{text}}</div>
+
+    <button [@fade-in-out]="visibleText" ion-button (tap)="makeReq()" id="text">HTTP Req</button>
+
+    <span *ngFor="let r of resp"> 
+        <div>{{r.title}}</div>
+    </span>
 
 </ion-content>

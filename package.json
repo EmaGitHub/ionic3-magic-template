@@ -38,6 +38,7 @@
     "@ionic-native/firebase": "4.7.0",
     "@ionic-native/geolocation": "4.7.0",
     "@ionic-native/globalization": "4.5.3",
+    "@ionic-native/http": "^4.20.0",
     "@ionic-native/in-app-browser": "4.7.0",
     "@ionic-native/keyboard": "4.5.3",
     "@ionic-native/launch-navigator": "4.7.0",
@@ -56,6 +57,7 @@
     "@typescript-eslint/eslint-plugin": "1.7.0",
     "@typescript-eslint/parser": "1.7.0",
     "cordova-android": "7.1.4",
+    "cordova-plugin-advanced-http": "2.2.0",
     "cordova-plugin-app-version": "0.1.9",
     "cordova-plugin-compat": "1.2.0",
     "cordova-plugin-device": "2.0.1",
@@ -130,7 +132,10 @@
         "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
       },
       "cordova-universal-links-plugin": {},
-      "cordova-plugin-firebase": {}
+      "cordova-plugin-firebase": {},
+      "cordova-plugin-advanced-http": {
+        "OKHTTP_VERSION": "3.10.0"
+      }
     },
     "platforms": [
       "android"

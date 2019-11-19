@@ -2,8 +2,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HTTP } from '@ionic-native/http';
 import { HttpObserve } from '@angular/common/http/src/client';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
@@ -11,14 +12,24 @@ import { Api } from './models/Api';
 import { Backend } from './models/Backend';
 import { HttpClientOptions } from './models/HttpClientOptions';
 import { ResponseTypes } from './models/ResponseTypes';
+import { IHttpService } from './http.interface';
+import { DeviceService } from '../device';
+import { HttpClientProvider } from './httpClient.service';
+import { HttpNativeProvider } from './httpNative.service';
 
 @Injectable()
 export class ApiService {
+
     private _backend: Backend|null = null;
+    private _http?: IHttpService;
 
     constructor(
-        private http: HttpClient
-    ) { }
+        private deviceService: DeviceService,
+        private injector: Injector
+    ) {
+        if(!this.deviceService.isIos()) this._http = this.injector.get(HttpClientProvider);
+        else this._http = this.injector.get(HttpNativeProvider);
+     }
 
     /**
      * Init the Api Service with configuration fetched from config file
@@ -26,6 +37,7 @@ export class ApiService {
      */
     public init(backend: Backend) : void {
         this._backend = new Backend(backend);
+        console.log("this backend ",this._backend);
     }
 
     /**
@@ -60,6 +72,7 @@ export class ApiService {
 
             let httpClientOptions = this._prepareOptions(api, options);
 
+ 
             return this.call(api, httpClientOptions);
         }
         else {
@@ -146,9 +159,13 @@ export class ApiService {
      * @returns Observable
      */
     public call<T>(api: Api, httpClientOptions: HttpClientOptions): Observable<T> {
-        return this.http.request(api.method, api.url, httpClientOptions)
+        return this._http!.request(api.method, api.url, httpClientOptions)
             .map(res => this._handleSuccess(res))
             .catch(res => this._handleError(res));
+    }
+
+    public callNative<T>(api: Api, httpClientOptions: HttpClientOptions): Observable<T>{
+        return Observable.create()
     }
 
     private _handleSuccess(response: any): any {

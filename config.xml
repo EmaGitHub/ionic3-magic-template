@@ -124,4 +124,7 @@
     <plugin name="cordova-plugin-app-version" spec="0.1.9" />
     <plugin name="cordova-plugin-firebase" spec="2.0.5" />
     <engine name="android" spec="7.1.4" />
+    <plugin name="cordova-plugin-advanced-http" spec="2.2.0">
+        <variable name="OKHTTP_VERSION" value="3.10.0" />
+    </plugin>
 </widget>

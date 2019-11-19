@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { ConfigService } from '@core/config/config.service';
 
 import { ApiService } from './api.service';
+import { HttpClientProvider } from './httpClient.service';
+import { HttpNativeProvider } from './httpNative.service';
+import { FakeBackend } from './models/fake-backend';
 
 /**
  * @name ApiModule
@@ -17,7 +20,10 @@ import { ApiService } from './api.service';
     ],
     providers: [
         ApiService,
-        ConfigService
+        ConfigService,
+        HttpClientProvider,
+        HttpNativeProvider,
+        FakeBackend
     ]
 })
 export class ApiModule {

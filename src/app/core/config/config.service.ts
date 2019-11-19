@@ -9,6 +9,7 @@ import { Storage } from '@ionic/storage';
 
 import { Config } from './models/Config';
 import { ConfigModuleOptions } from './models/ConfigModuleOptions';
+import { FakeBackend } from '../api/models/fake-backend';
 
 const storageKeys = {
     lastConfig: 'last'
@@ -27,7 +28,8 @@ export class ConfigService {
         private logger: LoggerService,
         private deviceService: DeviceService,
         private apiService: ApiService,
-        private versioningService: VersioningService
+        private versioningService: VersioningService,
+        private fakeBackend: FakeBackend
     ) {
         this.storage = new Storage({
             name: options.storePrefix || 'storage',
@@ -75,7 +77,9 @@ export class ConfigService {
     private initConfig(config: Config): void {
         this.config = new Config(config);
         // Init the api service
-        this.apiService.init(this.config.backend);
+        //this.apiService.init(this.config.backend);
+        //mock Apis
+        this.apiService.init(this.fakeBackend.getApis());
         // Update the logger service
         this.logger.changeLevel(this.config.loggerLevel);
         // Init the versioning service
