@@ -14,7 +14,6 @@ export class ResponseInterceptor implements HttpInterceptor {
             .pipe(
                 tap((response: HttpEvent<any>) => {
                     if (response instanceof HttpResponse) {
-                        console.log('response', response);
 
                         if (response.body.esito) {
                             try {

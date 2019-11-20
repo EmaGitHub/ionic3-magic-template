@@ -6,6 +6,8 @@ import { ApiService } from './api.service';
 import { HttpClientProvider } from './httpClient.service';
 import { HttpNativeProvider } from './httpNative.service';
 import { FakeBackend } from './models/fake-backend';
+import { EffectsModule } from '@ngrx/effects';
+import { ApiEffects } from './effects/api-effects';
 
 /**
  * @name ApiModule
@@ -16,7 +18,8 @@ import { FakeBackend } from './models/fake-backend';
  */
 @NgModule({
     imports: [
-        HttpClientModule
+        HttpClientModule,
+/*         EffectsModule.forFeature([ApiEffects])*/   
     ],
     providers: [
         ApiService,

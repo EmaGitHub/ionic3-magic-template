@@ -16,6 +16,8 @@ import { UserEffects } from './core/user/effects/user.effects';
 import { UserReducer } from './core/user/reducers/user.reducer';
 import { DeviceReducer } from './core/device/reducers/device.reducer';
 import { SideMenuComponent } from './shared/side-menu/side-menu';
+import { ApiReducer } from './core/api/reducers/api.reducer';
+import { ApiEffects } from './core/api/effects/api-effects';
 
 @NgModule({
     declarations: [
@@ -26,8 +28,8 @@ import { SideMenuComponent } from './shared/side-menu/side-menu';
     imports: [
         BrowserModule,
         IonicModule.forRoot(App, IonicConfig),
-        StoreModule.forRoot(<any>{userState: UserReducer, deviceState: DeviceReducer}),
-        EffectsModule.forRoot([UserEffects]),
+        EffectsModule.forRoot([UserEffects, ApiEffects]),
+        StoreModule.forRoot({userState: UserReducer, deviceState: DeviceReducer, apiState: ApiReducer}),
         CoreModule,
         SharedModule,
         LoginModule,

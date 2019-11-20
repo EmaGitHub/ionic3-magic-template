@@ -171,10 +171,9 @@ export class AuthService {
 
         return new Promise((resolve, reject) => {
            
-            resolve({
-
-            })
-
+            setTimeout(() => {
+                resolve({})
+            }, 500);
         });
     }
 

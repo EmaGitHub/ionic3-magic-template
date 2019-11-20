@@ -62,6 +62,7 @@ export class ApiService {
 			responseType?: ResponseTypes;
 		} = {}
     ): Observable<T> {
+
         // Use getApi in configService to define all options for api
         let api = Object.assign({},(this._backend as Backend).getApi(apiName));
 
@@ -71,7 +72,7 @@ export class ApiService {
 
             let httpClientOptions = this._prepareOptions(api, options);
 
- 
+            console.log("callApi ",JSON.stringify(api),"\noptions: ",JSON.stringify(httpClientOptions))
             return this.call(api, httpClientOptions);
         }
         else {

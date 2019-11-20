@@ -2,7 +2,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { LoggerService } from '@core/logger';
 import { IonicStorageModule } from '@ionic/storage';
-
 import { UserService } from './user.service';
 
 /**
@@ -13,7 +12,7 @@ import { UserService } from './user.service';
 @NgModule({
     imports: [
         IonicStorageModule.forRoot(),
-        HttpClientModule
+        HttpClientModule,
     ],
     providers: [
         UserService,

@@ -1,9 +1,10 @@
 import { initialUserState, UserState } from "../models/user-state";
 import { LoginAction } from "../actions/login-action";
 import { UserActionTypes } from "../actions/user-actions-types";
+import { Action } from "@ngrx/store";
 
 
-export function UserReducer(state: any = initialUserState, action: LoginAction): UserState {
+export function UserReducer(state: any = initialUserState, action: Action): UserState {
 
   switch (action.type) {
     case UserActionTypes.USER_LOGIN:
@@ -12,7 +13,7 @@ export function UserReducer(state: any = initialUserState, action: LoginAction):
 
     case UserActionTypes.USER_LOGIN_SUCCESS:
       console.log("pass on userReducer case userLoginSuccess")
-      return {...state, user: action.user, loading: false, logged: true};
+      return {...state, user: (action as LoginAction).user, loading: false, logged: true};
 
     case UserActionTypes.USER_LOGIN_ERROR:
       console.log("pass on userReducer case error")
