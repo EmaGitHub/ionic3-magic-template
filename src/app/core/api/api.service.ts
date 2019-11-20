@@ -37,7 +37,6 @@ export class ApiService {
      */
     public init(backend: Backend) : void {
         this._backend = new Backend(backend);
-        console.log("this backend ",this._backend);
     }
 
     /**
@@ -162,10 +161,6 @@ export class ApiService {
         return this._http!.request(api.method, api.url, httpClientOptions)
             .map(res => this._handleSuccess(res))
             .catch(res => this._handleError(res));
-    }
-
-    public callNative<T>(api: Api, httpClientOptions: HttpClientOptions): Observable<T>{
-        return Observable.create()
     }
 
     private _handleSuccess(response: any): any {

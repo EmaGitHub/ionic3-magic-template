@@ -32,6 +32,9 @@ export class DetailPage {
 
             (resp: any) => {
                 this.resp = resp;
+            },
+            (err: any) => {
+                console.log("Error: ",err)
             }    
         );
     }
