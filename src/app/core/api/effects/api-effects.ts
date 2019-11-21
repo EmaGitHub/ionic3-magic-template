@@ -14,6 +14,7 @@ export class ApiEffects{
 
     @Effect()
     apiCall = this.actions.ofType(ApiActionTypes.REQUEST_SENT)
+        /* .map((action: any) => ({type: ApiActionTypes.REQUEST_SENT, apiName: action.apiName})) */
         .switchMap((action: any) => this.apiService.callApi(action.api, action.options) )
         .pipe(
             map(apiResponse => ({ type: ApiActionTypes.SUCCESS_RESPONSE_RECEIVED, response: apiResponse})),

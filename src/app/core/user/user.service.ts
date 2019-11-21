@@ -319,7 +319,7 @@ export class UserService {
 
     public fakeFetchUserProfile(username: string): Observable<any>{
 
-        console.log("fake feth user profile")
+        console.log("fake fetch user profile")
 
         var source = Observable.create(
             (observer: any) => {

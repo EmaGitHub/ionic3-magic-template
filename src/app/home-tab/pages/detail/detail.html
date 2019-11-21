@@ -3,16 +3,19 @@
 <ion-content padding-left padding-right class="pageContent">
 
     <div [@fade-in-out]="visibleText" id="text">{{text}}</div>
+    <br>
+    <div [@fade-in-out]="visibleText" id="text">
+        <button ion-button (tap)="makeGetReq()" >HTTP GET Req</button>
+        <button ion-button (tap)="makePostReq()" >HTTP POST Req</button>
+    </div>
 
-    <span [@fade-in-out]="visibleText" id="text">
-    <button ion-button (tap)="makeGetReq()" >HTTP GET Req</button>
-    <button ion-button (tap)="makePostReq()" >HTTP POST Req</button>
-    </span>
-    
+    <br>
+    <div [@fade-in-out]="visibleText" id="text" *ngIf="postResp">{{postResp}}</div>
+    <br>
     <span *ngFor="let r of getResp"> 
-        <div>{{r.title}}</div>
+        <div> - {{r.title}}</div>
+        <hr>
     </span>
-
-    <div>{{postResp}}</div>
+   
 
 </ion-content>
