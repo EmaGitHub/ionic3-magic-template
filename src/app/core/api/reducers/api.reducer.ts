@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { initialApiState } from "../redux-models/api-state";
 import { ApiActionTypes } from "../actions/api-action-types";
 import { ApiCallAction } from "../actions/api-call-action";
+import { ApiResponseAction } from "../actions/api-response-action";
 
 export function ApiReducer (state: any = initialApiState, action: Action){
 
@@ -13,11 +14,11 @@ export function ApiReducer (state: any = initialApiState, action: Action){
 
         case(ApiActionTypes.SUCCESS_RESPONSE_RECEIVED):
             console.log("pass on apiReducer case success response received")
-            return {...state, response: (action as ApiCallAction).response, requestPending: false};
+            return {...state, response: (action as ApiResponseAction).response, requestPending: false};
 
         case(ApiActionTypes.FAIL_RESPONSE_RECEIVED):
             console.log("pass on apiReducer case response failed ")
-            return {...state, error: (action as ApiCallAction).error, requestPending: false};
+            return {...state, error: (action as ApiResponseAction).error, requestPending: false};
 
         default:
             return state;

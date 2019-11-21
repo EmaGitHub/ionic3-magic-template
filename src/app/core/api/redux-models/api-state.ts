@@ -4,7 +4,7 @@ export interface ApiCallState {
     apiName: string;
     requestPending: boolean;
     response: any | null;
-    error: string | null;
+    error: any | null;
 }
 
 export const initialApiState: ApiCallState = {
