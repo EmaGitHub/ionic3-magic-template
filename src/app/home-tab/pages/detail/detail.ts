@@ -29,15 +29,12 @@ export class DetailPage implements OnInit {
     ngOnInit() {
 
         this.apiStateSubscription$ = this.store.select('apiState').subscribe((state: any) => {
-
-            if(state.error == null) {
                 
-                console.log("state str ",JSON.stringify(state))
-                if(state.api == 'get1') this.getResp = state.response
-                if(state.api == 'post') this.postResp = state.response
-            }
+            console.log("state str ",JSON.stringify(state))
 
-            else console.log("Error: ",state.error)
+            //if(state.api == 'get1') this.getResp = state.response
+            //if(state.api == 'post') this.postResp = state.response
+
         })
     }
 

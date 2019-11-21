@@ -149,7 +149,7 @@ export class UserService {
                         }
                     }
                     else {
-                        reject();
+                        reject("no refresh token");
                     }
                 })
             }
@@ -157,7 +157,9 @@ export class UserService {
             else {
                 reject();
             }
-        });
+        })/* .catch((error: any) => {
+
+        }); */
     }
 
     /**
@@ -318,11 +320,15 @@ export class UserService {
     public fakeFetchUserProfile(username: string): Observable<any>{
 
         console.log("fake feth user profile")
+
         var source = Observable.create(
             (observer: any) => {
                 observer.next()
+            },
+            (error: Error) => {
+                console.log("error ",error)
             });
         
-        return source;
+        return source; 
     }
 }

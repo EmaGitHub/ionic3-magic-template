@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect } from "@ngrx/effects";
 import { ApiActionTypes } from "../actions/api-action-types";
 import { ApiService } from "../api.service";
-import { Observable } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs/observable/of";
 

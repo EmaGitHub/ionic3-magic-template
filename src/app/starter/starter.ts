@@ -45,14 +45,15 @@ export class Starter {
                     () => {
                         this.logger.debug('Initialize completed');
                         // Try autologin
+                        console.log("try autologin")
                         this.userService.autologin().then(
                             () => {
                                 console.log("Autologin success")
                                 this.deviceService.hideSplashscreen();
                                 this._loadTabsPage();
                             },
-                            () => {
-                                console.log("Autologin failed: ")
+                            (error: Error) => {
+                                console.log("Autologin failed: ",error)
                                 this.deviceService.hideSplashscreen();
                                 this.loginService.openMainLogin();
                             }
