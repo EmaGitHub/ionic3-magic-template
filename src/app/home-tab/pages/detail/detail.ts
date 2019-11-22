@@ -27,16 +27,17 @@ export class DetailPage implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-       
     }
 
     listenForResponse(){
 
         this.apiStateSubscription$.subscribe((state: ApiCallState) => {
 
+            console.log("state listened ",state);
+
             if (state.requestPending == false && state.error==null){
-                if (state.apiName == 'get1') this.getResp = state.response
-                if (state.apiName == 'post') this.postResp = JSON.stringify(state.response)
+                if (state.apiName[state.apiName.length-1] == 'get1') this.getResp = state.response
+                if (state.apiName[state.apiName.length-1] == 'post') this.postResp = JSON.stringify(state.response)
             }
         })
     }

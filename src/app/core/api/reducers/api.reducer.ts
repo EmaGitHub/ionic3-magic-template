@@ -10,10 +10,10 @@ export function ApiReducer (state: any = initialApiState, action: Action){
 
         case(ApiActionTypes.REQUEST_SENT):
             console.log("pass on apiReducer case request sent")
-            return {...state, requestPending: true, apiName: (action as ApiCallAction).api};
+            return {...state, requestPending: true, apiName: [...state.apiName, (action as ApiCallAction).apiName]};
 
         case(ApiActionTypes.SUCCESS_RESPONSE_RECEIVED):
-            console.log("pass on apiReducer case success response received")
+            console.log("pass on apiReducer case success response received for api ",state.apiName)
             return {...state, response: (action as ApiResponseAction).response, requestPending: false};
 
         case(ApiActionTypes.FAIL_RESPONSE_RECEIVED):

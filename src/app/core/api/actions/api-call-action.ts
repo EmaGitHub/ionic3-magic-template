@@ -5,5 +5,5 @@ export class ApiCallAction implements Action {
 
     type: string = ApiActionTypes.REQUEST_SENT;
 
-    constructor(public api: any, public options?: any) {}
+    constructor(public apiName: any, public options?: any) {}
 }

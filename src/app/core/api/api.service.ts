@@ -14,8 +14,8 @@ import { HttpClientOptions } from './models/HttpClientOptions';
 import { ResponseTypes } from './models/ResponseTypes';
 import { IHttpService } from './http.interface';
 import { DeviceService } from '../device';
-import { HttpClientProvider } from './httpClient.service';
-import { HttpNativeProvider } from './httpNative.service';
+import { HttpClientProvider } from './clients/httpClient.service';
+import { HttpNativeClientProvider } from './clients/httpNativeClient.service';
 
 @Injectable()
 export class ApiService {
@@ -28,7 +28,7 @@ export class ApiService {
         private injector: Injector
     ) {
         if(!this.deviceService.isIos()) this._http = this.injector.get(HttpClientProvider);
-        else this._http = this.injector.get(HttpNativeProvider);
+        else this._http = this.injector.get(HttpNativeClientProvider);
      }
 
     /**

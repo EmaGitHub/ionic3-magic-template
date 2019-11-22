@@ -1,13 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ConfigService } from '@core/config/config.service';
-
 import { ApiService } from './api.service';
-import { HttpClientProvider } from './httpClient.service';
-import { HttpNativeProvider } from './httpNative.service';
 import { FakeBackend } from './models/fake-backend';
-import { EffectsModule } from '@ngrx/effects';
-import { ApiEffects } from './effects/api-effects';
+
+import { HttpClientProvider } from './clients/httpClient.service';
+import { HttpNativeClientProvider } from './clients/httpNativeClient.service';
 
 /**
  * @name ApiModule
@@ -25,7 +23,7 @@ import { ApiEffects } from './effects/api-effects';
         ApiService,
         ConfigService,
         HttpClientProvider,
-        HttpNativeProvider,
+        HttpNativeClientProvider,
         FakeBackend
     ]
 })
