@@ -1,7 +1,7 @@
 
 export interface ApiCallState {
 
-    apiName: string[];
+    apiName: string;
     requestPending: boolean;
     response: any | null;
     error: any | null;
@@ -9,7 +9,7 @@ export interface ApiCallState {
 
 export const initialApiState: ApiCallState = {
 
-    apiName: [],
+    apiName: '',
     requestPending: false,
     response: null,
     error: null
