@@ -1,36 +1,25 @@
-
-<ion-tabs
-    #appTabs
-    no-border
-    color="white"
-    class="app-tabs"
-    [ngClass]="{'split-view' : splitViewIsActive}"
+<ion-tabs #appTabs no-border color="light" class="app-tabs" [ngClass]="{'split-view' : splitViewIsActive}"
     (ionChange)="onTabChanges($event)">
 
-    <ion-tab
-    [enabled]="true"
-    [root]="tab1Root"
-    [tabTitle]="'HOME' | translate"
-    tabIcon="home"></ion-tab>
+    <ion-tab [enabled]="true" [root]="tab1Root" [tabTitle]="'HOME' | translate" tabIcon="home"></ion-tab>
 
-    <ion-tab
-    [enabled]="true"
-    [root]="tab2Root"
-    [tabTitle]="'INFO' | translate"
-    tabIcon="map"></ion-tab>
+    <ion-tab [enabled]="true" [root]="tab2Root" [tabTitle]="'INFO' | translate" tabIcon="map"></ion-tab>
 
-    <ion-tab></ion-tab>
+    <ion-tab>
+    </ion-tab>
 
-    <ion-tab
-    [enabled]="true"
-    [root]="tab2Root"
-    [tabTitle]="'INFO' | translate"
-    tabIcon="color-filter"></ion-tab>
+    <ion-fab bottom center>
+        <div class="extern-card-button" ion-fab></div>
+    </ion-fab>
 
-    <ion-tab
-    [enabled]="true"
-    [root]="tab2Root"
-    [tabTitle]="'INFO' | translate"
-    tabIcon="logo-bitcoin"></ion-tab>
+    <ion-fab bottom center>
+        <button class="cardal-button" ion-fab color="danger">
+            <ion-icon name="card"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-tab [enabled]="true" [root]="tab2Root" [tabTitle]="'INFO' | translate" tabIcon="color-filter"></ion-tab>
+
+    <ion-tab [enabled]="true" [root]="tab2Root" [tabTitle]="'INFO' | translate" tabIcon="logo-bitcoin"></ion-tab>
 
 </ion-tabs>
