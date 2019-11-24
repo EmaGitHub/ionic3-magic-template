@@ -17,11 +17,10 @@
             }
 
             &[aria-selected="true"] {
-                background: map-get($colors, primary);
-                color: map-get($colors, light);
+                color: map-get($colors, danger);
 
                 ion-icon {
-                    color: map-get($colors, light);
+                    color: map-get($colors, danger);
                 }
             }
 

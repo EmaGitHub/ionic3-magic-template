@@ -25,10 +25,12 @@
 }
 
 .pageContent{
-    margin-top: 72px;
+    margin-top: 56px;
+    background: lightgray;
     
     .scroll-content{
-        margin-bottom: 140px !important;
+        padding-top: 16px;
+        padding-bottom: 16px !important;
     }
 }
 ion-nav.main-app.content-hidden {
