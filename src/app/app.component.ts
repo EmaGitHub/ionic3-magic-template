@@ -83,24 +83,4 @@ export class App extends AutoUnsubscribe {
             this.splitViewService.getSplitView(0).pushOnMaster(RootPage);
         }, 300);
     }
-
-    public logOut(){
-
-        setTimeout(() => {
-            
-            this.deviceService.confirm("Are you sure do you want to exit app?", {title: 'Exit confirm', buttons: [{
-                text: 'CANCEL',
-                cssClass: 'primary',
-                role: 'cancel',
-                handler: () => {}
-            },{
-                text: 'OK',
-                cssClass: 'primary',
-                handler: () => {
-                    this.store.dispatch({type: UserActionTypes.USER_LOGOUT});
-                    this.loginService.openMainLogin(); 
-                }
-            }]})
-        }, 300);       
-    }
 }

@@ -1,8 +1,53 @@
 side-menu {
 
+    ion-header {
+        #row-one{
+            background-image: url('../../../assets/imgs/florence.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 90px;
+        }
+        #row-two{
+            height: 90px;
+        }
+
+        .user-picture{
+            position: absolute;
+            top: 55px;
+            background-image: url('../../../assets/imgs/avatar.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            left: 20px;
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            padding: 10px;
+            z-index: 15;
+        }
+
+        .toolbar-title {
+
+            position: relative !important;
+            top: 24px;
+            font-size: 17px;
+
+            .subtitle {
+                position: relative !important;
+                bottom: 8px;
+                font-size: 70%;
+                color: gray
+            }
+        }
+
+    }
+
     #menuList{
 
-        padding-top: 8px !important;
+        padding-top: 186px !important;
     }
+
+
+
+
 
 }

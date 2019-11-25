@@ -5,6 +5,7 @@ import { LoginService } from '@app/login';
 import { UserActionTypes } from '@app/core/user/actions/user-actions-types';
 import { InfoPage } from '@app/info-tab';
 import { Nav } from 'ionic-angular';
+import { DeviceService } from '@app/core/device';
 
 /**
  * Generated class for the SideMenuComponent component.
@@ -22,7 +23,8 @@ export class SideMenuComponent {
 
   constructor(
         private store: Store<AppStore>,
-        private loginService: LoginService
+        private loginService: LoginService,
+        private deviceService: DeviceService
   ) {
   }
 
@@ -33,10 +35,22 @@ export class SideMenuComponent {
 
   public logOut(){
 
-      this.store.dispatch({type: UserActionTypes.USER_LOGOUT});
-      setTimeout(() => {
-          this.loginService.openMainLogin(); 
-      }, 400);
-  }
+    setTimeout(() => {
+        
+        this.deviceService.confirm("Are you sure do you want to exit app?", {title: 'Exit confirm', buttons: [{
+            text: 'CANCEL',
+            cssClass: 'primary',
+            role: 'cancel',
+            handler: () => {}
+        },{
+            text: 'OK',
+            cssClass: 'primary',
+            handler: () => {
+                this.store.dispatch({type: UserActionTypes.USER_LOGOUT});
+                this.loginService.openMainLogin(); 
+            }
+        }]})
+    }, 300);       
+}
 
 }
