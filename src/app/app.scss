@@ -26,11 +26,12 @@
 
 .pageContent{
     margin-top: 56px;
-    background: lightgray;
+    
     
     .scroll-content{
         padding-top: 16px;
         padding-bottom: 16px !important;
+        background: map-get($colors, home-back-gray);
     }
 }
 ion-nav.main-app.content-hidden {
