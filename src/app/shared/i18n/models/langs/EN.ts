@@ -14,7 +14,7 @@ export const EN = {
     HOME: 'Home',
     INFO: 'Info',
     ROOT: 'Root',
-    SEEK: 'Seek',
+    SEED: 'Seed',
 
     HOMEPAGE: 'HomePage',
     INFOPAGE: 'InfoPage',

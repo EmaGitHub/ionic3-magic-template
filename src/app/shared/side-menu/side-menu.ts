@@ -4,8 +4,11 @@ import { AppStore } from '@app/app-store';
 import { LoginService } from '@app/login';
 import { UserActionTypes } from '@app/core/user/actions/user-actions-types';
 import { InfoPage } from '@app/info-tab';
-import { Nav } from 'ionic-angular';
+import { Nav, MenuController } from 'ionic-angular';
 import { DeviceService } from '@app/core/device';
+import { SplitViewService } from '@app/core/split-view';
+import { RootPage } from '@app/home-tab/pages/root/root';
+import { SeekPage } from '@app/home-tab/pages/seek/seek';
 
 /**
  * Generated class for the SideMenuComponent component.
@@ -24,7 +27,11 @@ export class SideMenuComponent {
   constructor(
         private store: Store<AppStore>,
         private loginService: LoginService,
-        private deviceService: DeviceService
+        private deviceService: DeviceService,
+        private splitViewService: SplitViewService,
+        private menuCtrl: MenuController,
+
+
   ) {
   }
 
@@ -32,6 +39,25 @@ export class SideMenuComponent {
 
     this.nav!.setRoot(InfoPage, {}, {animate: true})
   }
+
+  public goHomePage(){
+        
+    console.log("splitview 0: ",this.splitViewService.getSplitView(0));
+    console.log("splitview 1: ",this.splitViewService.getSplitView(1));
+
+    this.menuCtrl.toggle()
+    setTimeout(() => {
+        this.splitViewService.getSplitView(0).pushOnMaster(SeekPage);
+    }, 300);
+}
+
+public goRootPage(){
+
+    this.menuCtrl.toggle()
+    setTimeout(() => {
+        this.splitViewService.getSplitView(0).pushOnMaster(RootPage);
+    }, 300);
+}
 
   public logOut(){
 
