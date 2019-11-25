@@ -1,8 +1,9 @@
 page-login {
     ion-content.content-md {
-        background: map-get($colors, secondary);
 
-        #loginForm {
+        background-color: white;
+
+        #registerForm {
             width: 80%;
             max-width: 300px;
             margin: 70px auto;
@@ -32,11 +33,15 @@ page-login {
                 }
             }
 
-            .button-link {
-                text-transform: none;
-                text-decoration: underline;
-                font-weight: normal;
-            }
         }
+    }
+
+    .register-button{
+
+        background-color: map-get($colors, danger);
+        width: 90%;
+        margin: 0 5%;
+        position: absolute;
+        bottom: 8vh;
     }
 }

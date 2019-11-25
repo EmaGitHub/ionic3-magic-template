@@ -9,6 +9,8 @@ export const EN = {
     ERR_MISSING_LANG_FILE: 'No translations for selected language was found.\nPlease check your internet connection and retry',
     ERR_NO_LAST_USER_INFO: 'No user info available',
 
+    REGISTER: 'Register',
+    CONTINUE: 'Continue',
     FORGOT_PASSWORD: 'Forgotten password?',
 
     HOME: 'Home',

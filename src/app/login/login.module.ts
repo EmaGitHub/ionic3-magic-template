@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginPage, LoginService } from '@app/login';
 import { SharedModule } from '@shared/shared.module';
 import { IonicModule } from 'ionic-angular';
+import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
 
 @NgModule({
     imports: [
@@ -12,13 +13,15 @@ import { IonicModule } from 'ionic-angular';
     ],
     declarations: [
         // Pages list
-        LoginPage
+        LoginPage,
+        WelcomeScreen
 
         // Components
     ],
     entryComponents: [
         // Pages list
-        LoginPage
+        LoginPage,
+        WelcomeScreen
 
         // Components
     ],

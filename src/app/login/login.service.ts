@@ -1,18 +1,30 @@
 import { Injectable } from '@angular/core';
-import { LoginPage } from '@app/login';
 import { DeviceService } from '@core/device';
 import { LoginStates, UserService } from '@core/user';
 import { Modal, ModalController } from 'ionic-angular';
+import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
+import { LoginPage } from './pages/login/login';
 
 @Injectable()
 export class LoginService {
     private _loginModal: Modal;
+    private _welcomeModal: Modal;
 
     constructor(
         private modalCtrl: ModalController,
         private deviceService: DeviceService,
         private userService: UserService
     ) {
+        // Create the main login modal
+        this._welcomeModal = this.modalCtrl.create(WelcomeScreen, {}, {
+            showBackdrop: true,
+            enableBackdropDismiss: false,
+            cssClass: 'login-modal'
+        });
+
+        this._welcomeModal.onDidDismiss(data => {
+            this.openMainLogin();
+          });
         // Create the main login modal
         this._loginModal = this.modalCtrl.create(LoginPage, {}, {
             showBackdrop: true,
@@ -27,6 +39,15 @@ export class LoginService {
      */
     public openMainLogin(): void {
         this._loginModal.present().then(() => {
+            this.deviceService.hideLoading();
+        });
+    }
+
+    /**
+     * Open the previuosly created main login modal
+     */
+    public openWelcomeScreen(): void {
+        this._welcomeModal.present().then(() => {
             this.deviceService.hideLoading();
         });
     }

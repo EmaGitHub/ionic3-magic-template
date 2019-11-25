@@ -1,0 +1,79 @@
+welcome-screen {
+
+    ion-content.content-md {
+
+        background-color: transparent;
+
+        #rt-logo{
+            padding-top: 12vh;
+            padding-bottom: 5vh;
+            h3{
+                font-family: caslon3-bd !important;
+                margin: 0px;
+                font-size: 26px;
+            }
+            #rt-logo-img{
+
+                margin-top: 5px;
+                height: 125px;
+                width: 110px;
+                background: url("../../../../assets/imgs/rt-logo.png");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        }
+
+        #welcome {
+
+            h1{
+                font-weight: 400;
+                font-size: 30px;
+            }
+            .lighter-text{
+                font-weight: 300;
+            }
+        }
+
+    }
+    .center {
+        text-align: center;
+        margin: auto;
+      }
+
+      .back-background{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: lightgray;
+        z-index: -20;
+      }
+
+      .background-image{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: url("../../../../assets/imgs/students.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -10;
+        filter: blur(2px);
+        -webkit-filter:  blur(2px);
+        -moz-filter:  blur(2px);
+        opacity: 0.2;
+
+    }
+
+    .register-button{
+
+        background-color: map-get($colors, danger);
+        width: 90%;
+        margin: 0 5%;
+        position: absolute;
+        bottom: 8vh;
+    }
+     
+}

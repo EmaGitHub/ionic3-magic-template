@@ -1,10 +1,9 @@
 <ion-content>
-
-    <div id="loginForm">
-        <h5> {{ 'LOGIN' | translate }} </h5>
+    
+    <div id="registerForm">
 
         <form (ngSubmit)="onLoginSubmit()" #loginForm="ngForm">
-            <ion-item class="login-input-container">
+            <ion-item class="login-input-container" lines="inset">
                 <ion-input
                     [clearInput]="false"
                     [placeholder]="'USERNAME' | translate"
@@ -36,16 +35,11 @@
                 class="login-button"
                 full
                 type="submit"
-                [disabled]="!loginForm.valid"> {{ 'LOGIN' | translate }} </button>
-
-            <button
-                ion-button
-                class="button-link"
-                clear
-                type="button"
-                tappable
-                (click)="onForgotPasswordClicked()"> {{ 'FORGOT_PASSWORD' | translate }} </button>
+                [disabled]="!loginForm.valid"> {{ 'REGISTER' | translate }} </button>
         </form>
     </div>
 
 </ion-content>
+
+<button ion-button class="register-button" (tap)="goLogin()">{{ 'CONTINUE' | translate }}</button>
+

@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -16,24 +15,28 @@
 // automatically applied to the <body> element in the app.
 
 .text-bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-.pageContent{
-    margin-top: 56px;
-    
-    
-    .scroll-content{
-        padding-top: 16px;
-        padding-bottom: 16px !important;
-        background: map-get($colors, home-back-gray);
-    }
+.pageContent {
+  margin-top: 56px;
+
+  .scroll-content {
+    padding-top: 16px;
+    padding-bottom: 16px !important;
+    background: map-get($colors, home-back-gray);
+  }
 }
 
 ion-nav.main-app.content-hidden {
-    background: map-get($colors, primary);
+  background: map-get($colors, primary);
 
-    ion-tabs.app-tabs {
-        display: none;
-    }
+  ion-tabs.app-tabs {
+    display: none;
+  }
+
+  @font-face {
+    font-family: caslon3-bd;
+    src: url(../assets/fonts/Caslon-bd.ttf) format("ttf");
+  }
 }

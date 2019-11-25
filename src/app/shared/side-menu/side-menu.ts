@@ -41,9 +41,6 @@ export class SideMenuComponent {
   }
 
   public goHomePage(){
-        
-    console.log("splitview 0: ",this.splitViewService.getSplitView(0));
-    console.log("splitview 1: ",this.splitViewService.getSplitView(1));
 
     this.menuCtrl.toggle()
     setTimeout(() => {
@@ -73,7 +70,7 @@ public goRootPage(){
             cssClass: 'primary',
             handler: () => {
                 this.store.dispatch({type: UserActionTypes.USER_LOGOUT});
-                this.loginService.openMainLogin(); 
+                this.loginService.openWelcomeScreen(); 
             }
         }]})
     }, 300);       
