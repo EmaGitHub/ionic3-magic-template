@@ -2,25 +2,26 @@
     <ion-slide class="first-content">
 
         <div class="register-form">
-                <form #loginForm="ngForm">
-                    <ion-item class="login-input-container" lines="inset">
-                        <ion-input [clearInput]="false" [placeholder]="'USERNAME' | translate" [(ngModel)]="username"
-                            name="username" autocapitalize="off" autocorrect="off" clearInput clearOnEdit="off"
-                            required></ion-input>
-                    </ion-item>
-                    <ion-item class="login-input-container">
-                        <ion-input [clearInput]="false" [placeholder]="'PASSWORD' | translate" [(ngModel)]="password"
-                            type="password" name="password" autocapitalize="off" autocorrect="off" clearOnEdit="off"
-                            required></ion-input>
-                        <ion-icon id="eye-icon" name="ios-eye-outline" item-right></ion-icon>
-                    </ion-item>
-                </form>
+            <form #loginForm="ngForm">
+                <ion-item class="login-input-container" lines="inset">
+                    <ion-input [clearInput]="false" [placeholder]="'USERNAME' | translate" [(ngModel)]="username"
+                        name="username" autocapitalize="off" autocorrect="off" clearInput clearOnEdit="off" required>
+                    </ion-input>
+                </ion-item>
+                <ion-item class="login-input-container">
+                    <ion-input [clearInput]="false" [placeholder]="'PASSWORD' | translate" [(ngModel)]="password"
+                        type="password" name="password" autocapitalize="off" autocorrect="off" clearOnEdit="off"
+                        required></ion-input>
+                    <ion-icon id="eye-icon" name="ios-eye-outline" item-right></ion-icon>
+                </ion-item>
+            </form>
 
-                <div class="barcode-circle">
-                    <div class="barcode-icon"></div>
-                    <p id="barcode-label">{{ 'BARCODE_READER' | translate }}</p>
-                </div>
+            <div class="barcode-circle">
+                <div class="barcode-icon"></div>
             </div>
+            <p id="barcode-label">{{ 'BARCODE_READER' | translate }}</p>
+
+        </div>
 
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="next()">{{ 'CONTINUE' | translate }}</button>
@@ -28,15 +29,19 @@
     </ion-slide>
 
     <ion-slide class="second-content">
-        
+
         <div class="feeds-label">
-
             <h3>{{'IMPROVE_FEEDS' | translate}}</h3>
-
             <h5>{{'FEEDS_LABEL' | translate}}</h5>
         </div>
 
-            <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
+        <div class="tags-div">
+            <span *ngFor="let tag of tags">
+                <tag [tag]='tag'></tag>
+            </span>
+        </div>
+        
+        <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="onLoginSubmit()">{{ 'REGISTER' | translate }}</button>
 
     </ion-slide>

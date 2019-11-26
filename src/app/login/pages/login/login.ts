@@ -25,6 +25,9 @@ export class LoginPage {
     @ContentChild(TextInput) ion_input?: TextInput;
     @ViewChild('slides') slides?: Slides;
 
+    public tags: string [] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon','MidnightBlue',
+    'Violet','CornflowerBlue','Red','SlateBlue','Tomato'];
+
     constructor(
         private logger: LoggerService,
         private userService: UserService,
@@ -53,7 +56,6 @@ export class LoginPage {
                 }
             }
         );
-
     }
 
     toggleShow()
@@ -83,12 +85,10 @@ export class LoginPage {
         this.inAppBrowser.create('https://forgotpassword.test.com', '_system');
     }
 
-    next() {
+    public next() {
         this.slides!.slideNext();
       }
-    /**
-     * Close login modal
-     */
+
     public closeModal(): void {
         this.viewCtrl.dismiss();
     }

@@ -59,17 +59,25 @@ page-login {
   .second-content{
 
     background-color: white;
+    text-align: center;
 
     .feeds-label {
       width: 90%;
       margin: 0 5%;
       position: absolute;
-      top: 10vh;
+      top: 8vh;
 
       h5{
         font-weight: 300;
         font-size: 15px;
       }
+    }
+    .tags-div{
+      width: 90%;
+      margin: 0 5%;
+      position: absolute;
+      top: 22vh;
+      padding: 16px;
     }
   }
 
@@ -79,6 +87,10 @@ page-login {
     margin: 0 5%;
     position: absolute;
     bottom: 8vh;
+  }
+
+  .login-button:disabled {
+    background-color: map-get($colors, google-gray);
   }
 
   .swiper-pagination-bullet-active {
