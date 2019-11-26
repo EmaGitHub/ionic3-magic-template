@@ -2,7 +2,7 @@
     
     <div id="registerForm">
 
-        <form (ngSubmit)="onLoginSubmit()" #loginForm="ngForm">
+        <form #loginForm="ngForm">
             <ion-item class="login-input-container" lines="inset">
                 <ion-input
                     [clearInput]="false"
@@ -25,21 +25,25 @@
                     name="password"
                     autocapitalize="off"
                     autocorrect="off"
-                    clearInput
                     clearOnEdit="off"
                     required></ion-input>
+                    <ion-icon id="eye-icon" name="ios-eye-outline" item-right></ion-icon>
+
             </ion-item>
 
-            <button
-                ion-button
-                class="login-button"
-                full
-                type="submit"
-                [disabled]="!loginForm.valid"> {{ 'REGISTER' | translate }} </button>
         </form>
+
+        <div class="barcode-circle">
+            <div class="barcode-icon"></div>
+            <p id="barcode-label">{{ 'BARCODE_READER' | translate }}</p>
+        </div>
+        
     </div>
+
+    
 
 </ion-content>
 
-<button ion-button class="register-button" (tap)="goLogin()">{{ 'CONTINUE' | translate }}</button>
+<button ion-button full
+type="submit" [disabled]="!loginForm.valid" class="register-button" (tap)="onLoginSubmit()">{{ 'CONTINUE' | translate }}</button>
 

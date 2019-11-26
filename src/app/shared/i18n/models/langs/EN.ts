@@ -35,5 +35,7 @@ export const EN = {
 
     USERNAME: 'Username',
 
-    YES: 'Yes'
+    YES: 'Yes',
+
+    BARCODE_READER: 'Barcode Reader'
 }

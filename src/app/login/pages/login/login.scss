@@ -1,47 +1,63 @@
 page-login {
-    ion-content.content-md {
+  ion-content.content-md {
+    background-color: white;
 
-        background-color: white;
+    #registerForm {
+      width: 80%;
+      margin: 18vh auto;
 
-        #registerForm {
-            width: 80%;
-            max-width: 300px;
-            margin: 70px auto;
-            text-align: center;
-            height: 0px;
+      .login-input-container {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        padding-left: 0px;
+        min-height: 0;
+        border-bottom: 1px solid black !important;
 
-            h5 {
-                color: map-get($colors, primary);
-                font-weight: bold;
-                margin-bottom: 20px;
-            }
-
-            .login-input-container {
-                margin-top: 20px;
-                margin-bottom: 20px;
-                padding-left: 0px;
-                min-height: 0;
-
-                .item-inner {
-                    padding-right: 0px;
-                    border: none;
-
-                    input {
-                        text-align: center;
-                        padding-right: 0;
-                    }
-                }
-            }
-
+        #eye-icon {
+          position: absolute;
+          right: 0;
+          bottom: 0;
         }
-    }
 
-    .register-button{
+        .item-inner {
+          padding-right: 0px;
+          border: none;
 
-        background-color: map-get($colors, danger);
-        width: 90%;
-        margin: 0 5%;
-        position: absolute;
-        bottom: 8vh;
+          input {
+            text-align: center;
+            padding-right: 0;
+          }
+        }
+      }
     }
+  }
+
+  .barcode-circle {
+    border-radius: 50%;
+    height: 15vh;
+    width: 15vh;
+    background-color: black;
+    margin: 15vh auto;
+    padding-top: 4vh;
+    text-align: center;
+
+    .barcode-icon {
+      background: url("../../../../assets/imgs/barcode-black.png");
+      filter: brightness(0) invert(1);
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 7vh;
+    }
+    #barcode-label {
+      margin-top: 5vh;
+    }
+  }
+
+  .register-button {
+    background-color: map-get($colors, danger);
+    width: 90%;
+    margin: 0 5%;
+    position: absolute;
+    bottom: 8vh;
+  }
 }

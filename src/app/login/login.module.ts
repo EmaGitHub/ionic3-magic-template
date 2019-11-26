@@ -4,6 +4,7 @@ import { LoginPage, LoginService } from '@app/login';
 import { SharedModule } from '@shared/shared.module';
 import { IonicModule } from 'ionic-angular';
 import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
+import { ShowHideInput } from './directives/show-hide-input.directive';
 
 @NgModule({
     imports: [
@@ -14,14 +15,16 @@ import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
     declarations: [
         // Pages list
         LoginPage,
-        WelcomeScreen
+        WelcomeScreen,
 
         // Components
+        // Directives
+        ShowHideInput
     ],
     entryComponents: [
         // Pages list
         LoginPage,
-        WelcomeScreen
+        WelcomeScreen,
 
         // Components
     ],

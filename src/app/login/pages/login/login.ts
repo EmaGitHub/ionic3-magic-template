@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ContentChild } from '@angular/core';
 import { TabsService } from '@app/tabs';
 import { DeviceService } from '@core/device';
 import { LoggerService } from '@core/logger';
 import { UserService } from '@core/user';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { ViewController } from 'ionic-angular';
+import { ViewController, TextInput } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppStore } from '@app/app-store';
@@ -20,6 +20,9 @@ export class LoginPage {
     private username: string = '';
     private password: string = '';
     private userStateSubscription$: Subscription = new Subscription;
+    show = false;
+
+    @ContentChild(TextInput) ion_input?: TextInput;
 
     constructor(
         private logger: LoggerService,
@@ -51,6 +54,17 @@ export class LoginPage {
         );
 
     }
+
+    toggleShow()
+  {
+    this.show = !this.show;
+    if (this.show){
+        this.ion_input!.type("text");
+    }
+    else {
+        this.ion_input!.type("password");
+    }
+  }
 
     ionViewDidLeave() {
 
