@@ -1,21 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LoginPage, LoginService } from '@app/login';
+import { LoginService } from '@app/login';
 import { SharedModule } from '@shared/shared.module';
 import { IonicModule } from 'ionic-angular';
 import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
 import { ShowHideInput } from './directives/show-hide-input.directive';
+import { LoginPage } from './pages/login/login';
 
 @NgModule({
     imports: [
         IonicModule,
         SharedModule,
-        FormsModule
+        FormsModule,
     ],
     declarations: [
         // Pages list
-        LoginPage,
         WelcomeScreen,
+        LoginPage,
 
         // Components
         // Directives
@@ -23,8 +24,8 @@ import { ShowHideInput } from './directives/show-hide-input.directive';
     ],
     entryComponents: [
         // Pages list
-        LoginPage,
         WelcomeScreen,
+        LoginPage
 
         // Components
     ],

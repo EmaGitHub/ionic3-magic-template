@@ -1,49 +1,45 @@
-<ion-content>
-    
-    <div id="registerForm">
+<ion-slides #slides pager>
+    <ion-slide class="first-content">
 
-        <form #loginForm="ngForm">
-            <ion-item class="login-input-container" lines="inset">
-                <ion-input
-                    [clearInput]="false"
-                    [placeholder]="'USERNAME' | translate"
-                    [(ngModel)]="username"
-                    name="username"
-                    autocapitalize="off"
-                    autocorrect="off"
-                    clearInput
-                    clearOnEdit="off"
-                    required></ion-input>
-            </ion-item>
+        <div class="register-form">
+                <form #loginForm="ngForm">
+                    <ion-item class="login-input-container" lines="inset">
+                        <ion-input [clearInput]="false" [placeholder]="'USERNAME' | translate" [(ngModel)]="username"
+                            name="username" autocapitalize="off" autocorrect="off" clearInput clearOnEdit="off"
+                            required></ion-input>
+                    </ion-item>
+                    <ion-item class="login-input-container">
+                        <ion-input [clearInput]="false" [placeholder]="'PASSWORD' | translate" [(ngModel)]="password"
+                            type="password" name="password" autocapitalize="off" autocorrect="off" clearOnEdit="off"
+                            required></ion-input>
+                        <ion-icon id="eye-icon" name="ios-eye-outline" item-right></ion-icon>
+                    </ion-item>
+                </form>
 
-            <ion-item class="login-input-container">
-                <ion-input
-                    [clearInput]="false"
-                    [placeholder]="'PASSWORD' | translate"
-                    [(ngModel)]="password"
-                    type="password"
-                    name="password"
-                    autocapitalize="off"
-                    autocorrect="off"
-                    clearOnEdit="off"
-                    required></ion-input>
-                    <ion-icon id="eye-icon" name="ios-eye-outline" item-right></ion-icon>
+                <div class="barcode-circle">
+                    <div class="barcode-icon"></div>
+                    <p id="barcode-label">{{ 'BARCODE_READER' | translate }}</p>
+                </div>
+            </div>
 
-            </ion-item>
+        <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
+            (tap)="next()">{{ 'CONTINUE' | translate }}</button>
 
-        </form>
+    </ion-slide>
 
-        <div class="barcode-circle">
-            <div class="barcode-icon"></div>
-            <p id="barcode-label">{{ 'BARCODE_READER' | translate }}</p>
-        </div>
+    <ion-slide class="second-content">
         
-    </div>
+        <div class="feeds-label">
 
-    
+            <h3>{{'IMPROVE_FEEDS' | translate}}</h3>
 
-</ion-content>
+            <h5>{{'FEEDS_LABEL' | translate}}</h5>
+        </div>
 
-<button ion-button full
-type="submit" [disabled]="!loginForm.valid" class="register-button" (tap)="onLoginSubmit()">{{ 'CONTINUE' | translate }}</button>
+            <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
+            (tap)="onLoginSubmit()">{{ 'REGISTER' | translate }}</button>
 
+    </ion-slide>
+
+
+</ion-slides>

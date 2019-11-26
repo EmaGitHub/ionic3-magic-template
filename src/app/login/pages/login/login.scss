@@ -1,10 +1,12 @@
 page-login {
-  ion-content.content-md {
+  .first-content {
     background-color: white;
 
-    #registerForm {
-      width: 80%;
-      margin: 18vh auto;
+    .register-form {
+      width: 90%;
+      margin: 0 5%;
+      position: absolute;
+      top: 22vh;
 
       .login-input-container {
         margin-top: 2vh;
@@ -30,34 +32,57 @@ page-login {
         }
       }
     }
-  }
-
-  .barcode-circle {
-    border-radius: 50%;
-    height: 15vh;
-    width: 15vh;
-    background-color: black;
-    margin: 15vh auto;
-    padding-top: 4vh;
-    text-align: center;
-
-    .barcode-icon {
-      background: url("../../../../assets/imgs/barcode-black.png");
-      filter: brightness(0) invert(1);
-      background-repeat: no-repeat;
-      background-size: cover;
-      height: 7vh;
-    }
-    #barcode-label {
+    .barcode-circle {
+      border-radius: 50%;
+      height: 15vh;
+      width: 15vh;
+      background-color: black;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 4vh;
       margin-top: 5vh;
+      text-align: center;
+  
+      .barcode-icon {
+        background: url("../../../../assets/imgs/barcode-black.png");
+        filter: brightness(0) invert(1);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 7vh;
+      }
+      #barcode-label {
+        margin-top: 5vh;
+      }
     }
   }
 
-  .register-button {
+  .second-content{
+
+    background-color: white;
+
+    .feeds-label {
+      width: 90%;
+      margin: 0 5%;
+      position: absolute;
+      top: 10vh;
+
+      h5{
+        font-weight: 300;
+        font-size: 15px;
+      }
+    }
+  }
+
+  .login-button {
     background-color: map-get($colors, danger);
     width: 90%;
     margin: 0 5%;
     position: absolute;
     bottom: 8vh;
   }
+
+  .swiper-pagination-bullet-active {
+    background: map-get($colors, danger);
+  }
+
 }

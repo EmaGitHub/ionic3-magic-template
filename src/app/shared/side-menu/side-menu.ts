@@ -9,6 +9,7 @@ import { DeviceService } from '@app/core/device';
 import { SplitViewService } from '@app/core/split-view';
 import { RootPage } from '@app/home-tab/pages/root/root';
 import { SeekPage } from '@app/home-tab/pages/seek/seek';
+import { Starter } from '@app/starter/starter';
 
 /**
  * Generated class for the SideMenuComponent component.
@@ -30,8 +31,6 @@ export class SideMenuComponent {
         private deviceService: DeviceService,
         private splitViewService: SplitViewService,
         private menuCtrl: MenuController,
-
-
   ) {
   }
 
@@ -70,7 +69,7 @@ public goRootPage(){
             cssClass: 'primary',
             handler: () => {
                 this.store.dispatch({type: UserActionTypes.USER_LOGOUT});
-                this.loginService.openWelcomeScreen(); 
+                this.loginService.openMainLogin(); 
             }
         }]})
     }, 300);       

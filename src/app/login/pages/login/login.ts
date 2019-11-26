@@ -4,7 +4,7 @@ import { DeviceService } from '@core/device';
 import { LoggerService } from '@core/logger';
 import { UserService } from '@core/user';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { ViewController, TextInput } from 'ionic-angular';
+import { ViewController, TextInput, NavController, Slides } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppStore } from '@app/app-store';
@@ -23,6 +23,7 @@ export class LoginPage {
     show = false;
 
     @ContentChild(TextInput) ion_input?: TextInput;
+    @ViewChild('slides') slides?: Slides;
 
     constructor(
         private logger: LoggerService,
@@ -31,8 +32,8 @@ export class LoginPage {
         private tabsService: TabsService,
         private viewCtrl: ViewController,
         private inAppBrowser: InAppBrowser,
-        private store: Store<AppStore>
-    ) { }
+        private store: Store<AppStore>    
+        ) { }
 
     ionViewDidEnter() {
 
@@ -82,6 +83,9 @@ export class LoginPage {
         this.inAppBrowser.create('https://forgotpassword.test.com', '_system');
     }
 
+    next() {
+        this.slides!.slideNext();
+      }
     /**
      * Close login modal
      */
