@@ -37,7 +37,7 @@ export const EN = {
 
     YES: 'Yes',
 
-    BARCODE_READER: 'Barcode Reader',
+    BARCODE_READER: 'Barcode Scanner',
     IMPROVE_FEEDS: 'Improve your feeds',
     FEEDS_LABEL: 'choosing your favourite tags, you help us to know more about you and understand your tastes'
 }

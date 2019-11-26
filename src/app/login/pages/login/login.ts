@@ -4,7 +4,7 @@ import { DeviceService } from '@core/device';
 import { LoggerService } from '@core/logger';
 import { UserService } from '@core/user';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { ViewController, TextInput, NavController, Slides } from 'ionic-angular';
+import { ViewController, TextInput, Slides } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppStore } from '@app/app-store';
@@ -72,6 +72,10 @@ export class LoginPage {
     ionViewDidLeave() {
 
         this.userStateSubscription$!.unsubscribe();
+    }
+
+    public barcodeScan(){
+        console.log("barcode Scan")
     }
 
     public onLoginSubmit() {

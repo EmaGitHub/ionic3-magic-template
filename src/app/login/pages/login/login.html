@@ -16,11 +16,12 @@
                 </ion-item>
             </form>
 
-            <div class="barcode-circle">
-                <div class="barcode-icon"></div>
-            </div>
-            <p id="barcode-label">{{ 'BARCODE_READER' | translate }}</p>
-
+            <span (tap)="barcodeScan()">
+                <div class="barcode-circle">
+                    <div class="barcode-icon"></div>
+                </div>
+                <p id="barcode-label">{{ 'BARCODE_READER' | translate }}</p>
+            </span>
         </div>
 
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
@@ -40,10 +41,9 @@
                 <tag [tag]='tag'></tag>
             </span>
         </div>
-        
+
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="onLoginSubmit()">{{ 'REGISTER' | translate }}</button>
-
     </ion-slide>
 
 

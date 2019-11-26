@@ -14,9 +14,9 @@ export class TagComponent implements OnInit{
 
   @Input() tag: string = '';
   backgroundColor: string = '';
-  actived: boolean = true;
+  activated: boolean = false;
 
-  colors: string[] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon','MidnightBlue', 'Indigo',
+  colors: string[] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','LawnGreen','LightSalmon','MidnightBlue', 'Indigo',
                       'Violet','Maroon','Red','SlateBlue','Tomato', 'Wheat', 'SteelBlue', 'SkyBlue', 'Salmon', 'RebeccaPurple', 'PaleGreen', 'LightSteelBlue']
 
   constructor() {
@@ -29,9 +29,16 @@ export class TagComponent implements OnInit{
     this.backgroundColor = this.colors[random];
   }
 
+  styleObject(){
+
+    return {'background-color': !this.activated ? this.backgroundColor : 'white', 
+    'border': !this.activated ? '2px solid transparent' : '2px solid black',
+    'color': !this.activated ? 'white' : 'black'}
+  }
+  
+
   tapped(){
 
-    console.log("clicked")
-    this.actived = !this.actived;
+    this.activated = !this.activated;
   }
 }
