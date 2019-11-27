@@ -1,14 +1,7 @@
 <navbar [pageName]="'HOMEPAGE'"></navbar>
 
-<ion-content class="pageContent">
+<ion-content class="pageContent fade-in"  [@fade-in-out]="visibleText">
 
-
-
-
-        <home-banner class="fade-in" [@fade-in-out]="visibleText"></home-banner>
-
-
-
-
+        <home-banner></home-banner>
 
 </ion-content>

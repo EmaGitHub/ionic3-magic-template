@@ -15,7 +15,6 @@ import { HomeBannerComponent } from './components/home-banner/home-banner';
         // Tab with split view
         HomeTab,
         
-
         // Components
         HomeBannerComponent,
 

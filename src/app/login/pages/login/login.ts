@@ -26,7 +26,7 @@ export class LoginPage {
     @ViewChild('slides') slides?: Slides;
 
     public tags: string [] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon','MidnightBlue',
-    'Violet','CornflowerBlue','Red','SlateBlue','Tomato'];
+    'Violet','CornflowerBlue','Red','SlateBlue','Tomato','DarkOrchid'];
 
     constructor(
         private logger: LoggerService,

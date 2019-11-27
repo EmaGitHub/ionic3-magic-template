@@ -66,9 +66,9 @@ page-login {
       width: 90%;
       margin: 0 5%;
       padding-top: 20px;
-      position: absolute;
-      top: 0;
       background-color: white;
+      position: fixed;
+      top: 0;
 
       h5{
         font-weight: 300;
@@ -78,8 +78,8 @@ page-login {
     .tags-div{
       width: 90%;
       margin: 0 5%;
-      position: absolute;
-      top: 22vh;
+      margin-top: 110px;
+      margin-bottom: 100px;
       padding: 16px;
     }
   }
@@ -88,7 +88,7 @@ page-login {
     background-color: map-get($colors, danger);
     width: 90%;
     margin: 0 5%;
-    position: absolute;
+    position: fixed;
     bottom: 8vh;
   }
 
@@ -100,4 +100,7 @@ page-login {
     background: map-get($colors, danger);
   }
 
+  .swiper-slide {
+    overflow-y: scroll;
+}
 }
