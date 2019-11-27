@@ -6,10 +6,12 @@ import { I18nModule } from '@shared/i18n/i18n.module';
 import { ModalNavPageModule } from '@shared/modal-nav/modal-nav.module';
 import { IonicModule } from 'ionic-angular';
 import { NavbarComponent } from './navbar/navbar';
+import { RtLogoComponent } from './rt-logo/rt-logo';
 
 @NgModule({
     declarations: [
-        NavbarComponent
+        NavbarComponent,
+        RtLogoComponent
     ],
     imports: [
         IonicModule,
@@ -28,7 +30,8 @@ import { NavbarComponent } from './navbar/navbar';
     exports: [
         I18nModule,
         ModalNavPageModule,
-        NavbarComponent
+        NavbarComponent,
+        RtLogoComponent
     ]
 })
 export class SharedModule { }

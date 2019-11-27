@@ -28,6 +28,22 @@
   }
 }
 
+ion-navbar.toolbar{
+      height: 56px !important;
+      padding: 0;
+
+}
+
+.toolbar-background {
+  background-color: white !important;
+}
+.toolbar-title{
+  color: map-get($colors, dark) !important;
+}
+ion-icon.back-button-icon.icon {
+  color: map-get($colors, dark) !important;
+}
+
 ion-nav.main-app.content-hidden {
   background: map-get($colors, primary);
 

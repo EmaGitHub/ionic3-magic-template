@@ -3,6 +3,11 @@
         <button ion-button icon-only menuToggle class="toggle" [ngClass]="(menuToggleVisible)?'':'invisible'">
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title text-center> {{ pageName | translate }} </ion-title>
+        <ion-title *ngIf="pageName == 'HOMEPAGE'"><rt-logo></rt-logo> 
+            <ion-icon (click)="openNotifications()" id="notification-icon" name="notifications-outline">
+                    <ion-badge id="notifications-badge" color="danger">{{notifications}}</ion-badge>
+            </ion-icon> 
+        </ion-title>
+        <ion-title *ngIf="pageName != 'HOMEPAGE'" text-center class="page-title"> {{ pageName | translate }} </ion-title>
     </ion-navbar>
 </ion-header>

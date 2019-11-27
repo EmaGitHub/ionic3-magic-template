@@ -18,6 +18,7 @@ export class NavbarComponent {
 
   @Input() pageName: string = '';
   menuToggleVisible: boolean = true;
+  notifications: number = 2;
 
   constructor(
     private store: Store<AppStore>,
@@ -37,4 +38,7 @@ export class NavbarComponent {
     )
   }
 
+  openNotifications() {
+    
+  }
 }
