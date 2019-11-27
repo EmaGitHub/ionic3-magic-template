@@ -1,10 +1,14 @@
 <navbar [pageName]="'HOMEPAGE'"></navbar>
 
-<ion-content padding-left padding-right class="pageContent">
+<ion-content class="pageContent">
 
-    <div class="fade-in" [@fade-in-out]="visibleText">{{text}}</div>
 
-    <br>
-    <button class="fade-in" ion-button (tap)="goDetail()" [@fade-in-out]="visibleText"> go to detail</button>
+
+
+        <home-banner class="fade-in" [@fade-in-out]="visibleText"></home-banner>
+
+
+
+
 
 </ion-content>

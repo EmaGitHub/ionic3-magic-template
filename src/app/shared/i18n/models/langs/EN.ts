@@ -27,6 +27,8 @@ export const EN = {
     LOGIN: 'Login',
     LOGOUT: 'Logout',
 
+    EVENTS_LABEL: 'Discover all the Tuscany events',
+    TOSCANA_CLAIM: 'Tuscany Claim',
     NO: 'No',
 
     OK: 'Ok',

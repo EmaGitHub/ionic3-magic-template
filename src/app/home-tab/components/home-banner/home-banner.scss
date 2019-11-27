@@ -1,0 +1,87 @@
+home-banner {
+  text-align: center;
+
+  .back-background {
+    position: absolute;
+    height: 200px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: map-get($colors, danger);
+    z-index: -15;
+  }
+
+  .background-image {
+    position: absolute;
+    height: 200px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: url("../assets/imgs/events.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -10;
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    opacity: 0.5;
+  }
+
+  .claim{
+
+    text-align: left;
+    padding: 20px 30px;
+    color: white;
+    font-size: 25px;
+    font-weight: 700;
+
+    .sub-claim {
+        font-weight: 300;
+    }
+  }
+
+  .line{
+
+    margin: 16px 0;
+    height: 1px;
+    width: 50px;
+    background-color: white;
+  }
+
+  .input {
+    text-align: center;
+    position: absolute;
+    padding: 0;
+    margin: 0 10%;
+    width: 79%;
+    height: 50px;
+    top: 175px;
+    box-shadow: 8px 4px 12px map-get($colors, dark);
+
+    .col {
+      padding: 0;
+    }
+    .row {
+      height: 100%;
+      width: 100%;
+
+      #search-button {
+        background-color: gray;
+
+        ion-icon {
+          color: white;
+          z-index: 30;
+          position: relative;
+          top: 14px;
+          font-size: 25px;
+        }
+      }
+      input {
+        padding-left: 8px;
+        height: 100%;
+        width: 100%;
+        font-size: 18px;
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<!-- Generated template for the HomeBannerComponent component -->
+
+<div class="back-background"></div>
+<div class="background-image"></div>
+
+<div class="claim">
+  {{ 'EVENTS_LABEL' | translate }}
+  <div class="line"></div>
+  <span class="sub-claim">{{ 'TOSCANA_CLAIM' | translate }}</span>
+</div>
+
+
+<div class="input">
+  <ion-row>
+  <ion-col col-10><input type="text" placeholder="Cerca"></ion-col>
+  <ion-col (tap)="goDetail()" id="search-button" col-2><ion-icon name="search"></ion-icon></ion-col>
+  </ion-row>
+</div>

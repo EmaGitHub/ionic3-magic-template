@@ -6,7 +6,7 @@ page-login {
       width: 90%;
       margin: 0 5%;
       position: absolute;
-      top: 22vh;
+      top: 15vh;
 
       .login-input-container {
         margin-top: 2vh;
@@ -62,10 +62,13 @@ page-login {
     text-align: center;
 
     .feeds-label {
+      height: 140px;
       width: 90%;
       margin: 0 5%;
+      padding-top: 20px;
       position: absolute;
-      top: 8vh;
+      top: 0;
+      background-color: white;
 
       h5{
         font-weight: 300;
