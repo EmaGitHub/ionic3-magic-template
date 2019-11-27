@@ -34,11 +34,6 @@ export class SideMenuComponent {
   ) {
   }
 
-  public goInfoPage(){
-
-    this.nav!.setRoot(InfoPage, {}, {animate: true})
-  }
-
   public goHomePage(){
 
     this.menuCtrl.toggle()

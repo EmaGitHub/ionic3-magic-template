@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { TabsService } from '@app/tabs';
 import { ConfigService } from '@core/config';
 import { DeviceService } from '@core/device';
-import { FCMService } from '@core/fcm';
 import { LoggerService } from '@core/logger';
 import { UserService } from '@core/user';
 import { VersioningService } from '@core/versioning';
@@ -23,7 +22,6 @@ export class Starter {
         private i18nService: I18nService,
         private logger: LoggerService,
         private userService: UserService,
-        private fcmService: FCMService,
         private versioningService: VersioningService,
         private loginService: LoginService
     ) {

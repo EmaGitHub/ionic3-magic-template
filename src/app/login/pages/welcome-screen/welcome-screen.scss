@@ -1,7 +1,6 @@
 welcome-screen {
 
     ion-content.content-md {
-
         background-color: transparent;
 
         #rt-logo{
@@ -15,7 +14,6 @@ welcome-screen {
                 font-size: 26px;
             }
             #rt-logo-img{
-
                 margin-top: 5px;
                 height: 125px;
                 width: 110px;
@@ -26,7 +24,6 @@ welcome-screen {
         }
 
         #welcome {
-
             width: 80%;
             margin: 0 10%;
             position: absolute;
@@ -75,7 +72,6 @@ welcome-screen {
     }
 
     .register-button{
-
         background-color: map-get($colors, danger);
         width: 90%;
         margin: 0 5%;
