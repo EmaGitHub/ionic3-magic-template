@@ -2,4 +2,4 @@
 <side-menu></side-menu>
 </ion-menu>
 
-<ion-nav #content class="main-app" [root]="rootPage" [ngClass]="{ 'content-hidden' : userIsNotLogged }"></ion-nav>
+<ion-nav #content class="main-app" [root]="rootPage" [ngClass]="{ 'content-hidden' : !userLogged }"></ion-nav>
