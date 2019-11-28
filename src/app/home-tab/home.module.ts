@@ -9,6 +9,9 @@ import { DetailPage } from './pages/detail/detail';
 import { RootPage } from './pages/root/root';
 import { SeekPage } from './pages/seek/seek';
 import { HomeBannerComponent } from './components/home-banner/home-banner';
+import { MainEventComponent } from './components/main-event/main-event';
+import { HorizontalScrollEventsComponent } from './components/horizontal-scroll-events/horizontal-scroll-events';
+import { ScrollEventComponent } from './components/scroll-event/scroll-event';
 
 @NgModule({
     declarations: [
@@ -17,6 +20,9 @@ import { HomeBannerComponent } from './components/home-banner/home-banner';
         
         // Components
         HomeBannerComponent,
+        MainEventComponent,
+        HorizontalScrollEventsComponent,
+        ScrollEventComponent,
 
         // Pages list
         HomePage,
@@ -35,6 +41,9 @@ import { HomeBannerComponent } from './components/home-banner/home-banner';
 
         // Components
         HomeBannerComponent,
+        MainEventComponent,
+        HorizontalScrollEventsComponent,
+        ScrollEventComponent,
 
         // Pages list
         HomePage,

@@ -1,7 +1,15 @@
 <navbar [pageName]="'HOMEPAGE'"></navbar>
 
-<ion-content class="pageContent fade-in"  [@fade-in-out]="visibleText">
+<ion-content class="pageContent">
+        <div class="pageWithTabs">
 
-        <home-banner></home-banner>
+        <div class="fade-in"  [@fade-in-out]="visibleText">
+                <home-banner></home-banner>
+        </div>
 
+        <horizontal-scroll-events [title]="'DISCOUNT_EVENTS_LABEL'"></horizontal-scroll-events>
+
+        <horizontal-scroll-events [title]="'RECOMMENTED_EVENTS_LABEL'"></horizontal-scroll-events>
+
+        </div>
 </ion-content>

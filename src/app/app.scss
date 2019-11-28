@@ -28,14 +28,14 @@
   }
 }
 
-.conten-hidden{
-  opacity: 0;
+.pageWithTabs{
+  margin-bottom: 100px;
 }
 
 ion-navbar.toolbar{
       height: 56px !important;
       padding: 0;
-
+      border-bottom: 1px solid gray;
 }
 
 .toolbar-background {

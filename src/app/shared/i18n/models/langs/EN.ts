@@ -29,15 +29,18 @@ export const EN = {
 
     EVENTS_LABEL: 'Discover all the Tuscany events',
     TOSCANA_CLAIM: 'Tuscany Claim',
-    NO: 'No',
 
+    SEE_ALL: 'See all',
+    DISCOUNT_EVENTS_LABEL: 'Top discounted events',
+    MAIN_EVENTS_LABEL: 'Main events',
+    RECOMMENTED_EVENTS_LABEL: 'Recommented events',
+
+    NO: 'No',
     OK: 'Ok',
+    YES: 'Yes',
 
     PASSWORD: 'Password',
-
     USERNAME: 'Username',
-
-    YES: 'Yes',
 
     BARCODE_READER: 'Barcode Scanner',
     IMPROVE_FEEDS: 'Improve your feeds',

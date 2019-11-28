@@ -21,10 +21,16 @@ export class HomePage {
 
     ngAfterViewInit(){
 
+        
+    }
+
+    ionViewWillEnter(){
+        
+        // your code to initialize
         setTimeout(() => {
             this.visibleText = '1';
         }, 500);
-    }
+     }
 
 
 }

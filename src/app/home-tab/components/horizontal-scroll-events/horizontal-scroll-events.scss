@@ -1,0 +1,34 @@
+horizontal-scroll-events {
+
+    .content {
+
+        margin-bottom: 40px;
+        width: 100%;
+        height: 272px;
+        border: 2px solid map-get($colors, danger);
+
+        .item {
+            background-color: transparent;
+
+            h3 {
+                margin-top: 0;
+                margin-bottom: 0;
+                font-size: 20px;
+                color: map-get($colors, danger);
+            }
+            span {
+                font-size: 13px;
+                color: map-get($colors, google-gray);
+                font-weight: 400;
+            }
+            #arrow-icon {
+                color: map-get($colors, google-gray);
+            }
+        }
+        
+        .scroll-window{
+
+            height: 200px;
+        }
+    }
+}
