@@ -1,18 +1,34 @@
-import { Directive, ElementRef, Input, HostListener } from '@angular/core';
+import { Directive, ElementRef, Input, SimpleChanges } from '@angular/core';
 
 @Directive({
     selector: '[show-hide-input]'
 })
-export class ShowHideInput {
+export class ShowHideInput{
 
-    @Input('appTargetInput') targetInput: any;
+    @Input() hide: boolean = true;
 
-    constructor(el: ElementRef) {
+    constructor(private el: ElementRef) {
     }
-  
-    @HostListener('click') onMouseEnter() {
-      let inType = (this.targetInput._native.nativeElement.type == 'text')? 'password': 'text';
-      this.targetInput._native.nativeElement.type = inType;
+
+    ngAfterViewInit(){
+
+      this.changeType('password')
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+
+      if(changes.hide.previousValue != null){
+
+        if(changes.hide.currentValue == true)
+            this.changeType('password')
+        else 
+            this.changeType('text')
+      }
+      
+    }
+
+    changeType(type: string) {  // in your case function name is type
+      this.el.nativeElement.children[0].type = type; // change type for input inside the ion-input
   }
 
 }

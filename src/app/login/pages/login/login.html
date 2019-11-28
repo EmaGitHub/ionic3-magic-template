@@ -9,10 +9,11 @@
                     </ion-input>
                 </ion-item>
                 <ion-item class="login-input-container">
-                    <ion-input [clearInput]="false" [placeholder]="'PASSWORD' | translate" [(ngModel)]="password"
-                        type="password" name="password" autocapitalize="off" autocorrect="off" clearOnEdit="off"
-                        required></ion-input>
-                    <ion-icon id="eye-icon" name="ios-eye-outline" item-right></ion-icon>
+                    <ion-input [clearInput]="false" [placeholder]="'PASSWORD' | translate" [(ngModel)]="password" show-hide-input
+                     name="password" autocapitalize="off" autocorrect="off" clearOnEdit="off" [hide]="!show" id="password-input" required></ion-input>
+                     <button (tap)="hideShow()" id="eye-button" item-end>
+                    <ion-icon  [name]="iconName()" [hide]="!show" id="eye-icon"></ion-icon>
+                </button>
                 </ion-item>
             </form>
 

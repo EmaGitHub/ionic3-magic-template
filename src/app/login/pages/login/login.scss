@@ -15,10 +15,24 @@ page-login {
         min-height: 0;
         border-bottom: 1px solid black !important;
 
-        #eye-icon {
+        #password-input{
+
+          margin-right: 40px;
+          padding-left: 40px;
+        }
+        #eye-button {
           position: absolute;
           right: 0;
           bottom: 0;
+          height: 40px;
+          width: 40px;
+          background-color: transparent;
+          padding: 0;
+          margin-bottom: 4px;
+        }
+
+        #eye-icon{
+            font-size: 30px;
         }
 
         .item-inner {

@@ -58,16 +58,13 @@ export class LoginPage {
         );
     }
 
-    toggleShow()
-  {
-    this.show = !this.show;
-    if (this.show){
-        this.ion_input!.type("text");
+    hideShow()  {this.show = !this.show}
+
+    iconName(){
+
+        if (!this.show) return 'ios-eye-off-outline';
+        else return 'ios-eye-outline';
     }
-    else {
-        this.ion_input!.type("password");
-    }
-  }
 
     ionViewDidLeave() {
 
