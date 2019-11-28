@@ -1,15 +1,16 @@
 <navbar [pageName]="'HOMEPAGE'"></navbar>
 
-<ion-content class="pageContent">
+<ion-content class="pageWithNavbar">
         <div class="pageWithTabs">
 
-        <div class="fade-in"  [@fade-in-out]="visibleText">
-                <home-banner></home-banner>
-        </div>
+                <div class="fade-in"  [@fade-in-out]="visibleText">
+                        <home-banner></home-banner>
+                </div>
 
-        <horizontal-scroll-events [title]="'DISCOUNT_EVENTS_LABEL'"></horizontal-scroll-events>
+                <div class="pageContent">
+                        <horizontal-scroll-events [title]="'DISCOUNT_EVENTS_LABEL'"></horizontal-scroll-events>
 
-        <horizontal-scroll-events [title]="'RECOMMENTED_EVENTS_LABEL'"></horizontal-scroll-events>
-
+                        <horizontal-scroll-events [title]="'RECOMMENTED_EVENTS_LABEL'"></horizontal-scroll-events>
+                </div>
         </div>
 </ion-content>
