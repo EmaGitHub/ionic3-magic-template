@@ -6,8 +6,8 @@ import { LoginStates, UserService } from '@core/user';
 import { Platform } from 'ionic-angular';
 import { Store } from '@ngrx/store';
 import { AppStore } from './app-store';
-import { Subscription } from 'rxjs';
 import { UserState } from './core/user/models/user-state';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     templateUrl: 'app.html'
@@ -24,13 +24,16 @@ export class App extends AutoUnsubscribe {
         private platform: Platform,
         private deviceService: DeviceService,
         private userService: UserService,
-        private store: Store<AppStore>
+        private store: Store<AppStore>,
+        private statusBar: StatusBar
     ) {
         super();
         this.platform.ready().then(() => {
             this.initOrientation();
+            this.statusBar.overlaysWebView(false);
             this.initLogoutSubscriptions();
             this.initUserSubscription();
+            this.statusBar.backgroundColorByHexString("#e5001c");
         });
     }
 

@@ -9,7 +9,12 @@ rt-logo {
         }
 
         .navbar-image{
+            background-image: url('../assets/imgs/rt-logo.png');
+            background-size: cover;
+            background-repeat: no-repeat;
             height: 32px;
+            width: 28px;
+            margin: 0 auto;
         }
 
     }

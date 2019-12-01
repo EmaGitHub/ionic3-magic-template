@@ -14,6 +14,21 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+body {
+  margin-top: constant(safe-area-inset-top);
+  margin-top: env(safe-area-inset-top);
+
+}
+
+.toolbar-footer {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: 30px;
+}
+
 .text-bold {
   font-weight: bold;
 }
