@@ -7,6 +7,7 @@ import { LoginPage } from './pages/login/login';
 
 @Injectable()
 export class LoginService {
+
     private _loginModal: Modal;
     private _welcomeModal: Modal;
 
@@ -15,16 +16,17 @@ export class LoginService {
         private deviceService: DeviceService,
         private userService: UserService
     ) {
-        // Create the main login modal
+        // Create the main welcome modal
         this._welcomeModal = this.modalCtrl.create(WelcomeScreen, {}, {
             showBackdrop: true,
             enableBackdropDismiss: false,
-            cssClass: 'login-modal'
+            cssClass: 'welcome-modal'
         });
 
         this._welcomeModal.onDidDismiss(data => {
             this.openMainLogin();
           });
+
         // Create the main login modal
         this._loginModal = this.modalCtrl.create(LoginPage, {}, {
             showBackdrop: true,
