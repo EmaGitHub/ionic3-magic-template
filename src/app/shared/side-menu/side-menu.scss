@@ -40,20 +40,28 @@ side-menu {
         }
     }
 
-    #menuList{
-        padding-top: 186px !important;
-    }
+    ion-content {
 
-    .bottomMenuButton{
+        #menuList{
+            padding-top: 186px !important;
 
-        position: absolute;
-        bottom: 0px;
-        .item-inner{
-            border: 1px solid lightgray;
-            border-bottom: 0;
-            border-left: 0;
-            border-right: 0;
+            .bottomMenuButton{
+
+                position: absolute;
+                bottom: 0px;
+                .item-inner{
+                    border: 1px solid lightgray;
+                    border-bottom: 0;
+                    border-left: 0;
+                    border-right: 0;
+                }
+            }
+        }
+        .scroll-content{
+        bottom: constant(safe-area-inset-bottom);
+        bottom: env(safe-area-inset-bottom);
         }
     }
+
 
 }
