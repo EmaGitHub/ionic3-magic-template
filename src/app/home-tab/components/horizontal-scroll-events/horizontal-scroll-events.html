@@ -10,7 +10,7 @@
   <ion-scroll class="scroll-window" scrollX="true" direction="x">
     <ion-row nowrap>
       <div *ngFor="let event of events; let idx = index">
-        <scroll-event></scroll-event>
+        <scroll-event [event]="event"></scroll-event>
       </div>
     </ion-row>
   </ion-scroll>

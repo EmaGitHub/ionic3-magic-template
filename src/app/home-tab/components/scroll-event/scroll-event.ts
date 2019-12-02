@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SplitViewService } from '@app/core/split-view';
 import { EventDetailPage } from '@app/home-tab/pages/event-detail/event-detail';
+import { Event } from '@app/core/models/Event';
 
 /**
  * Generated class for the ScrollEventComponent component.
@@ -13,6 +14,8 @@ import { EventDetailPage } from '@app/home-tab/pages/event-detail/event-detail';
   templateUrl: 'scroll-event.html'
 })
 export class ScrollEventComponent {
+
+  @Input() event?: Event;
 
   constructor(
     private splitViewService: SplitViewService

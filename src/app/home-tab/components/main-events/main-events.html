@@ -1,13 +1,12 @@
 <!-- Generated template for the MainEventComponent component -->
 <div class="main-events">
 
-    
     <ion-item no-lines>
         <h3>{{'HIGHLIGHT_EVENTS' | translate}}</h3>
     </ion-item>
 
     <span *ngFor="let event of mainEvents">
-        <main-event></main-event>
+        <main-event [event]="event"></main-event>
     </span>
         
 </div>
