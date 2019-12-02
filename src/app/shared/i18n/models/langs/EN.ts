@@ -20,12 +20,14 @@ export const EN = {
     INFO: 'Info',
     ROOT: 'Root',
     SEED: 'Seed',
+    SETTINGS: 'Settings',
 
     HOMEPAGE: 'HomePage',
     INFOPAGE: 'InfoPage',
     DETAILPAGE: 'DetailPage',
     ROOTPAGE: 'RootPage',
     SEEKPAGE: 'SeekPage',
+    SETTINGSPAGE: 'SettingsPage',
 
     LOGIN: 'Login',
     LOGOUT: 'Logout',

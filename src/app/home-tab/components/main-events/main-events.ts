@@ -21,7 +21,7 @@ export class MainEventsComponent implements OnInit{
 
   ngOnInit(){
 
-    this.mainEvents = [{title: 'Laboratorio botanica', dateBegin: new Date('11/09/2020'), dateEnd: new Date('11/12/2020')}, {title: 'Inside Magritte', dateBegin: new Date('11/09/2020'), dateEnd: new Date('11/09/2021')}];
+    this.mainEvents = [{title: 'Botanic laboratory', dateBegin: new Date('11/09/2020'), dateEnd: new Date('11/12/2020')}, {title: 'Inside Magritte', dateBegin: new Date('11/09/2020'), dateEnd: new Date('11/09/2021')}];
   }
 
 }

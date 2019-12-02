@@ -36,7 +36,7 @@ export class HorizontalScrollEventsComponent implements OnInit {
 
       case 'RECOMMENTED_EVENTS_LABEL':
 
-      this.events = [{title: 'Assedio alla Villa', type: 'SPETTACOLO'}, {title: 'Futuro e tecnologia', type: 'MOSTRA'}];
+      this.events = [{title: 'Assedio alla Villa', type: 'SPETTACOLO'}, {title: 'Futuro e tecnologia', type: 'MOSTRA'}, {title: 'Assedio alla Villa', type: 'SPETTACOLO'}, {title: 'Futuro e tecnologia', type: 'MOSTRA'}];
         break;
     }
   }

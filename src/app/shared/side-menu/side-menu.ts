@@ -18,56 +18,66 @@ import { Starter } from '@app/starter/starter';
  * Components.
  */
 @Component({
-  selector: 'side-menu',
-  templateUrl: 'side-menu.html'
+    selector: 'side-menu',
+    templateUrl: 'side-menu.html'
 })
 export class SideMenuComponent {
 
-  @ViewChild(Nav) nav?: Nav;
+    @ViewChild(Nav) nav?: Nav;
 
-  constructor(
+    constructor(
         private store: Store<AppStore>,
         private loginService: LoginService,
         private deviceService: DeviceService,
         private splitViewService: SplitViewService,
         private menuCtrl: MenuController,
-  ) {
-  }
+    ) {
+    }
 
-  public goHomePage(){
+    public goHomePage() {
 
-    this.menuCtrl.toggle()
-    setTimeout(() => {
-        this.splitViewService.getSplitView(0).pushOnMaster(SeekPage);
-    }, 300);
-}
+        this.menuCtrl.toggle()
+        setTimeout(() => {
+            this.splitViewService.getSplitView(0).pushOnMaster(SeekPage);
+        }, 300);
+    }
 
-public goRootPage(){
+    public goRootPage() {
 
-    this.menuCtrl.toggle()
-    setTimeout(() => {
-        this.splitViewService.getSplitView(0).pushOnMaster(RootPage);
-    }, 300);
-}
+        this.menuCtrl.toggle()
+        setTimeout(() => {
+            this.splitViewService.getSplitView(0).pushOnMaster(RootPage);
+        }, 300);
+    }
 
-  public logOut(){
+    public goSettingsPage() {
 
-    setTimeout(() => {
-        
-        this.deviceService.confirm("Are you sure do you want to exit app?", {title: 'Exit confirm', buttons: [{
-            text: 'CANCEL',
-            cssClass: 'primary',
-            role: 'cancel',
-            handler: () => {}
-        },{
-            text: 'OK',
-            cssClass: 'primary',
-            handler: () => {
-                this.store.dispatch({type: UserActionTypes.USER_LOGOUT});
-                this.loginService.openMainLogin(); 
-            }
-        }]})
-    }, 300);       
-}
+        this.menuCtrl.toggle()
+        setTimeout(() => {
+            this.splitViewService.getSplitView(0).pushOnMaster(SeekPage);
+        }, 300);
+    }
+
+    public logOut() {
+
+        setTimeout(() => {
+
+            this.deviceService.confirm("Are you sure do you want to exit app?", {
+                title: 'Exit confirm', buttons: [{
+                    text: 'CANCEL',
+                    cssClass: 'primary',
+                    role: 'cancel',
+                    handler: () => { }
+                }, {
+                    text: 'OK',
+                    cssClass: 'primary',
+                    handler: () => {
+                        this.store.dispatch({ type: UserActionTypes.USER_LOGOUT });
+                        this.loginService.openMainLogin();
+                    }
+                }]
+            })
+        }, 300);
+    }
 
 }
