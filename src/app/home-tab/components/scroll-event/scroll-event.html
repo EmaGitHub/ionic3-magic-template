@@ -1,7 +1,15 @@
 <!-- Generated template for the ScrollEventComponent component -->
 <div class="event-content">
-
     <ion-card (click)="goEventDetail()">
+
+        <div class="backgroundImage"></div>
+        <div class="eventIcon"></div>
+        <div class="description">
+
+            {{event.title}}
+            <p>{{event.type}}</p>
+
+        </div>
 
     </ion-card>
 </div>

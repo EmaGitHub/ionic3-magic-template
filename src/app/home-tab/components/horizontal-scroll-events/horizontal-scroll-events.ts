@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Event } from '@app/core/models/Event';
 
 /**
  * Generated class for the HorizontalScrollEventsComponent component.
@@ -14,7 +15,7 @@ export class HorizontalScrollEventsComponent implements OnInit {
 
   @Input() title: string = '';
 
-  events: any[] = [];
+  events: Partial<Event>[] = [];
 
   constructor() {
 
@@ -30,13 +31,12 @@ export class HorizontalScrollEventsComponent implements OnInit {
 
       case 'DISCOUNT_EVENTS_LABEL': 
 
-        this.events = [{}, {}, {}, {}, {}];
-        
+        this.events = [{title: 'Antiche Camelie', type: 'MOSTRA'}, {title: 'Carnevale di Bocco', type: 'SPETTACOLO'}, {title: 'Antichi egizi', type: 'MOSTRA'}, {title: 'Assedio alla Villa', type: 'SPETTACOLO'}, {title: 'Futuro e tecnologia', type: 'MOSTRA'}];
         break;
 
       case 'RECOMMENTED_EVENTS_LABEL':
-        console.log("recommmm event label")
-        this.events = [{}, {}];
+
+      this.events = [{title: 'Assedio alla Villa', type: 'SPETTACOLO'}, {title: 'Futuro e tecnologia', type: 'MOSTRA'}];
         break;
     }
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SplitViewService } from '@app/core/split-view';
 import { EventDetailPage } from '@app/home-tab/pages/event-detail/event-detail';
 import { Event } from '@app/core/models/Event';
@@ -13,13 +13,17 @@ import { Event } from '@app/core/models/Event';
   selector: 'main-event',
   templateUrl: 'main-event.html'
 })
-export class MainEventComponent {
+export class MainEventComponent implements OnInit{
 
   @Input() event?: Event;
   
   constructor(
     private splitViewService: SplitViewService
   ) {
+
+  }
+
+  ngOnInit() {
   }
 
   goEventDetail(){

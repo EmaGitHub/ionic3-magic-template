@@ -1,5 +1,9 @@
 <!-- Generated template for the MainEventComponent component -->
 <div class="main-event">
     <ion-card (tap)="goEventDetail()">
+
+        <h2>{{event.title}}</h2>
+
+        <p> From {{event.dateBegin.toLocaleString('default', { month: 'long' })}} {{event.dateBegin.getDay()}} to {{event.dateEnd.toLocaleString('default', { month: 'long' })}} {{event.dateEnd.getDay()}}</p>
     </ion-card>
 </div>

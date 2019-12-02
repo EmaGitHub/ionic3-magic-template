@@ -3,7 +3,7 @@ scroll-event {
     .event-content{
 
         height: 200px;
-        width: 156px;
+        width: 152px;
         border: 1px solid violet;
         text-align: center;
     }
@@ -13,6 +13,45 @@ scroll-event {
         width: 130px !important;
         display: inline-block;
         border-radius: 20px !important;
+
+        .backgroundImage {
+
+            background-color: rgb(255, 47, 109);
+            height: 110px;
+        }
+
+        .eventIcon{
+
+            position: relative;
+            left: 40px;
+            bottom: 25px;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border: 1px solid map-get($colors, google-gray);
+            background-color: white;
+        }
+
+        .description {
+            width: 100%;
+            height: 68px;
+            text-align: center;
+            position: relative;
+            bottom: 20px;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            p{
+                width: 100%;
+                color: gray;
+                font-size: 13px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
     }
 
 }

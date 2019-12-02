@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Event } from '@app/core/models/Event';
 
 /**
  * Generated class for the MainEventComponent component.
@@ -12,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainEventsComponent implements OnInit{
 
-  mainEvents: any[] = [];
+  mainEvents: Partial<Event>[] = [];
 
   constructor() {
 
@@ -20,7 +21,7 @@ export class MainEventsComponent implements OnInit{
 
   ngOnInit(){
 
-    this.mainEvents = [{}, {}];
+    this.mainEvents = [{title: 'Laboratorio botanica', dateBegin: new Date('11/09/2020'), dateEnd: new Date('11/12/2020')}, {title: 'Inside Magritte', dateBegin: new Date('11/09/2020'), dateEnd: new Date('11/09/2021')}];
   }
 
 }

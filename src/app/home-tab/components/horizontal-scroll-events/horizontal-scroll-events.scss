@@ -1,35 +1,31 @@
 horizontal-scroll-events {
+  .cont {
+    width: 100%;
+    height: 254px;
+    border: 2px solid map-get($colors, danger);
 
-    .content {
-        width: 100%;
-        height: 254px;
-        border: 2px solid map-get($colors, danger);
+    .item {
+      background-color: transparent;
 
-        .item {
-            background-color: transparent;
-
-            h3 {
-                margin-top: 0;
-                margin-bottom: 0;
-                font-size: 20px;
-                color: map-get($colors, danger);
-            }
-            span {
-                font-size: 13px;
-                color: map-get($colors, google-gray);
-                font-weight: 400;
-            }
-            #arrow-icon {
-                color: map-get($colors, google-gray);
-            }
-        }
-        
-        .scroll-window{
-            white-space: nowrap;
-            height: 200px;
-        }
-
-
-
+      h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 20px;
+        color: map-get($colors, danger);
+        font-weight: 500;
+      }
+      span {
+        font-size: 13px;
+        color: map-get($colors, google-gray);
+        font-weight: 400;
+      }
+      #arrow-icon {
+        color: map-get($colors, google-gray);
+      }
     }
+
+    .scroll-window {
+      height: 200px;
+    }
+  }
 }

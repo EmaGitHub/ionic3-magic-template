@@ -1,8 +1,9 @@
 export interface Event {
 
-    name: string;
-    date_begin: Date;
-    date_end: Date;
+    title: string;
+    dateBegin: Date;
+    dateEnd: Date;
+    type: string;
     icon: string;
     background: string;
     position: any;
