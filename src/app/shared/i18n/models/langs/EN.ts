@@ -32,7 +32,7 @@ export const EN = {
 
     SEE_ALL: 'See all',
     DISCOUNT_EVENTS_LABEL: 'Top discounted events',
-    MAIN_EVENTS_LABEL: 'Main events',
+    HIGHLIGHT_EVENTS: 'Highlight events',
     RECOMMENTED_EVENTS_LABEL: 'Recommented events',
 
     NO: 'No',

@@ -4,15 +4,17 @@ main-events {
 
 
         width: 100%;
-        height: 200px;
         border: 2px solid blue;
     
-        
-        h3 {
-            margin-top: 0;
-            margin-bottom: 0;
-            font-size: 20px;
-            color: map-get($colors, danger);
+        ion-item {
+
+            background-color: transparent;
+            h3 {
+                margin-top: 0;
+                margin-bottom: 0;
+                font-size: 20px;
+                color: map-get($colors, danger);
+            }
         }
     }
 }

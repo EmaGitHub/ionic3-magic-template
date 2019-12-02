@@ -2,9 +2,17 @@ scroll-event {
 
     .event-content{
 
-        height: 190px;
+        height: 200px;
         width: 156px;
         border: 1px solid violet;
+        text-align: center;
+    }
+
+    ion-card {
+        height: 170px !important;
+        width: 130px !important;
+        display: inline-block;
+        border-radius: 20px !important;
     }
 
 }

@@ -2,15 +2,18 @@ main-event {
 
     .main-event {
 
-        height: 200px;
         width: 100%;
-        border: 2px solid blue;    
+        height: 210px !important;
+        border: 2px solid green; 
+        text-align: center;   
+        padding: 10px 0;
         
-         h3 {
-                margin-top: 0;
-                margin-bottom: 0;
-                font-size: 20px;
-                color: map-get($colors, danger);
-            }
+        ion-card {
+            height: 100% !important;
+            width: 90% !important;
+            display: inline-block;
+            border-radius: 20px !important;
+            margin: 0;
+        }
     }
 }
