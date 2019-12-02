@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SplitViewService } from '@app/core/split-view';
+import { EventDetailPage } from '@app/home-tab/pages/event-detail/event-detail';
 
 /**
  * Generated class for the MainEventComponent component.
@@ -12,7 +14,14 @@ import { Component } from '@angular/core';
 })
 export class MainEventComponent {
 
-  constructor() {
+  constructor(
+    private splitViewService: SplitViewService
+  ) {
+  }
+
+  goEventDetail(){
+
+    this.splitViewService.getSplitView(0).pushOnDetail(EventDetailPage);
   }
 
 }

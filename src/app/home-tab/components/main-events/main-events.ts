@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 /**
  * Generated class for the MainEventComponent component.
@@ -10,9 +10,17 @@ import { Component } from '@angular/core';
   selector: 'main-events',
   templateUrl: 'main-events.html'
 })
-export class MainEventsComponent {
+export class MainEventsComponent implements OnInit{
+
+  mainEvents: any[] = [];
 
   constructor() {
+
+  }
+
+  ngOnInit(){
+
+    this.mainEvents = [{}, {}];
   }
 
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { SplitViewService } from '@app/core/split-view';
-import { DetailPage } from '@app/home-tab/pages/detail/detail';
 
 /**
  * Generated class for the HomeBannerComponent component.
@@ -16,7 +15,6 @@ export class HomeBannerComponent {
 
 
   constructor(
-    private splitViewService: SplitViewService
   ) {
   }
 

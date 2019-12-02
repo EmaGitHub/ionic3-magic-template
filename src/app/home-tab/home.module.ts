@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HomeTab } from './home-tab';
 import { HomePage } from './pages/home/home';
-import { DetailPage } from './pages/detail/detail';
 import { RootPage } from './pages/root/root';
 import { SeekPage } from './pages/seek/seek';
 import { HomeBannerComponent } from './components/home-banner/home-banner';
@@ -13,6 +12,7 @@ import { MainEventComponent } from './components/main-event/main-event';
 import { HorizontalScrollEventsComponent } from './components/horizontal-scroll-events/horizontal-scroll-events';
 import { ScrollEventComponent } from './components/scroll-event/scroll-event';
 import { MainEventsComponent } from './components/main-events/main-events';
+import { EventDetailPage } from './pages/event-detail/event-detail';
 
 @NgModule({
     declarations: [
@@ -28,7 +28,7 @@ import { MainEventsComponent } from './components/main-events/main-events';
 
         // Pages list
         HomePage,
-        DetailPage,
+        EventDetailPage,
         RootPage,
         SeekPage
     ],
@@ -50,7 +50,7 @@ import { MainEventsComponent } from './components/main-events/main-events';
 
         // Pages list
         HomePage,
-        DetailPage,
+        EventDetailPage,
         RootPage,
         SeekPage
     ]
