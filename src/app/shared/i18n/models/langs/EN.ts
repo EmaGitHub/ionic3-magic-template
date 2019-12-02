@@ -14,6 +14,9 @@ export const EN = {
     FORGOT_PASSWORD: 'Forgotten password?',
 
     HOME: 'Home',
+    CALENDAR: 'Calendar',
+    PROFILE: 'Profile',
+    MAP: 'Map',
     INFO: 'Info',
     ROOT: 'Root',
     SEED: 'Seed',
