@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'main-event',
-  templateUrl: 'main-event.html'
+  selector: 'main-events',
+  templateUrl: 'main-events.html'
 })
-export class MainEventComponent {
+export class MainEventsComponent {
 
   constructor() {
   }

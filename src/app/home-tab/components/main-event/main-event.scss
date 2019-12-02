@@ -1,3 +1,16 @@
 main-event {
 
+    .main-event {
+
+        height: 200px;
+        width: 100%;
+        border: 2px solid blue;    
+        
+         h3 {
+                margin-top: 0;
+                margin-bottom: 0;
+                font-size: 20px;
+                color: map-get($colors, danger);
+            }
+    }
 }

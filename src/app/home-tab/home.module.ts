@@ -12,6 +12,7 @@ import { HomeBannerComponent } from './components/home-banner/home-banner';
 import { MainEventComponent } from './components/main-event/main-event';
 import { HorizontalScrollEventsComponent } from './components/horizontal-scroll-events/horizontal-scroll-events';
 import { ScrollEventComponent } from './components/scroll-event/scroll-event';
+import { MainEventsComponent } from './components/main-events/main-events';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { ScrollEventComponent } from './components/scroll-event/scroll-event';
         
         // Components
         HomeBannerComponent,
+        MainEventsComponent,
         MainEventComponent,
         HorizontalScrollEventsComponent,
         ScrollEventComponent,
@@ -41,6 +43,7 @@ import { ScrollEventComponent } from './components/scroll-event/scroll-event';
 
         // Components
         HomeBannerComponent,
+        MainEventsComponent,
         MainEventComponent,
         HorizontalScrollEventsComponent,
         ScrollEventComponent,

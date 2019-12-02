@@ -20,9 +20,8 @@ export class HomeBannerComponent {
   ) {
   }
 
-  goDetail(){
+  searchEvent(){
 
-    this.splitViewService.getSplitView(0).pushOnDetail(DetailPage);
-}
+  }
 
 }

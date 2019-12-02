@@ -17,7 +17,6 @@
 body {
   margin-top: constant(safe-area-inset-top);
   margin-top: env(safe-area-inset-top);
-
 }
 
 .toolbar-footer {
@@ -37,8 +36,6 @@ body {
   margin-top: 56px;
 
   .scroll-content {
-    padding-top: 16px;
-    padding-bottom: 16px !important;
     background: map-get($colors, home-back-gray);
   }
 }

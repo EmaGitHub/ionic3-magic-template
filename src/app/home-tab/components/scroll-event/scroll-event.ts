@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SplitViewService } from '@app/core/split-view';
+import { EventDetailPage } from '@app/home-tab/pages/event-detail/event-detail';
 
 /**
  * Generated class for the ScrollEventComponent component.
@@ -12,11 +14,14 @@ import { Component } from '@angular/core';
 })
 export class ScrollEventComponent {
 
-  text: string;
+  constructor(
+    private splitViewService: SplitViewService
+  ) {
+  }
 
-  constructor() {
-    console.log('Hello ScrollEventComponent Component');
-    this.text = 'Hello World';
+  goEventDetail(){
+
+    this.splitViewService.getSplitView(0).pushOnDetail(EventDetailPage);
   }
 
 }
