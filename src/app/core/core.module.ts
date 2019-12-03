@@ -12,11 +12,12 @@ import { FCMModule } from '@core/fcm/fcm.module';
 import { LoggerModule } from '@core/logger/logger.module';
 import { NavigationModule } from '@core/navigation/navigation.module';
 import { SplitViewModule } from '@core/split-view/split-view.module';
-import { UserModule } from '@core/user/user.module';
 import { VersioningModule } from '@core/versioning';
 import { ENV } from '@env';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { UserService } from './user';
+import { LokiDatabaseService } from './lokijs-database/LokiDBService';
+import { EventsService } from './events/events-service';
 
 @NgModule({
     imports: [
@@ -44,6 +45,8 @@ import { UserService } from './user';
         DeepLinkService,
         InAppBrowser,
         UserService,
+        EventsService,
+        LokiDatabaseService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ResponseErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true }

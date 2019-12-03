@@ -1,0 +1,6 @@
+[{"shortTitle": "Carnevale di Bocco", "type": "SPETTACOLO", "title": "Carnivale dei Figli di Bocco", "discountedPrice": "4.55"}, 
+    {"shortTitle": "Antiche Camelie", "type": "MOSTRA", "title": "Mostra sulle Antiche Camelie", "discountedPrice": "5.55"}, 
+    {"shortTitle": "Carnevale di Bocco", "type": "SPETTACOLO", "discountedPrice": "3.55"}, 
+    {"shortTitle": "Antichi egizi", "type": "MOSTRA", "discountedPrice": "4.55"}, 
+    {"shortTitle": "Assedio alla Villa", "type": "SPETTACOLO", "isRecommented": true, "discountedPrice": "4.55"}, 
+    {"shortTitle": "Futuro e tecnologia", "type": "MOSTRA", "isRecommented": true, "discountedPrice": "4.55"}]

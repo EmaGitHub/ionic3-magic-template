@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from '@app/core/models/Event';
+import { Event } from '@app/core/events/models/Event';
 
 /**
  * Generated class for the MainEventComponent component.

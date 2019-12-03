@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { AppStore } from './app-store';
 import { UserState } from './core/user/models/user-state';
 import { StatusBar } from '@ionic-native/status-bar';
+import { LokiDatabaseService } from './core/lokijs-database/LokiDBService';
 
 @Component({
     templateUrl: 'app.html'
@@ -25,7 +26,8 @@ export class App extends AutoUnsubscribe {
         private deviceService: DeviceService,
         private userService: UserService,
         private store: Store<AppStore>,
-        private statusBar: StatusBar
+        private statusBar: StatusBar,
+        private lokiDatabasesService: LokiDatabaseService
     ) {
         super();
         this.platform.ready().then(() => {
@@ -34,6 +36,7 @@ export class App extends AutoUnsubscribe {
             this.initLogoutSubscriptions();
             this.initUserSubscription();
             this.statusBar.backgroundColorByHexString("#e5001c");
+            this.lokiDatabasesService.initDB();
         });
     }
 
