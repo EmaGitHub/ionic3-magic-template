@@ -35,7 +35,7 @@ export class App extends AutoUnsubscribe {
             this.statusBar.overlaysWebView(false);
             this.initLogoutSubscriptions();
             this.initUserSubscription();
-            this.statusBar.backgroundColorByHexString("#e5001c");
+            this.statusBar.backgroundColorByHexString("#FFF");
             this.lokiDatabasesService.initDB();
         });
     }

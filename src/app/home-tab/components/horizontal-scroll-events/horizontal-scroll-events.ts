@@ -43,7 +43,7 @@ export class HorizontalScrollEventsComponent implements OnInit {
 
         
         //console.log("Discounted events ",this.lokiDBServie.getEventsFromDB().find({'discountedPrice': {'$gte': 0}}));
-        this.events = [{shortTitle: 'Carnevale di Bocco', type: 'SPETTACOLO', title: 'Carnivale dei Figli di Bocco'}, {shortTitle: 'Antiche Camelie', type: 'MOSTRA', title: 'Mostra sulle Antiche Camelie', }, {shortTitle: 'Carnevale di Bocco', type: 'SPETTACOLO'}, {shortTitle: 'Antichi egizi', type: 'MOSTRA'}, {shortTitle: 'Assedio alla Villa', type: 'SPETTACOLO'}, {shortTitle: 'Futuro e tecnologia', type: 'MOSTRA'}];
+        this.events = [{shortTitle: 'Carnevale di Bocco', type: 'SPETTACOLO', title: 'Carnivale dei Figli di Bocco'}, {shortTitle: 'Antiche Camelie', type: 'MOSTRA', title: 'Mostra sulle Antiche Camelie'}, {shortTitle: 'Carnevale di Bocco', type: 'SPETTACOLO'}, {shortTitle: 'Antichi egizi', type: 'MOSTRA'}, {shortTitle: 'Assedio alla Villa', type: 'SPETTACOLO'}, {shortTitle: 'Futuro e tecnologia', type: 'MOSTRA'}];
         break;
 
       case 'RECOMMENTED_EVENTS_LABEL':
@@ -57,7 +57,7 @@ export class HorizontalScrollEventsComponent implements OnInit {
 
   }
 
-  public initEventsSubscription() {
+  /* public initEventsSubscription() {
 
     this.eventsSubscription$ = this.store.select('eventsState');
     this.eventsSubscription$.subscribe((state: EventsState) => {
@@ -69,5 +69,5 @@ export class HorizontalScrollEventsComponent implements OnInit {
         }
         else console.log("events is not updated")
     })
-}
+  } */
 }

@@ -2,17 +2,17 @@ export class Event {
 
     title: string= '';
     shortTitle: string= '';
-    dateBegin?: Date;
-    dateEnd?: Date;
+    dateBegin: Date =  new Date('11/09/2020');
+    dateEnd: Date= new Date('11/12/2020');
     type?: string;
     icon?: string;
-    label: string= '';
-    description: string= '';
+    label: string= 'label';
+    description: string= 'description';
     background?: string;
     position: any;
-    regionalPrice: number= 0;
+    regularTicketPrice: number= 0;
     /* exclusive */
     isRecommented: boolean = false;
     isHighlight: boolean= false;
-    discountedPrice: number= 0;
+    discountedTicketPrice: number= 0;
 }
