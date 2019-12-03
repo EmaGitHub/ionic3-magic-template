@@ -6,7 +6,7 @@ page-login {
       width: 90%;
       margin: 0 5%;
       position: absolute;
-      top: 15vh;
+      top: 36vh;
 
       .login-input-container {
         margin-top: 2vh;
@@ -15,8 +15,7 @@ page-login {
         min-height: 0;
         border-bottom: 1px solid black !important;
 
-        #password-input{
-
+        #password-input {
           margin-right: 40px;
           padding-left: 40px;
         }
@@ -31,8 +30,8 @@ page-login {
           margin-bottom: 4px;
         }
 
-        #eye-icon{
-            font-size: 30px;
+        #eye-icon {
+          font-size: 30px;
         }
 
         .item-inner {
@@ -54,9 +53,9 @@ page-login {
       margin-left: auto;
       margin-right: auto;
       padding-top: 4vh;
-      margin-top: 5vh;
+      margin-top: 7vh;
       text-align: center;
-  
+
       .barcode-icon {
         background: url("../assets/imgs/barcode-black.png");
         filter: brightness(0) invert(1);
@@ -70,31 +69,53 @@ page-login {
     }
   }
 
-  .second-content{
-
+  .second-content {
     background-color: white;
     text-align: center;
 
-    .feeds-label {
-      height: 140px;
+    .tags-div {
       width: 90%;
       margin: 0 5%;
-      padding-top: 20px;
-      background-color: white;
-      position: fixed;
-      top: 0;
+      position: absolute;
+      top: 42vh;
+    }
+  }
 
-      h5{
-        font-weight: 300;
-        font-size: 15px;
+  .third-content {
+    background-color: white;
+
+    .ateneo {
+      position: absolute;
+      top: 38vh;
+      ion-row {
+        margin: 0 40px;
+        ion-col {
+          padding: 20px;
+          border-radius: 30%;
+        }
+      }
+
+      .ateneo-selected{
+
+        background-color: lightgray;
       }
     }
-    .tags-div{
-      width: 90%;
-      margin: 0 5%;
-      margin-top: 110px;
-      margin-bottom: 100px;
-      padding: 16px;
+  }
+
+  .feeds-ateneo-label {
+    height: 140px;
+    width: 80%;
+    margin: 0 10%;
+    position: absolute;
+    top: 22vh;
+
+    h3 {
+      font-weight: 600;
+      font-size: 30px;
+    }
+    h5 {
+      font-weight: 300;
+      font-size: 15px;
     }
   }
 
@@ -116,5 +137,5 @@ page-login {
 
   .swiper-slide {
     overflow-y: scroll;
-}
+  }
 }

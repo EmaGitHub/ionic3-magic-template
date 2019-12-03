@@ -1,6 +1,6 @@
 <ion-slides #slides pager>
     <ion-slide class="first-content">
-
+        <step [number]="'1'" [label]="'Register'"></step>
         <div class="register-form">
             <form #loginForm="ngForm">
                 <ion-item class="login-input-container" lines="inset">
@@ -9,11 +9,12 @@
                     </ion-input>
                 </ion-item>
                 <ion-item class="login-input-container">
-                    <ion-input [clearInput]="false" [placeholder]="'PASSWORD' | translate" [(ngModel)]="password" show-hide-input
-                     name="password" autocapitalize="off" autocorrect="off" clearOnEdit="off" [hide]="!show" id="password-input" required></ion-input>
-                     <button (tap)="hideShow()" id="eye-button" item-end>
-                    <ion-icon  [name]="iconName()" [hide]="!show" id="eye-icon"></ion-icon>
-                </button>
+                    <ion-input [clearInput]="false" [placeholder]="'PASSWORD' | translate" [(ngModel)]="password"
+                        show-hide-input name="password" autocapitalize="off" autocorrect="off" clearOnEdit="off"
+                        [hide]="!show" id="password-input" required></ion-input>
+                    <button (tap)="hideShow()" id="eye-button" item-end>
+                        <ion-icon [name]="iconName()" [hide]="!show" id="eye-icon"></ion-icon>
+                    </button>
                 </ion-item>
             </form>
 
@@ -31,8 +32,9 @@
     </ion-slide>
 
     <ion-slide class="second-content">
+        <step [number]="'2'" [label]="'Favourites'"></step>
 
-        <div class="feeds-label">
+        <div class="feeds-ateneo-label">
             <h3>{{'IMPROVE_FEEDS' | translate}}</h3>
             <h5>{{'FEEDS_LABEL' | translate}}</h5>
         </div>
@@ -42,6 +44,40 @@
                 <tag [tag]='tag'></tag>
             </span>
         </div>
+
+        <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
+            (tap)="next()">{{ 'CONTINUE' | translate }}</button>
+    </ion-slide>
+
+
+    <ion-slide class="third-content">
+        <step [number]="'3'" [label]="'Ateneo'"></step>
+
+        <div class="feeds-ateneo-label">
+            <h3>{{'ATENEO_FEEDS' | translate}}</h3>
+            <h5>{{'ATENEO_LABEL' | translate}}</h5>
+        </div>
+
+        <div class="ateneo">
+        <ion-row>
+            <ion-col (tap)="selectAteneo(1)" [ngClass]="ateneoSelected == 1 ? 'ateneo-selected': '' ">
+                <img src="assets/imgs/Risorsa3x.png">
+            </ion-col>
+            <ion-col (tap)="selectAteneo(2)" [ngClass]="ateneoSelected == 2 ? 'ateneo-selected': '' ">
+                <img src="assets/imgs/uni-siena.png">
+            </ion-col>
+        </ion-row>
+        <ion-row>
+                <ion-col (tap)="selectAteneo(3)" [ngClass]="ateneoSelected == 3 ? 'ateneo-selected': '' ">
+                        <img src="assets/imgs/unis-siena.png">
+                    </ion-col>
+                    <ion-col (tap)="selectAteneo(4)" [ngClass]="ateneoSelected == 4 ? 'ateneo-selected': '' ">
+                        <img src="assets/imgs/uni-firenze.png">
+                    </ion-col>
+        </ion-row>
+
+    </div>
+
 
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="onLoginSubmit()">{{ 'REGISTER' | translate }}</button>

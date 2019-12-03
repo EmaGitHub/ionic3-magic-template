@@ -7,6 +7,7 @@ import { WelcomeScreen } from './pages/welcome-screen/welcome-screen';
 import { ShowHideInput } from './directives/show-hide-input.directive';
 import { LoginPage } from './pages/login/login';
 import { TagComponent } from './components/tag/tag';
+import { StepComponent } from './components/step/step';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { TagComponent } from './components/tag/tag';
 
         // Components
         TagComponent,
+        StepComponent,
         // Directives
         ShowHideInput
     ],
@@ -31,6 +33,7 @@ import { TagComponent } from './components/tag/tag';
 
         // Components
         TagComponent,
+        StepComponent
     ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     providers: [

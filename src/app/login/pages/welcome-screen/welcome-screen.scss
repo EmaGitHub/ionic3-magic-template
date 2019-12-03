@@ -3,40 +3,19 @@ welcome-screen {
     ion-content.content-md {
         background-color: transparent;
 
-        #rt-logo{
-            width: 50%;
-            margin: 0 25%;
-            position: absolute;
-            top: 7vh;
-            
-            h3{
-                font-family: caslon3-bd !important;
-                margin: 0px;
-                font-size: 26px;
-            }
-            #rt-logo-img{
-                margin-top: 5px;
-                height: 125px;
-                width: 110px;
-                background: url("../assets/imgs/rt-logo.png");
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-        }
-
         #welcome {
-            width: 80%;
-            margin: 0 10%;
+            width: 90%;
+            margin: 0 5%;
             position: absolute;
-            top: 46vh;
+            top: 4vh;
 
-            h1{
+            h2{
                 font-weight: 400;
-                font-size: 5vh;
+                font-size: 4vh;
             }
             .lighter-text{
                 font-weight: 300;
-                font-size: 4vh;
+                font-size: 3vh;
             }
         }
 

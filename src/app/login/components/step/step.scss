@@ -1,0 +1,30 @@
+step {
+    
+    .red-circle{
+
+        background-color: map-get($colors, danger);
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        margin-left: -25px;
+
+        .number{
+
+            font-size: 40px;
+            font-weight: 300;
+            color: white;
+        }
+    }
+
+    .label-container{
+
+        width: 100%;
+        font-size: 16px;
+        font-weight: 300;
+        position: absolute;
+        top: 112px;
+    }
+}

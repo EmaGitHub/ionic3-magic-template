@@ -31,9 +31,9 @@ export class TagComponent implements OnInit{
 
   styleObject(){
 
-    return {'background-color': this.activated ? this.backgroundColor : 'white', 
-    'border': this.activated ? '2px solid transparent' : '2px solid black',
-    'color': this.activated ? 'white' : 'black'}
+    return {'background-color': !this.activated ? this.backgroundColor : '#2C2C2C', 
+    'border': !this.activated ? '2px solid transparent' : '2px solid black',
+    'color': !this.activated ? 'white' : 'gray'}
   }
   
 

@@ -49,5 +49,7 @@ export const EN = {
 
     BARCODE_READER: 'Barcode Scanner',
     IMPROVE_FEEDS: 'Improve your feeds',
-    FEEDS_LABEL: 'choosing your favourite tags, you help us to know more about you and understand your tastes'
+    FEEDS_LABEL: 'choosing your favourite tags, you help us to know more about you and understand your tastes',
+    ATENEO_FEEDS: 'Your Ateneo',
+    ATENEO_LABEL: 'selecting your Ateneo logo, your app will be marked with the assigned brand'
 }

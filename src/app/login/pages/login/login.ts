@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '@app/app-store';
 import { UserState } from '@app/core/user/models/user-state';
 import { LoginAction } from '@app/core/user/actions/login-action';
+import { isRightSide } from 'ionic-angular/umd/util/util';
 
 @Component({
     selector: 'page-login',
@@ -22,11 +23,12 @@ export class LoginPage {
     private userStateSubscription$: Subscription = new Subscription;
     show = false;
 
+    ateneoSelected: number = -1;
+
     @ContentChild(TextInput) ion_input?: TextInput;
     @ViewChild('slides') slides?: Slides;
 
-    public tags: string [] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon','MidnightBlue',
-    'Violet','CornflowerBlue','Red','SlateBlue','Tomato','DarkOrchid'];
+    public tags: string [] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon','Green'];
 
     constructor(
         private logger: LoggerService,
@@ -80,6 +82,11 @@ export class LoginPage {
         this.logger.debug(`credentials ${this.username}/${this.password}`);
         this.deviceService.showLoading();
         this.store.dispatch(new LoginAction(this.username, this.password));
+    }
+
+    public selectAteneo(number: number){
+
+        this.ateneoSelected = number;
     }
 
     public onForgotPasswordClicked(): void {
