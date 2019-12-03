@@ -12,6 +12,7 @@ scroll-event {
         width: 130px !important;
         display: inline-block;
         border-radius: 20px !important;
+        box-shadow: 1px 2px 15px -4px map-get($colors, dark) !important;
 
         .backgroundImage {
 

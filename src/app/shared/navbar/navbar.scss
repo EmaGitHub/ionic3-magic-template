@@ -5,6 +5,10 @@ navbar {
         position: absolute;
         z-index: 10;
         color: black !important;
+
+        .menu-icon{
+            font-size: 16px;
+        }
     }
 
     .invisible{
@@ -20,21 +24,19 @@ navbar {
         position: absolute;
         right: 20px;
         top: 13px;
-        font-size: 25px;
+        font-size: 22px;
+
     }
 
 
     #notifications-badge {
-        background-color: map-get($colors, danger);
-        height: 15px;
-        min-width: 0;
-        width: 15px;
-        padding: 0;
-        font-size: 13px;
+        background-color: #e5001c;
+        height: 7px;
+        width: 7px;
         position: absolute;
-        top: -6px;
-        right: -11px;
-        border-radius: 100%;
+        top: 10px;
+        right: 22px;
+        border-radius: 50%;
     }
 
 }

@@ -52,11 +52,11 @@ home-banner {
     text-align: center;
     position: absolute;
     padding: 0;
-    margin: 0 10%;
-    width: 79%;
+    margin: 0 5%;
+    width: 91%;
     height: 50px;
     top: 175px;
-    box-shadow: 5px 10px 20px map-get($colors, dark);
+    box-shadow: 4px 2px 40px map-get($colors, dark);
 
     .col {
       padding: 0;

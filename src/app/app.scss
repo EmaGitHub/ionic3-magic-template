@@ -14,6 +14,8 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+@import "../theme/icons";
+
 body {
   margin-top: constant(safe-area-inset-top);
   margin-top: env(safe-area-inset-top);
@@ -71,4 +73,5 @@ ion-nav.main-app.content-hidden {
     font-family: caslon3-bd;
     src: url(../assets/fonts/Caslon-bd.ttf) format("ttf");
   }
+
 }

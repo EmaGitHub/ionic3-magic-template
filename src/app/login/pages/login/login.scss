@@ -15,10 +15,6 @@ page-login {
         min-height: 0;
         border-bottom: 1px solid black !important;
 
-        #password-input {
-          margin-right: 40px;
-          padding-left: 40px;
-        }
         #eye-button {
           position: absolute;
           right: 0;
@@ -39,7 +35,7 @@ page-login {
           border: none;
 
           input {
-            text-align: center;
+            text-align: left;
             padding-right: 0;
           }
         }
