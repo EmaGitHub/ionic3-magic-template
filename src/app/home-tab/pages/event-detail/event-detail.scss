@@ -53,7 +53,7 @@ page-event-detail {
         #map{
 
             height: 160px;
-            background-color: green;
+            background: url("../assets/imgs/map.png");
             margin: 0 16px;
         }
         #location{
@@ -63,12 +63,26 @@ page-event-detail {
             margin: 16px 16px;
             #name{
                 font-weight: 500;
+                margin-bottom: 2px;
             }
         }
 
         #social{
             margin: 16px 16px;
-            height: 100px;
+            height: 56px;
+            ion-icon {
+                font-size: 45px;
+                padding: 0 30px 0 0;
+            }
+            #twitter{
+                color: cyan;
+            }
+            #facebook{
+                color: blue;
+            }
+            #pinterest{
+                color: palevioletred;
+            }
 
         }
 
