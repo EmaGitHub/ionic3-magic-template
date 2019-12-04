@@ -13,5 +13,20 @@ ion-icon {
     &[class*="custom-menu"] {
         mask-image: url(/assets/icon/ico_menu.svg);
      }
+     &[class*="custom-calendario-rosso"] {
+      mask-image: url(/assets/icon/Toolbar/ico_calendario_rosso.svg);
+   }
+    &[class*="custom-home-rosso"] {
+      mask-image: url(/assets/icon/Toolbar/ico_home_rosso.svg);
+   }
+    &[class*="custom-impostazioni-rosso"] {
+      mask-image: url(/assets/icon/Toolbar/ico_impostazioni_rosso.svg);
+   }
+    &[class*="custom-profilo-rosso"] {
+      mask-image: url(/assets/icon/Toolbar/ico_profilo_rosso.svg);
+   }
+    &[class*="custom-teatri"] {
+      mask-image: url(/assets/icon/ico_teatri.svg);
+   }
 
  }

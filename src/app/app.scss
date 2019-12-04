@@ -35,7 +35,7 @@ body {
 }
 
 .pageWithNavbar {
-  margin-top: 56px;
+  margin-top: 70px;
 
   .scroll-content {
     background: map-get($colors, home-back-gray);
@@ -47,9 +47,9 @@ body {
 }
 
 ion-navbar.toolbar{
-      height: 56px !important;
+      height: 70px !important;
       padding: 0;
-      border-bottom: 1px solid gray;
+      //border-bottom: 1px solid gray;
 }
 
 .toolbar-background {

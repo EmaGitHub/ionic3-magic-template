@@ -1,11 +1,11 @@
 <ion-tabs #appTabs no-border color="light" class="app-tabs" [ngClass]="{'split-view' : splitViewIsActive}"
     (ionChange)="onTabChanges($event)">
 
-    <ion-tab [enabled]="true" [root]="tab1Root" [tabTitle]="'HOME' | translate" tabIcon="home"></ion-tab>
+    <ion-tab [enabled]="true" [root]="tab1Root" [tabTitle]="'HOME' | translate" tabIcon="custom-home-rosso"></ion-tab>
 
-    <ion-tab [enabled]="true" [root]="tab2Root" [tabTitle]="'CALENDAR' | translate" tabIcon="calendar"></ion-tab>
+    <ion-tab [enabled]="true" [root]="tab2Root" [tabTitle]="'CALENDAR' | translate" tabIcon="custom-calendario-rosso"></ion-tab>
 
-    <ion-tab>
+    <!-- <ion-tab>
     </ion-tab>
 
     <ion-fab bottom center>
@@ -17,10 +17,10 @@
             <ion-icon name="card"></ion-icon>
             
         </button>
-    </ion-fab>
+    </ion-fab> -->
 
-    <ion-tab [enabled]="true" [root]="tab2Root" [tabTitle]="'PROFILE' | translate" tabIcon="person"></ion-tab>
+    <ion-tab [enabled]="true" [root]="tab2Root" [tabTitle]="'PROFILE' | translate" tabIcon="custom-profilo-rosso"></ion-tab>
 
-    <ion-tab [enabled]="true" [root]="tab2Root" [tabTitle]="'MAP' | translate" tabIcon="map"></ion-tab>
+    <ion-tab [enabled]="true" [root]="tab2Root" [tabTitle]="'SETTINGS' | translate" tabIcon="custom-impostazioni-rosso"></ion-tab>
 
 </ion-tabs>

@@ -18,8 +18,10 @@ horizontal-scroll-events {
         color: map-get($colors, google-gray);
         font-weight: 400;
       }
-      #arrow-icon {
+      .arrow-icon {
         color: map-get($colors, google-gray);
+        font-size: 20px !important;
+        padding-top: 3px;
       }
     }
 

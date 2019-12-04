@@ -9,12 +9,12 @@
 
             ion-icon {
                 color    : map-get($colors, light-gray);
-                font-size: 2.7rem;
+                font-size: 2rem;
             }
 
             .tab-button-text {
                 // FIX visibility of ionic tab when translate is not ready
-                display: block;
+                visibility: hidden;
             }
 
             &[aria-selected="true"] {
@@ -22,6 +22,11 @@
 
                 ion-icon {
                     color: map-get($colors, danger);
+                }
+                .tab-button-text {
+                    // FIX visibility of ionic tab when translate is not ready
+                    display: block;
+                    visibility: visible;
                 }
             }
 
