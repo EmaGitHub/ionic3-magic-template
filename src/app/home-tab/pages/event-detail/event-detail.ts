@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FadeInOut } from '@app/core/animations';
 import { NavParams } from 'ionic-angular';
 import { Event } from '@app/core/events/models/Event';
@@ -10,21 +10,31 @@ import { Event } from '@app/core/events/models/Event';
         FadeInOut,
     ]
 })
-export class EventDetailPage implements OnInit, OnDestroy {
+export class EventDetailPage implements OnInit {
 
-    private event?: Event;
+    event?: Event;
+    tabBar: any;
+
+    friends: any[] = [{}, {}, {}, {}, {}, {}, {}]
 
     constructor(
-        private navParams: NavParams
+        private navParams: NavParams,
     ) {}
 
     ngOnInit() {
 
         this.event = this.navParams.get('event');
-    }
+        console.log("event ",this.event)
 
-    ngOnDestroy(){
-        console.log("ngOnDestroy");
+        this.tabBar = <HTMLElement>document.querySelector(".tabbar");
+        if (this.tabBar != null) {
+          this.tabBar.style.bottom = '-56px';
+        }
     }
-
+    
+    //Called when view is left
+    ionViewWillLeave() {
+        
+        this.tabBar.style.bottom = '0';
+    }
 }

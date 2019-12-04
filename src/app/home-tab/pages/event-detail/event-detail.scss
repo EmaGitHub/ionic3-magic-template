@@ -1,8 +1,80 @@
 page-event-detail {
 
-    #text {
-        opacity: 0;
-        text-align: center; 
+    .content{
+
+        margin-bottom: 200px !important;
+
+
+        #title{
+            font-size: 22px !important;
+            font-weight: 500;
+            margin: 10px 16px;
+        }
+
+        #label{
+
+            font-size: 15px !important;
+            font-weight: 300;
+            margin: 0 16px;
+        }
+
+        #date{
+            font-size: 14px !important;
+            font-weight: 300;
+            margin: 12px 16px;
+        }
+
+        #image{
+
+            background-color: cadetblue;
+            height: 200px;
+            width: 100%;
+        }
+
+        #description{
+
+            font-size: 15px !important;
+            font-weight: 300;
+            margin: 16px 16px;
+        }
+
+        #friends{
+
+            font-size: 15px !important;
+            font-weight: 300;
+            margin: 0 16px;
+        }
+
+        #map{
+
+            height: 160px;
+            background-color: green;
+            margin: 0 16px;
+        }
+        #location{
+
+            font-size: 15px !important;
+            font-weight: 300;
+            margin: 16px 16px;
+            #name{
+                font-weight: 500;
+            }
+        }
+
+        #social{
+            margin: 16px 16px;
+            height: 100px;
+
+        }
+
+        hr {
+            margin: 0 16px;
+            background-color: grey;
+        }
+        #around-you{
+            font-size: 12px !important;
+            margin: 16px 16px;
+        }
     }
  
 }

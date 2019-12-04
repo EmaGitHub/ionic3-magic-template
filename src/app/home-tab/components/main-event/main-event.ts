@@ -24,6 +24,7 @@ export class MainEventComponent implements OnInit{
   }
 
   ngOnInit() {
+
   }
 
   goEventDetail(){

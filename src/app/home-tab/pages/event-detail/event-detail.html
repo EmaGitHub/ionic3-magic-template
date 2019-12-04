@@ -1,21 +1,40 @@
-<navbar [pageName]="'DETAILPAGE'"></navbar>
+<navbar [pageName]="''"></navbar>
 
-<ion-content padding-left padding-right padding-top class="pageWithNavbar">
+<ion-content class="pageWithNavbar">
 
-    <div [@fade-in-out]="visibleText" id="text">{{text}}</div>
-    <br>
-    <div [@fade-in-out]="visibleText" id="text">
-        <button ion-button (tap)="makeGetReq()" >HTTP GET Req</button>
-        <button ion-button (tap)="makePostReq()" >HTTP POST Req</button>
-    </div>
+    <div class="content">
+        <p id="title">{{event.title}}</p>
 
-    <br>
-    <div [@fade-in-out]="visibleText" id="text" *ngIf="postResp">{{postResp}}</div>
-    <br>
-    <span *ngFor="let r of getResp"> 
-        <div> - {{r.title}}</div>
+        <p id="label">{{event.label}}</p>
+
+        <p id="date">From {{event.dateBegin.toLocaleString('default', { month: 'long' })}} {{event.dateBegin.getDay()}} to {{event.dateEnd.toLocaleString('default', { month: 'long' })}} {{event.dateEnd.getDay()}}</p>
+        
+        <div id="image" >{{event.background}}</div>
+
+        <p id="description">{{event.description}}</p>
+
+
+        <p id="friends">
+            Persone che conosci che parteciperanno
+        </p>
+        <horizontal-scroll-friends [friends]="friends"></horizontal-scroll-friends>
+
+        <div id="map"></div>
+
+        <div id="location">
+        <p id="name" >{{event.locationName}}</p>
+        {{event.locationAddress}}
+        </div>
+
+
+        <div id="social">
+
+        </div>
         <hr>
-    </span>
-   
+        <div id="around-you">
+            Around you
+        </div>
+
+    </div>
 
 </ion-content>

@@ -13,6 +13,8 @@ import { HorizontalScrollEventsComponent } from './components/horizontal-scroll-
 import { ScrollEventComponent } from './components/scroll-event/scroll-event';
 import { MainEventsComponent } from './components/main-events/main-events';
 import { EventDetailPage } from './pages/event-detail/event-detail';
+import { HorizontalScrollFriendsComponent } from './components/horizontal-scroll-friends/horizontal-scroll-friends';
+import { ScrollFriendComponent } from './components/scroll-friend/scroll-friend';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,9 @@ import { EventDetailPage } from './pages/event-detail/event-detail';
         MainEventsComponent,
         MainEventComponent,
         HorizontalScrollEventsComponent,
+        HorizontalScrollFriendsComponent,
         ScrollEventComponent,
+        ScrollFriendComponent,
 
         // Pages list
         HomePage,
@@ -46,7 +50,9 @@ import { EventDetailPage } from './pages/event-detail/event-detail';
         MainEventsComponent,
         MainEventComponent,
         HorizontalScrollEventsComponent,
+        HorizontalScrollFriendsComponent,
         ScrollEventComponent,
+        ScrollFriendComponent,
 
         // Pages list
         HomePage,

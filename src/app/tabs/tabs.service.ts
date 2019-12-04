@@ -30,6 +30,14 @@ export class TabsService {
         return tabsIsLoaded;
     }
 
+    hideTabs() {
+
+        let elem = <HTMLElement>document.querySelector(".tabbar");
+        if (elem != null) {
+          elem.style.bottom = '100px';
+        }
+    }
+
     /**
      * Load the TabsPage for the first time
      */
