@@ -1,0 +1,29 @@
+horizontal-scroll-images {
+  .cont {
+    width: 100%;
+
+    .item {
+      background-color: transparent;
+
+      h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 20px;
+        color: map-get($colors, danger);
+        font-weight: 500;
+      }
+      span {
+        font-size: 13px;
+        color: map-get($colors, google-gray);
+        font-weight: 400;
+      }
+    }
+
+    .scroll-window {
+      height: 100px;
+      .scroll-content{
+        padding-left: 16px;
+      }
+    }
+  }
+}

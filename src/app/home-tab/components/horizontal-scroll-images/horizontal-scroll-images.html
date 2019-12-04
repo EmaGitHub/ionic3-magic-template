@@ -1,0 +1,12 @@
+<!-- Generated template for the HorizontalScrollEventsComponent component -->
+<div class="cont">
+
+  <ion-scroll class="scroll-window" scrollX="true" direction="x">
+    <ion-row nowrap>
+      <div *ngFor="let nearEvent of nearEvents; let idx = index">
+        <scroll-image [nearEvent]="nearEvent"></scroll-image>
+      </div>
+    </ion-row>
+  </ion-scroll>
+
+</div>

@@ -15,7 +15,8 @@ export class EventDetailPage implements OnInit {
     event?: Event;
     tabBar: any;
 
-    friends: any[] = [{}, {}, {}, {}, {}, {}, {}]
+    friends: any[] = [{}, {}, {}, {}, {}, {}, {}];
+    nearEvents: any[] =  [{}, {}, {}, {}, {}];
 
     constructor(
         private navParams: NavParams,
@@ -24,7 +25,6 @@ export class EventDetailPage implements OnInit {
     ngOnInit() {
 
         this.event = this.navParams.get('event');
-        console.log("event ",this.event)
 
         this.tabBar = <HTMLElement>document.querySelector(".tabbar");
         if (this.tabBar != null) {
@@ -32,7 +32,6 @@ export class EventDetailPage implements OnInit {
         }
     }
     
-    //Called when view is left
     ionViewWillLeave() {
         
         this.tabBar.style.bottom = '0';
