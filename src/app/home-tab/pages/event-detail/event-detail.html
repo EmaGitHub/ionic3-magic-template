@@ -7,12 +7,33 @@
 
         <p id="label">{{event.label}}</p>
 
-        <p id="date">From {{event.dateBegin.toLocaleString('default', { month: 'long' })}} {{event.dateBegin.getDay()}} to {{event.dateEnd.toLocaleString('default', { month: 'long' })}} {{event.dateEnd.getDay()}}</p>
-        
-        <div id="image" >{{event.background}}</div>
+        <p id="date">From {{event.dateBegin.toLocaleString('default', { month: 'long' })}} {{event.dateBegin.getDay()}}
+            to {{event.dateEnd.toLocaleString('default', { month: 'long' })}} {{event.dateEnd.getDay()}}</p>
+
+        <div id="image">{{event.background}}</div>
 
         <p id="description">{{event.description}}</p>
 
+        <div class="price">
+
+            <ion-row>
+                <ion-col>
+                    Biglietto regolare
+                </ion-col>
+                <ion-col>
+                    Biglietto scontato
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="bold">
+                    € {{event.regularTicketPrice}}
+                </ion-col>
+                <ion-col class="bold">
+                    € {{event.discountedTicketPrice}}
+                </ion-col>
+            </ion-row>
+
+        </div>
 
         <p id="friends">
             Persone che conosci che parteciperanno
@@ -22,8 +43,8 @@
         <div id="map"></div>
 
         <div id="location">
-        <p id="name" >{{event.locationName}}</p>
-        {{event.locationAddress}}
+            <p id="name">{{event.locationName}}</p>
+            {{event.locationAddress}}
         </div>
 
         <div id="social">
