@@ -30,7 +30,7 @@ export class EventDetailPage implements OnInit {
 
         this.tabBar = <HTMLElement>document.querySelector(".tabbar");
         if (this.tabBar != null) {
-          this.tabBar.style.bottom = '-56px';
+          this.tabBar.style.bottom = '-92px';
         }
 
 /*         console.log("nav ",this.splitViewService.getSplitView(0).detailNav.getActive())

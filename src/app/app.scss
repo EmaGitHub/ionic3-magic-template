@@ -21,9 +21,9 @@ body {
   margin-top: env(safe-area-inset-top);
 }
 
-.toolbar-footer {
-  margin-bottom: constant(safe-area-inset-bottom);
-  margin-bottom: env(safe-area-inset-bottom);
+.tabbar.show-tabbar {
+  margin-bottom: constant(safe-area-inset-bottom) !important;
+  margin-bottom: env(safe-area-inset-bottom) !important;
 }
 
 .swiper-container-horizontal > .swiper-pagination-bullets {

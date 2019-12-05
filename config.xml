@@ -31,8 +31,8 @@
     <preference name="FadeSplashScreen" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#283C5A" />
-    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
+    <preference name="StatusBarStyle" value="#000000" />
     <preference name="AndroidLaunchMode" value="singleTop" />
     <preference name="loadUrlTimeoutValue" value="700000" />
     <platform name="android">
@@ -128,6 +128,6 @@
     <plugin name="cordova-plugin-advanced-http" spec="2.2.0">
         <variable name="OKHTTP_VERSION" value="3.10.0" />
     </plugin>
-    <engine name="ios" spec="5.0.0" />
     <engine name="android" spec="7.1.4" />
+    <engine name="ios" spec="5.0.0" />
 </widget>

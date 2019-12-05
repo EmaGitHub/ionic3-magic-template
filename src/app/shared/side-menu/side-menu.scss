@@ -78,8 +78,8 @@ side-menu {
             }
         }
         .scroll-content{
-        bottom: constant(safe-area-inset-bottom);
-        bottom: env(safe-area-inset-bottom);
+            margin-bottom: constant(safe-area-inset-bottom) !important;
+            margin-bottom: env(safe-area-inset-bottom) !important;
         }
     }
 }
