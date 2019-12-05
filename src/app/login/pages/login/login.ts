@@ -28,7 +28,7 @@ export class LoginPage {
     @ContentChild(TextInput) ion_input?: TextInput;
     @ViewChild('slides') slides?: Slides;
 
-    public tags: string [] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon','Green','Yellow','Purple','Olive','Blue'];
+    public tags: string [] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon', 'Green'];
 
     constructor(
         private logger: LoggerService,

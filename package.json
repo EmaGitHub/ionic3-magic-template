@@ -140,8 +140,8 @@
       }
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   },
   "config": {
