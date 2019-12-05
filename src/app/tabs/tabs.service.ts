@@ -12,8 +12,8 @@ export class TabsService {
 
     constructor(
         private appCtrl: App,
-        private deviceService: DeviceService
-    ) { }
+        private deviceService: DeviceService,
+    ) {     }
 
     public isTabsLoaded(): boolean {
         let tabsIsLoaded = true;

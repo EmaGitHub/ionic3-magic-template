@@ -9,7 +9,6 @@ import { AppStore } from './app-store';
 import { UserState } from './core/user/models/user-state';
 import { StatusBar } from '@ionic-native/status-bar';
 import { LokiDatabaseService } from './core/lokijs-database/LokiDBService';
-import { SplitViewService } from './core/split-view';
 
 @Component({
     templateUrl: 'app.html'
@@ -32,7 +31,6 @@ export class App extends AutoUnsubscribe {
         private store: Store<AppStore>,
         private statusBar: StatusBar,
         private lokiDatabasesService: LokiDatabaseService,
-        private splitViewService: SplitViewService
     ) {
         super();
         this.platform.ready().then(() => {
@@ -46,7 +44,6 @@ export class App extends AutoUnsubscribe {
             this.platform.registerBackButtonAction(() => {
                 this.exitConfirm();
             });
-
         });
     }
 
@@ -88,8 +85,6 @@ export class App extends AutoUnsubscribe {
     }
 
     exitConfirm() {
-
-        console.log("nav ",this.splitViewService.getSplitView(0))
 
         if (this.exitDialogVisible == false) {
             this.deviceService.confirm("Do you really want to close app?", {

@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '@app/app-store';
 import { UserState } from '@app/core/user/models/user-state';
 import { LoginAction } from '@app/core/user/actions/login-action';
+import { SplitViewService } from '@app/core/split-view';
 
 @Component({
     selector: 'page-login',
@@ -36,7 +37,8 @@ export class LoginPage {
         private tabsService: TabsService,
         private viewCtrl: ViewController,
         private inAppBrowser: InAppBrowser,
-        private store: Store<AppStore>    
+        private store: Store<AppStore>,
+        private splitViewService: SplitViewService
         ) { }
 
     ionViewDidEnter() {

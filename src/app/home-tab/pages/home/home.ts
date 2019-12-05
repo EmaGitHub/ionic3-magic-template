@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '@app/app-store';
 import { EventsActionTypes } from '@app/core/events/actions/events-action-types';
 import { Action } from 'rxjs/scheduler/Action';
-import { Platform, AlertController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'page-home',
@@ -24,7 +24,7 @@ export class HomePage implements OnInit{
         private eventsService: EventsService,
         private store: Store<AppStore>,
         private alertCtrl: AlertController
-    ) {
+            ) {
 
     }
 
