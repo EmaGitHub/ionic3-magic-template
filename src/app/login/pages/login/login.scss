@@ -6,7 +6,8 @@ page-login {
       width: 90%;
       margin: 0 5%;
       position: absolute;
-      top: 36vh;
+      //top: 36vh;
+      top: 275px;
 
       .login-input-container {
         margin-top: 2vh;
@@ -126,7 +127,8 @@ page-login {
     width: 90%;
     margin: 0 5% 60px 5%;
     position: absolute;
-    top: 665px;
+    top: 650px;
+    height: 40px;
     //bottom: 8vh;
 
   }
