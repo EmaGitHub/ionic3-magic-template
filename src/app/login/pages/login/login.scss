@@ -6,8 +6,8 @@ page-login {
       width: 90%;
       margin: 0 5%;
       position: absolute;
-      //top: 36vh;
-      top: 275px;
+      top: 30vh;
+      //top: 275px;
 
       .login-input-container {
         margin-top: 2vh;
@@ -15,6 +15,7 @@ page-login {
         padding-left: 0px;
         min-height: 0;
         border-bottom: 1px solid black !important;
+        background-color: transparent !important;
 
         #eye-button {
           position: absolute;
@@ -74,8 +75,8 @@ page-login {
       width: 90%;
       margin: 0 5%;
       position: absolute;
-      top: 310px;
-      //top: 42vh;
+      //top: 310px;
+      top: 45vh;
     }
   }
 
@@ -84,8 +85,8 @@ page-login {
 
     .ateneo {
       position: absolute;
-      //top: 38vh;
-      top: 330px;
+      top: 38vh;
+      //top: 330px;
       ion-row {
         margin: 0 40px;
         ion-col {
@@ -109,8 +110,8 @@ page-login {
     width: 80%;
     margin: 0 10%;
     position: absolute;
-    top: 170px;
-    //top: 22vh;
+    //top: 170px;
+    top: 22vh;
 
     h3 {
       font-weight: 600;
@@ -127,18 +128,20 @@ page-login {
     width: 90%;
     margin: 0 5%;
     position: absolute;
-    top: 650px;
+    //top: 650px;
     height: 40px;
-    //bottom: 8vh;
+    bottom: 8vh;
 
   }
-  .space-under-login-button{
+  /* .space-under-login-button{
+    //
     height: 60px;
     position: absolute;
     top: 690px;
     width: 100%;
     background-color: transparent;
-  }
+    //
+  } */
 
   .login-button:disabled {
     background-color: map-get($colors, google-gray);
