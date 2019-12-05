@@ -14,9 +14,8 @@ horizontal-scroll-events {
         font-weight: 500;
       }
       span {
-        font-size: 13px;
-        color: map-get($colors, google-gray);
-        font-weight: 400;
+        font-size: 14px;
+        font-weight: 500;
       }
       .arrow-icon {
         color: map-get($colors, google-gray);
@@ -28,7 +27,7 @@ horizontal-scroll-events {
     .scroll-window {
       height: 215px;
       .scroll-content{
-        padding-left: 16px;
+        padding: 0 16px;
       }
     }
   }

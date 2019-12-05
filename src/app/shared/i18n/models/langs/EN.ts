@@ -30,13 +30,13 @@ export const EN = {
     SETTINGSPAGE: 'SettingsPage',
 
     LOGIN: 'Login',
-    LOGOUT: 'Logout',
+    LOGOUT: 'Log out',
 
     EVENTS_LABEL: 'Discover all the Tuscany events',
     TOSCANA_CLAIM: 'Tuscany Claim',
 
     SEE_ALL: 'See all',
-    DISCOUNT_EVENTS_LABEL: 'Top discounted events',
+    DISCOUNT_EVENTS_LABEL: 'Top DISCOUNTED events',
     HIGHLIGHT_EVENTS: 'Highlight events',
     RECOMMENTED_EVENTS_LABEL: 'Recommented events',
 

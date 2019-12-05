@@ -62,7 +62,7 @@ export class SideMenuComponent {
 
         setTimeout(() => {
 
-            this.deviceService.confirm("Are you sure do you want to exit app?", {
+            this.deviceService.confirm("Are you sure do you want to log out?", {
                 title: 'Exit confirm', buttons: [{
                     text: 'CANCEL',
                     cssClass: 'primary',

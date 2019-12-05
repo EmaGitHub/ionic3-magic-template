@@ -10,7 +10,6 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '@app/app-store';
 import { UserState } from '@app/core/user/models/user-state';
 import { LoginAction } from '@app/core/user/actions/login-action';
-import { isRightSide } from 'ionic-angular/umd/util/util';
 
 @Component({
     selector: 'page-login',
@@ -28,7 +27,7 @@ export class LoginPage {
     @ContentChild(TextInput) ion_input?: TextInput;
     @ViewChild('slides') slides?: Slides;
 
-    public tags: string [] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon','Green'];
+    public tags: string [] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon','Green','Yellow','Purple','Olive','Blue'];
 
     constructor(
         private logger: LoggerService,

@@ -1,4 +1,4 @@
-<ion-header class>
+<ion-header class="header">
 
     <ion-row id="row-one"></ion-row>
 
@@ -18,19 +18,24 @@
 
 <ion-content class="ion-padding">
     <ion-list id="menuList" no-lines>
-        <ion-item tappable (tap)="goHomePage()" menuClose >
+        <ion-item tappable (tap)="goHomePage()" menuClose>
             <ion-icon id="sectionIcon" name="ios-contacts" item-start></ion-icon>
             {{'SEED' | translate}}
         </ion-item>
-        <ion-item tappable (tap)="goRootPage()" menuClose >
-            <ion-icon id="sectionIcon" name="md-analytics" item-start></ion-icon>
+        <ion-item tappable (tap)="goRootPage()" menuClose>
+            <ion-icon id="sectionIcon" name="card" item-start></ion-icon>
             {{'ROOT' | translate}}
         </ion-item>
-        <ion-item tappable (tap)="goSettingsPage()" menuClose >
-                <ion-icon id="sectionIcon" name="settings" item-start></ion-icon>
-                {{'SETTINGS' | translate}}
-            </ion-item>
-        <ion-item tappable class="bottomMenuButton" (tap)="logOut()" menuClose >
+        <ion-item tappable (tap)="goSettingsPage()" menuClose>
+            <ion-icon id="sectionIcon" name="ios-reverse-camera-outline" item-start></ion-icon>
+            {{'ROOTPAGE' | translate}}
+        </ion-item>
+        <ion-item tappable (tap)="goSettingsPage()" menuClose>
+            <ion-icon id="sectionIcon" name="ios-settings-outline" item-start></ion-icon>
+            {{'SETTINGS' | translate}}
+        </ion-item>
+        
+        <ion-item tappable class="bottomMenuButton" (tap)="logOut()" menuClose>
             {{'LOGOUT' | translate}}
         </ion-item>
     </ion-list>

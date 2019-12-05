@@ -53,7 +53,7 @@ export class Starter {
                             (error: Error) => {
                                 console.log("Autologin failed: ",error)
                                 this.deviceService.hideSplashscreen();
-                                this.loginService.openWelcomeScreen();
+                                this.loginService.openMainLogin();
                             }
                         )
                     },

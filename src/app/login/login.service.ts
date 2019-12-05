@@ -9,7 +9,7 @@ import { LoginPage } from './pages/login/login';
 export class LoginService {
 
     private _loginModal: Modal;
-    private _welcomeModal: Modal;
+    //private _welcomeModal: Modal;
 
     constructor(
         private modalCtrl: ModalController,
@@ -17,7 +17,7 @@ export class LoginService {
         private userService: UserService
     ) {
         // Create the main welcome modal
-        this._welcomeModal = this.modalCtrl.create(WelcomeScreen, {}, {
+        /* this._welcomeModal = this.modalCtrl.create(WelcomeScreen, {}, {
             showBackdrop: true,
             enableBackdropDismiss: false,
             cssClass: 'welcome-modal'
@@ -25,7 +25,7 @@ export class LoginService {
 
         this._welcomeModal.onDidDismiss(data => {
             this.openMainLogin();
-          });
+          }); */
 
         // Create the main login modal
         this._loginModal = this.modalCtrl.create(LoginPage, {}, {
@@ -46,13 +46,13 @@ export class LoginService {
     }
 
     /**
-     * Open the previuosly created main login modal
+     * Open the previuosly created main welcome screen modal
      */
-    public openWelcomeScreen(): void {
+    /* public openWelcomeScreen(): void {
         this._welcomeModal.present().then(() => {
             this.deviceService.hideLoading();
         });
-    }
+    } */
 
     /**
      * Start to observe the session's changes in order to open or dismiss it

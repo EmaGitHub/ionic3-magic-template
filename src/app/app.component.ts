@@ -3,23 +3,27 @@ import { Starter } from '@app/starter/starter';
 import { AutoUnsubscribe } from '@core/auto-unsubscribe';
 import { DeviceService } from '@core/device';
 import { LoginStates, UserService } from '@core/user';
-import { Platform } from 'ionic-angular';
+import { Platform, NavController } from 'ionic-angular';
 import { Store } from '@ngrx/store';
 import { AppStore } from './app-store';
 import { UserState } from './core/user/models/user-state';
 import { StatusBar } from '@ionic-native/status-bar';
 import { LokiDatabaseService } from './core/lokijs-database/LokiDBService';
+import { SplitViewService } from './core/split-view';
 
 @Component({
     templateUrl: 'app.html'
 })
 export class App extends AutoUnsubscribe {
 
+    @ViewChild('nav') navCtrl?: NavController;
+
     public rootPage: any = Starter;
     public userIsNotLogged: boolean = false;
 
     private userSubscription$?: Store<UserState>;
     public userLogged: boolean = false;
+    private exitDialogVisible: boolean = false;
 
     constructor(
         private platform: Platform,
@@ -27,16 +31,22 @@ export class App extends AutoUnsubscribe {
         private userService: UserService,
         private store: Store<AppStore>,
         private statusBar: StatusBar,
-        private lokiDatabasesService: LokiDatabaseService
+        private lokiDatabasesService: LokiDatabaseService,
+        private splitViewService: SplitViewService
     ) {
         super();
         this.platform.ready().then(() => {
             this.initOrientation();
-            this.statusBar.overlaysWebView(false);
             this.initLogoutSubscriptions();
             this.initUserSubscription();
             this.statusBar.backgroundColorByHexString("#FFF");
+            this.statusBar.styleDefault();
             this.lokiDatabasesService.initDB();
+            this.deviceService.hideSplashscreen();
+            this.platform.registerBackButtonAction(() => {
+                this.exitConfirm();
+            });
+
         });
     }
 
@@ -77,4 +87,29 @@ export class App extends AutoUnsubscribe {
         })
     }
 
+    exitConfirm() {
+
+        console.log("nav ",this.splitViewService.getSplitView(0))
+
+        if (this.exitDialogVisible == false) {
+            this.deviceService.confirm("Do you really want to close app?", {
+                title: 'Exit confirm', buttons: [{
+                    text: 'CANCEL',
+                    cssClass: 'primary',
+                    role: 'cancel',
+                    handler: () => {
+                        this.exitDialogVisible = false;
+                     }
+                }, {
+                    text: 'OK',
+                    cssClass: 'primary',
+                    handler: () => {
+                        this.platform.exitApp();
+                    }
+                }]
+            });
+            this.exitDialogVisible = true;
+        }
+
+    }
 }

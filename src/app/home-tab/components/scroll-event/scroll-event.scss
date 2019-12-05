@@ -28,7 +28,7 @@ scroll-event {
             height: 50px;
             width: 50px;
             border-radius: 50%;
-            border: 1px solid map-get($colors, google-gray);
+            box-shadow: 0px 1px 9px -5px black;
             background-color: white;
 
             ion-icon {

@@ -118,9 +118,11 @@ page-login {
   .login-button {
     background-color: map-get($colors, danger);
     width: 90%;
-    margin: 0 5%;
-    position: fixed;
-    bottom: 8vh;
+    margin: 0 5% 60px 5%;
+    position: absolute;
+    top: 665px;
+    //bottom: 8vh;
+
   }
 
   .login-button:disabled {
