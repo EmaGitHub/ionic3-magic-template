@@ -125,12 +125,19 @@ page-login {
   .login-button {
     background-color: map-get($colors, danger);
     width: 90%;
-    margin: 0 5% 60px 5%;
+    margin: 0 5%;
     position: absolute;
     top: 650px;
     height: 40px;
     //bottom: 8vh;
 
+  }
+  .space-under-login-button{
+    height: 60px;
+    position: absolute;
+    top: 690px;
+    width: 100%;
+    background-color: transparent;
   }
 
   .login-button:disabled {

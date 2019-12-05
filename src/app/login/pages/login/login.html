@@ -2,7 +2,7 @@
     <ion-slide class="first-content">
         <step [number]="'1'" [label]="'Register'"></step>
         <div class="register-form">
-            <form #loginForm="ngForm">
+            <form #loginForm="ngForm" ng-submit="next()">
                 <ion-item class="login-input-container" lines="inset">
                     <ion-input [clearInput]="false" [placeholder]="'USERNAME' | translate" [(ngModel)]="username"
                         name="username" autocapitalize="off" autocorrect="off" clearInput clearOnEdit="off" required>
@@ -28,7 +28,7 @@
 
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="next()">{{ 'CONTINUE' | translate }}</button>
-
+        <div class="space-under-login-button"></div>
     </ion-slide>
 
     <ion-slide class="second-content">
@@ -47,6 +47,7 @@
 
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="next()">{{ 'CONTINUE' | translate }}</button>
+        <div class="space-under-login-button"></div>
     </ion-slide>
 
 
@@ -59,29 +60,28 @@
         </div>
 
         <div class="ateneo">
-        <ion-row>
-            <ion-col (tap)="selectAteneo(1)" [ngClass]="ateneoSelected == 1 ? 'ateneo-selected': '' ">
-                <img src="assets/imgs/Risorsa3x.png">
-            </ion-col>
-            <ion-col (tap)="selectAteneo(2)" [ngClass]="ateneoSelected == 2 ? 'ateneo-selected': '' ">
-                <img src="assets/imgs/uni-siena.png">
-            </ion-col>
-        </ion-row>
-        <ion-row>
+            <ion-row>
+                <ion-col (tap)="selectAteneo(1)" [ngClass]="ateneoSelected == 1 ? 'ateneo-selected': '' ">
+                    <img src="assets/imgs/Risorsa3x.png">
+                </ion-col>
+                <ion-col (tap)="selectAteneo(2)" [ngClass]="ateneoSelected == 2 ? 'ateneo-selected': '' ">
+                    <img src="assets/imgs/uni-siena.png">
+                </ion-col>
+            </ion-row>
+            <ion-row>
                 <ion-col (tap)="selectAteneo(3)" [ngClass]="ateneoSelected == 3 ? 'ateneo-selected': '' ">
-                        <img src="assets/imgs/unis-siena.png">
-                    </ion-col>
-                    <ion-col (tap)="selectAteneo(4)" [ngClass]="ateneoSelected == 4 ? 'ateneo-selected': '' ">
-                        <img src="assets/imgs/uni-firenze.png">
-                    </ion-col>
-        </ion-row>
-
-    </div>
-
+                    <img src="assets/imgs/unis-siena.png">
+                </ion-col>
+                <ion-col (tap)="selectAteneo(4)" [ngClass]="ateneoSelected == 4 ? 'ateneo-selected': '' ">
+                    <img src="assets/imgs/uni-firenze.png">
+                </ion-col>
+            </ion-row>
+        </div>
 
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="onLoginSubmit()">{{ 'REGISTER' | translate }}</button>
-    </ion-slide>
 
+        <div class="space-under-login-button"></div>
+    </ion-slide>
 
 </ion-slides>
