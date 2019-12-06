@@ -21,8 +21,8 @@ export class Event {
     constructor(initialValues: Partial<Event>) {
         this.title= initialValues.title;
         this.shortTitle= initialValues.shortTitle;
-        this.dateBegin=  new Date('11,9,2020');
-        this.dateEnd=new Date('12,2,2020');
+        this.dateBegin=  new Date('11/9/2020');
+        this.dateEnd=new Date('12/2/2020');
         this.type= initialValues.type;
         this.icon= initialValues.type;
         this.label= 'label';

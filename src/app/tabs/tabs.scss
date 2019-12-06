@@ -18,6 +18,13 @@
             }
 
             &[aria-selected="true"] {
+
+                .tab-button-text {
+                    font-size: 8px !important;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+
                 color: map-get($colors, danger);
 
                 ion-icon {

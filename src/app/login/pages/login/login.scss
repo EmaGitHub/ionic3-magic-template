@@ -1,6 +1,8 @@
 page-login {
+
   .first-content {
     background-color: white;
+    overflow-x: hidden;
 
     .register-form {
       width: 90%;
@@ -16,6 +18,15 @@ page-login {
         min-height: 0;
         border-bottom: 1px solid black !important;
         background-color: transparent !important;
+
+        ion-input {
+          ::placeholder{
+              color:black !important;
+              font-size: 16px !important;
+              font-weight: bold;
+              text-transform: uppercase;
+          }
+      }
 
         #eye-button {
           position: absolute;
@@ -61,9 +72,12 @@ page-login {
         background-size: cover;
         height: 7vh;
       }
-      #barcode-label {
-        margin-top: 5vh;
-      }
+    }
+    #barcode-label {
+      margin-top: 2vh;
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: bold;
     }
   }
 
@@ -76,7 +90,7 @@ page-login {
       margin: 0 5%;
       position: absolute;
       //top: 310px;
-      top: 45vh;
+      top: 40vh;
     }
   }
 
@@ -85,7 +99,7 @@ page-login {
 
     .ateneo {
       position: absolute;
-      top: 38vh;
+      top: 32vh;
       //top: 330px;
       ion-row {
         margin: 0 40px;
@@ -111,7 +125,7 @@ page-login {
     margin: 0 10%;
     position: absolute;
     //top: 170px;
-    top: 22vh;
+    top: 16vh;
 
     h3 {
       font-weight: 600;

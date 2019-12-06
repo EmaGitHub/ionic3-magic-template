@@ -38,10 +38,13 @@ export class LoginPage {
         private viewCtrl: ViewController,
         private inAppBrowser: InAppBrowser,
         private store: Store<AppStore>,
-        private splitViewService: SplitViewService
-        ) { }
+        ) {
+
+         }
 
     ionViewDidEnter() {
+
+        this.slides!.onlyExternal = true;
 
         this.userStateSubscription$ = this.store.select('userState').subscribe(
             (userState: UserState) => {

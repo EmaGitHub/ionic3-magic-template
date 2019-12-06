@@ -76,8 +76,13 @@ ion-nav.main-app.content-hidden {
   }
 
   @font-face {
-    font-family: caslon3-bd;
+    font-family: 'caslon3-bd';
     src: url(../assets/fonts/Caslon-bd.ttf) format("ttf");
+  }
+
+  @font-face {
+    font-family: 'san-francisco';
+    src: url(../assets/fonts/SF-Pro-Text-Regular.ttf) format("ttf");
   }
 
 }

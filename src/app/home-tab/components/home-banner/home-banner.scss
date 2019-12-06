@@ -25,10 +25,10 @@ home-banner {
     -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
     opacity: 0.5;
+    z-index: -10;
   }
 
-  .claim{
-
+  .claim {
     text-align: left;
     padding: 20px 30px;
     color: white;
@@ -36,51 +36,63 @@ home-banner {
     font-weight: 700;
 
     .sub-claim {
-        font-weight: 300;
+      font-weight: 300;
     }
   }
 
-  .line{
-
+  .line {
     margin: 16px 0;
     height: 1px;
     width: 50px;
     background-color: white;
   }
 
-  .input {
+  .input-item {
     text-align: center;
     position: absolute;
     padding: 0;
     margin: 0 5%;
-    width: 91%;
-    height: 50px;
-    top: 175px;
+    width: 90%;
+    height: 56px;
+    top: 172px;
     box-shadow: 4px 2px 40px map-get($colors, dark);
+    border-radius: 5px;
 
-    .col {
-      padding: 0;
-    }
-    .row {
-      height: 100%;
-      width: 100%;
+    .item-inner {
+      padding-right: 0 !important;
+      border: 0 !important;
+    
+    .label {
+      margin: 0;
 
-      #search-button {
-        background-color: gray;
+      .row {
 
-        ion-icon {
-          color: white;
-          z-index: 30;
-          position: relative;
-          top: 14px;
-          font-size: 25px;
+      #input{
+        text-align: left;
+        font-size: 18px !important;
+        padding-left: 8px;
+
+        input{
+          height: 100% !important;
         }
       }
-      input {
-        padding-left: 8px;
-        height: 100%;
-        width: 100%;
-        font-size: 18px;
+
+        #search-button {
+          background-color: map-get($colors, google-gray);
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+          padding-top: 2px;
+          height: 56px;
+
+          ion-icon {
+            color: white;
+            z-index: 30;
+            position: relative;
+            top: 14px;
+            font-size: 25px;
+          }
+        }
+      }
       }
     }
   }
