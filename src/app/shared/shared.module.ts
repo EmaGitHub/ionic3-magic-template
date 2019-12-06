@@ -7,6 +7,7 @@ import { ModalNavPageModule } from '@shared/modal-nav/modal-nav.module';
 import { IonicModule } from 'ionic-angular';
 import { NavbarComponent } from './navbar/navbar';
 import { RtLogoComponent } from './rt-logo/rt-logo';
+import { IT } from './i18n/models/langs/IT';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,7 @@ import { RtLogoComponent } from './rt-logo/rt-logo';
             local: {
                 i18n: LocalI18n,
                 langs: {
-                    en: EN
+                    it: IT
                 }
             },
             storePrefix: ENV.storePrefix

@@ -8,6 +8,7 @@ import { ShowHideInput } from './directives/show-hide-input.directive';
 import { LoginPage } from './pages/login/login';
 import { TagComponent } from './components/tag/tag';
 import { StepComponent } from './components/step/step';
+import { SwiperPaginationBulletComponent } from './components/swiper-pagination-bullet/swiper-pagination-bullet';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { StepComponent } from './components/step/step';
         // Components
         TagComponent,
         StepComponent,
+        SwiperPaginationBulletComponent,
         // Directives
         ShowHideInput
     ],
@@ -33,7 +35,8 @@ import { StepComponent } from './components/step/step';
 
         // Components
         TagComponent,
-        StepComponent
+        StepComponent,
+        SwiperPaginationBulletComponent
     ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     providers: [

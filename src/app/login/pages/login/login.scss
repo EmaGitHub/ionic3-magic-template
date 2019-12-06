@@ -3,6 +3,7 @@ page-login {
   .first-content {
     background-color: white;
     overflow-x: hidden;
+    overflow-y: hidden;
 
     .register-form {
       width: 90%;
@@ -20,6 +21,11 @@ page-login {
         background-color: transparent !important;
 
         ion-input {
+
+          input{
+            margin-left: 0;
+          }  
+
           ::placeholder{
               color:black !important;
               font-size: 16px !important;
@@ -99,8 +105,8 @@ page-login {
 
     .ateneo {
       position: absolute;
-      top: 32vh;
-      //top: 330px;
+      top: 36vh;
+      width: 100%;
       ion-row {
         margin: 0 40px;
         ion-col {
@@ -144,28 +150,20 @@ page-login {
     position: absolute;
     //top: 650px;
     height: 40px;
-    bottom: 8vh;
+    top: 86vh;
+    border-radius: 5px;
 
   }
-  /* .space-under-login-button{
-    //
-    height: 60px;
-    position: absolute;
-    top: 690px;
-    width: 100%;
-    background-color: transparent;
-    //
-  } */
 
   .login-button:disabled {
     background-color: map-get($colors, google-gray);
   }
 
   .swiper-pagination-bullet-active {
-    background: map-get($colors, danger);
+    background: map-get($colors, google-gray);
   }
 
-  .swiper-slide {
+/*   .swiper-slide {
     overflow-y: scroll;
-  }
+  } */
 }

@@ -3,7 +3,7 @@ import { Starter } from '@app/starter/starter';
 import { AutoUnsubscribe } from '@core/auto-unsubscribe';
 import { DeviceService } from '@core/device';
 import { LoginStates, UserService } from '@core/user';
-import { Platform, NavController } from 'ionic-angular';
+import { Platform, NavController,} from 'ionic-angular';
 import { Store } from '@ngrx/store';
 import { AppStore } from './app-store';
 import { UserState } from './core/user/models/user-state';

@@ -4,6 +4,7 @@
 
         <h2>{{event.title}}</h2>
 
-        <p> From {{event.dateBegin.toLocaleString('default', { month: 'long' })}} {{event.dateBegin.getDate()}} to {{event.dateEnd.toLocaleString('default', { month: 'long' })}} {{event.dateEnd.getDate()}}</p>
+        <p> {{'FROM' | translate}} {{event.dateBegin.getDate()}} {{event.dateBegin.toLocaleString('it-IT', { month: 'long' })}}  
+            {{'TO' | translate}} {{event.dateEnd.getDate()}} {{event.dateEnd.toLocaleString('it-IT', { month: 'long' })}}</p>
     </ion-card>
 </div>

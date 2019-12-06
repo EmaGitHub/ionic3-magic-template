@@ -6,12 +6,17 @@ horizontal-scroll-events {
     .item {
       background-color: transparent;
 
-      h3 {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 20px;
-        color: map-get($colors, danger);
-        font-weight: 500;
+      .events-label{
+        h3 {
+          margin-top: 0;
+          margin-bottom: 0;
+          font-size: 20px;
+          color: map-get($colors, danger);
+          font-weight: 500;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       span {
         font-size: 15px;

@@ -37,6 +37,7 @@
     <preference name="loadUrlTimeoutValue" value="700000" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <preference name="android:windowSoftInputMode" value="adjustPan" />
         <preference name="android-minSdkVersion" value="26" />
         <preference name="android-targetSdkVersion" value="26" />
         <hook src="hooks/copy_gradle_extra.js" type="after_platform_add" />
@@ -64,7 +65,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <preference name="Orientation" value="all" />
-        <preference name="KeyboardResize" value="true" />
+        <preference name="KeyboardResize" value="false" />
         <preference name="KeyboardResizeMode" value="ionic" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
@@ -121,13 +122,13 @@
     <plugin name="cordova-plugin-screen-orientation" spec="3.0.1" />
     <plugin name="cordova-plugin-ios-disableshaketoedit" spec="1.0.0" />
     <plugin name="cordova-plugin-compat" spec="1.2.0" />
-    <plugin name="cordova-plugin-ionic-keyboard" spec="2.0.5" />
     <plugin name="cordova-universal-links-plugin" spec="https://github.com/lcaprini/cordova-universal-links-plugin.git" />
     <plugin name="cordova-plugin-app-version" spec="0.1.9" />
     <plugin name="cordova-plugin-firebase" spec="2.0.5" />
     <plugin name="cordova-plugin-advanced-http" spec="2.2.0">
         <variable name="OKHTTP_VERSION" value="3.10.0" />
     </plugin>
+    <plugin name="cordova-plugin-ionic-keyboard" spec="2.2.0" />
     <engine name="ios" spec="5.0.0" />
     <engine name="android" spec="7.1.4" />
 </widget>

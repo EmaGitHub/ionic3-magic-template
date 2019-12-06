@@ -19,6 +19,7 @@ import { SideMenuComponent } from './shared/side-menu/side-menu';
 import { ApiReducer } from './core/api/reducers/api.reducer';
 import { ApiEffects } from './core/api/effects/api-effects';
 import { EventsReducer } from './core/events/reducers/events.reducer';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import { EventsReducer } from './core/events/reducers/events.reducer';
     ],
     providers: [
         Store,
+        Keyboard,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })

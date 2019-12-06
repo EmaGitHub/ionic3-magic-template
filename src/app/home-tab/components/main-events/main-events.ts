@@ -21,7 +21,7 @@ export class MainEventsComponent implements OnInit{
 
   ngOnInit(){
 
-    this.mainEvents = [new Event({title: "Botanic Laboratory"}), new Event({"title": 'Inside Magritte'})];
+    this.mainEvents = [new Event({title: "Laboratorio botanico"}), new Event({"title": 'Dentro Magritte'})];
   }
 
 }

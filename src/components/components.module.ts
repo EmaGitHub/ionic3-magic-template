@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { EventsAroundComponent } from './events-around/events-around';
-import { ScrollImageComponent } from './scroll-image/scroll-image';
 @NgModule({
-	declarations: [
-    EventsAroundComponent,
-    ScrollImageComponent],
+	declarations: [],
+
 	imports: [],
-	exports: [
-    EventsAroundComponent,
-    ScrollImageComponent]
+	exports: []
+
 })
 export class ComponentsModule {}

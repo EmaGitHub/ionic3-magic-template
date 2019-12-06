@@ -7,8 +7,8 @@
 
         <p id="label">{{event.label}}</p>
 
-        <p id="date">From {{event.dateBegin.toLocaleString('default', { month: 'long' })}} {{event.dateBegin.getDate()}}
-            to {{event.dateEnd.toLocaleString('default', { month: 'long' })}} {{event.dateEnd.getDate()}}</p>
+        <p id="date"> {{'FROM' | translate}} {{event.dateBegin.getDate()}} {{event.dateBegin.toLocaleString('it-IT', { month: 'long' })}}  {{'TO' | translate}}
+            {{event.dateEnd.getDate()}} {{event.dateEnd.toLocaleString('it-IT', { month: 'long' })}}</p>
 
         <div id="image">{{event.background}}</div>
 

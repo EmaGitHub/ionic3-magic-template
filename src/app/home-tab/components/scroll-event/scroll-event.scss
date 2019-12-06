@@ -43,8 +43,9 @@ scroll-event {
             height: 68px;
             text-align: center;
             position: relative;
-            bottom: 20px;
-            font-size: 12px;
+            bottom: 22px;
+            font-size: 15px;
+            font-weight: bold;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -52,7 +53,7 @@ scroll-event {
             p{
                 width: 100%;
                 color: gray;
-                font-size: 13px;
+                font-size: 10px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;

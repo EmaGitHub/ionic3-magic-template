@@ -68,12 +68,12 @@ home-banner {
       .row {
 
       #input{
-        text-align: left;
         font-size: 18px !important;
         padding-left: 8px;
 
         input{
           height: 100% !important;
+          border: none; // for black border
         }
       }
 

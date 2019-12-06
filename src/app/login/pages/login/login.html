@@ -1,6 +1,6 @@
 <ion-slides #slides pager>
     <ion-slide class="first-content">
-        <step [number]="'1'" [label]="'Register'"></step>
+        <step [number]="'1'" [label]="'REGISTER'"></step>
         <div class="register-form">
             <form #loginForm="ngForm" ng-submit="next()">
                 <ion-item class="login-input-container" lines="inset">
@@ -11,7 +11,7 @@
                 <ion-item class="login-input-container">
                     <ion-input [clearInput]="false" [placeholder]="'PASSWORD' | translate" [(ngModel)]="password"
                         show-hide-input name="password" autocapitalize="off" autocorrect="off" clearOnEdit="off"
-                        [hide]="!show" id="password-input" required></ion-input>
+                        [hide]="!show" id="password-input" required (keyup.enter)="enterPressed()"></ion-input>
                     <button (tap)="hideShow()" id="eye-button" item-end>
                         <ion-icon [name]="iconName()" [hide]="!show" id="eye-icon"></ion-icon>
                     </button>
@@ -28,11 +28,10 @@
 
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="next()">{{ 'CONTINUE' | translate }}</button>
-        <div class="space-under-login-button"></div>
     </ion-slide>
 
     <ion-slide class="second-content">
-        <step [number]="'2'" [label]="'Favourites'"></step>
+        <step [number]="'2'" [label]="'FAVOURITES'"></step>
 
         <div class="feeds-ateneo-label">
             <h3>{{'IMPROVE_FEEDS' | translate}}</h3>
@@ -47,7 +46,6 @@
 
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="next()">{{ 'CONTINUE' | translate }}</button>
-        <div class="space-under-login-button"></div>
     </ion-slide>
 
 
@@ -81,7 +79,6 @@
         <button ion-button full type="submit" [disabled]="!loginForm.valid" class="login-button"
             (tap)="onLoginSubmit()">{{ 'REGISTER' | translate }}</button>
 
-        <div class="space-under-login-button"></div>
-    </ion-slide>
+        </ion-slide>
 
 </ion-slides>

@@ -10,7 +10,8 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '@app/app-store';
 import { UserState } from '@app/core/user/models/user-state';
 import { LoginAction } from '@app/core/user/actions/login-action';
-import { SplitViewService } from '@app/core/split-view';
+import { Keyboard } from '@ionic-native/keyboard';
+
 
 @Component({
     selector: 'page-login',
@@ -38,6 +39,7 @@ export class LoginPage {
         private viewCtrl: ViewController,
         private inAppBrowser: InAppBrowser,
         private store: Store<AppStore>,
+        private keyboard: Keyboard
         ) {
 
          }
@@ -65,6 +67,11 @@ export class LoginPage {
     }
 
     hideShow()  {this.show = !this.show}
+
+    enterPressed(){
+
+        this.keyboard.hide();
+    }
 
     iconName(){
 

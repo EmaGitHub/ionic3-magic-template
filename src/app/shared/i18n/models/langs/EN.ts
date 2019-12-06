@@ -43,6 +43,8 @@ export const EN = {
     NO: 'No',
     OK: 'Ok',
     YES: 'Yes',
+    FROM: 'from',
+    TO: 'to',
 
     PASSWORD: 'Password',
     USERNAME: 'Username',
@@ -51,5 +53,10 @@ export const EN = {
     IMPROVE_FEEDS: 'Improve your feeds',
     FEEDS_LABEL: 'choosing your favourite tags, you help us to know more about you and understand your tastes',
     ATENEO_FEEDS: 'Your Ateneo',
-    ATENEO_LABEL: 'selecting your Ateneo logo, your app will be marked with the assigned brand'
+    ATENEO_LABEL: 'selecting your Ateneo logo, your app will be marked with the assigned brand',
+
+    SEARCH: 'Search',
+    FAVOURITES: 'Favourites',
+
+    AROUND_YOU: 'Around you',
 }
