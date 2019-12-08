@@ -68,6 +68,8 @@ side-menu {
 
                 position: absolute;
                 bottom: 0px;
+                bottom: constant(safe-area-inset-bottom) !important;
+                bottom: env(safe-area-inset-bottom) !important;
             }
 
             .item{

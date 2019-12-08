@@ -150,7 +150,8 @@ page-login {
     position: absolute;
     //top: 650px;
     height: 40px;
-    top: 86vh;
+    top: calc( 86vh - constant(safe-area-inset-bottom));
+    top: calc( 86vh - env(safe-area-inset-bottom));
     border-radius: 5px;
 
   }

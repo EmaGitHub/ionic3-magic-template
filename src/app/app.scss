@@ -28,7 +28,8 @@ body {
 
 .swiper-container-horizontal > .swiper-pagination-bullets {
 
-  top: 94vh;
+  top: calc( 94vh - constant(safe-area-inset-bottom));
+  top: calc( 94vh - env(safe-area-inset-bottom));
   //bottom: 20px;
 }
 
