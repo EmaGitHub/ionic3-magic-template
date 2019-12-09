@@ -10,7 +10,7 @@
         <p id="date"> {{'FROM' | translate}} {{event.dateBegin.getDate()}} {{event.dateBegin.toLocaleString('it-IT', { month: 'long' })}}  {{'TO' | translate}}
             {{event.dateEnd.getDate()}} {{event.dateEnd.toLocaleString('it-IT', { month: 'long' })}}</p>
 
-        <div id="image">{{event.background}}</div>
+        <div id="image" [style.background]="getImage()"></div>
 
         <p id="description">{{event.description}}</p>
 

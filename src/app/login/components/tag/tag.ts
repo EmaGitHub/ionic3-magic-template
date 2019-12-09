@@ -16,8 +16,8 @@ export class TagComponent implements OnInit{
   backgroundColor: string = '';
   activated: boolean = false;
 
-  colors: string[] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','LawnGreen','LightSalmon','MidnightBlue', 'Indigo',
-                      'Violet','Maroon','Red','SlateBlue','Tomato', 'Wheat', 'SteelBlue', 'SkyBlue', 'Salmon', 'RebeccaPurple', 'PaleGreen', 'LightSteelBlue']
+  colors: string[] = ['#525389','#900060 ','#5eb246','#7b6cef','#7b6cef','#ef86a8','#9543cf','#8080ff','#912cee', '#918698',
+                      '#768fe6','#d58fe6','#79bd77','#f23224','#f27776', '#bc7776', '#bcc1e9', '#42ece9', '#cf8ce9', '#cf8c11']
 
   constructor() {
 
@@ -25,17 +25,16 @@ export class TagComponent implements OnInit{
 
   ngOnInit(){
 
-    let random = Math.floor(Math.random() * this.colors.length) + 1;
-    this.backgroundColor = this.colors[random];
+    this.backgroundColor = 'linear-gradient(to right, '+ this.colors[Math.floor(Math.random() * this.colors.length)+1]+', '+ this.colors[Math.floor(Math.random() * this.colors.length)+1];
   }
 
   styleObject(){
 
-    return {'background-color': !this.activated ? this.backgroundColor : '#2C2C2C', 
-    'border': !this.activated ? '2px solid transparent' : '2px solid black',
-    'color': !this.activated ? 'white' : 'gray'}
+    return {'background': this.activated ? this.backgroundColor : '#2C2C2C', 
+    'color': this.activated ? 'white' : 'gray',
+    'font-weight': this.activated ? 'bold' : '400'
   }
-  
+  }
 
   tapped(){
 

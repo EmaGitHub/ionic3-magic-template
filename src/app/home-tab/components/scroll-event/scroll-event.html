@@ -2,7 +2,7 @@
 <div class="event-content">
     <ion-card (click)="goEventDetail()">
 
-        <div class="backgroundImage"></div>
+        <div class="backgroundImage"  [ngStyle]="{'background-image': 'url(' + pictureUrl + ')'}"></div>
         <div class="eventIcon">
             <ion-icon name="custom-teatri"></ion-icon>
         </div>

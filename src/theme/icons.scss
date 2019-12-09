@@ -28,5 +28,8 @@ ion-icon {
     &[class*="custom-teatri"] {
       mask-image: url(../assets/icon/ico_teatri.svg);
    }
+   &[class*="custom-search"] {
+      mask-image: url(../assets/icon/ico_search.svg);
+   }
 
  }

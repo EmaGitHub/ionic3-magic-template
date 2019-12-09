@@ -31,6 +31,7 @@ export const EN = {
 
     LOGIN: 'Login',
     LOGOUT: 'Log out',
+    SELECT_ATENEO: "Seleziona your Ateneo's logo",
 
     EVENTS_LABEL: 'Discover all the Tuscany events',
     TOSCANA_CLAIM: 'Tuscany Claim',
@@ -59,4 +60,7 @@ export const EN = {
     FAVOURITES: 'Favourites',
 
     AROUND_YOU: 'Around you',
+
+    LOGOUT_CONFIRM_TITLE: 'Logout confirm',
+    LOGOUT_CONFIRM_LABEL: 'Are you sure you want to Logout?'
 }

@@ -3,15 +3,14 @@ main-event {
     .main-event {
 
         height: 210px !important;
-        padding: 10px 0;
         text-align: center;
-        margin: 0 16px;
+        margin: 10px 16px 16px 16px;
         
         ion-card {
             height: 100% !important;
             display: inline-block;
             border-radius: 20px !important;
-            background-color: rgb(221, 0, 241);
+            background-size: cover !important;
             margin: 0;
             padding-left: 24px;
             text-align: left;

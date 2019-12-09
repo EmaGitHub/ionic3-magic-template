@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 /**
  * Generated class for the ScrollEventComponent component.
@@ -10,11 +10,18 @@ import { Component, Input } from '@angular/core';
   selector: 'scroll-image',
   templateUrl: 'scroll-image.html'
 })
-export class ScrollImageComponent {
+export class ScrollImageComponent implements OnInit{
 
   @Input() nearEvent?: any;
 
+  nearEventImage: string = '';
+
   constructor(
   ) {
+  }
+
+  ngOnInit() {
+    
+    this.nearEventImage = 'assets/imgs/'+this.nearEvent!.image;
   }
 }

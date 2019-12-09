@@ -5,6 +5,7 @@ export interface UserState {
     logged: boolean
     error: boolean
     user: User | null
+    ateneo: string
   }
 
 
@@ -12,5 +13,6 @@ export const initialUserState: UserState = {
     loading: false,
     logged: false,
     error: false,
-    user: null
+    user: null,
+    ateneo: ''
   };

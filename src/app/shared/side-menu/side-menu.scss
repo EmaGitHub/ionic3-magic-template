@@ -5,12 +5,14 @@ side-menu {
         left:16px !important;
 
         #row-one{
-            background-image: url('../assets/imgs/florence.png');
             background-size: cover;
             background-repeat: no-repeat;
             height: 90px;
             position: relative;
             right: 16px;
+            -webkit-background-size: 100%;
+            -moz-background-size: 100%;
+            background-size: 100%;
         }
         #row-two{
             height: 90px;
@@ -33,12 +35,11 @@ side-menu {
             display: block;
         }
         .user-picture{
-            background-image: url('../assets/imgs/uni-firenze.png');
-            background-size: cover;
+            background-size: 100%;
             background-repeat: no-repeat;
             height:100%;
-            width: 90%;
-            margin-left: 5%;
+            width: 58px;
+            margin-left: 4%;
             z-index: 16;
             
         }

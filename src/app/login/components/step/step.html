@@ -6,4 +6,17 @@
 
 <div class="label-container">{{label | translate}}</div>
 
+<div class="pager">
+<ion-row  text-center>
+  <ion-col>
+    <div class="dot" [ngClass]="(number >= 1) ? 'dot-selected' : '' "></div>
+  </ion-col>
+  <ion-col>
+      <div class="dot" [ngClass]="(number >= 2) ? 'dot-selected' : '' "></div>
+  </ion-col>
+  <ion-col>
+      <div class="dot" [ngClass]="(number >= 3) ? 'dot-selected' : '' "></div>
+  </ion-col>
+</ion-row>
+</div>
 

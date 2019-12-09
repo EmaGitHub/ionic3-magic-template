@@ -105,15 +105,15 @@ page-login {
 
     .ateneo {
       position: absolute;
-      top: 36vh;
+      top: 35vh;
       width: 100%;
       ion-row {
-        margin: 0 40px;
+        margin: 0 45px;
         ion-col {
           padding: 20px;
           border-radius: 30%;
           img{
-            width: 110px !important;
+            width: 18vh;
           }
         }
       }
@@ -160,11 +160,7 @@ page-login {
     background-color: map-get($colors, google-gray);
   }
 
-  .swiper-pagination-bullet-active {
-    background: map-get($colors, google-gray);
-  }
-
-/*   .swiper-slide {
+  .swiper-slide {
     overflow-y: scroll;
-  } */
+  }
 }

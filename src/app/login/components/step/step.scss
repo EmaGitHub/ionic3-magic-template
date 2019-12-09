@@ -1,31 +1,53 @@
 step {
-    
-    .red-circle{
+  .red-circle {
+    background-color: #e5001c;
+    border-radius: 50%;
+    height: 6vh;
+    width: 6vh;
+    position: absolute;
+    top: 4vh;
+    left: 50%;
+    margin-left: -3vh;
+    padding-top: 1px;
 
-        background-color: #e5001c;
-        border-radius: 50%;
-        height: 6vh;
-        width: 6vh;
-        position: absolute;
-        top: 4vh;
-        left: 50%;
-        margin-left: -3vh;
-        padding-top: 1px;
+    .number {
+      font-size: 5vh;
+      font-weight: 300;
+      color: white;
+    }
+  }
 
-        .number{
+  .label-container {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 300;
+    position: absolute;
+    top: 11vh;
+  }
 
-            font-size: 5vh;
-            font-weight: 300;
-            color: white;
-        }
+  .pager{
+
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: calc(95vh - constant(safe-area-inset-bottom));
+    top: calc(95vh - env(safe-area-inset-bottom));
+    padding: 0 42vw;
+
+
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background-color: lightgray;
+      border-radius: 50%;
     }
 
-    .label-container{
+    .dot-selected{
 
-        width: 100%;
-        font-size: 16px;
-        font-weight: 300;
-        position: absolute;
-        top: 11vh;
+        background-color: map-get($colors, google-gray);
     }
+  }
+
 }
+

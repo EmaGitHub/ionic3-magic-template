@@ -1,6 +1,6 @@
 export const IT = {
 
-    CANCEL: 'Cancella',
+    CANCEL: 'Annulla',
 
     DEVICE_OFFLINE: 'Dispositivo offline',
 
@@ -18,19 +18,20 @@ export const IT = {
     PROFILE: 'Profilo',
     MAP: 'Map',
     INFO: 'Info',
-    ROOT: 'Root',
-    SEED: 'Seed',
-    SETTINGS: 'Impostazioni',
+    ROOT: 'Voce 2',
+    SEED: 'Voce 1',
+    SETTINGS: 'Voce 4',
 
     HOMEPAGE: 'HomePage',
     INFOPAGE: 'InfoPage',
     DETAILPAGE: 'DetailPage',
-    ROOTPAGE: 'RootPage',
+    ROOTPAGE: 'Voce 3',
     SEEKPAGE: 'SeekPage',
     SETTINGSPAGE: 'SettingsPage',
 
     LOGIN: 'Login',
     LOGOUT: 'Log out',
+    SELECT_ATENEO: 'Seleziona il logo del tuo Ateneo',
 
     EVENTS_LABEL: 'Scopri tutti gli eventi della Toscana!',
     TOSCANA_CLAIM: 'Claim TOSCANA',
@@ -59,5 +60,8 @@ export const IT = {
     FAVOURITES: 'Preferiti',
 
     AROUND_YOU: 'Nei dintorni',
+
+    LOGOUT_CONFIRM_TITLE: 'Conferma Logout',
+    LOGOUT_CONFIRM_LABEL: 'Sei sicuro di voler fare Logout?'
 
 }

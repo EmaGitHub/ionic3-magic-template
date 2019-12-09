@@ -2,6 +2,7 @@ import { initialUserState, UserState } from "../models/user-state";
 import { LoginAction } from "../actions/login-action";
 import { UserActionTypes } from "../actions/user-actions-types";
 import { Action } from "@ngrx/store";
+import { AteneoAction } from "../actions/ateneo-action";
 
 
 export function UserReducer(state: any = initialUserState, action: Action): UserState {
@@ -22,6 +23,10 @@ export function UserReducer(state: any = initialUserState, action: Action): User
     case UserActionTypes.USER_LOGOUT:
         console.log("pass on userReducer case userLogoutSuccess")
         return {...state, loading: false, logged: false};
+
+    case UserActionTypes.EDIT_ATENEO:
+        console.log("pass on userReducer case edit Ateneo ",(action as AteneoAction).ateneo ) 
+        return {...state, ateneo: (action as AteneoAction).ateneo};
 
     default:
       return state;

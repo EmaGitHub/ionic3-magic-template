@@ -16,6 +16,7 @@ import { Event } from '@app/core/events/models/Event';
 export class MainEventComponent implements OnInit{
 
   @Input() event?: Event;
+  imageUrl: string = '';
   
   constructor(
     private splitViewService: SplitViewService
@@ -32,4 +33,8 @@ export class MainEventComponent implements OnInit{
     this.splitViewService.getSplitView(0).pushOnDetail(EventDetailPage, {event: this.event});
   }
 
+  getImage(){
+
+    return ' url("assets/imgs/'+this.event!.background+'")';
+  }
 }

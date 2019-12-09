@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 /**
  * Generated class for the ScrollEventComponent component.
@@ -10,11 +10,18 @@ import { Component, Input } from '@angular/core';
   selector: 'scroll-friend',
   templateUrl: 'scroll-friend.html'
 })
-export class ScrollFriendComponent {
+export class ScrollFriendComponent implements OnInit {
 
   @Input() friend?: any;
 
+  friendUrlImage: string = '';
+
   constructor(
   ) {
+  }
+
+  ngOnInit(){
+
+    this.friendUrlImage = 'assets/imgs/'+this.friend.image;
   }
 }

@@ -1,4 +1,4 @@
-<ion-slides #slides pager>
+<ion-slides #slides>
     <ion-slide class="first-content">
         <step [number]="'1'" [label]="'REGISTER'"></step>
         <div class="register-form">
@@ -60,7 +60,7 @@
         <div class="ateneo">
             <ion-row>
                 <ion-col (tap)="selectAteneo(1)" [ngClass]="ateneoSelected == 1 ? 'ateneo-selected': '' ">
-                    <img src="assets/imgs/Risorsa3x.png">
+                    <img src="assets/imgs/uni-pisa.png">
                 </ion-col>
                 <ion-col (tap)="selectAteneo(2)" [ngClass]="ateneoSelected == 2 ? 'ateneo-selected': '' ">
                     <img src="assets/imgs/uni-siena.png">

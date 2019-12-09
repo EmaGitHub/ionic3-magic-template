@@ -1,6 +1,6 @@
 <!-- Generated template for the MainEventComponent component -->
 <div class="main-event">
-    <ion-card (tap)="goEventDetail()">
+    <ion-card (tap)="goEventDetail()" [style.background]="getImage()">
 
         <h2>{{event.title}}</h2>
 

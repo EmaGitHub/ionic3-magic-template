@@ -16,8 +16,8 @@ export class EventDetailPage implements OnInit {
     event?: Event;
     tabBar: any;
 
-    friends: any[] = [{}, {}, {}, {}, {}, {}, {}];
-    nearEvents: any[] =  [{}, {}, {}, {}, {}];
+    friends: any[] = [{name: 'Anna', image: 'person2.png'}, {name: 'Carlo', image: 'person3.png'}, {name: 'Laura', image: 'person4.png'}, {name: 'Gigi', image: 'person5.png'}, {name: 'Franco', image: 'person7.png'}, {name: 'Francesco', image: 'person5.png'}, {name: 'Andrea', image: 'person3.png'}];
+    nearEvents: any[] =  [{image: 'camelie.png'}, {image: 'Pisa.png'}, {image: 'bocco.png'}, {image: 'egizi.png'}, {image: 'carnevale.png'}];
 
     constructor(
         private navParams: NavParams,
@@ -32,9 +32,12 @@ export class EventDetailPage implements OnInit {
         if (this.tabBar != null) {
           this.tabBar.style.bottom = '-92px';
         }
+    }
 
-/*         console.log("nav ",this.splitViewService.getSplitView(0).detailNav.getActive())
- */    }
+    getImage(){
+
+        return 'url("assets/imgs/'+this.event!.background+'")';
+    }
     
     ionViewWillLeave() {
         

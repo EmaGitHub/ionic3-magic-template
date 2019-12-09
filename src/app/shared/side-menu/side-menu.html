@@ -1,15 +1,15 @@
 <ion-header class="header">
 
-    <ion-row id="row-one"></ion-row>
+    <ion-row id="row-one" [ngStyle]="{'background-image': 'url(' + cityUrlPicture + ')'}"></ion-row> 
 
     <div class="back-picture">
-        <div class="user-picture"></div>
+        <div class="user-picture" [ngStyle]="{'background-image': 'url(' + ateneoLogoUrl + ')', 'margin': ''+logoStyle}"></div>
     </div>
 
     <ion-row id="row-two">
         <ion-toolbar>
             <ion-title>User Name
-                <p class="subtitle">Università degli studi di Firenze</p>
+                <p class="subtitle">Università degli studi di {{ateneo}}</p>
             </ion-title>
         </ion-toolbar>
     </ion-row>
@@ -19,15 +19,15 @@
 <ion-content class="ion-padding">
     <ion-list id="menuList" no-lines>
         <ion-item tappable (tap)="goHomePage()" menuClose>
-            <ion-icon id="sectionIcon" name="ios-contacts" item-start></ion-icon>
+            <ion-icon id="sectionIcon" name="ios-reverse-camera-outline" item-start></ion-icon>
             {{'SEED' | translate}}
         </ion-item>
         <ion-item tappable (tap)="goRootPage()" menuClose>
-            <ion-icon id="sectionIcon" name="card" item-start></ion-icon>
+            <ion-icon id="sectionIcon" name="ios-card-outline" item-start></ion-icon>
             {{'ROOT' | translate}}
         </ion-item>
         <ion-item tappable (tap)="goSettingsPage()" menuClose>
-            <ion-icon id="sectionIcon" name="ios-reverse-camera-outline" item-start></ion-icon>
+            <ion-icon id="sectionIcon" name="custom-notifications" item-start></ion-icon>
             {{'ROOTPAGE' | translate}}
         </ion-item>
         <ion-item tappable (tap)="goSettingsPage()" menuClose>

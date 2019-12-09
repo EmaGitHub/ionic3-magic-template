@@ -15,8 +15,7 @@ scroll-event {
         box-shadow: 1px 2px 15px -4px map-get($colors, dark) !important;
 
         .backgroundImage {
-
-            background-color: rgb(255, 47, 109);
+            background-size: cover !important;
             height: 110px;
         }
 
@@ -44,7 +43,7 @@ scroll-event {
             text-align: center;
             position: relative;
             bottom: 22px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             white-space: nowrap;
             overflow: hidden;

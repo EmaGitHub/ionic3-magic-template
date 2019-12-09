@@ -11,6 +11,8 @@ import { AppStore } from '@app/app-store';
 import { UserState } from '@app/core/user/models/user-state';
 import { LoginAction } from '@app/core/user/actions/login-action';
 import { Keyboard } from '@ionic-native/keyboard';
+import { AteneoAction } from '@app/core/user/actions/ateneo-action';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -25,11 +27,12 @@ export class LoginPage {
     show = false;
 
     ateneoSelected: number = -1;
+    ateneoName: string= '';
 
     @ContentChild(TextInput) ion_input?: TextInput;
     @ViewChild('slides') slides?: Slides;
 
-    public tags: string [] = ['DarkOrchid','DarkOliveGreen ','DeepSkyBlue','DarkTurquoise','DarkOrange','FireBrick','Gray','LawnGreen','LightSalmon', 'Green'];
+    public tags: string [] = ['Congressi','Fiere ','DeepSkyBlue','Sagre','Musica','Mercati','Festival','Cinema','Spettacoli', 'Folklore', 'Convegni', 'Teatro', 'Musica'];
 
     constructor(
         private logger: LoggerService,
@@ -39,7 +42,8 @@ export class LoginPage {
         private viewCtrl: ViewController,
         private inAppBrowser: InAppBrowser,
         private store: Store<AppStore>,
-        private keyboard: Keyboard
+        private keyboard: Keyboard,
+        private translateService: TranslateService
         ) {
 
          }
@@ -90,14 +94,34 @@ export class LoginPage {
 
     public onLoginSubmit() {
 
-        this.logger.debug(`credentials ${this.username}/${this.password}`);
-        this.deviceService.showLoading();
-        this.store.dispatch(new LoginAction(this.username, this.password));
+        if (this.ateneoName ==  '')  this.deviceService.alert(this.translateService.instant('SELECT_ATENEO'), { title: 'Ateneo'});
+        
+        else {
+            this.logger.debug(`credentials ${this.username}/${this.password}`);
+            this.deviceService.showLoading();
+            this.store.dispatch(new AteneoAction(this.ateneoName));
+            this.store.dispatch(new LoginAction(this.username, this.password));
+        }
     }
 
     public selectAteneo(number: number){
 
         this.ateneoSelected = number;
+        switch (this.ateneoSelected) {
+
+            case 1:
+                this.ateneoName = 'Pisa'
+                break;
+            case 2: 
+                this.ateneoName = 'Siena'
+                break;
+            case 3:
+                this.ateneoName = 'Stranieri-Siena'
+                break;
+            case 4: 
+                this.ateneoName = 'Firenze'
+                break;
+        }
     }
 
     public onForgotPasswordClicked(): void {
