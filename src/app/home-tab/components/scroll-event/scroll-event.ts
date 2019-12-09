@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SplitViewService } from '@app/core/split-view';
 import { EventDetailPage } from '@app/home-tab/pages/event-detail/event-detail';
 import { Event } from '@app/core/events/models/Event';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 /**
  * Generated class for the ScrollEventComponent component.
@@ -18,15 +19,18 @@ export class ScrollEventComponent implements OnInit{
   @Input() event?: Event;
 
   pictureUrl: string= '';
+  iconName: string= '';
 
   constructor(
     private splitViewService: SplitViewService
   ) {
+
   }
 
   ngOnInit(){
 
-    this.initImage()
+    this.initImage();
+    this.initIcon();
   }
 
   goEventDetail(){
@@ -38,5 +42,11 @@ export class ScrollEventComponent implements OnInit{
 
     this.pictureUrl =  "assets/imgs/"+this.event!.background;
   }
+  initIcon(){
+
+    if(this.event!.type == "MOSTRA") this.iconName = 'custom-mostre';
+    else this.iconName = 'custom-teatri';
+  }
+  
 
 }
