@@ -30,8 +30,8 @@ step {
     width: 100%;
     text-align: center;
     position: absolute;
-    top: calc(95vh - constant(safe-area-inset-bottom));
-    top: calc(95vh - env(safe-area-inset-bottom));
+    top: calc(94vh - constant(safe-area-inset-bottom));
+    top: calc(94vh - env(safe-area-inset-bottom));
     padding: 0 42vw;
 
 

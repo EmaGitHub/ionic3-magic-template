@@ -26,13 +26,6 @@ body {
   margin-bottom: env(safe-area-inset-bottom) !important;
 }
 
-.swiper-container-horizontal > .swiper-pagination-bullets {
-
-  top: calc( 94vh - constant(safe-area-inset-bottom));
-  top: calc( 94vh - env(safe-area-inset-bottom));
-  //bottom: 20px;
-}
-
 .text-bold {
   font-weight: bold;
 }
@@ -47,7 +40,9 @@ body {
 
 
 .pageWithTabs{
-  margin-bottom: 82px;
+
+  margin-bottom: calc( 80px + constant(safe-area-inset-bottom));
+  margin-bottom: calc( 80px + env(safe-area-inset-bottom));
 }
 
 ion-navbar.toolbar{

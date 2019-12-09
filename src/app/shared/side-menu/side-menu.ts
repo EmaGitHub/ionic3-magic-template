@@ -24,7 +24,7 @@ import { TranslateService } from '@ngx-translate/core';
     selector: 'side-menu',
     templateUrl: 'side-menu.html'
 })
-export class SideMenuComponent  {
+export class SideMenuComponent {
 
     @ViewChild(Nav) nav?: Nav;
 
@@ -45,81 +45,81 @@ export class SideMenuComponent  {
     ) {
 
         this.initSidemenuLogo();
-        
+
     }
 
 
-    initSidemenuLogo(){
+    initSidemenuLogo() {
         this.userStateSubscription$ = this.store.select('userState').subscribe(
-          (userState: UserState) => {
-  
-              if (userState.logged) {
-                  
-                this.ateneo = userState.ateneo;
-                this.initCityUrlPicture();
-                this.initAteneoLogoUrl();
-                this.initLogoStyle();
-              }
-          }
-      );
+            (userState: UserState) => {
+
+                if (userState.logged) {
+
+                    this.ateneo = userState.ateneo;
+                    this.initCityUrlPicture();
+                    this.initAteneoLogoUrl();
+                    this.initLogoStyle();
+                }
+            }
+        );
     }
 
-    initAteneoLogoUrl(){
-    
-        switch (this.ateneo){
-    
-          case 'Firenze':
-              this.ateneoLogoUrl =  "assets/imgs/uni-firenze.png";
-              break;
-          case 'Siena':
-                this.ateneoLogoUrl =  "assets/imgs/uni-siena.png";
+    initAteneoLogoUrl() {
+
+        switch (this.ateneo) {
+
+            case 'Firenze':
+                this.ateneoLogoUrl = "assets/imgs/uni-firenze.png";
                 break;
-          case 'Stranieri-Siena':
-            this.ateneoLogoUrl =  "assets/imgs/unis-siena.png";
-            break;
-          case 'Pisa':
-            this.ateneoLogoUrl =  "assets/imgs/uni-pisa.png";
-            break;
+            case 'Siena':
+                this.ateneoLogoUrl = "assets/imgs/uni-siena.png";
+                break;
+            case 'Stranieri-Siena':
+                this.ateneoLogoUrl = "assets/imgs/unis-siena.png";
+                break;
+            case 'Pisa':
+                this.ateneoLogoUrl = "assets/imgs/uni-pisa.png";
+                break;
         }
-      }
-    
-      initLogoStyle(){
-    
-        switch (this.ateneo){
-    
-          case 'Firenze':
-              this.logoStyle =  "0 3px";
-              break;
-          case 'Siena':
+    }
+
+    initLogoStyle() {
+
+        switch (this.ateneo) {
+
+            case 'Firenze':
+                this.logoStyle = "0 3px";
+                break;
+            case 'Siena':
                 this.logoStyle = "4px 3px";
                 break;
-          case 'Stranieri-Siena':
+            case 'Stranieri-Siena':
                 this.logoStyle = "15px 2px";
                 break;
-          case 'Pisa':
+            case 'Pisa':
                 this.logoStyle = "3px 3px";
                 break;
         }
-      }
+    }
 
-      initCityUrlPicture(){
+    initCityUrlPicture() {
 
-        switch (this.ateneo){
-    
+        switch (this.ateneo) {
+
             case 'Firenze':
-                this.cityUrlPicture =  "assets/imgs/florence.png";
+                this.cityUrlPicture = "assets/imgs/Firenze.png";
                 break;
             case 'Siena':
-                this.cityUrlPicture =  "assets/imgs/siena.png";
+                this.cityUrlPicture = "assets/imgs/Siena.png";
                 break;
             case 'Stranieri-Siena':
-                this.cityUrlPicture =  "assets/imgs/siena.png";
+                this.cityUrlPicture = "assets/imgs/Siena.png";
                 break;
             case 'Pisa':
-                this.cityUrlPicture =  "assets/imgs/pisa.png";
+                this.cityUrlPicture = "assets/imgs/Pisa.png";
                 break;
-          }
-      }
+        }
+    }
 
     public goHomePage() {
 
