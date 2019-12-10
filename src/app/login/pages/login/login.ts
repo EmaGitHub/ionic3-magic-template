@@ -32,7 +32,7 @@ export class LoginPage {
     @ContentChild(TextInput) ion_input?: TextInput;
     @ViewChild('slides') slides?: Slides;
 
-    public tags: string [] = ['Congressi','Fiere ','DeepSkyBlue','Sagre','Musica','Mercati','Festival','Cinema','Spettacoli', 'Folklore', 'Convegni', 'Teatro', 'Musica'];
+    public tags: string [] = ['Congressi','Fiere ','Sagre','Musica','Mercati','Festival','Cinema','Spettacoli', 'Folklore', 'Convegni', 'Teatro'];
 
     constructor(
         private logger: LoggerService,
