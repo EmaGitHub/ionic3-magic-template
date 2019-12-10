@@ -20,14 +20,14 @@ export const IT = {
     INFO: 'Info',
     ROOT: 'Voce 2',
     SEED: 'Voce 1',
-    SETTINGS: 'Voce 4',
+    SETTINGSPAGE: 'SettingsPage',
 
     HOMEPAGE: 'HomePage',
     INFOPAGE: 'InfoPage',
     DETAILPAGE: 'DetailPage',
     ROOTPAGE: 'Voce 3',
     SEEKPAGE: 'SeekPage',
-    SETTINGSPAGE: 'SettingsPage',
+    SETTINGS: 'Impostazioni',
 
     LOGIN: 'Login',
     LOGOUT: 'Log out',

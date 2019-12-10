@@ -19,8 +19,9 @@ horizontal-scroll-events {
         }
       }
       span {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 600;
+        color: #585858;
       }
       .arrow-icon {
         color: map-get($colors, google-gray);

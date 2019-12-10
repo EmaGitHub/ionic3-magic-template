@@ -16,8 +16,12 @@ side-menu {
         }
         #row-two{
             height: 90px;
-            position: relative;
-            right: 16px;
+            border-bottom: 2px solid #ececec;
+
+            .toolbar-title{
+                position: relative;
+                right: 16px;
+            }
         }
 
         .back-picture{
@@ -54,7 +58,7 @@ side-menu {
                 position: relative !important;
                 bottom: 8px;
                 font-size: 12px;
-                color: gray
+                color: gray;
             }
         }
 

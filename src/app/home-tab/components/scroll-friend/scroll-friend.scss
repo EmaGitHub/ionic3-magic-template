@@ -5,8 +5,6 @@ scroll-friend {
         width: 75px;
         text-align: center;
         margin-top: 10px;
-    }
-
 
 
         .backgroundImage {
@@ -19,7 +17,13 @@ scroll-friend {
 
         }
 
+        #friend-name{
 
-        
+            font-weight: 300;
+            font-size: 12px;
+            padding-top: 5px;
+        }
+
+    }
 
 }
